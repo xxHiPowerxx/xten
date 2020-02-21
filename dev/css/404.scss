@@ -1,0 +1,63 @@
+@import './variables';
+
+/*--------------------------------------------------------------
+# 404 Styles
+--------------------------------------------------------------*/
+#primary {
+    width: 1170px;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+.error-404 {
+    text-align: center;
+}
+
+.error404 .content-area {
+    background: url(../images/404-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.error-404 {
+    min-height: 40em;
+}
+
+.error404 .not-found {
+    background-color: $off-white;
+    box-shadow: 0 0 1em 0.15em $off-white;
+    padding: 2em;
+}
+
+.search {
+    width: 100%;
+    margin: 3em 0;
+}
+
+.search label {
+    display: contents;
+}
+
+.search input[type=search] {
+    width: 75%;
+    margin-right: 2em;
+}
+
+.search input[type=submit] {
+    width: 10%;
+    padding: 1em;
+    font-size: inherit;
+}
+
+.message,
+.page-header {
+    @include fontSize(25.6px);
+}
+
+.widget_404-left,
+.widget_404-right {
+    text-align: left;
+    @include fontSize(25.6px);
+}
+
+/*# sourceMappingURL=../../maps/dev/css/404.css.map */

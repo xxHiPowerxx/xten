@@ -1,0 +1,28 @@
+.xten-alert {
+	box-shadow: 0 0.6rem 0.9rem rgba(0, 0, 0, 0.16);
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin-bottom: 0;
+	display: none;
+
+	.alert-content {
+		text-align: center;
+
+		* {
+			display: inline;
+		}
+		a {
+			color: inherit;
+			text-decoration: underline;
+		}
+	}
+
+	.close {
+		padding: 28px;
+		font-size: 30px;
+
+		&:focus {
+			outline: none;
+		}
+	}
+}

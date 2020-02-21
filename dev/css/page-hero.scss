@@ -1,0 +1,88 @@
+@import './variables';
+
+.page-hero {
+	&,.page-hero-section {
+		background-size: cover;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto;
+		min-height: 35vh;
+		height: auto;
+		z-index: 1;
+		padding: 1.875rem; //30px
+		@media (max-width: $vp_sm) {
+			padding: 0.9375rem; //15px
+		}
+	}
+	&.page-hero-overlay {
+		position: relative;
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+		}
+	}
+	&[data-page-hero-overlay-color="dark"] {
+		&:before {
+			background-color: rgba(10, 10, 10, 0.1);
+		}
+	}
+	&[data-page-hero-overlay-color="light"] {
+		&:before {
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+	}
+	&.container-page-hero-section-content{
+		display: flex;
+		width: 100%;
+		height: 100%;
+		}
+}
+	// Hero Section Content
+	.page-hero-section-content {
+		width: 53.125rem; //850px
+		padding: 1.5em;
+		text-align: center;
+		color: #ffffff;
+		@media (max-width: $vp_m){
+			width: 100%;
+		}
+		&[data-page-hero-overlay-color="dark"] {
+				background-color: rgba(10, 10, 10, 0.7);
+		}
+		&[data-page-hero-overlay-color="light"] {
+			background-color: rgba(225, 225, 225, 0.8);
+			color: #000;
+		}
+		h1.page-hero-title {
+			margin-bottom: 0px;
+		}
+		p {
+			margin-top: 1.25rem; //20px
+			line-height: 1.25;
+		}
+	}
+
+	// workaround for IE to maintain min-height
+@media (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.page-hero {
+		&,.page-hero-section {
+			min-height: auto;
+			margin: 0px;
+		}
+		&:after {
+			content: '';
+			min-height: 35vh;
+			@media (max-width: $vp_sm) {
+				min-height: auto;
+			}
+		}
+	}
+}

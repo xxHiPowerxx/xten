@@ -1,0 +1,59 @@
+@import './variables';
+@import './buttons';
+@import './box-shadow.scss';
+@import './color-system.scss';
+
+/**
+ * Styles for the WordPress post/page editor.
+ * Ensures a visual match between back- and front-end.
+ */
+body.gutenberg-editor-page .editor-writing-flow {
+    color: $white;
+    font-family: inherit;
+    @include font-size-leading(20px, 1.4);
+}
+
+body.gutenberg-editor-page .editor-post-title .editor-post-title__input,
+body.gutenberg-editor-page .editor-writing-flow h1,
+body.gutenberg-editor-page .editor-writing-flow h2,
+body.gutenberg-editor-page .editor-writing-flow h3,
+body.gutenberg-editor-page .editor-writing-flow h4,
+body.gutenberg-editor-page .editor-writing-flow h5,
+body.gutenberg-editor-page .editor-writing-flow h6,
+body.gutenberg-editor-page .edit-post-visual-editor p {
+    font-family: inherit;
+    color: $gray-blue;
+    clear: both;
+}
+
+body.gutenberg-editor-page .editor-post-title .editor-post-title__input {
+    @include font-size-leading(32px, 1.4);
+}
+
+body.gutenberg-editor-page .edit-post-visual-editor p {
+    font-family: inherit;
+    @include fontSize(20px);
+
+}
+
+/* Visualize editor font sizes (defined in functions.php). */
+
+.has-small-font-size {
+    font-size: var(--small-font-size) + px;
+    font-size: calc(var(--small-font-size) / 16) + rem;
+}
+
+.has-regular-font-size {
+    font-size: var(--regular-font-size) + px;
+    font-size: calc(var(--regular-font-size) / 16) + rem;
+}
+
+.has-large-font-size {
+    font-size: var(--large-font-size) + px;
+    font-size: calc(var(--large-font-size) / 16) + rem;
+}
+
+.has-larger-font-size {
+    font-size: var(--larger-font-size) + px;
+    font-size: calc(var(--larger-font-size) / 16) + rem;
+}

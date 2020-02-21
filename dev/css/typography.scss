@@ -1,0 +1,119 @@
+@import './variables';
+
+:root {
+	font-size: 13px;
+
+	@media screen and (min-width: $vp_m) {
+		font-size: 14px;
+	}
+
+	@media screen and (min-width: $vp_xl) {
+		font-size: 16px;
+	}
+}
+
+//@include font-size-leading(pixel val, line height val) converts px to rem and lineheight and includes fallback px selector as well.
+//ex: @include font-size-leading(24px, 1.2) will output font-size:2rem, font-size:24px, line-height .
+//Colors and misc variables stored in the variables partial.
+
+//Font selection is handled by the Customizer.
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 900;
+}
+
+/*----GENERAL USE TEXT-------*/
+//largest size first, then scale down based on base font size reduction.
+
+body {
+	@include font-size-leading(20px, 1.05);
+}
+
+h1,
+.section-heading {
+	@include font-size-leading(60px, 1.05);
+}
+
+h2 {
+	@include font-size-leading(48px, 1.05);
+}
+
+h3 {
+	@include font-size-leading(39px, 1.05);
+}
+
+h4 {
+	@include font-size-leading(31px, 1.05);
+}
+
+h5,
+.lead {
+	@include font-size-leading(25px, 1.05);
+
+}
+
+h6 {
+	@include font-size-leading(22px, 1.05);
+}
+
+p {
+	@include font-size-leading(20px, 1.4);
+}
+
+.main-container a {
+	font-family: inherit;
+	@include font-size-leading(20px, 1.05);
+}
+
+//Sub Navigation Menu
+nav a {
+	@media screen and (min-width: $vp_lg) {
+		@include font-size-leading(16px, 1.05);
+	}
+}
+
+//Main Navigation Menu
+.main-navigation li a {
+	@media screen and (min-width: $vp_lg) {
+		@include font-size-leading(20px, 1.05);
+	}
+}
+
+
+/*------SPECIAL USE TEXT---------*/
+ul,
+ol {
+	@include font-size-leading(20px, 1.5);
+	line-height: 32px;
+}
+
+blockquote {
+	@include font-size-leading(25px, 1.5);
+	line-height: 50px;
+
+	&::before {
+		content: open-quote;
+		padding-right: 10px;
+		@include font-size-leading(50px, 1.25);
+	}
+
+	&::after {
+		content: close-quote;
+		padding-left: 10px;
+		@include font-size-leading(50px, 1.25);
+	}
+}
+
+.call__out--text {
+	@include font-size-leading(36px, 1.5);
+}
+
+.call__out--highlight {
+	@include font-size-leading(42px, 1.25);
+	font-weight: bold;
+}

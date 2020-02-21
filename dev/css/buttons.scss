@@ -1,0 +1,51 @@
+@import "./variables";
+
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height) {
+	padding: $padding-y $padding-x;
+	font-size: $font-size;
+	line-height: $line-height;
+}
+
+.xten-btn {
+	border: 1px solid rgba(255, 255, 255, 0);
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	display: inline-block;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	user-select: none;
+	text-decoration: none;
+	margin-bottom: 15px;
+	max-width: 100%;
+
+	&:hover,
+	&:focus {
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+		text-decoration: none;
+		outline: 0;
+		filter: brightness(1.2);
+	}
+
+	&.xten-btn-outline {
+		&:hover,
+		&:focus,
+		&:active {
+			color: $white;
+		}
+	}
+
+	@include button-size(15px, 30px, 20px, 26px);
+
+	&.xten-btn-xs {
+		@include button-size(10px, 30px, 16px, 21px);
+	}
+
+	&.xten-btn-sm {
+		@include button-size(15px, 30px, 16px, 21px);
+	}
+
+	&.xten-btn-lg {
+		@include button-size(20px, 40px, 20px, 26px);
+	}
+}

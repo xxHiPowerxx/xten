@@ -1,0 +1,35 @@
+# Ignore everything:
+/*
+
+# Whitelist what you want tracked:
+!/.github/
+!/dev/
+!/languages/
+!/assets/
+!/lib
+!/acf-json
+!style.css
+
+!.babelrc
+!composer.json
+!composer.lock
+!CONTRIBUTING.md
+!.editorconfig
+!.eslintignore
+!.eslintrc.json
+!.gitignore
+!gulpfile.babel.js
+!LICENSE
+!package-lock.json
+!package.json
+!phpcs.xml.dist
+!README.md
+!screenshot.png
+!.travis.yml
+
+package-lock.json
+
+# Ignore generated css files
+/dev/css/*.css
+/dev/style.css
+dev/css/typography_backup.scss

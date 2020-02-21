@@ -1,0 +1,35 @@
+@import "./variables";
+
+/*--------------------------------------------------------------
+# Color System
+--------------------------------------------------------------*/
+@each $name, $color in $color-array {
+	.has-#{$name}-color {
+		color: $color;
+	}
+
+	a.has-#{$name}-color,
+	a.has-#{$name}-color:hover,
+	a.has-#{$name}-color:active,
+	a.has-#{$name}-color:focus {
+		color: $color;
+	}
+
+	.has-#{$name}-background-color {
+		background-color: $color;
+	}
+
+	.has-#{$name}-border-color {
+		border-color: $color;
+
+		&.xten-btn-outline {
+			background-color: rgba(255, 255, 255, 0);
+
+			&:hover,
+			&:focus,
+			&:active {
+				background-color: $color;
+			}
+		}
+	}
+}
