@@ -77,7 +77,7 @@
 								</div>
 							</a>
 						</div>
-					<?php if ( ! empty( $facebook_account ) || ! empty( $twitter_account ) || ! empty( $youtube_account ) || ! empty( $instagram_account ) || ! empty( $linkedin_account ) || ! empty( $department_address ) || ! empty( $department_phne ) || ! empty( $department_fax_number ) || ! empty( $department_email_address ) || ! empty( $tty_users ) ) : ?>
+					<?php if ( ! empty( $facebook_account ) || ! empty( $twitter_account ) || ! empty( $youtube_account ) || ! empty( $instagram_account ) || ! empty( $linkedin_account ) || ! empty( $department_address ) || ! empty( $department_phone ) || ! empty( $department_fax_number ) || ! empty( $department_email_address ) || ! empty( $tty_users ) ) : ?>
 						<div class="standard-footer-content">
 							<?php if ( ! empty( $facebook_account ) || ! empty( $twitter_account ) || ! empty( $youtube_account ) || ! empty( $instagram_account ) || ! empty( $linkedin_account ) ) : ?>
 							<div class="social-media-wrapper">
@@ -92,7 +92,7 @@
 								?>
 							</div>
 							<?php endif; ?>
-						<?php if ( ! empty( $department_address ) || ! empty( $department_phne ) || ! empty( $department_fax_number ) || ! empty( $department_email_address ) || ! empty( $tty_users ) ) : ?>
+						<?php if ( ! empty( $department_address ) || ! empty( $department_phone ) || ! empty( $department_fax_number ) || ! empty( $department_email_address ) || ! empty( $tty_users ) ) : ?>
 							<div class="department-info">
 								<?php if ( ! empty( $department_address ) ) : ?>
 									<div class="address-area">
@@ -101,7 +101,7 @@
 										<?php endif; ?>
 									</div>
 								<?php endif; ?>
-							<?php if ( ! empty( $department_phne ) || ! empty( $department_fax_number ) || ! empty( $department_email_address ) || ! empty( $tty_users ) ) : ?>
+							<?php if ( ! empty( $department_phone ) || ! empty( $department_fax_number ) || ! empty( $department_email_address ) || ! empty( $tty_users ) ) : ?>
 								<div class="contact-info">
 									<?php if ( ! empty( $department_phone ) ) : ?>
 										Phone: <?php echo $department_phone; ?><br>
