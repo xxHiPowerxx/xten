@@ -240,7 +240,9 @@ add_action( 'wp_enqueue_scripts', 'xten_scripts' );
 /**
  * Activate Plugins
  */
-require get_template_directory() . '/inc/activate-plugins.php';
+// TODO: Remove this from project and test.
+// No Longer Need to keep the plugin active.
+// require get_template_directory() . '/inc/activate-plugins.php';
 
 /**
  * Tribe Overrides
