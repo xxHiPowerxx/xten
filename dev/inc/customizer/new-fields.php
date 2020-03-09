@@ -68,7 +68,7 @@ function xten_customize_new_fields_register( $wp_customize ) {
 				?>
 				<label>
 					<script>
-					$(document).on('ready', function(){
+					jQuery(document).on('ready', function($){
 						if(window.updateTextInputFunctions === undefined) {
 							/**
 								* Update Range Text Input's siblings.
