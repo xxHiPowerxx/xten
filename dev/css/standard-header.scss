@@ -54,8 +54,6 @@
 	z-index: 8000;
 
 	.site-header {
-		padding: 0;
-
 		box-shadow: 0 0.6rem 0.9rem rgba(0, 0, 0, 0.16);
 		transition: all 0.15s $smooth_transition;
 
@@ -63,10 +61,11 @@
 			padding: 0;
 
 			.header-container {
-				height: 3rem; //4.5rem
 				display: flex;
 				align-items: center;
 				width: 100%;
+				padding-top: 1.5rem;
+				padding-bottom: 1.5rem;
 
 				.site-branding {
 					margin-right: auto;
@@ -82,10 +81,6 @@
 						margin: 0 auto;
 						max-width: 100%;
 						text-decoration: none;
-
-						@media (min-width: $vp_sm) {
-							margin-left: 2.2rem;
-						}
 						&:focus,
 						&:hover {
 							text-decoration: none;
@@ -131,7 +126,7 @@
 
 							&.child-logo {
 								svg {
-									height: 100px;
+									height: auto;
 								}
 							}
 						}
