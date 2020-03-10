@@ -135,20 +135,27 @@ $smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 
 /*-----FONT CALCULATIONS-----*/
 @function calculateRem($size) {
-	$remSize: $size / 16px;
+	$remSize: $size / 10px;
 	@return #{$remSize}rem;
 }
+@function strip-unit($number) {
+	@if type-of($number) == "number" and not unitless($number) {
+		@return $number / ($number * 0 + 1);
+	}
 
+	@return $number;
+}
 @function calculateLineHeight($size, $lineHeight) {
-	$heightSize: ($size / 16px) * $lineHeight;
-	//@debug "Size:#{$size}, LineHeight: #{$lineHeight}, heightSize: #{$heightSize}";
-	@return #{$heightSize}rem;
+	// $heightSize: ($size / 10px) * $lineHeight;
+	$heightSize: $size * $lineHeight / 10;
+	// @debug "Size:#{$size}, LineHeight: #{$lineHeight}, heightSize: #{$heightSize}";
+	@return strip-unit($heightSize);
 }
 
 @mixin font-size-leading($size, $lineHeight) {
 	font-size: $size; //Fallback in px
 	font-size: calculateRem($size);
-	line-height: calculateLineHeight($size, $lineHeight);
+	line-height: $lineHeight;
 }
 
 @mixin fontSize($size) {

@@ -1,14 +1,10 @@
-@import './variables';
+@import "./variables";
 
 :root {
-	font-size: 13px;
+	font-size: 8px;
 
 	@media screen and (min-width: $vp_m) {
-		font-size: 14px;
-	}
-
-	@media screen and (min-width: $vp_xl) {
-		font-size: 16px;
+		font-size: 10px;
 	}
 }
 
@@ -30,35 +26,30 @@ h6 {
 /*----GENERAL USE TEXT-------*/
 //largest size first, then scale down based on base font size reduction.
 
-body {
-	@include font-size-leading(20px, 1.05);
-}
-
 h1,
 .section-heading {
-	@include font-size-leading(60px, 1.05);
+	@include font-size-leading(60px, 1.25);
 }
 
 h2 {
-	@include font-size-leading(48px, 1.05);
+	@include font-size-leading(48px, 1.25);
 }
 
 h3 {
-	@include font-size-leading(39px, 1.05);
+	@include font-size-leading(39px, 1.25);
 }
 
 h4 {
-	@include font-size-leading(31px, 1.05);
+	@include font-size-leading(31px, 1.25);
 }
 
 h5,
 .lead {
-	@include font-size-leading(25px, 1.05);
-
+	@include font-size-leading(25px, 1.25);
 }
 
 h6 {
-	@include font-size-leading(22px, 1.05);
+	@include font-size-leading(22px, 1.25);
 }
 
 p {
@@ -84,27 +75,26 @@ nav a {
 	}
 }
 
-
 /*------SPECIAL USE TEXT---------*/
 ul,
 ol {
 	@include font-size-leading(20px, 1.5);
-	line-height: 32px;
+	line-height: 1.6;
 }
 
 blockquote {
 	@include font-size-leading(25px, 1.5);
-	line-height: 50px;
+	line-height: 2;
 
 	&::before {
 		content: open-quote;
-		padding-right: 10px;
+		padding-right: 0.2em;
 		@include font-size-leading(50px, 1.25);
 	}
 
 	&::after {
 		content: close-quote;
-		padding-left: 10px;
+		padding-left: 0.2em;
 		@include font-size-leading(50px, 1.25);
 	}
 }
