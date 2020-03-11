@@ -14,11 +14,18 @@
 	</div> <!-- /container -->
 
 	<?php
-	$site_url             = esc_url( home_url( '/' ) );
-	$site_name            = $GLOBALS['department_name'];
-	$site_name_anchor_tag = '<a href="' . $site_url . '" class="site-name-url">' . $site_name . '</a>';
-	$site_info_content    = wp_kses_post( get_field( 'site_info_content', 'option' ) );
-	$site_info_default    = do_shortcode( wp_kses_post( '© ' . '[year] ' . 'XTen' . ' | ' . $site_name_anchor_tag . ' | ' . '<a href="http://xxhipowerxx.github.io/xten/main/Pages/Policy.aspx" target="_blank" rel="noopener">Privacy Policy</a> | <a href="http://xxhipowerxx.github.io/xten/main/Pages/ADANotice.aspx" target="_blank" rel="noopener">Accessibility</a>' ) );
+	$site_url                = esc_url( home_url( '/' ) );
+	$site_name               = esc_attr( get_bloginfo() );
+	$site_name_anchor_tag    = '<a href="' . $site_url . '" class="site-name-url">' . $site_name . '</a>';
+	$site_info_content       = wp_kses_post( get_field( 'site_info_content', 'option' ) );
+	$privacy_policy_elements = '';
+	$policy_page_id          = (int) get_option( 'wp_page_for_privacy_policy' );
+	if ( ! empty( $policy_page_id ) && get_post_status( $policy_page_id ) === 'publish' ) :
+		$privacy_policy_permalink = (string) get_permalink( $policy_page_id );
+		$privacy_policy_elements  = ' | <a href="' . $privacy_policy_permalink . '" target="_blank" rel="noopener">Privacy Policy</a>';
+	endif;
+
+	$site_info_default    = do_shortcode( wp_kses_post( '© ' . '[year] ' . $site_name_anchor_tag . $privacy_policy_elements ) );
 
 	// Standard Footer Variables //
 
