@@ -22,8 +22,8 @@ function process_inline_css() {
 	// Theme Options.
 	$xten_link_color      = esc_attr( get_theme_mod( 'xten_link_color', '#007db6' ) );
 	$xten_theme_color     = esc_attr( get_theme_mod( 'xten_theme_color', '#003366' ) );
-	$heading_default_font = json_decode( get_theme_mod( 'font_pairings', '{"heading":"roboto"}' ) );
-	$body_default_font    = json_decode( get_theme_mod( 'font_pairings', '{"body":"opensans"}' ) );
+	$heading_default_font = json_decode( get_theme_mod( 'font_pairings', '{"heading":"roboto", "heading_fallback":"Arial, sans-serif"}' ) );
+	$body_default_font    = json_decode( get_theme_mod( 'font_pairings', '{"body":"opensans", "body_fallback":"Arial, sans-serif"}' ) );
 
 	// /Header Mobile Nav.
 	// Begin Style Tag.
@@ -32,8 +32,11 @@ function process_inline_css() {
 
 	// Load Fonts Used.
 	// Theme Heading Default Font.
-	$headingPath = $heading_default_font->heading;
-	$bodyPath    = $body_default_font->body;
+	$headingPath             = $heading_default_font->heading;
+	$heading_font_w_fallback = $heading_default_font->heading . ',' . $heading_default_font->heading_fallback;
+	$bodyPath                = $body_default_font->body;
+	$body_font_w_fallback    = $body_default_font->body . ',' . $body_default_font->body_fallback;
+
 
 	if ( 'playfairdisplay' == $headingPath || ( 'merriweather' == $headingPath && 'sourcesanspro' == $bodyPath ) ) {
 		$fontWeight = '-black.ttf';
@@ -61,7 +64,7 @@ function process_inline_css() {
 
 	// Assign Styles.
 	$styles .= 'h1,.section-heading{' .
-		'font-family:' . $heading_default_font->heading . ';' .
+		'font-family:' . $heading_font_w_fallback . ';' .
 	'}' .
 	'.xten-theme-color-bg, .pagination .current, .search-form button:hover{' .
 		'background-color:' . $xten_theme_color . ';' .
@@ -102,10 +105,10 @@ function process_inline_css() {
 	'}';
 
 	$bodyStyles .= 'body,button,input,optgroup,select,textarea{' .
-		'font-family:' . $body_default_font->body . ';' .
+		'font-family:' . $body_font_w_fallback . ';' .
 		'}' .
 		'h2,h3,h4,h5,h6,.xten-highlight-font{' .
-			'font-family:' . $body_default_font->body . ';' .
+			'font-family:' . $body_font_w_fallback . ';' .
 		'}' .
 	'}';
 
