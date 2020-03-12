@@ -27,7 +27,7 @@ function site_info_default_func() {
 	$policy_page_id          = (int) get_option( 'wp_page_for_privacy_policy' );
 	if ( ! empty( $policy_page_id ) && get_post_status( $policy_page_id ) === 'publish' ) :
 		$privacy_policy_permalink = (string) get_permalink( $policy_page_id );
-		$privacy_policy_elements  = ' | <a href="' . $privacy_policy_permalink . '" target="_blank" rel="noopener">Privacy Policy</a>';
+		$privacy_policy_elements  = ' | <a href="' . $privacy_policy_permalink . '">Privacy Policy</a>';
 	endif;
 
 	$site_info_default = '© ' . get_year_func() . ' ' . $site_name_anchor_tag . $privacy_policy_elements;
