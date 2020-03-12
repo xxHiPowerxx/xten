@@ -1,304 +1,304 @@
 {
-  "key": "group_5dae2a9cda15b",
-  "title": "Site Footer",
-  "fields": [
-    {
-      "key": "field_5dae2ce40ab4e",
-      "label": "<h1>Department General Information</h1>",
-      "name": "",
-      "type": "message",
-      "instructions": "",
-      "required": 0,
-      "conditional_logic": 0,
-      "wrapper": {
-        "width": "",
-        "class": "",
-        "id": ""
-      },
-      "message": "",
-      "new_lines": "wpautop",
-      "esc_html": 0
-    },
-    {
-      "key": "field_5dae2d020ab50",
-      "label": "Department Contact Info",
-      "name": "department_contact_info",
-      "type": "group",
-      "instructions": "",
-      "required": 0,
-      "conditional_logic": 0,
-      "wrapper": {
-        "width": "",
-        "class": "",
-        "id": ""
-      },
-      "layout": "block",
-      "sub_fields": [
+    "key": "group_5dae2a9cda15b",
+    "title": "Site Footer",
+    "fields": [
         {
-          "key": "field_5dfa632282325",
-          "label": "Department Main Address",
-          "name": "department_main_address",
-          "type": "textarea",
-          "instructions": "",
-          "required": 0,
-          "conditional_logic": 0,
-          "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-          },
-          "default_value": "",
-          "placeholder": "",
-          "maxlength": "",
-          "rows": 4,
-          "new_lines": "br"
+            "key": "field_5dae2ce40ab4e",
+            "label": "<h1>Department General Information<\/h1>",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
-          "key": "field_5dae2d130ab51",
-          "label": "Department Phone",
-          "name": "department_phone",
-          "type": "text",
-          "instructions": "Please enter phone number.",
-          "required": 0,
-          "conditional_logic": 0,
-          "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-          },
-          "default_value": "",
-          "placeholder": "",
-          "prepend": "",
-          "append": "",
-          "maxlength": ""
+            "key": "field_5dae2d020ab50",
+            "label": "Department Contact Info",
+            "name": "department_contact_info",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5dfa632282325",
+                    "label": "Department Main Address",
+                    "name": "department_main_address",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "new_lines": "br"
+                },
+                {
+                    "key": "field_5dae2d130ab51",
+                    "label": "Department Phone",
+                    "name": "department_phone",
+                    "type": "text",
+                    "instructions": "Please enter phone number.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5dae2d280ab52",
+                    "label": "Department Fax Number",
+                    "name": "department_fax_number",
+                    "type": "text",
+                    "instructions": "Please enter fax number.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5dae2d340ab53",
+                    "label": "Department Email Address",
+                    "name": "department_email_address",
+                    "type": "email",
+                    "instructions": "Please enter email address.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_5dae2d400ab54",
+                    "label": "TTY Users",
+                    "name": "tty_users",
+                    "type": "number",
+                    "instructions": "Please enter TTY number.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                }
+            ]
         },
         {
-          "key": "field_5dae2d280ab52",
-          "label": "Department Fax Number",
-          "name": "department_fax_number",
-          "type": "text",
-          "instructions": "Please enter fax number.",
-          "required": 0,
-          "conditional_logic": 0,
-          "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-          },
-          "default_value": "",
-          "placeholder": "",
-          "prepend": "",
-          "append": "",
-          "maxlength": ""
+            "key": "field_5dae2d5781acb",
+            "label": "<h1>Department Social Media Accounts<\/h1>",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
-          "key": "field_5dae2d340ab53",
-          "label": "Department Email Address",
-          "name": "department_email_address",
-          "type": "email",
-          "instructions": "Please enter email address.",
-          "required": 0,
-          "conditional_logic": 0,
-          "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-          },
-          "default_value": "",
-          "placeholder": "",
-          "prepend": "",
-          "append": ""
+            "key": "field_5dae2d7081acc",
+            "label": "Social Media Accounts",
+            "name": "social_media_accounts",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5dae2d7981acd",
+                    "label": "Facebook Account",
+                    "name": "facebook_account",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "https:\/\/www.facebook.com\/SanBernardinoXTen\/",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5dae2d8881ace",
+                    "label": "Twitter Account",
+                    "name": "twitter_account",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "https:\/\/twitter.com\/xten",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5dae2d9481acf",
+                    "label": "YouTube Account",
+                    "name": "youtube_account",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "https:\/\/www.youtube.com\/user\/xtenPIO",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5dae2da081ad0",
+                    "label": "Instagram Account",
+                    "name": "instagram_account",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "https:\/\/www.instagram.com\/xten\/",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5dae2db381ad1",
+                    "label": "LinkedIn Account",
+                    "name": "linkedin_account",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "https:\/\/www.linkedin.com\/company\/xten",
+                    "placeholder": ""
+                }
+            ]
         },
         {
-          "key": "field_5dae2d400ab54",
-          "label": "TTY Users",
-          "name": "tty_users",
-          "type": "number",
-          "instructions": "Please enter TTY number.",
-          "required": 0,
-          "conditional_logic": 0,
-          "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-          },
-          "default_value": "",
-          "placeholder": "",
-          "prepend": "",
-          "append": "",
-          "min": "",
-          "max": "",
-          "step": ""
+            "key": "field_5e1f67b879cc0",
+            "label": "<h1>Site Info<\/h1>",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_5e1f6a4b79cc2",
+            "label": "Site Info Content",
+            "name": "site_info_content",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "[site-info-default]",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
         }
-      ]
-    },
-    {
-      "key": "field_5dae2d5781acb",
-      "label": "<h1>Department Social Media Accounts</h1>",
-      "name": "",
-      "type": "message",
-      "instructions": "",
-      "required": 0,
-      "conditional_logic": 0,
-      "wrapper": {
-        "width": "",
-        "class": "",
-        "id": ""
-      },
-      "message": "",
-      "new_lines": "wpautop",
-      "esc_html": 0
-    },
-    {
-      "key": "field_5dae2d7081acc",
-      "label": "Social Media Accounts",
-      "name": "social_media_accounts",
-      "type": "group",
-      "instructions": "",
-      "required": 0,
-      "conditional_logic": 0,
-      "wrapper": {
-        "width": "",
-        "class": "",
-        "id": ""
-      },
-      "layout": "block",
-      "sub_fields": [
-        {
-          "key": "field_5dae2d7981acd",
-          "label": "Facebook Account",
-          "name": "facebook_account",
-          "type": "url",
-          "instructions": "",
-          "required": 0,
-          "conditional_logic": 0,
-          "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-          },
-          "default_value": "https://www.facebook.com/SanBernardinoXTen/",
-          "placeholder": ""
-        },
-        {
-          "key": "field_5dae2d8881ace",
-          "label": "Twitter Account",
-          "name": "twitter_account",
-          "type": "url",
-          "instructions": "",
-          "required": 0,
-          "conditional_logic": 0,
-          "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-          },
-          "default_value": "https://twitter.com/xten",
-          "placeholder": ""
-        },
-        {
-          "key": "field_5dae2d9481acf",
-          "label": "YouTube Account",
-          "name": "youtube_account",
-          "type": "url",
-          "instructions": "",
-          "required": 0,
-          "conditional_logic": 0,
-          "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-          },
-          "default_value": "https://www.youtube.com/user/xtenPIO",
-          "placeholder": ""
-        },
-        {
-          "key": "field_5dae2da081ad0",
-          "label": "Instagram Account",
-          "name": "instagram_account",
-          "type": "url",
-          "instructions": "",
-          "required": 0,
-          "conditional_logic": 0,
-          "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-          },
-          "default_value": "https://www.instagram.com/xten/",
-          "placeholder": ""
-        },
-        {
-          "key": "field_5dae2db381ad1",
-          "label": "LinkedIn Account",
-          "name": "linkedin_account",
-          "type": "url",
-          "instructions": "",
-          "required": 0,
-          "conditional_logic": 0,
-          "wrapper": {
-            "width": "",
-            "class": "",
-            "id": ""
-          },
-          "default_value": "https://www.linkedin.com/company/xten",
-          "placeholder": ""
-        }
-      ]
-    },
-    {
-      "key": "field_5e1f67b879cc0",
-      "label": "<h1>Site Info</h1>",
-      "name": "",
-      "type": "message",
-      "instructions": "",
-      "required": 0,
-      "conditional_logic": 0,
-      "wrapper": {
-        "width": "",
-        "class": "",
-        "id": ""
-      },
-      "message": "",
-      "new_lines": "wpautop",
-      "esc_html": 0
-    },
-    {
-      "key": "field_5e1f6a4b79cc2",
-      "label": "Site Info Content",
-      "name": "site_info_content",
-      "type": "wysiwyg",
-      "instructions": "",
-      "required": 0,
-      "conditional_logic": 0,
-      "wrapper": {
-        "width": "",
-        "class": "",
-        "id": ""
-      },
-      "default_value": "<a href=\"http://xxhipowerxx.github.io/xten/main/Pages/Policy.aspx\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> | <a href=\"http://xxhipowerxx.github.io/xten/main/Pages/ADANotice.aspx\" target=\"_blank\" rel=\"noopener\">Accessibility</a> ©[year] XTen",
-      "tabs": "all",
-      "toolbar": "basic",
-      "media_upload": 0,
-      "delay": 0
-    }
-  ],
-  "location": [
-    [
-      {
-        "param": "options_page",
-        "operator": "==",
-        "value": "acf-options-footer"
-      }
-    ]
-  ],
-  "menu_order": 0,
-  "position": "normal",
-  "style": "seamless",
-  "label_placement": "top",
-  "instruction_placement": "label",
-  "hide_on_screen": "",
-  "active": 1,
-  "description": "",
-  "modified": 1579119835
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-footer"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1584036922
 }

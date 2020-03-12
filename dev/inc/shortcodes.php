@@ -15,6 +15,28 @@ function get_year_func() {
 add_shortcode( 'year', 'get_year_func' );
 
 /**
+ * Site-Info Shortcode
+ * 
+ * This allows site-info to be rendered through shortcode, thus allowing it to be rendered in ACF Default Value.
+ * 
+ */
+function site_info_default_func() {
+	$site_url                = esc_url( home_url( '/' ) );
+	$site_name               = esc_attr( get_bloginfo() );
+	$site_name_anchor_tag    = '<a href="' . $site_url . '" class="site-name-url">' . $site_name . '</a>';
+	$policy_page_id          = (int) get_option( 'wp_page_for_privacy_policy' );
+	if ( ! empty( $policy_page_id ) && get_post_status( $policy_page_id ) === 'publish' ) :
+		$privacy_policy_permalink = (string) get_permalink( $policy_page_id );
+		$privacy_policy_elements  = ' | <a href="' . $privacy_policy_permalink . '" target="_blank" rel="noopener">Privacy Policy</a>';
+	endif;
+
+	$site_info_default = '© ' . get_year_func() . ' ' . $site_name_anchor_tag . $privacy_policy_elements;
+
+	return $site_info_default;
+}
+add_shortcode( 'site-info-default', 'site_info_default_func' );
+
+/**
  * Facebook shortcode.
  *
  * @param array $atts attributes from shortcode.
