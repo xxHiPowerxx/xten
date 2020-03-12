@@ -475,7 +475,6 @@ template {
 /*   Container   */
 .container {
 	width: 100%;
-	padding: 0;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -910,22 +909,17 @@ body input:focus {
 --------------------------------------------------------------*/
 
 .content-wrapper > .main-container {
-	@include allMargins(0px);
-	@include allPadding(25px);
-
-	@media screen and (max-width: $vp_xs) {
-		@include containerMargins(0px);
-		@include allPadding(0px);
-	}
+	margin-top: 0;
+	margin-bottom: 0;
 
 	@media screen and (min-width: $vp_xs) {
-		@include containerMargins(40px);
-		@include allPadding(0px);
+		margin-top: 4rem;
+		margin-bottom: 4rem;
 	}
 
 	@media screen and (min-width: $vp_sm) {
-		@include containerMargins(60px);
-		@include allPadding(0px);
+		margin-top: 6rem;
+		margin-bottom: 6rem;
 	}
 }
 
@@ -1172,8 +1166,9 @@ article.page {
 
 .site-footer {
 	.container.container-ext.footer-container {
-		max-width: 1420px;
-		padding: 1.75rem;
+		max-width: 1440px;
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
 		// @media (min-width: $vp_xs) {
 		// 	padding: 3.75rem;
 		// }
