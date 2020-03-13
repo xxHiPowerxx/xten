@@ -3,10 +3,8 @@ var placeHolderImg,
 	nodeStyles = {},
 	initalLoad = false,
 	fixedHeader = document.getElementsByClassName("fixed-header"),
-	xtenHead = document.getElementsByClassName("xten-menu"),
 	siteHeader = document.getElementById("masthead"),
 	docBody = document.body,
-	hasScrolledPastXTenHeader = false,
 	hasScrolledPastHeader = false,
 	hasScrolledPastAdminBar = false;
 
@@ -26,7 +24,7 @@ function createPlaceHolderImg(elem) {
 			.getPropertyValue("max-height")
 	);
 	var paddingBottom;
-	paddingBottom = (imgHeight / imgWidth) * 100 + "%";
+	// paddingBottom = (imgHeight / imgWidth) * 100 + "%";
 
 	placeHolderImg = document.createElement("DIV");
 
@@ -44,7 +42,9 @@ function createPlaceHolderImg(elem) {
 		}
 	};
 
-	placeHolderImg.style.paddingBottom = paddingBottom;
+	// placeHolderImg.style.paddingBottom = paddingBottom;
+	placeHolderImg.style.width = imgWidth + "px";
+	placeHolderImg.style.height = imgHeight + "px";
 	placeHolderImg.style.position = "relative";
 	placeHolderImg.style.display = "block";
 
@@ -85,7 +85,7 @@ function sizeHeaderPad() {
 		docBody.appendChild(sizeHeaderRefClone);
 
 		window.siteHeaderHeight =
-			(window.innerWidth <= 734
+			(734 >= window.innerWidth
 				? sizeHeaderRefClone.getBoundingClientRect().height.toFixed(3) -
 				  13
 				: sizeHeaderRefClone
@@ -95,46 +95,7 @@ function sizeHeaderPad() {
 		sizeHeaderPad[0].style.paddingTop = window.siteHeaderHeight;
 		parentElem = sizeHeaderRefClone.parentElement;
 		if (parentElem !== undefined) {
-			parentElem.removeChild(sizeHeaderRefClone);
-		}
-	}
-}
-
-/**
- * Set Fixed Header top value to XTen Header's Height.
- * Keep Header Below XTen Header.
- */
-function compensateForXTenHeader() {
-	var compensateXTenHeader = document.getElementsByClassName(
-		"compensateForXTenHeader"
-	)[0];
-	var adminBarStylePostion;
-	var xtenHeadHeight;
-	var adminBar = document.getElementById("wpadminbar");
-
-	// Only Run if xten-menu is enabled and header is position: fixed.
-	if (0 < xtenHead.length && 0 < fixedHeader.length && compensateXTenHeader) {
-		if (true === hasScrolledPastXTenHeader) {
-			// Check for admin bar and make sure it is position:fixed, then compensate for it.
-			if (null === adminBar) {
-				compensateXTenHeader.style.marginTop = "";
-			} else {
-				adminBarStylePostion = getComputedStyle(adminBar).position;
-				if ("fixed" === adminBarStylePostion) {
-					xtenHeadHeight = adminBar
-						.getBoundingClientRect()
-						.height.toFixed(3);
-					compensateXTenHeader.style.marginTop =
-						xtenHeadHeight + "px";
-				} else {
-					compensateXTenHeader.style.marginTop = "";
-				}
-			}
-		} else {
-			xtenHeadHeight = xtenHead[0]
-				.getBoundingClientRect()
-				.height.toFixed(3);
-			compensateXTenHeader.style.marginTop = xtenHeadHeight + "px";
+			// parentElem.removeChild(sizeHeaderRefClone);
 		}
 	}
 }
@@ -153,14 +114,14 @@ function compensateForAdminBar() {
 			pageWrapper = document.getElementsByClassName("page-wrapper")[0],
 			adminBarPosition = getComputedStyle(adminBar).position,
 			mobileMenu = document.getElementsByClassName("mobile-sidebar")[0];
-		if (!xtenHead[0] && fixedHeader[0]) {
+		if (fixedHeader[0]) {
 			if (
 				true === hasScrolledPastAdminBar &&
 				"absolute" === adminBarPosition
 			) {
-				fixedHeader[0].style.marginTop = "";
+				fixedHeader[0].style.top = "";
 			} else {
-				fixedHeader[0].style.marginTop = adminBarHeight + "px";
+				fixedHeader[0].style.top = adminBarHeight + "px";
 			}
 		}
 		html.setAttribute("style", "margin-top: 0px !important;");
@@ -232,14 +193,12 @@ function listenForAdminBar() {
 }
 
 function readyFuncs() {
-	compensateForXTenHeader();
 	sizeHeaderPad();
 	listenForAdminBar();
 }
 readyFuncs();
 
 function resizeFuncs() {
-	compensateForXTenHeader();
 	compensateForAdminBar();
 	sizeHeaderPad();
 }
