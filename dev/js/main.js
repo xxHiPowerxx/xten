@@ -56,10 +56,6 @@ jQuery(document).ready(function($) {
 		var colophon;
 		if (0 < $(".sizeContent").length) {
 			headerHeight = $("#masthead").outerHeight();
-			if (0 < $(".xten-menu").length) {
-				//Check if XTen Header is present.
-				headerHeight += $(".xten-menu").outerHeight();
-			}
 			colophon = $("#colophon");
 			minHeight =
 				$(window).outerHeight() -
