@@ -86,8 +86,7 @@ function sizeHeaderPad() {
 
 		window.siteHeaderHeight =
 			(734 >= window.innerWidth
-				? sizeHeaderRefClone.getBoundingClientRect().height.toFixed(3) -
-				  13
+				? sizeHeaderRefClone.getBoundingClientRect().height.toFixed(3)
 				: sizeHeaderRefClone
 						.getBoundingClientRect()
 						.height.toFixed(3)) + "px";
