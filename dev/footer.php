@@ -15,7 +15,7 @@
 
 	<?php
 	$site_name         = esc_attr( get_bloginfo() );
-	$site_info_content = wp_kses_post( get_field( 'site_info_content', 'option' ) );
+	$site_info_content = wp_kses_post( get_field_without_wpautop( 'site_info_content', 'option' ) );
 	$site_info_default = do_shortcode( wp_kses_post( '[site-info-default]' ) );
 	$site_info_content = ( ! $site_info_content ) ? $site_info_default : $site_info_content;
 
@@ -160,9 +160,7 @@
 			<div class="site-info-footer-wrapper">
 				<div class="container">
 					<div class="site-info">
-								<?php
-								echo $site_info_content;
-								?>
+						<?php echo $site_info_content; ?>
 					</div><!-- .site-info -->
 				</div>
 			</div>
