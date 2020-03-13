@@ -415,8 +415,9 @@ add_filter( 'theme_page_templates', 'xten_remove_dev_template', 20, 3 );
 /**
  * Remove <p> Tags from ACF wysiwyg Fields.
  */
-function get_field_without_wpautop( $field_name, $option = null, $format_value = null ) {
+function get_field_without_wpautop( $field_name, $option ) {
 	remove_filter('acf_the_content', 'wpautop');
-	get_field( $field_name, $option );
+	$field = get_field( $field_name, $option );
 	add_filter('acf_the_content', 'wpautop');
+	return $field;
 }
