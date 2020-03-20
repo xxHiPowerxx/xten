@@ -389,7 +389,7 @@ function xten_json_load_point( $paths ) {
 	return $paths;
 }
 
-// Check to see if xten Save feilds file exsists and adds save point if it does.
+// Check to see if xten Save fields file exsists and adds save point if it does.
 $save_acf_fields = get_template_directory() . '/save-acf-fields.php';
 if ( file_exists( $save_acf_fields ) ) {
 	require $save_acf_fields;
