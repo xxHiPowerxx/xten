@@ -16,14 +16,14 @@ $icon_fa_svg_chevron_down = '<svg focusable="false" xmlns="http://www.w3.org/200
 			if ( $is_mobile_gobal_nav ) :
 			?>
 			<div class="label">CLOSE</div>
-			<div class="hamburger">
+			<div class="mobile-toggler-icon">
 				<i class="fas fa-times"></i>
 			</div>
 			<?php
 			else :
 			?>
 			<div class="label">MENU</div>
-			<div class="hamburger">
+			<div class="mobile-toggler-icon">
 				<i class="fas fa-bars"></i>
 			</div>
 			<?php
