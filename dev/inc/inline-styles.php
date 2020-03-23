@@ -95,7 +95,8 @@ function process_inline_css() {
 			'transform:translate3d(0, 0, 0);' .
 		'}' .
 		'html.nav-open body .mobile-sidebar,' .
-		'html.nav-open body .close-layer{' .
+		'html.nav-open body .close-layer,' .
+		'.site-header .mobile-toggler{' .
 			'display:none;' .
 		'}' .
 		'.nav-shrink .site-branding a{' .
