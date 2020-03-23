@@ -118,7 +118,7 @@ add_action( 'after_setup_theme', 'xten_setup' );
  * Retrieve Standard Header Selection and start GLOBAL variable.
  */
 $GLOBALS['internet_or_xtenline'] = get_theme_mod( 'standard_header_selection', 'standard_internet_header' );
-$GLOBALS['mobile_menu_breakpoint'] = get_theme_mod( 'mobile_nav_breakpoint', 1050 );
+$GLOBALS['mobile_nav_breakpoint'] = get_theme_mod( 'mobile_nav_breakpoint', 1050 );
 $GLOBALS['department_name']        = esc_attr( get_theme_mod( 'standard_header_logo_department_name' ) );
 
 /**
