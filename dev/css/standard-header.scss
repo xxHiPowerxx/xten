@@ -426,7 +426,10 @@
 	/*   Standard IntERnet Header   */
 	&.xten-standard-internet-header {
 		.site-header {
-			background-color: #2e528a;
+			@at-root .mobile-sidebar-top,
+				& {
+				background-color: #2e528a;
+			}
 		}
 
 		.xten-header {
@@ -537,11 +540,17 @@
 	/*   /Standard IntRAnet Header   */
 
 	.mobile-toggler {
-		color: #969ba0;
-
-		&:hover {
-			color: #fff;
+		color: $white;
+		background-color: transparent;
+		border: none;
+		@extend .smooth-transition;
+		@extend .smoother-transition;
+		#{$active} {
+			transform: scale(1.1) translateZ(0);
 		}
+	}
+	.mobile-toggler-icon {
+		font-size: 2.4rem;
 	}
 }
 
