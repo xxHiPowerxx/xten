@@ -94,7 +94,7 @@ function sizeHeaderPad() {
 		sizeHeaderPad[0].style.paddingTop = window.siteHeaderHeight;
 		parentElem = sizeHeaderRefClone.parentElement;
 		if (parentElem !== undefined) {
-			// parentElem.removeChild(sizeHeaderRefClone);
+			parentElem.removeChild(sizeHeaderRefClone);
 		}
 	}
 }
