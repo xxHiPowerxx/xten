@@ -30,27 +30,31 @@ h6 {
 	$small-font-size: $font-size * 0.8333333333;
 	@return #{$small-font-size};
 }
-@mixin reduceLargeFontsAtVPXS($font-size) {
-	@media (min-width: $vp_xs) {
+@mixin reduceLargeFontsAtVPXS($font-size, $vp) {
+	@media (min-width: $vp) {
 		font-size: $font-size;
 	}
 	font-size: reduceLargeFonts($font-size);
 }
 h1,
 .section-heading {
-	@include reduceLargeFontsAtVPXS(6rem);
+	@include reduceLargeFontsAtVPXS(5rem, $vp_sm);
+	@include reduceLargeFontsAtVPXS(6rem, $vp_lg);
 }
 
 h2 {
-	@include reduceLargeFontsAtVPXS(4.8rem);
+	@include reduceLargeFontsAtVPXS(4.2rem, $vp_sm);
+	@include reduceLargeFontsAtVPXS(4.8rem, $vp_lg);
 }
 
 h3 {
-	@include reduceLargeFontsAtVPXS(3.9rem);
+	@include reduceLargeFontsAtVPXS(3.2rem, $vp_sm);
+	@include reduceLargeFontsAtVPXS(3.9rem, $vp_lg);
 }
 
 h4 {
-	@include reduceLargeFontsAtVPXS(3.1rem);
+	@include reduceLargeFontsAtVPXS(2.5rem, $vp_sm);
+	@include reduceLargeFontsAtVPXS(3.1rem, $vp_lg);
 }
 
 h5,
