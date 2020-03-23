@@ -95,12 +95,12 @@ jQuery(document).ready(function($) {
 	// Sub Menu Open Animation sub-menu-toggler
 	$("#mobile-menu .menu-item .sub-menu").on("show.bs.collapse", function() {
 		var parent = $(this).parentsUntil("a");
-		$(parent).addClass("isShowing");
+		$(parent).addClass("is-showing");
 	});
 
 	$("#mobile-menu .menu-item .sub-menu").on("hide.bs.collapse", function() {
 		var parent = $(this).parentsUntil("a");
-		$(parent).removeClass("isShowing");
+		$(parent).removeClass("is-showing");
 	});
 
 	// Close Search Toggler
