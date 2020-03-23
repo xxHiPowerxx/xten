@@ -26,68 +26,58 @@ if ( $locations && isset( $locations[ $menu_name ] ) ) :
 	$GLOBALS['global_xten_header_file'] = get_template_directory() . '/inc/header/global-xten-header.php';
 	$global_xten_header_file            = $GLOBALS['global_xten_header_file'];
 	?>
-	<div id="mobile-sidebar" class="mobile-sidebar mobile-sidebar-closed"> <!-- Mobile Nav -->
+	<div id="mobile-sidebar" class="mobile-sidebar collapse"> <!-- Mobile Nav -->
 		<?php
 		$is_mobile_gobal_nav = true;
 		require get_template_directory() . '/inc/header/global-xten-header.php';
 
 		// Main Nav Mobile Accordion.
 		?>
-		<div class="primary-nav-wrapper">
-			<div class="primary-nav-trigger">
-				<div class="site-branding">
-					<?php	$home_url = esc_url( home_url( '/' ) ); ?>
-					<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
-						<div class="ctnr-custom-logo <?php echo file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ? 'child-logo' : ''; ?>">
-							<?php
-							if ( file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ) :
-								require get_stylesheet_directory() . '/header-logo.svg';
-							else :
-								$xten_header_logo_svg = $GLOBALS['xten-header-logo'];
-								echo $xten_header_logo_svg;
-								?>
-								<?php if ( $site_name ) : ?>
-									<span class="site-name"><?php echo esc_attr( $site_name ); ?> </span>
-								<?php endif; ?>
-								<?php
-							endif;
-							?>
-						</div>
-					</a>
-				</div><!-- .site-branding -->
-				<button class="btn mobile-main-nav-trigger mobile-nav-trigger" type="button" data-toggle="collapse" data-target="#mobile-main-navigation" aria-expanded="true" aria-controls="mobile-main-navigation">
-					<div><span>MENU</span></div> <i class="fa fa-chevron-down"></i>
-				</button>
-			</div>
-
-			<div class="mobile-main-navigation-wrapper">
-				<div class="collapse show" id="mobile-main-navigation">
-					<!-- Mobile Search -->
-					<div class="mobile-search">
-						<?php echo get_search_form(); ?>
-					</div>
-
+		<div class="site-branding">
+			<?php	$home_url = esc_url( home_url( '/' ) ); ?>
+			<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
+				<div class="ctnr-custom-logo <?php echo file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ? 'child-logo' : ''; ?>">
 					<?php
-					// Primary Nav.
-					if ( $menu_items ) :
-							wp_nav_menu(
-								array(
-									'theme_location' => $menu_name,
-									'menu_id'        => 'mobile-menu',
-									'container'      => 'ul',
-									'depth'          => 2,
-									'walker'         => new XTen_Walker(),
-								)
-							);
+					if ( file_exists( get_stylesheet_directory() . '/header-logo.svg' ) ) :
+						require get_stylesheet_directory() . '/header-logo.svg';
+					else :
+						$xten_header_logo_svg = $GLOBALS['xten-header-logo'];
+						echo $xten_header_logo_svg;
+						?>
+						<?php if ( $site_name ) : ?>
+							<span class="site-name"><?php echo esc_attr( $site_name ); ?> </span>
+						<?php endif; ?>
+						<?php
 					endif;
-					// Close Main Nav Mobile Accordion.
 					?>
-
 				</div>
-			</div>
-		</div>
+			</a>
+		</div><!-- /.site-branding -->
+		<div class="mobile-main-navigation-wrapper">
+			<div class="collapse show" id="mobile-main-navigation">
+				<!-- Mobile Search -->
+				<div class="mobile-search">
+					<?php echo get_search_form(); ?>
+				</div>
 
-		<div class="mobile-translate"></div>
+				<?php
+				// Primary Nav.
+				if ( $menu_items ) :
+						wp_nav_menu(
+							array(
+								'theme_location' => $menu_name,
+								'menu_id'        => 'mobile-menu',
+								'container'      => 'ul',
+								'depth'          => 2,
+								'walker'         => new XTen_Walker(),
+							)
+						);
+				endif;
+				// Close Main Nav Mobile Accordion.
+				?>
+
+			</div>
+		</div><!-- .mobile-main-navigation-wrapper -->
 
 		<?php
 		// Bottom Widget in mobile menu.
@@ -100,18 +90,6 @@ if ( $locations && isset( $locations[ $menu_name ] ) ) :
 		endif;
 		?>
 	</div><!-- .mobile-sidebar -->
-
-	<script async>
-		function googleTranslateElementInit() {
-			var isMobile = jQuery( 'body' ).hasClass( 'is-mobile' );
-			if ( isMobile ) {
-				new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
-			} else {
-				new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
-			}
-		}
-	</script>
-	<script type='text/javascript' src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit' async></script>
 
 	<?php
 
