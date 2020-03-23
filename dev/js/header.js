@@ -151,24 +151,17 @@ jQuery(document).ready(function($) {
 	);
 
 	function activateMobileMenu() {
+		var body = $("body");
 		var wrapper = $("#menu-wrapper");
 		var breakPoint = wrapper.attr("data-mobile-nav-breakpoint");
 		var windowWidth = window.innerWidth;
 		var activeClassName = "xten-mobile-menu-active";
 		var inactiveClassName = "xten-mobile-menu-inactive";
 
-		if (windowWidth <= breakPoint) {
-			wrapper.addClass(activeClassName);
-			wrapper.removeClass(inactiveClassName);
-			$("#google_translate_element")
-				.detach()
-				.appendTo(".mobile-translate");
+		if (windowWidth < breakPoint) {
+			body.addClass(activeClassName).removeClass(inactiveClassName);
 		} else {
-			wrapper.removeClass(activeClassName);
-			wrapper.addClass(inactiveClassName);
-			$("#google_translate_element")
-				.detach()
-				.appendTo(".desktop-translate");
+			body.removeClass(activeClassName).addClass(inactiveClassName);
 		}
 	}
 
