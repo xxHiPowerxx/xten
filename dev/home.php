@@ -15,7 +15,7 @@ get_header(); ?>
 	$sidebar_location = get_theme_mod( 'sidebar_location', 'sidebar_right' );
 	$column           = '';
 	if ( 'none' !== $sidebar_location ) {
-		$column = '-lg-8';
+		$column = '-xl-8';
 	};
 	?>
 

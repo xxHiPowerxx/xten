@@ -21,7 +21,7 @@ get_header(); ?>
 				<div class="page-content">
 					<p class="message"><?php esc_html_e( 'It looks like nothing was found at this location. The URL may be misspelled, or the page may no longer be available.', 'xten' ); ?></p>
 					<div class="row">
-						<div class="col-lg-8 offset-lg-2">
+						<div class="col-xl-8 offset-xl-2">
 							<div class="search">
 								<?php
 									get_search_form();
