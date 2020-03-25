@@ -69,7 +69,7 @@
 				padding-bottom: 1.5rem;
 
 				.site-branding {
-					margin-right: auto;
+					margin-right: 1.5rem;
 					text-align: left;
 					line-height: 0;
 					width: auto;
@@ -101,7 +101,7 @@
 							.xten-logo-svg {
 								width: 13.75rem; //20.34rem
 								height: auto; //14.817rem
-								margin-top: -5px;
+								margin-top: -0.5rem;
 								z-index: 1;
 								@media (min-width: $vp_xs) {
 									width: 12.75rem;
@@ -177,22 +177,23 @@
 						li {
 							display: flex;
 							align-items: center;
-							margin-left: 30px;
+							margin-left: 1em;
 
 							&.hidden-desktop {
 								display: none;
 							}
 							@media screen and (min-width: $vp_lg) {
-								margin-left: 45px;
+								margin-left: 1.25em;
 							}
 							@media screen and (min-width: $vp_xl) {
-								margin-left: 60px;
+								margin-left: 1.5em;
 							}
 
 							a {
 								position: relative;
 								&:focus,
-								&:hover {
+								&:hover,
+								&.open {
 									text-decoration: none;
 									&:before {
 										transform: scaleX(1) translateZ(0);
@@ -230,10 +231,10 @@
 								flex-direction: column;
 								background-color: #efefef;
 								border: none;
-								box-shadow: 0 6px 5px 0 rgba(0, 0, 0, 0.1);
+								box-shadow: 0 0.6rem 0.5rem 0 rgba(0, 0, 0, 0.1);
 								margin: 0;
 								opacity: 0;
-								transform: translate(0, 10px);
+								transform: translate(0, 1rem);
 								transition: opacity 200ms ease-in,
 									transform 200ms ease-in,
 									visibility 200ms ease-in;
@@ -264,15 +265,15 @@
 								// Flyout UL
 								.sub-menu {
 									padding: 0;
-									width: 200px;
+									width: 20rem;
 									li {
 										padding: 0;
 										margin-left: 0;
 
 										a {
-											font-size: 14px;
+											font-size: 1.4rem;
 											font-weight: normal;
-											padding: 10px 15px;
+											padding: 0.5em 1em;
 
 											&:hover {
 												background-color: #dadada;
@@ -296,11 +297,11 @@
 									.inner-sub-nav-wrapper {
 										max-width: 1748px;
 										margin: 0 auto;
-										padding: 10px 10px 0;
+										padding: 1rem 1rem 0;
 
 										.sub-nav-group {
 											flex: 1;
-											padding: 30px;
+											padding: 3rem;
 
 											&.hidden-desktop {
 												display: none;
@@ -310,21 +311,21 @@
 												&.has-heading {
 													.mega-menu-heading {
 														display: block;
-														font-size: 24px;
-														line-height: 24px;
+														font-size: 2.4rem;
+														line-height: 1;
 														font-weight: bold;
 														color: #596068;
 														width: 100%;
 														border-bottom: 1px solid
 															#c6c6c6;
-														padding-bottom: 10.5px;
-														margin-bottom: 20.5px;
+														padding-bottom: 0.4375em;
+														margin-bottom: 0.8541666em;
 													}
 
 													.links {
 														a {
-															font-size: 16px;
-															margin-bottom: 10.5px;
+															font-size: 1.6rem;
+															margin-bottom: 0.65625em;
 														}
 													}
 												}
@@ -337,10 +338,10 @@
 													}
 
 													a {
-														font-size: 20px;
-														line-height: 20px;
+														font-size: 2rem;
+														line-height: 1;
 														font-weight: bold;
-														margin-bottom: 15px;
+														margin-bottom: 0.75em;
 														width: auto;
 														&:before {
 															content: none;
@@ -364,7 +365,7 @@
 							&.menu-type-flyout,
 							&.menu-type-mega-menu {
 								> a {
-									padding: 10.2px 8.5px;
+									padding: 0.5em;
 								}
 							}
 
@@ -381,7 +382,7 @@
 						.menu-item-has-children,
 						.menu-type-mega-menu,
 						.page_item_has_children {
-							padding-right: 7px;
+							padding-right: 0.5em;
 
 							.dropdown {
 								display: block;
@@ -525,15 +526,23 @@
 .xten-mobile-menu-active {
 	.desktop-navigation,
 	.header-search-toggle,
-	.xten-header-inner {
+	.xten-header-inner,
+	.xten-mobile-menu-active-hide {
 		display: none;
+	}
+	.xten-mobile-menu-active-show {
+		display: block;
 	}
 }
 
 .xten-mobile-menu-inactive {
 	.desktop-navigation,
-	.header-search-toggle {
+	.header-search-toggle,
+	.xten-mobile-menu-inactive-show {
 		display: block;
+	}
+	.xten-mobile-menu-inactive-hide {
+		display: none;
 	}
 
 	.xten-header-inner {
