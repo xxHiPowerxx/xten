@@ -36,6 +36,31 @@ function xten_customize_register( $wp_customize ) {
 	$wp_customize->remove_section( 'colors' );
 	$wp_customize->remove_section( 'header_image' );
 	$wp_customize->remove_section( 'background_image' );
+
+	// Site Phone Number.
+	$wp_customize->add_setting(
+		'site_phone_number',
+		array(
+			'default'           => null,
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'site_phone_number',
+			array(
+				'priority'    => 12,
+				'label'       => __( 'Site Phone Number', 'bolt-on' ),
+				'section'     => 'title_tagline',
+				'settings'    => 'site_phone_number',
+				'description' => __( 'The Site Phone Number Will Be displayed in multple areas', 'bolt-on' ),
+				'type'        => 'text',
+			)
+		)
+	);
+	$wp_customize->get_setting( 'site_phone_number' )->transport = 'postMessage';
 }
 add_action( 'customize_register', 'xten_customize_register' );
 

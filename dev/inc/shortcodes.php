@@ -81,3 +81,19 @@ function text_modification_shortcode_func( $atts, $content = null ) {
 	return '<span class="' . $class . '" style="' . $styles . '">' . $content . '</span>';
 }
 add_shortcode( 'text_mod', 'text_modification_shortcode_func' );
+
+/**
+ * Site Phone Number Shortcode.
+ * Will Render Site Phone Number in Widget or Content.
+ */
+function get_site_phone_number_func( $atts = '' ) {
+	$site_phone_number = esc_attr( get_theme_mod('site_phone_number', '') );
+	if ( $atts !== '' ) :
+		$return_result = '<a class="anchor-site-phone-number" href="tel:' . $site_phone_number . '"><span class="desktop site-phone-number">' . $site_phone_number . '</span></a>';
+	else :
+		$return_result = $site_phone_number;
+	endif;
+	return $return_result;
+}
+add_shortcode( 'site_phone_number', 'get_site_phone_number_func' );
+add_filter( 'widget_text', 'do_shortcode' );
