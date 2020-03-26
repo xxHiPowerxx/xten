@@ -33,11 +33,11 @@ function createPlaceHolderImg(elem) {
 			position: elem.style.position ? elem.style.position : ""
 		},
 		parentNode: {
-			position: elem.parentElement.style.position
-				? elem.parentElement.style.position
+			position: elem.parentNode.style.position
+				? elem.parentNode.style.position
 				: "",
-			width: elem.parentElement.style.position
-				? elem.parentElement.style.position
+			width: elem.parentNode.style.position
+				? elem.parentNode.style.position
 				: ""
 		}
 	};
@@ -54,10 +54,10 @@ function createPlaceHolderImg(elem) {
 	);
 	elem.style.position = "absolute";
 
-	elem.parentElement.style.position = "relative";
-	elem.parentElement.style.maxHeight = maxHeight + "px";
-	elem.parentElement.style.width = "100%";
-	elem.parentElement.appendChild(placeHolderImg);
+	elem.parentNode.style.position = "relative";
+	elem.parentNode.style.maxHeight = maxHeight + "px";
+	elem.parentNode.style.width = "100%";
+	elem.parentNode.appendChild(placeHolderImg);
 }
 
 function sizeHeaderPad() {
@@ -92,7 +92,7 @@ function sizeHeaderPad() {
 						.height.toFixed(3)) + "px";
 
 		sizeHeaderPad[0].style.paddingTop = window.siteHeaderHeight;
-		parentElem = sizeHeaderRefClone.parentElement;
+		parentElem = sizeHeaderRefClone.parentNode;
 		if (parentElem !== undefined) {
 			parentElem.removeChild(sizeHeaderRefClone);
 		}
