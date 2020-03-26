@@ -23,7 +23,7 @@ get_header(); ?>
 	?>
 	<div class="sizeContent container container-ext main-container">
 		<div class="row">
-			<div class="col<?php echo esc_attr( $column ); ?> order-lg-1 content-area card-style" id="primary">
+			<div class="col<?php echo esc_attr( $column ); ?> order-xl-1 content-area card-style" id="primary">
 				<main id="main" class="site-main">
 
 				<?php
