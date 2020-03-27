@@ -99,17 +99,18 @@
 }
 
 .cat-links {
-	@include font-size-leading(25.6px, 1.5);
-	//margin-top: .5em;
+	@include font-size-leading(25px, 1.5);
+	line-height: 1.5;
+	padding-bottom: 1.5rem;
+	padding-top: 1.5rem;
 
 	a {
 		color: $dark-gray;
 		display: inline-block;
 		font-weight: bold;
-		margin-left: 0.5em;
 
-		&:first-child {
-			margin-left: 0;
+		&:not(:last-child) {
+			margin-right: 0.5em;
 		}
 	}
 }
@@ -131,9 +132,7 @@
 }
 
 .entry-content {
-	margin: 0 auto;
-	// @include fontSize(32px);
-	line-height: 110%;
+	margin: 0;
 }
 
 .post-date {
