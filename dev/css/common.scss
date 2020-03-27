@@ -755,13 +755,35 @@ textarea {
 }
 
 .post-navigation .nav-links {
-	@include font-size-leading(20px, 1.5);
-	word-break: break-all;
+	margin-top: 3rem;
 }
 
 .nav-links {
 	display: flex;
 	justify-content: space-between;
+	> [class*="nav"] {
+		max-width: 35rem;
+		word-break: break-word;
+		a {
+			@extend .card-style;
+			transition: $smooth-transition;
+			padding: 1.5rem;
+			text-decoration: none;
+			display: flex;
+			flex-direction: column;
+			min-height: 100%;
+			#{$active} {
+				box-shadow: 0 0.15rem 0.3rem rgba(15, 15, 15, 0.25);
+			}
+		}
+	}
+}
+
+.nav-link-label {
+	width: 100%;
+	text-align: center;
+	font-weight: 700;
+	margin-bottom: 0.25em;
 }
 
 .comment-navigation .nav-previous,
@@ -769,6 +791,7 @@ textarea {
 .post-navigation .nav-previous {
 	width: 50%;
 	flex: 1 0 50%;
+	margin-right: auto;
 }
 
 .comment-navigation .nav-next,
@@ -776,6 +799,7 @@ textarea {
 .post-navigation .nav-next {
 	text-align: end;
 	flex: 1 0 50%;
+	margin-left: auto;
 }
 
 .post-navigation-sub span {
@@ -886,7 +910,7 @@ body input:focus {
 
 .card-style {
 	background-color: $white;
-	box-shadow: 0 0 0.5em 0.05em rgba(15, 15, 15, 0.06);
+	box-shadow: 0 0.05rem 0.15rem rgba(15, 15, 15, 0.1);
 }
 
 .card-style.content-area {
@@ -1046,39 +1070,43 @@ body.search-open {
 
 	.nav-links {
 		i {
-			transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+			transition: $smooth-transition;
 		}
 
-		.nav-previous a {
-			display: flex;
-			align-items: center;
-			min-height: 100%;
-
-			&:hover {
-				i {
-					transform: translateX(-5px);
+		.nav-previous {
+			.nav-link-title {
+				#{$active} {
+					i {
+						transform: translateX(-5px);
+					}
 				}
-			}
-
-			i {
-				margin-right: 0.25em;
+				i {
+					margin-right: 0.25em;
+				}
 			}
 		}
+		.nav-next {
+			.nav-link-title {
+				justify-content: flex-end;
+				#{$active} {
+					i {
+						transform: translateX(5px);
+					}
+				}
 
-		.nav-next a {
-			display: flex;
-			align-items: center;
-			justify-content: flex-end;
-			min-height: 100%;
-
-			&:hover {
 				i {
-					transform: translateX(5px);
+					margin-left: 0.25em;
 				}
 			}
-
-			i {
-				margin-left: 0.25em;
+		}
+		.nav-link-title {
+			display: flex;
+			align-items: center;
+			flex: 1;
+			min-height: 100%;
+			.nav-title {
+				margin-left: auto;
+				margin-right: auto;
 			}
 		}
 	}
