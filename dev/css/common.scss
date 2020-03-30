@@ -1188,20 +1188,10 @@ article.page {
 # Footer
 --------------------------------------------------------------*/
 
-@media (min-width: $vp_lg) {
-	.footer-container {
-		padding: 0;
-	}
-}
-
 .site-footer {
 	.container.container-ext.footer-container {
-		max-width: 1440px;
 		padding-top: 1.5rem;
 		padding-bottom: 1.5rem;
-		// @media (min-width: $vp_xs) {
-		// 	padding: 3.75rem;
-		// }
 	}
 	.custom-logo-link {
 		display: inline-block;
