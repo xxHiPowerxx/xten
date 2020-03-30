@@ -55,7 +55,7 @@
 
 	.site-header {
 		box-shadow: 0 0.6rem 0.9rem rgba(0, 0, 0, 0.16);
-		transition: all 0.15s $smooth_transition;
+		transition: all 0.15s $smooth-transition;
 
 		.navbar {
 			padding: 0;
@@ -216,7 +216,7 @@
 										rgba($gold, $opacity_zero)
 									);
 									transform: scaleX(0) translateZ(0);
-									transition: $smooth_transition;
+									transition: $smooth-transition;
 								}
 							}
 
