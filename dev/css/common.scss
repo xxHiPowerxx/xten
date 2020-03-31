@@ -763,7 +763,6 @@ textarea {
 	justify-content: space-between;
 	> [class*="nav"] {
 		max-width: 35rem;
-		word-break: break-word;
 		a {
 			@extend .card-style;
 			transition: $smooth-transition;
@@ -784,6 +783,9 @@ textarea {
 	text-align: center;
 	font-weight: 700;
 	margin-bottom: 0.25em;
+	margin-bottom: 0.25em;
+	padding-bottom: 0.25em;
+	border-bottom: 0.1em solid $gray-100;
 }
 
 .comment-navigation .nav-previous,
@@ -1069,44 +1071,47 @@ body.search-open {
 	overflow: visible !important;
 
 	.nav-links {
-		i {
+		.nav-link-label-icon {
 			transition: $smooth-transition;
 		}
 
 		.nav-previous {
-			.nav-link-title {
+			a {
 				#{$active} {
-					i {
-						transform: translateX(-5px);
+					.nav-link-label-icon {
+						transform: translateX(-0.25em);
 					}
 				}
-				i {
+				.nav-link-label-icon {
+					float: left;
 					margin-right: 0.25em;
 				}
 			}
 		}
 		.nav-next {
-			.nav-link-title {
+			a {
 				justify-content: flex-end;
 				#{$active} {
-					i {
-						transform: translateX(5px);
+					.nav-link-label-icon {
+						transform: translateX(0.25em);
 					}
 				}
 
-				i {
+				.nav-link-label-icon {
+					float: right;
 					margin-left: 0.25em;
 				}
 			}
 		}
-		.nav-link-title {
+		.ctnr-nav-title {
 			display: flex;
 			align-items: center;
-			flex: 1;
+			// flex: 1;
 			min-height: 100%;
 			.nav-title {
 				margin-left: auto;
 				margin-right: auto;
+				word-break: normal;
 			}
 		}
 	}
@@ -1290,7 +1295,6 @@ article.page {
 		.standard-footer-content {
 			display: flex;
 			flex-flow: column;
-			align-items: center;
 			padding: 0;
 			margin-top: 3rem;
 			@media (min-width: $vp_sm) {
@@ -1298,9 +1302,6 @@ article.page {
 			}
 			@media (min-width: $vp_m) {
 				flex-flow: row;
-			}
-			@media (min-width: $vp_lg) {
-				align-items: flex-start;
 			}
 			.social-media-wrapper {
 				width: 80%;

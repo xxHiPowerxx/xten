@@ -83,8 +83,8 @@
 if ( is_singular() ) :
 	the_post_navigation(
 		array(
-			'prev_text'          => __( '<i class="fas fa-arrow-left"></i> %title' ),
-			'next_text'          => __( '%title <i class="fas fa-arrow-right"></i>' ),
+			'prev_text'          => __( '<div class="nav-link-label">Previous Post</div><div class="nav-link-title"><i class="fas fa-arrow-left"></i> <span class="nav-title">%title</span></div>' ),
+			'next_text'          => __( '<div class="nav-link-label">Next Post</div><div class="nav-link-title"><span class="nav-title">%title</span> <i class="fas fa-arrow-right"></i></div>' ),
 			'screen_reader_text' => __( 'Posts navigation' ),
 		)
 	);
