@@ -767,9 +767,8 @@ textarea {
 			@extend .card-style;
 			transition: $smooth-transition;
 			padding: 1.5rem;
+			display: block;
 			text-decoration: none;
-			display: flex;
-			flex-direction: column;
 			min-height: 100%;
 			#{$active} {
 				box-shadow: 0 0.15rem 0.3rem rgba(15, 15, 15, 0.25);
