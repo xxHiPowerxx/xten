@@ -18,8 +18,8 @@ class SB_Social_Profile extends WP_Widget {
 		function __construct() {
 				parent::__construct(
 					'SB_Social_Profile',
-					__('Social Networks Profiles', 'translation_domain'), // Name
-					array('description' => __('Links to Site social media profile', 'translation_domain'),)
+					__('Social Network Profiles', 'xten'), // Name
+					array('description' => __('Links to Site social media profile', 'xten'),)
 				);
 		}
 
@@ -33,11 +33,11 @@ class SB_Social_Profile extends WP_Widget {
 		 */
 		public function widget($args, $instance) {
 
-			$facebook = $instance['facebook'];
-			$twitter = $instance['twitter'];
-			$youtube = $instance['youtube'];
+			$facebook  = $instance['facebook'];
+			$twitter   = $instance['twitter'];
+			$youtube   = $instance['youtube'];
 			$instagram = $instance['instagram'];
-			$linkedin = $instance['linkedin'];
+			$linkedin  = $instance['linkedin'];
 
 			// social profile link
 			$facebook_profile  = '<a class="facebook" target="_blank" aria-label="Visit Our Facebook Page" href="' . $facebook . '"><i aria-hidden="true" class="fab fa-facebook-square" title="Visit Our Facebook Page"></i><span class="sr-only">Visit Our Facebook Page</span></a>';
@@ -67,16 +67,11 @@ class SB_Social_Profile extends WP_Widget {
 		 * @param array $instance Previously saved values from database.
 		 */
 		public function form($instance) {
-			isset($instance['facebook']) ? $facebook = $instance['facebook'] : null;
-			empty($instance['facebook']) ? $facebook = 'https://www.facebook.com/SanBernardinoXTen/' : null;
-			isset($instance['twitter']) ? $twitter = $instance['twitter'] : null;
-			empty($instance['twitter']) ? $twitter = 'https://twitter.com/xten' : null;
-			isset($instance['youtube']) ? $youtube = $instance['youtube'] : null;
-			empty($instance['youtube']) ? $youtube = 'https://www.youtube.com/user/xtenPIO' : null;
-			isset($instance['instagram']) ? $instagram = $instance['instagram'] : null;
-			empty($instance['instagram']) ? $instagram = 'https://www.instagram.com/xten/' : null;
-			isset($instance['linkedin']) ? $linkedin = $instance['linkedin'] : null;
-			empty($instance['linkedin']) ? $linkedin = 'https://www.linkedin.com/company/xten' : null;
+			$facebook  = isset($instance['facebook']) ? $instance['facebook'] : 'https://www.facebook.com/SanBernardinoXTen/';
+			$twitter   = isset($instance['twitter']) ? $instance['twitter'] : 'https://twitter.com/xten';
+			$youtube   = isset($instance['youtube']) ? $instance['youtube'] : 'https://www.youtube.com/user/xtenPIO';
+			$instagram = isset($instance['instagram']) ? $instance['instagram'] : 'https://www.instagram.com/xten/';
+			$linkedin  = isset($instance['linkedin']) ? $instance['linkedin'] : 'https://www.linkedin.com/company/xten';
 		?>
 			<p>
 				<label for="<?php echo $this->get_field_id('facebook'); ?>"><?php _e('Facebook:'); ?></label> 
@@ -90,7 +85,7 @@ class SB_Social_Profile extends WP_Widget {
 
 			<p>
 				<label for="<?php echo $this->get_field_id('youtube'); ?>"><?php _e('Youtube:'); ?></label> 
-				<input class="widefat" id="<?php echo $this->get_field_id('youtube'); ?>" name="<?php echo $this->get_field_name('youtube'); ?>" type="text" value="<?php echo esc_attr($youtube); ?>">
+				<input class="widefat foobar" id="<?php echo $this->get_field_id('youtube'); ?>" name="<?php echo $this->get_field_name('youtube'); ?>" type="text" value="<?php echo esc_attr($youtube); ?>">
 			</p>
 
 			<p>
@@ -118,12 +113,12 @@ class SB_Social_Profile extends WP_Widget {
 		 */
 		public function update($new_instance, $old_instance) {
 				$instance = array();
-				$instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
-				$instance['facebook'] = (!empty($new_instance['facebook']) ) ? strip_tags($new_instance['facebook']) : '';
-				$instance['twitter'] = (!empty($new_instance['twitter']) ) ? strip_tags($new_instance['twitter']) : '';
-				$instance['youtube'] = (!empty($new_instance['youtube']) ) ? strip_tags($new_instance['youtube']) : '';
+				$instance['title']     = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
+				$instance['facebook']  = (!empty($new_instance['facebook']) ) ? strip_tags($new_instance['facebook']) : '';
+				$instance['twitter']   = (!empty($new_instance['twitter']) ) ? strip_tags($new_instance['twitter']) : '';
+				$instance['youtube']   = (!empty($new_instance['youtube']) ) ? strip_tags($new_instance['youtube']) : '';
 				$instance['instagram'] = (!empty($new_instance['instagram']) ) ? strip_tags($new_instance['instagram']) : '';
-				$instance['linkedin'] = (!empty($new_instance['linkedin']) ) ? strip_tags($new_instance['linkedin']) : '';
+				$instance['linkedin']  = (!empty($new_instance['linkedin']) ) ? strip_tags($new_instance['linkedin']) : '';
 
 				return $instance;
 		}
