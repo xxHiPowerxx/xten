@@ -289,8 +289,6 @@ require get_template_directory() . '/inc/gutenberg-settings.php';
  * Widget areas.
  */
 require get_template_directory() . '/inc/widget-area.php';
-/* calls Social Medial Widget for Widget Area */
-require get_template_directory() . '/inc/social-media-widget.php';
 
 /**
  * Implement the Custom Header feature.

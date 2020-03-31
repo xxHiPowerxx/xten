@@ -22,16 +22,6 @@ function xten_widgets_init() {
 	));
 
 	register_sidebar( array(
-		'name'          => esc_html__( 'Social Media Accounts', 'xten' ),
-		'id'            => 'social-media-widget-area',
-		'description'   => esc_html__( 'Add Social Media widget here.', 'xten' ),
-		'before_widget' => '<div id="%1$s" class="widget social-widget-area %2$s">',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h2 class="widget-title xten-theme-color-bg">',
-		'after_title'   => '</h2>',
-	));
-
-	register_sidebar( array(
 		'name'          => esc_html__( 'Deparment Address', 'xten' ),
 		'id'            => 'department-address-widget-area',
 		'description'   => esc_html__( 'Add Department Address widget here.', 'xten' ),
