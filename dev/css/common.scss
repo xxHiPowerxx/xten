@@ -910,7 +910,7 @@ body input:focus {
 
 .card-style {
 	background-color: $white;
-	box-shadow: 0 0.05rem 0.15rem rgba(15, 15, 15, 0.1);
+	box-shadow: 0 0.1rem 0.25rem rgba(15, 15, 15, 0.35);
 }
 
 .card-style.content-area {
@@ -1190,8 +1190,8 @@ article.page {
 
 .site-footer {
 	.container.container-ext.footer-container {
-		padding-top: 1.5rem;
-		padding-bottom: 1.5rem;
+		padding-top: 3rem;
+		padding-bottom: 3rem;
 	}
 	.custom-logo-link {
 		display: inline-block;
@@ -1292,6 +1292,7 @@ article.page {
 			flex-flow: column;
 			align-items: center;
 			padding: 0;
+			margin-top: 3rem;
 			@media (min-width: $vp_sm) {
 				flex-flow: row;
 			}
@@ -1299,24 +1300,17 @@ article.page {
 				flex-flow: row;
 			}
 			@media (min-width: $vp_lg) {
-				margin-top: 6rem;
 				align-items: flex-start;
 			}
 			.social-media-wrapper {
 				width: 80%;
 				text-align: center;
-				margin-top: 3rem;
-				margin-bottom: 3rem;
-				@media (min-width: $vp_xs) {
-					margin-top: 3rem;
-				}
 				@media (min-width: $vp_sm) {
 					width: 60%;
 				}
 				@media (min-width: $vp_m) {
 					width: 55%;
 					order: 1;
-					margin-top: 0;
 				}
 				@media (min-width: $vp_lg) {
 					width: 40%;
@@ -1328,16 +1322,8 @@ article.page {
 				.social-icons {
 					position: relative;
 					display: flex;
-					justify-content: space-around;
 					margin-left: auto;
 					margin-right: auto;
-					@media (min-width: $vp_m) {
-						max-width: 100%;
-						justify-content: space-evenly;
-					}
-					@media (min-width: $vp_lg) {
-						// margin: 0 18px;
-					}
 					a {
 						display: block;
 						padding: 0;
@@ -1354,15 +1340,9 @@ article.page {
 							margin: 0;
 							font-size: 3.312rem;
 						}
-						@media (min-width: $vp_m) {
-							height: 63px;
-						}
 					}
 					.sr-only {
 						display: none;
-					}
-					.youtube {
-						width: 63px;
 					}
 				}
 			}
@@ -1507,10 +1487,8 @@ article.page {
 }
 
 .social-icons a {
-	@include font-size-leading(59.2px, 1.05);
+	font-size: 6rem;
 	display: inline-block;
-	width: 50px;
-	height: 50px;
 	opacity: 0.5;
 	transition: $smooth-transition;
 	&:focus,
