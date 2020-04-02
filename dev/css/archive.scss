@@ -1,140 +1,150 @@
-@import './variables';
+@import "./variables";
 
 /*--------------------------------------------------------------
 # Archive
 --------------------------------------------------------------*/
 
 .article-container {
-    padding-left: 0;
-    padding-right: 0;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 @media screen and (min-width: $vp_sm) {
-
-    /* First 2 .article-container(s)  */
-    .article-container:nth-child(-n+2) {
-        margin-top: 0;
-    }
+	/* First 2 .article-container(s)  */
+	.article-container:nth-child(-n + 2) {
+		margin-top: 0;
+	}
 }
 
 .article-container {
-    margin-top: 15px;
+	margin-top: 15px;
 }
 
 .article-container:first-child {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .article-container .hentry .featured-image {
-    margin-bottom: 0;
-    display: block;
-    width: 100%;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-    padding-top: 56.25%;
+	margin-bottom: 0;
+	display: block;
+	width: 100%;
+	height: auto;
+	position: relative;
+	overflow: hidden;
+	padding-top: 56.25%;
 
-    .attachment-archive-thumbnail {
-        display: block;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    }
+	.attachment-archive-thumbnail {
+		display: block;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
 }
 
 .featured-image:hover img {
-    transform: translateZ(0) scale(1.05);
+	transform: translateZ(0) scale(1.05);
 }
 
 .featured-image img {
-    transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+	transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .article-container .hentry {
-    min-height: 100%;
-    padding: 0;
-    margin-bottom: 0;
+	min-height: 100%;
+	padding: 0;
+	margin-bottom: 0;
 }
 
 .archive-description {
-    @include fontSize(25.6px);
-    margin-top: 0.25em;
+	@include fontSize(25.6px);
+	margin-top: 0.25em;
 }
 
 @media screen and (min-width: $vp_sm) {
+	/* Odd .article-container(s) */
+	.article-container:nth-child(2n + 1) .hentry {
+		margin-right: 7.5px;
+	}
 
-    /* Odd .article-container(s) */
-    .article-container:nth-child(2n+1) .hentry {
-        margin-right: 7.5px;
-    }
-
-    /* Even .article-container(s) */
-    .article-container:nth-child(2n) .hentry {
-        margin-left: 7.5px;
-    }
+	/* Even .article-container(s) */
+	.article-container:nth-child(2n) .hentry {
+		margin-left: 7.5px;
+	}
 }
 
 .article-container .post-body {
-    padding: 1.5em 15px;
-    flex: 1;
+	padding: 1.5em 15px;
+	flex: 1;
 }
 
 .article-container .entry-header {
-    margin-bottom: 1em;
+	margin-bottom: 1em;
 }
 
 .article-container .post-category {
-    margin-right: 2em;
+	margin-right: 2em;
 }
 
 .post-body.d-flex .entry-footer {
-    margin-top: auto;
-    padding-bottom: 0;
+	margin-top: auto;
+	padding-bottom: 0;
 }
 
 .post-link {
-    display: inline-block;
-    text-decoration: none;
-    color: $white;
-    border-radius: 50%;
-    padding: .5em; //1em
-    //width: 4.5em;
-    margin-bottom: auto;
+	display: inline-block;
+	text-decoration: none;
+	color: $white;
+	border-radius: 50%;
+	padding: 0.5em; //1em
+	//width: 4.5em;
+	margin-bottom: auto;
 }
 
 .post-link {
-    i {
-        color: $white;
-        @include fontSize(27px);
-        transform: translateZ(0);
-        transition: transform .3s cubic-bezier(0.22, 0.61, 0.36, 1);
-        ;
-    }
+	i {
+		color: $white;
+		@include fontSize(27px);
+		transform: translateZ(0);
+		transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+	}
 
-    &:hover {
-        i {
-            color: $white;
-            transform: translateZ(0) translateX(.16em);
-        }
-    }
+	&:hover {
+		i {
+			color: $white;
+			transform: translateZ(0) translateX(0.16em);
+		}
+	}
 }
 
 .site-main .posts-navigation {
-    margin-top: 5em;
+	margin-top: 5em;
 }
 
 .nav-links {
-    @include fontSize(32px);
+	@include fontSize(32px);
 }
 
-@media all and (-ms-high-contrast: none),
-(-ms-high-contrast: active) {
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.article-container .hentry,
+	.article-container .hentry .post-body {
+		display: block !important;
+	}
+}
 
-    .article-container .hentry,
-    .article-container .hentry .post-body {
-        display: block !important;
-    }
+/*--------------------------------------------------------------
+## Category Archive.
+--------------------------------------------------------------*/
+.archive-wrapper {
+	&:not(:first-of-type) {
+		margin-top: 1.5rem;
+	}
+}
+.ctnr-archive-title {
+	.collapse-control-indicator {
+		font-size: 4rem;
+		padding: 0.25em;
+	}
 }

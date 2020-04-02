@@ -23,55 +23,66 @@ get_header(); ?>
 				<main id="main" class="site-main archive-page">
 
 					<?php
+					/*
+					* Include the component stylesheet for the content.
+					* This call runs only once on index and archive pages.
+					* At some point, override functionality should be built in similar to the template part below.
+					*/
+					wp_print_styles( array( 'xten-content-css' ) ); // Note: If this was already done it will be skipped.
 
-					if ( have_posts() ) :
-						/*
-						* Include the component stylesheet for the content.
-						* This call runs only once on index and archive pages.
-						* At some point, override functionality should be built in similar to the template part below.
-						*/
-						wp_print_styles( array( 'xten-content-css' ) ); // Note: If this was already done it will be skipped.
+					/* Display the appropriate header when required. */
+					xten_index_header();
 
-						/* Display the appropriate header when required. */
-						xten_index_header();
+					/**
+					 * Check if is page Category, and if so, get archive-category.php
+					 */
+					if ( is_category() ) :
 
-						?>
+						require get_template_directory() . '/archive-category.php';
 
-						<div class="archive-container d-flex flex-row flex-wrap align-items-stretch">
+					else : // else if ( ! is_category() ) :
+
+						if ( have_posts() ) :
+							?>
+
+							<div class="archive-container d-flex flex-row flex-wrap align-items-stretch">
+								<?php
+								/* Start the Loop */
+								while ( have_posts() ) :
+									?>
+									<div class="article-container col-md-6">
+										<?php
+										the_post();
+
+										/*
+										* Include the Post-Type-specific template for the content.
+										* If you want to override this in a child theme, then include a file
+										* called content-___.php (where ___ is the Post Type name) and that will be used instead.
+										*/
+										get_template_part( 'template-parts/content', 'archive-post' );
+										?>
+									</div><!-- .article-container -->
+									<?php
+								endwhile;
+								?>
+							</div>
 							<?php
 
-							/* Start the Loop */
-							while ( have_posts() ) :
-								the_post();
+							the_posts_navigation(
+								array(
+									'prev_text'          => __( '<i class="fas fa-arrow-left"></i> Older posts', 'xten' ),
+									'next_text'          => __( 'Newer posts <i class="fas fa-arrow-right"></i>', 'xten' ),
+									'screen_reader_text' => __( 'Posts navigation', 'xten' ),
+								)
+							);
 
+						else : // else if ( ! have_posts() ) :
 
-								/*
-								* Include the Post-Type-specific template for the content.
-								* If you want to override this in a child theme, then include a file
-								* called content-___.php (where ___ is the Post Type name) and that will be used instead.
-								*/
-								get_template_part( 'template-parts/content', 'archive-post' );
+							get_template_part( 'template-parts/content', 'none' );
 
-							endwhile;
+						endif; // endif ( have_posts() ) :
 
-							?>
-						</div>
-						<?php
-
-						the_posts_navigation(
-							array(
-								'prev_text'          => __( '<i class="fas fa-arrow-left"></i> Older posts', 'xten' ),
-								'next_text'          => __( 'Newer posts <i class="fas fa-arrow-right"></i>', 'xten' ),
-								'screen_reader_text' => __( 'Posts navigation', 'xten' ),
-							)
-						);
-
-					else :
-
-						get_template_part( 'template-parts/content', 'none' );
-
-					endif;
-
+					endif; // endif ( is_category() ) :
 					?>
 
 				</main><!-- #main -->
