@@ -1,0 +1,50 @@
+{
+    "key": "group_5e864e09ac689",
+    "title": "Use Archive Title",
+    "fields": [
+        {
+            "key": "field_5e864e582bc00",
+            "label": "Use Archive Title",
+            "name": "use_archive_title",
+            "type": "true_false",
+            "instructions": "Select whether to include the name of the archive in the Archive Title<br \/>eg - <b>Category: Uncategorized<\/b> <i>or<\/i> <b>Uncategorized<\/b>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "category"
+            }
+        ],
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "site-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1585861364
+}

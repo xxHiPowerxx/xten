@@ -25,9 +25,9 @@ function xten_is_amp() {
  * @return bool Whether to use amp-live-list.
  */
 function xten_using_amp_live_list_comments() {
-	if ( ! xten_is_amp() ) {
+	if ( ! xten_is_amp() ) :
 		return false;
-	}
+	endif;
 	$amp_theme_support = get_theme_support( 'amp' );
 	return ! empty( $amp_theme_support[0]['comments_live_list'] );
 }
@@ -50,13 +50,13 @@ function xten_add_amp_live_list_pagination_attribute( $markup ) {
  * Prints the header of the current displayed page based on its contents.
  */
 function xten_index_header() {
-	if ( is_home() && ! is_front_page() ) {
+	if ( is_home() && ! is_front_page() ) :
 		?>
 		<header>
 			<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
 		</header>
 		<?php
-	} elseif ( is_search() ) {
+	elseif ( is_search() ) :
 		?>
 		<header class="page-header">
 			<h1 class="page-title">
@@ -67,16 +67,38 @@ function xten_index_header() {
 			</h1>
 		</header><!-- .page-header -->
 		<?php
-	} elseif ( is_archive() ) {
+	elseif ( is_archive() ) :
+		$use_archive_title = get_field('use_archive_title', get_queried_object());
+		$use_archive_title = $use_archive_title ?
+												 $use_archive_title:
+												 get_field('use_archive_title', 'option');
+		// Remove Archive Name From Archive Title if ACF Option is set to Yes In Category or Site Settings Page.
+		if ( $use_archive_title === false ) :
+			function xten_remove_archive_name_from_title( $title ) {
+					if ( is_category() ) {
+							$title = single_cat_title( '', false );
+					} elseif ( is_tag() ) {
+							$title = single_tag_title( '', false );
+					} elseif ( is_author() ) {
+							$title = '<span class="vcard">' . get_the_author() . '</span>';
+					} elseif ( is_post_type_archive() ) {
+							$title = post_type_archive_title( '', false );
+					} elseif ( is_tax() ) {
+							$title = single_term_title( '', false );
+					}
+					return $title;
+			}
+			add_filter( 'get_the_archive_title', 'xten_remove_archive_name_from_title' );
+		endif;
 		?>
 		<header class="page-header content-area card-style">
 			<?php
-				the_archive_title( '<h1 class="page-title">', '</h1>' );
-				the_archive_description( '<div class="archive-description">', '</div>' );
+			the_archive_title( '<h1 class="page-title">', '</h1>' );
+			the_archive_description( '<div class="archive-description">', '</div>' );
 			?>
 		</header><!-- .page-header -->
 		<?php
-	}
+	endif;
 }
 
 /**
@@ -84,9 +106,9 @@ function xten_index_header() {
  */
 function xten_posted_on() {
 	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) :
 		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
-	}
+	endif;
 
 	$time_string = sprintf(
 		$time_string,
@@ -126,14 +148,14 @@ function xten_posted_by() {
  */
 function xten_post_categories() {
 	// Only show categories on post types that have categories, not pages.
-	if ( 'page' !== get_post_type() ) {
+	if ( 'page' !== get_post_type() ) :
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( esc_html__( ',  ', 'xten' ) );
-		if ( $categories_list ) {
+		if ( $categories_list ) :
 			/* translators: 1: list of categories. */
 			printf( '<span class="cat-links d-flex flex-row flex-wrap">' . esc_html__( '%1$s', 'xten' ) . ' </span>', $categories_list ); // WPCS: XSS OK.
-		}
-	}
+		endif;
+	endif;
 }
 
 /**
@@ -143,21 +165,28 @@ function xten_post_categories() {
  */
 function xten_post_tags() {
 	// Only show tags on post types that have categories.
-	if ( 'post' === get_post_type() ) {
+	if ( 'post' === get_post_type() ) :
 		/* translators: used between list items, there is a space after the comma */
 		$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'xten' ) );
-		if ( $tags_list ) {
+		if ( $tags_list ) :
 			/* translators: 1: list of tags. */
 			printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'xten' ) . ' </span>', $tags_list ); // WPCS: XSS OK.
-		}
-	}
+		endif;
+	endif;
 }
 
 /**
  * Prints comments link when comments are enabled.
  */
 function xten_comments_link() {
-	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+	if (
+		! is_single() &&
+		! post_password_required() &&
+		(
+			comments_open() ||
+			get_comments_number()
+		)
+	) :
 		echo '<span class="comments-link">';
 		comments_popup_link(
 			sprintf(
@@ -174,7 +203,7 @@ function xten_comments_link() {
 			)
 		);
 		echo ' </span>';
-	}
+	endif;
 }
 
 /**
@@ -206,9 +235,9 @@ function xten_edit_post_link() {
  * element when on single views.
  */
 function xten_post_thumbnail() {
-	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
+	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) :
 		return;
-	}
+	endif;
 
 	if ( is_singular() ) :
 		?>
@@ -224,7 +253,7 @@ function xten_post_thumbnail() {
 		<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
 			<?php
 			global $wp_query;
-			if ( 0 === $wp_query->current_post ) {
+			if ( 0 === $wp_query->current_post ) :
 				the_post_thumbnail(
 					'full',
 					array(
@@ -236,7 +265,7 @@ function xten_post_thumbnail() {
 						),
 					)
 				);
-			} else {
+			else :
 				the_post_thumbnail(
 					'post-thumbnail', array(
 						'alt' => the_title_attribute(
@@ -246,7 +275,7 @@ function xten_post_thumbnail() {
 						),
 					)
 				);
-			}
+			endif;
 			?>
 		</a>
 
