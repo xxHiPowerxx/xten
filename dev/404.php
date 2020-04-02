@@ -10,7 +10,7 @@
 get_header(); ?>
 
 <?php wp_print_styles( array( 'xten-404-css' ) ); ?>
-	<div class="sizeContent page-full-width main-container">
+	<div class="sizeContent page-full-width container container-ext main-container">
 		<main class="content-area" id="primary">
 
 			<section class="error-404 not-found">
