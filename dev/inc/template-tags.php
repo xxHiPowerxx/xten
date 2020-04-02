@@ -125,8 +125,8 @@ function xten_posted_by() {
  * If additional post types should display categories, add them to the conditional statement at the top.
  */
 function xten_post_categories() {
-	// Only show categories on post types that have categories.
-	if ( 'post' === get_post_type() ) {
+	// Only show categories on post types that have categories, not pages.
+	if ( 'page' !== get_post_type() ) {
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( esc_html__( ',  ', 'xten' ) );
 		if ( $categories_list ) {

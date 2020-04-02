@@ -34,7 +34,7 @@
 		<header class="entry-header">
 			<?php
 
-			if ( 'post' === get_post_type() ) :
+			if ( 'page' !== get_post_type() ) :
 				?>
 				<div class="entry-meta xten-highlight-font">
 					<?php
