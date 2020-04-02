@@ -269,16 +269,6 @@ html {
 						span {
 							font-size: 2.3rem;
 							padding: 1em;
-							transform-style: preserve-3d;
-							@extend .smooth-transition;
-							backface-visibility: hidden;
-							transform: scaleY(1) translateZ(0);
-						}
-
-						&:not(.collapsed) {
-							span {
-								transform: scaleY(-1) translateZ(0);
-							}
 						}
 					}
 				}

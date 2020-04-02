@@ -9,7 +9,7 @@ class XTen_Walker extends Walker_Nav_Menu {
 
 		if ( 'mobile-menu' === $args->menu_id ) :
 			$output    .= "\n$indent<button class='sub-menu-toggler collapsed' type='button' data-toggle='collapse' data-target='#nav-group-" . $unique_id . "'
-			aria-label='Mobile Navigation Submenu nav-group" . $unique_id . "' aria-expanded='false' aria-controls='nav-group-" . $unique_id . "'><span class='fa fa-chevron-down'></span></button><ul class='sub-menu collapse' id='nav-group-" . $unique_id . "'>\n";
+			aria-label='Mobile Navigation Submenu nav-group" . $unique_id . "' aria-expanded='false' aria-controls='nav-group-" . $unique_id . "'><span class='collapse-control-indicator fa fa-chevron-down'></span></button><ul class='sub-menu collapse' id='nav-group-" . $unique_id . "'>\n";
 		else :
 			$output    .= "\n$indent<ul class='sub-menu collapse' id='nav-group-" . $unique_id . "'>\n";
 		endif;

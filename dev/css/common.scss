@@ -425,6 +425,12 @@ template {
 		text-decoration: underline;
 	}
 }
+.display-flex {
+	display: flex;
+}
+[data-toggle="collapse"] {
+	cursor: pointer;
+}
 
 /*--------------------------------------------------------------
 # Accessibility
@@ -748,14 +754,8 @@ textarea {
 .site-main .comment-navigation,
 .site-main .posts-navigation,
 .site-main .post-navigation {
-	border-bottom: 1px solid #111;
-	margin: 0 auto 2em;
-	overflow: hidden;
-	padding-bottom: 2em;
-}
-
-.post-navigation .nav-links {
 	margin-top: 3rem;
+	overflow: hidden;
 }
 
 .nav-links {
@@ -771,7 +771,7 @@ textarea {
 			text-decoration: none;
 			min-height: 100%;
 			#{$active} {
-				box-shadow: 0 0.15rem 0.3rem rgba(15, 15, 15, 0.25);
+				box-shadow: 0 0.15rem 0.3rem rgba(15, 15, 15, 0.55);
 			}
 		}
 	}
@@ -1553,5 +1553,15 @@ article.page {
 .xten-hero .hero-section-content {
 	@media screen and (max-width: $vp_xs) {
 		padding: 0 !important;
+	}
+}
+
+.collapse-control-indicator {
+	transform-style: preserve-3d;
+	@extend .smooth-transition;
+	backface-visibility: hidden;
+	transform: scaleY(-1) translateZ(0);
+	@at-root .collapsed & {
+		transform: scaleY(1) translateZ(0);
 	}
 }
