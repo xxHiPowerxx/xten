@@ -71,6 +71,7 @@
 
 	<footer class="entry-footer xten-highlight-font">
 		<div class="post-category">
+			<h5 class="post-category-title">Category:</h5>
 			<?php xten_post_categories(); ?>
 		</div><!-- .post-category -->
 		<?php
@@ -81,10 +82,11 @@
 
 <?php
 if ( is_singular() ) :
+	$post_type_name = esc_attr( get_post_type_object( get_post_type() )->labels->singular_name );
 	the_post_navigation(
 		array(
-			'prev_text'          => __( '<div class="nav-link-label">Previous Post</div><div class="nav-link-title"><i class="fas fa-arrow-left"></i> <span class="nav-title">%title</span></div>' ),
-			'next_text'          => __( '<div class="nav-link-label">Next Post</div><div class="nav-link-title"><span class="nav-title">%title</span> <i class="fas fa-arrow-right"></i></div>' ),
+			'prev_text'          => __( '<div class="nav-link-label"><i class="nav-link-label-icon fas fa-arrow-left"></i> <span class="nav-link-label-text">Previous ' . $post_type_name . '</span></div><div class="ctnr-nav-title"><span class="nav-title">%title</span></div>' ),
+			'next_text'          => __( '<div class="nav-link-label"><span class="nav-link-label-text">Next ' . $post_type_name . '</span> <i class="nav-link-label-icon fas fa-arrow-right"></i></div><div class="ctnr-nav-title"><span class="nav-title">%title</span></div>' ),
 			'screen_reader_text' => __( 'Posts navigation' ),
 		)
 	);
