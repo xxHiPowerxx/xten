@@ -150,7 +150,7 @@ function xten_post_categories() {
 	// Only show categories on post types that have categories, not pages.
 	if ( 'page' !== get_post_type() ) :
 		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( esc_html__( ',  ', 'xten' ) );
+		$categories_list = get_the_category_list( esc_html__( ',&nbsp;', 'xten' ) );
 		if ( $categories_list ) :
 			/* translators: 1: list of categories. */
 			printf( '<span class="cat-links d-flex flex-row flex-wrap">' . esc_html__( '%1$s', 'xten' ) . ' </span>', $categories_list ); // WPCS: XSS OK.
