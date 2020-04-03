@@ -1,7 +1,27 @@
 {
     "key": "group_5dae0d0e2b65d",
     "title": "Site Settings",
-    "fields": [],
+    "fields": [
+        {
+            "key": "field_5e8764d10c5b1",
+            "label": "Globally Use Archive Title",
+            "name": "global_use_archive_title",
+            "type": "true_false",
+            "instructions": "Select whether to include the name of the archive in the Archive Title\r\neg - <b>Category: Uncategorized<\/b> <i>or<\/i> <b>Uncategorized<\/b> all site Archives.\r\nNote: This behavior can be overridden On Individual Archives.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "setting",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
     "location": [
         [
             {
@@ -19,5 +39,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1579101771
+    "modified": 1585931791
 }

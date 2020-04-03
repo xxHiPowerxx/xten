@@ -1,11 +1,11 @@
 {
     "key": "group_5e864e09ac689",
-    "title": "Use Archive Title",
+    "title": "Category Settings",
     "fields": [
         {
             "key": "field_5e864e582bc00",
             "label": "Use Archive Title",
-            "name": "use_archive_title",
+            "name": "local_use_archive_title",
             "type": "true_false",
             "instructions": "Select whether to include the name of the archive in the Archive Title<br \/>eg - <b>Category: Uncategorized<\/b> <i>or<\/i> <b>Uncategorized<\/b>",
             "required": 0,
@@ -29,13 +29,6 @@
                 "operator": "==",
                 "value": "category"
             }
-        ],
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "site-settings"
-            }
         ]
     ],
     "menu_order": 0,
@@ -46,5 +39,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585861364
+    "modified": 1585931322
 }

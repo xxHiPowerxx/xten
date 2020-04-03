@@ -68,10 +68,10 @@ function xten_index_header() {
 		</header><!-- .page-header -->
 		<?php
 	elseif ( is_archive() ) :
-		$use_archive_title = get_field('use_archive_title', get_queried_object());
-		$use_archive_title = $use_archive_title ?
-												 $use_archive_title:
-												 get_field('use_archive_title', 'option');
+		$local_use_archive_title = get_field('local_use_archive_title', get_queried_object());
+		$use_archive_title       = $local_use_archive_title ?
+											      	 $local_use_archive_title:
+											      	 get_field('global_use_archive_title', 'option');
 		// Remove Archive Name From Archive Title if ACF Option is set to Yes In Category or Site Settings Page.
 		if ( $use_archive_title === false ) :
 			function xten_remove_archive_name_from_title( $title ) {
