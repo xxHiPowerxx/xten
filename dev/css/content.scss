@@ -66,6 +66,9 @@
 .entry-title {
 	word-wrap: break-word;
 	hyphens: auto;
+	a {
+		font-size: inherit;
+	}
 }
 
 /* Hides the update date and time. */
@@ -92,6 +95,10 @@
 	padding-right: 2em;
 	max-height: 14em;
 	overflow-y: auto;
+	.post-category-title {
+		font-size: 2.2rem;
+		margin-bottom: 0;
+	}
 }
 
 .cat-link {
@@ -99,19 +106,15 @@
 }
 
 .cat-links {
-	@include font-size-leading(25px, 1.5);
-	line-height: 1.5;
+	font-size: 1.8rem;
+	line-height: 1;
 	padding-bottom: 1.5rem;
 	padding-top: 1.5rem;
-
 	a {
+		font-size: inherit;
 		color: $dark-gray;
 		display: inline-block;
 		font-weight: bold;
-
-		&:not(:last-child) {
-			margin-right: 0.5em;
-		}
 	}
 }
 
@@ -136,7 +139,7 @@
 }
 
 .post-date {
-	@include font-size-leading(25.6px, 1.5);
+	font-size: 2.2rem;
 }
 
 .page-content > *,
