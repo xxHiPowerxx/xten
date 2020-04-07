@@ -128,8 +128,8 @@ $GLOBALS['department_name']        = esc_attr( get_theme_mod( 'standard_header_l
  * @return array
  */
 function xten_embed_dimensions( array $dimensions ) {
-	   $dimensions['width'] = 720;
-		return $dimensions;
+	$dimensions['width'] = 720;
+	return $dimensions;
 }
 add_filter( 'embed_defaults', 'xten_embed_dimensions' );
 
@@ -137,8 +137,8 @@ add_filter( 'embed_defaults', 'xten_embed_dimensions' );
  * Enqueue WordPress theme styles within Gutenberg.
  */
 function xten_gutenberg_styles() {
-	  // Enqueue main stylesheet.
-		wp_enqueue_style( 'xten-base-style', get_theme_file_uri( '/css/editor-styles.css' ), array(), filemtime( get_template_directory() . '/css/editor-styles.css' ) );
+	// Enqueue main stylesheet.
+	wp_enqueue_style( 'xten-base-style', get_theme_file_uri( '/css/editor-styles.css' ), array(), filemtime( get_template_directory() . '/css/editor-styles.css' ) );
 }
 add_action( 'enqueue_block_editor_assets', 'xten_gutenberg_styles' );
 
@@ -146,40 +146,40 @@ add_action( 'enqueue_block_editor_assets', 'xten_gutenberg_styles' );
  * Enqueue styles.
  */
 function xten_styles() {
-		// Bootstrap.
-		$handle = 'xten-vendor-bootstrap-css';
+	// Bootstrap.
+	$handle = 'xten-vendor-bootstrap-css';
 	if ( ! wp_style_is( $handle, 'registered' ) ) {
-			wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/bootstrap/css/bootstrap.min.css' ), array(), '4.0.0' );
+		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/bootstrap/css/bootstrap.min.css' ), array(), '4.0.0' );
 	}
-		$handle = 'xten-vendor-bootstrap-js';
+	$handle = 'xten-vendor-bootstrap-js';
 	if ( ! wp_script_is( $handle, 'registered' ) ) {
-			wp_register_script( $handle, get_theme_file_uri( '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' ), array( 'jquery' ), '4.0.0', true );
+		wp_register_script( $handle, get_theme_file_uri( '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' ), array( 'jquery' ), '4.0.0', true );
 	}
 
-		// Fontawesome.
-		$handle = 'xten-vendor-fontawesome-css';
+	// Fontawesome.
+	$handle = 'xten-vendor-fontawesome-css';
 	if ( ! wp_style_is( $handle, 'registered' ) ) {
-			wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), ' 5.7.1', 'all' );
+		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), ' 5.7.1', 'all' );
 	}
 
-		// Enqueue main stylesheet.
-		wp_enqueue_style( 'xten-base-style', get_theme_file_uri( '/css/common.css' ), array( 'xten-vendor-bootstrap-css', 'xten-vendor-fontawesome-css' ), filemtime( get_template_directory() . '/css/common.css' ) );
+	// Enqueue main stylesheet.
+	wp_enqueue_style( 'xten-base-style', get_theme_file_uri( '/css/common.css' ), array( 'xten-vendor-bootstrap-css', 'xten-vendor-fontawesome-css' ), filemtime( get_template_directory() . '/css/common.css' ) );
 
-		// Register component styles that are printed as needed.
-		wp_register_style( 'xten-comments-css', get_theme_file_uri( '/css/comments.css' ), array(), filemtime( get_template_directory() . '/css/comments.css' ) );
-		wp_register_style( 'xten-content-css', get_theme_file_uri( '/css/content.css' ), array(), filemtime( get_template_directory() . '/css/content.css' ) );
-		wp_register_style( 'xten-search-css', get_theme_file_uri( '/css/search.css' ), array(), filemtime( get_template_directory() . '/css/search.css' ) );
-		wp_register_style( 'xten-sidebar-css', get_theme_file_uri( '/css/sidebar.css' ), array(), filemtime( get_template_directory() . '/css/sidebar.css' ) );
-		wp_register_style( 'xten-widgets-css', get_theme_file_uri( '/css/widgets.css' ), array(), filemtime( get_template_directory() . '/css/widgets.css' ) );
-		wp_register_style( 'xten-front-page-css', get_theme_file_uri( '/css/front-page.css' ), array(), filemtime( get_template_directory() . '/css/front-page.css' ) );
-		wp_register_style( 'xten-404-css', get_theme_file_uri( '/css/404.css' ), array(), filemtime( get_template_directory() . '/css/404.css' ) );
-		wp_register_style( 'xten-archive-css', get_theme_file_uri( '/css/archive.css' ), array(), filemtime( get_template_directory() . '/css/archive.css' ) );
+	// Register component styles that are printed as needed.
+	wp_register_style( 'xten-comments-css', get_theme_file_uri( '/css/comments.css' ), array(), filemtime( get_template_directory() . '/css/comments.css' ) );
+	wp_register_style( 'xten-content-css', get_theme_file_uri( '/css/content.css' ), array(), filemtime( get_template_directory() . '/css/content.css' ) );
+	wp_register_style( 'xten-search-css', get_theme_file_uri( '/css/search.css' ), array(), filemtime( get_template_directory() . '/css/search.css' ) );
+	wp_register_style( 'xten-sidebar-css', get_theme_file_uri( '/css/sidebar.css' ), array(), filemtime( get_template_directory() . '/css/sidebar.css' ) );
+	wp_register_style( 'xten-widgets-css', get_theme_file_uri( '/css/widgets.css' ), array(), filemtime( get_template_directory() . '/css/widgets.css' ) );
+	wp_register_style( 'xten-front-page-css', get_theme_file_uri( '/css/front-page.css' ), array(), filemtime( get_template_directory() . '/css/front-page.css' ) );
+	wp_register_style( 'xten-404-css', get_theme_file_uri( '/css/404.css' ), array(), filemtime( get_template_directory() . '/css/404.css' ) );
+	wp_register_style( 'xten-archive-css', get_theme_file_uri( '/css/archive.css' ), array(), filemtime( get_template_directory() . '/css/archive.css' ) );
 
-		wp_register_style( 'xten-event-calendar', get_theme_file_uri( '/css/event-calendar-pro.css' ), array(), filemtime( get_template_directory() . '/css/event-calendar-pro.css' ) );
-		wp_register_style( 'xten-page-hero-css', get_theme_file_uri( '/css/page-hero.css' ), array(), filemtime( get_template_directory() . '/css/page-hero.css' ) );
+	wp_register_style( 'xten-event-calendar', get_theme_file_uri( '/css/event-calendar-pro.css' ), array(), filemtime( get_template_directory() . '/css/event-calendar-pro.css' ) );
+	wp_register_style( 'xten-page-hero-css', get_theme_file_uri( '/css/page-hero.css' ), array(), filemtime( get_template_directory() . '/css/page-hero.css' ) );
 
-		wp_register_style( 'xten-header-css', get_theme_file_uri( '/css/xten-header.css' ), array(), filemtime( get_template_directory() . '/css/xten-header.css' ) );
-		wp_enqueue_style( 'xten-standard-header-css', get_theme_file_uri( '/css/standard-header.css' ), array( 'xten-base-style','xten-header-css' ), filemtime( get_template_directory() . '/css/standard-header.css' ) );
+	wp_register_style( 'xten-header-css', get_theme_file_uri( '/css/xten-header.css' ), array(), filemtime( get_template_directory() . '/css/xten-header.css' ) );
+	wp_enqueue_style( 'xten-standard-header-css', get_theme_file_uri( '/css/standard-header.css' ), array( 'xten-base-style','xten-header-css' ), filemtime( get_template_directory() . '/css/standard-header.css' ) );
 }
 add_action( 'wp_enqueue_scripts', 'xten_styles' );
 
@@ -196,9 +196,9 @@ add_action( 'admin_enqueue_scripts', 'admin_style' );
  */
 function xten_is_mobile( $classes ) {
 	if ( wp_is_mobile() ) :
-			$classes[] = 'xten-is-mobile';
-		endif;
-		return $classes;
+		$classes[] = 'xten-is-mobile';
+	endif;
+	return $classes;
 }
 add_filter( 'body_class', 'xten_is_mobile' );
 
@@ -232,7 +232,7 @@ function xten_scripts() {
 
 	// Enqueue comment script on singular post/page views only.
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-			wp_enqueue_script( 'comment-reply' );
+		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'xten_scripts' );
@@ -257,7 +257,7 @@ include_once( MY_ACF_PATH . 'acf.php' );
 // Customize the url setting to fix incorrect asset URLs.
 add_filter('acf/settings/url', 'my_acf_settings_url');
 function my_acf_settings_url( $url ) {
-    return MY_ACF_URL;
+	return MY_ACF_URL;
 }
 
 // (Optional) Hide the ACF admin menu item.
@@ -275,8 +275,8 @@ require get_template_directory() . '/inc/tribe-override.php';
  * Documentation.
  */
 function xten_documentation_add_menu_item() {
-	   global $submenu;
-		array_push( $submenu['index.php'], array( 'Web System', 'read', '//xxhipowerxx.github.io/xten/websystem/' ) );
+	global $submenu;
+	array_push( $submenu['index.php'], array( 'Web System', 'read', '//xxhipowerxx.github.io/xten/websystem/' ) );
 }
 add_action( 'admin_menu', 'xten_documentation_add_menu_item' );
 
@@ -389,9 +389,13 @@ function xten_json_load_point( $paths ) {
 
 // Check to see if xten Save fields file exsists and adds save point if it does.
 $save_acf_fields = get_template_directory() . '/save-acf-fields.php';
-if ( file_exists( $save_acf_fields ) ) {
-	require $save_acf_fields;
-}
+$select_where_to_save_acf_field_groups = get_field('select_where_to_save_acf_field_groups', 'options');
+$select_where_to_save_acf_field_groups = $select_where_to_save_acf_field_groups !== null ? $select_where_to_save_acf_field_groups : 'parent';
+if ( $select_where_to_save_acf_field_groups === 'parent' ) :
+	if ( file_exists( $save_acf_fields ) ) :
+		require $save_acf_fields;
+	endif;
+endif;
 
 /**
  * Remove Dev Templates From Backend Selection
