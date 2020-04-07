@@ -10,7 +10,7 @@ var placeHolderImg,
 
 // Modify Custom Logo
 function createPlaceHolderImg(elem) {
-	var imgWidth = elem.getAttribute("width");
+	var imgWidth = elem.style.width !== '' ? elem.getAttribute("width") : 0;
 	var imgHeight = elem.getAttribute("height");
 
 	var maxWidth = parseFloat(
@@ -88,8 +88,8 @@ function sizeHeaderPad() {
 			(734 >= window.innerWidth
 				? sizeHeaderRefClone.getBoundingClientRect().height.toFixed(3)
 				: sizeHeaderRefClone
-						.getBoundingClientRect()
-						.height.toFixed(3)) + "px";
+					.getBoundingClientRect()
+					.height.toFixed(3)) + "px";
 
 		sizeHeaderPad[0].style.paddingTop = window.siteHeaderHeight;
 		parentElem = sizeHeaderRefClone.parentNode;
@@ -130,7 +130,7 @@ function compensateForAdminBar() {
 		// eslint-disable-next-line vars-on-top
 		var optimalStyleTop = 0 < adminBarHeight ? adminBarHeight : 0;
 		headerWrapper.style.top = optimalStyleTop + "px";
-		pageWrapper.style.top = optimalStyleTop + "px";
+		pageWrapper.style.marginTop = optimalStyleTop + "px";
 		siteHeader.style.top = "";
 
 		// Ensure that mobile menu compensates for Admin Bar
@@ -158,7 +158,7 @@ function listenForAdminBar() {
 	if (hasAdminBar) {
 		// create an observer instance
 		// eslint-disable-next-line vars-on-top
-		var observer = new MutationObserver(function(mutations) {
+		var observer = new MutationObserver(function (mutations) {
 			// eslint-disable-next-line vars-on-top
 			for (var i = 0; i < mutations.length; i++) {
 				// eslint-disable-next-line vars-on-top
@@ -206,7 +206,7 @@ function onReady(func) {
 	if ("ready" === document.readyState || "complete" === document.readyState) {
 		func();
 	} else {
-		document.onreadystatechange = function() {
+		document.onreadystatechange = function () {
 			if ("complete" == document.readyState) {
 				func();
 			}
