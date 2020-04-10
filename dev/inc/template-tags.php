@@ -104,29 +104,35 @@ function xten_index_header() {
 /**
  * Prints HTML with meta information for the current post-date/time.
  */
-function xten_posted_on() {
-	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) :
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
-	endif;
+if ( ! function_exists( 'xten_posted_on' ) ) :
+	function xten_posted_on( $post = null ) {
+		$post = get_post( $post );
+		if ( ! $post ) {
+			return false;
+		}
+		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+		if ( get_the_time( 'U', $post ) !== get_the_modified_time( 'U', $post ) ) :
+			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		endif;
 
-	$time_string = sprintf(
-		$time_string,
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() ),
-		esc_attr( get_the_modified_date( 'c' ) ),
-		esc_html( get_the_modified_date() )
-	);
+		$time_string = sprintf(
+			$time_string,
+			esc_attr( get_the_date( 'c', $post ) ),
+			esc_html( get_the_date( '', $post) ),
+			esc_attr( get_the_modified_date( 'c', $post ) ),
+			esc_html( get_the_modified_date('', $post) )
+		);
 
-	$posted_on = sprintf(
-		/* translators: %s: post date. */
-		esc_html( '%1$s', 'post date', 'xten' ),
-		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-	);
+		$posted_on = sprintf(
+			/* translators: %s: post date. */
+			esc_html( '%1$s', 'post date', 'xten' ),
+			'<a href="' . esc_url( get_permalink($post) ) . '" rel="bookmark">' . $time_string . '</a>'
+		);
 
-	echo '<span class="posted-on">' . $posted_on . ' </span>'; // WPCS: XSS OK.
+		return '<span class="posted-on">' . $posted_on . ' </span>'; // WPCS: XSS OK.
 
-}
+	}
+endif; // endif ( ! function_exists( 'xten_posted_on' ) ) :
 
 /**
  * Prints HTML with meta information for the current author.

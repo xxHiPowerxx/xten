@@ -28,9 +28,7 @@
 				endif;
 				?>
 				<div class="post-date">
-					<?php
-						xten_posted_on();
-					?>
+					<?php echo xten_posted_on(); ?>
 				</div>
 			</div><!-- .entry-meta -->
 			<?php

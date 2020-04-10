@@ -9,7 +9,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'card-style content-area d-flex flex-column' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'listed-post card-style content-area d-flex flex-column' ); ?>>
 	<div class="featured-image">
 		<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
 			<?php
@@ -45,9 +45,7 @@
 					endif;
 					?>
 					<div class="post-date">
-						<?php
-							xten_posted_on();
-						?>
+						<?php echo xten_posted_on(); ?>
 					</div>
 				</div><!-- .entry-meta -->
 				<?php
