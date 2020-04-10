@@ -37,38 +37,44 @@ h6 {
 	font-size: reduceLargeFonts($font-size);
 }
 h1,
+.xten-h1[class*="xten-h1"],
 .section-heading {
 	@include reduceLargeFontsAtVPXS(5rem, $vp_sm);
 	@include reduceLargeFontsAtVPXS(6rem, $vp_lg);
 }
 
-h2 {
+h2,
+.xten-h2[class*="xten-h2"] {
 	@include reduceLargeFontsAtVPXS(4.2rem, $vp_sm);
 	@include reduceLargeFontsAtVPXS(4.8rem, $vp_lg);
 }
 
-h3 {
+h3,
+.xten-h3[class*="xten-h3"] {
 	@include reduceLargeFontsAtVPXS(3.2rem, $vp_sm);
 	@include reduceLargeFontsAtVPXS(3.9rem, $vp_lg);
 }
 
-h4 {
+h4,
+.xten-h4[class*="xten-h4"] {
 	@include reduceLargeFontsAtVPXS(2.5rem, $vp_sm);
 	@include reduceLargeFontsAtVPXS(3.1rem, $vp_lg);
 }
 
 h5,
+.xten-h5[class*="xten-h5"],
 .lead {
 	font-size: 2.5rem;
 }
 
-h6 {
+h6,
+.xten-h6[class*="xten-h6"] {
 	font-size: 2.2rem;
 }
 
 p {
 	font-size: 2rem;
-	line-height: 1.4;
+	line-height: 1.25;
 }
 
 .main-container a {
