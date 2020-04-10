@@ -29,23 +29,48 @@ get_header(); ?>
 					* At some point, override functionality should be built in similar to the template part below.
 					*/
 					wp_print_styles( array( 'xten-content-css' ) ); // Note: If this was already done it will be skipped.
+					$is_category = is_category();
 
+					// If page is a Category Archive, get the thumbnail.
+					if ( $is_category ) :
+						$category_thumbnail = get_field( 'category_thumbnail', get_queried_object() );
+						// var_dump($category_thumbnail);
+						if ( $category_thumbnail ) :
+							$thumbnail_id = $category_thumbnail['ID']
+							?>
+							<div class="featured-image">
+								<?php
+								
+								$thumbnail_img = wp_get_attachment_image( 
+									$thumbnail_id,
+									array(957, null),
+									false,
+									array(
+										'title' => single_cat_title( '', false )
+									)
+								);
+								echo $thumbnail_img;
+								?>
+							</div>
+							<?php
+						endif; // endif ( $category_thumbnail ) :
+					endif;// endif ( $is_category ) :
 					/* Display the appropriate header when required. */
 					xten_index_header();
 
 					/**
 					 * Check if is page Category, and if so, get archive-category.php
 					 */
-					if ( is_category() ) :
+					if ( $is_category ) :
 
 						require get_template_directory() . '/archive-category.php';
 
-					else : // else if ( ! is_category() ) :
+					else : // else if ( ! $is_category ) :
 
 						if ( have_posts() ) :
 							?>
 
-							<div class="archive-container d-flex flex-row flex-wrap align-items-stretch">
+							<div class="archive-container d-flex flex-row flex-wrap align-items-stretch posts-list">
 								<?php
 								/* Start the Loop */
 								while ( have_posts() ) :
@@ -82,7 +107,7 @@ get_header(); ?>
 
 						endif; // endif ( have_posts() ) :
 
-					endif; // endif ( is_category() ) :
+					endif; // endif ( $is_category ) :
 					?>
 
 				</main><!-- #main -->

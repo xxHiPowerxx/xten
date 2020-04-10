@@ -3,6 +3,30 @@
     "title": "Category Settings",
     "fields": [
         {
+            "key": "field_5e8e2f53f4d8f",
+            "label": "Category Thumbnail",
+            "name": "category_thumbnail",
+            "type": "image",
+            "instructions": "Treat as Categories Featured Image",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
             "key": "field_5e864e582bc00",
             "label": "Use Archive Title",
             "name": "local_use_archive_title",
@@ -39,5 +63,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585931322
+    "modified": 1586376614
 }
