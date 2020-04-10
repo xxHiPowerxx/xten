@@ -55,7 +55,7 @@ foreach ( $querried_post_types as $post_type ) :
 		if ( have_posts( $posts_of_type ) ) :
 			?>
 
-			<div id="<?php echo $archive_id; ?>" class="archive-container display-flex flex-row flex-wrap align-items-stretch <?php echo $collapseClass; ?>">
+			<div id="<?php echo $archive_id; ?>" class="posts-list archive-container display-flex flex-row flex-wrap align-items-stretch <?php echo $collapseClass; ?>">
 				<?php
 
 				/* Start the Loop */
