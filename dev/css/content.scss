@@ -70,6 +70,12 @@
 		font-size: inherit;
 	}
 }
+@for $i from 1 through 6 {
+	h#{$i}.entry-title,
+	.xten-h#{$i}.entry-title {
+		hyphens: manual;
+	}
+}
 
 /* Hides the update date and time. */
 .updated:not(.published) {
