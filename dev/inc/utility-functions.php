@@ -44,6 +44,26 @@ class XTenUtilities {
 		function get_theme_mod_img($mod_name){
 			return str_replace(array('http:', 'https:'), '', get_theme_mod($mod_name));
 		}
+		/**
+		 * Utility function that gets custom image without link.
+		 * @see https://developer.wordpress.org/reference/functions/get_custom_logo/
+		 * @param int $custom_logo_id - Custom Logo ID for wp_get_attachment_image()
+		 * @return string
+		 */
+		if ( ! function_exists( 'xten_get_custom_logo' ) ) :
+			function xten_get_custom_logo( $custom_logo_id ) {
+				if ( $custom_logo_id ) :
+					$custom_logo_attr = array(
+						'class' => 'custom-logo',
+					);
+					$image_alt = get_post_meta( $custom_logo_id, '_wp_attachment_image_alt', true );
+					if ( empty( $image_alt ) ) :
+						$custom_logo_attr['alt'] = get_bloginfo( 'name', 'display' );
+					endif;
+					return wp_get_attachment_image( $custom_logo_id, 'full', false, $custom_logo_attr );
+				endif; // endif ( $custom_logo_id ) :
+			}
+		endif; // endif ( ! function_exists( 'xten_get_custom_logo' ) ) :
 	}
 }
 
