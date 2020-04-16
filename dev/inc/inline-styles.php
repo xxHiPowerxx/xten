@@ -112,7 +112,7 @@ function process_inline_css() {
 			'font-family:' . $body_font_w_fallback . ';' .
 		'}';
 
-	$load_splash = '#load-splash{' .
+	$load_splash_style = '#load-splash{' .
 		'position:fixed;height:100%;' .
 		'width:100%;' .
 		'top:0;' .
@@ -129,6 +129,7 @@ function process_inline_css() {
 		'transform-origin:50%,50%;' .
 		'cursor:pointer;' .
 	'}' .
+	'html.no-js #load-splash,' .
 	'#load-splash:not(.loading){' .
 		'display:none;' .
 	'}' .
@@ -152,11 +153,24 @@ function process_inline_css() {
 		'align-items:center;' .
 	'}';
 
+	// This function checks to make sure that JS is enabled
+	// and removes the "no-js" class from the HTML element.
+	ob_start();
+	?>
+	(function checkForJS(){
+		document.documentElement.classList.remove('no-js');
+	})();
+	<?php
+	$check_for_js = ob_get_clean();
+
 	wp_register_style( 'xten-inline-style', false );
 	wp_enqueue_style( 'xten-inline-style', '', 'xten-content-css' );
 	wp_add_inline_style( 'xten-inline-style', $styles );
 	wp_add_inline_style( 'xten-inline-style', $bodyStyles );
-	wp_add_inline_style( 'xten-inline-style', $load_splash );
+	wp_add_inline_style( 'xten-inline-style', $load_splash_style );
+	wp_register_script( 'xten-inline-script', false );
+	wp_enqueue_script( 'xten-inline-script' );
+	wp_add_inline_script( 'xten-inline-script', $check_for_js );
 }
 
 add_action( 'wp_enqueue_scripts', 'process_inline_css' );
