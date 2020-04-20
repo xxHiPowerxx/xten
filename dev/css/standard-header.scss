@@ -266,6 +266,8 @@
 								.sub-menu {
 									padding: 0;
 									width: 20rem;
+									max-height: calc(100vh - 14rem);
+    							overflow: auto;
 									li {
 										padding: 0;
 										margin-left: 0;
