@@ -119,8 +119,8 @@ function process_inline_css() {
 		'left:0;' .
 		'z-index:9999;' .
 		' opacity:1;' .
-		'-webkit-transition:all .7s cubic-bezier(.22,.61,.36,1);' .
-		'transition:all .7s cubic-bezier(.22,.61,.36,1);' .
+		'-webkit-transition:all .5s cubic-bezier(.22,.61,.36,1);' .
+		'transition:all .5s cubic-bezier(.22,.61,.36,1);' .
 		'-webkit-transform:scale(1) translateZ(0);' .
 		'transform:scale(1) translateZ(0);' .
 		'-webkit-backface-visibility:hidden;' .
@@ -129,10 +129,20 @@ function process_inline_css() {
 		'transform-origin:50%,50%;' .
 		'cursor:pointer;' .
 	'}' .
-	'html.no-js #load-splash,' .
-	'#load-splash:not(.loading){' .
+	'html.no-js #load-splash{' .
+		'display:none !important;' .
+	'}' .
+	'#load-splash{' .
 		'display:none;' .
 	'}' .
+	'#load-splash.unloading,'.
+	'#load-splash.loading{' .
+		'display:block;' .
+	'}' .
+	'#load-splash.unloading{' .
+		'-webkit-transition-duration: .25s' .
+		'transition-duration: .25s' .
+	'}'.
 	'#load-splash.hiding{' .
 		'opacity:0;' .
 		'background-color:rgb(255,255,255);' .
