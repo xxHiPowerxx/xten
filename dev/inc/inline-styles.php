@@ -117,7 +117,7 @@ function process_inline_css() {
 		'width:100%;' .
 		'top:0;' .
 		'left:0;' .
-		'z-index:9999;' .
+		'z-index:99999;' .
 		' opacity:1;' .
 		'-webkit-transition:all .5s cubic-bezier(.22,.61,.36,1);' .
 		'transition:all .5s cubic-bezier(.22,.61,.36,1);' .
