@@ -52,33 +52,38 @@
 			endif;
 			?>
 		</header><!-- .entry-header -->
-
-		<div class="entry-content">
-			<?php
-
-			the_excerpt(
-				sprintf(
-					wp_kses(
-						/* translators: %s: Name of current post. Only visible to screen readers */
-						__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'xten' ),
-						array(
-							'span' => array(
-								'class' => array(),
-							),
-						)
-					),
-					get_the_title()
-				)
-			);
-
-			wp_link_pages(
-				array(
-					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'xten' ),
-					'after'  => '</div>',
-				)
-			);
+		<?php
+		// Get Description Setting from Archive Category Setting.
+		global $include_description;
+		if ( $include_description ) :
 			?>
-		</div><!-- .entry-content -->
+			<div class="entry-content">
+				<?php
+
+				the_excerpt(
+					sprintf(
+						wp_kses(
+							/* translators: %s: Name of current post. Only visible to screen readers */
+							__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'xten' ),
+							array(
+								'span' => array(
+									'class' => array(),
+								),
+							)
+						),
+						get_the_title()
+					)
+				);
+
+				wp_link_pages(
+					array(
+						'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'xten' ),
+						'after'  => '</div>',
+					)
+				);
+				?>
+			</div><!-- .entry-content -->
+		<?php endif; // endif ( $include_description ) : ?>
 
 		<footer class="entry-footer xten-highlight-font">
 			<div class="cat-link-container d-flex flex-row justify-content-between">

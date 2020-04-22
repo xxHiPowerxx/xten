@@ -1,6 +1,7 @@
 <?php
-
-$category_id = get_queried_object()->term_id;
+$queried_object      = get_queried_object();
+$category_id         = $queried_object->term_id;
+$include_description = get_field( 'include_description', $queried_object );
 // Get Public Post Types.
 $post_type_args = array(
 	'public' => true,
@@ -27,8 +28,8 @@ $multiple_post_types = count($querried_post_types) > 1 ? true : false;
 $collapseClass     = $multiple_post_types ? 'collapse' : null;
 
 foreach ( $querried_post_types as $post_type ) :
-
-	$post_type_name = esc_attr( get_post_type_object($post_type)->labels->name );
+	$post_type_object = get_post_type_object($post_type);
+	$post_type_name = esc_attr( $post_type_object->labels->name );
 	$archive_id = 'archive-' . $post_type;
 	?>
 	<div class="archive-wrapper">

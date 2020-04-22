@@ -3,6 +3,23 @@
     "title": "Category Settings",
     "fields": [
         {
+            "key": "field_5e9f6b0aa3c82",
+            "label": "Advanced",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 1,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_5e8e2f53f4d8f",
             "label": "Category Thumbnail",
             "name": "category_thumbnail",
@@ -44,6 +61,42 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5e9f6b6aa3c84",
+            "label": "Include Description",
+            "name": "include_description",
+            "type": "true_false",
+            "instructions": "Select Whether to include the description in the displayed posts or not.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5e9f6b41a3c83",
+            "label": "Advanced Accordion Endpoint",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 1,
+            "multi_expand": 0,
+            "endpoint": 1
         }
     ],
     "location": [
@@ -63,5 +116,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1586376614
+    "modified": 1587506287
 }
