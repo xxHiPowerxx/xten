@@ -55,7 +55,9 @@
 		<?php
 		// Get Description Setting from Archive Category Setting.
 		global $include_description;
-		if ( $include_description ) :
+		// Only exclude description if setting is NOT set to false.
+		// It could be null or true otherwise.
+		if ( $include_description !== false ) :
 			?>
 			<div class="entry-content">
 				<?php
