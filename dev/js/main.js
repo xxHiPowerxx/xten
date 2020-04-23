@@ -5,7 +5,21 @@
  *
  * @since 1.0.0
  */
-
+( function hideSplash() {
+	setTimeout( function() {
+		var loadSplash = document.getElementById( 'load-splash' ),
+			keyDownHandler = function() {
+				loadSplash.classList.add( 'hiding' );
+				this.removeEventListener( 'keydown', keyDownHandler, false );
+			};
+		if ( loadSplash ) {
+			loadSplash.addEventListener( 'click', function() {
+				this.classList.add( 'hiding' );
+			});
+			window.addEventListener( 'keydown', keyDownHandler, false );
+		}
+	});
+}() );
 ( function( $ ) {
 	$( document ).ready( function() {
 
@@ -108,8 +122,6 @@
 			}
 			$( loadSplash ).on( transitionEndEvent, function() {
 				this.classList.remove( 'loading' );
-			}).on( 'click', function() {
-				addHiding( this );
 			});
 			window.addEventListener( 'finishWork', function() {
 				var workStarted = window.workStarted || {},
