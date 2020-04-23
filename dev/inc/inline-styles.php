@@ -167,9 +167,7 @@ function process_inline_css() {
 	// and removes the "no-js" class from the HTML element.
 	ob_start();
 	?>
-	(function checkForJS(){
-		document.documentElement.classList.remove('no-js');
-	})();
+	document.documentElement.classList.remove("no-js");
 	<?php
 	$check_for_js = ob_get_clean();
 
