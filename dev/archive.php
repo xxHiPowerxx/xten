@@ -29,16 +29,26 @@ get_header(); ?>
 					* At some point, override functionality should be built in similar to the template part below.
 					*/
 					wp_print_styles( array( 'xten-content-css' ) ); // Note: If this was already done it will be skipped.
-					$is_category = is_category();
 
-					// If page is a Category Archive, get the thumbnail.
-					if ( $is_category ) :
-						$category_thumbnail = get_field( 'category_thumbnail', get_queried_object() );
-						// var_dump($category_thumbnail);
-						if ( $category_thumbnail ) :
-							$thumbnail_id = $category_thumbnail['ID']
+					global $wp_query;
+					$is_category = $wp_query->is_category;
+					$is_custom_post_type = $wp_query->is_post_type_archive;
+					// If page is a Category Archive OR is Investigation Archive, get the thumbnail.
+					if ( $is_category || $is_custom_post_type ) :
+						if ( $is_category ) :
+							$archive_thumbnail = get_field( 'category_thumbnail', get_queried_object() );
+						else :
+							// For this to work programatically, the thumbnail field must be named 'post-type'_thumbnail.
+							// EG: $post_type === 'products' Field Name = 'products_thumbnail';
+							$post_type = $wp_query->query['post_type'];
+							$thumbnail_handle = $post_type . '_thumbnail';
+
+							$archive_thumbnail = get_field( $thumbnail_handle, 'option' );
+						endif;
+						if ( $archive_thumbnail ) :
+							$thumbnail_id = $archive_thumbnail['ID']
 							?>
-							<div class="featured-image">
+							<div class="featured-image card-style">
 								<?php
 								
 								$thumbnail_img = wp_get_attachment_image( 
@@ -53,8 +63,8 @@ get_header(); ?>
 								?>
 							</div>
 							<?php
-						endif; // endif ( $category_thumbnail ) :
-					endif;// endif ( $is_category ) :
+						endif; // endif ( $archive_thumbnail ) :
+					endif;// endif ( $is_category || $is_investigations ) :
 					/* Display the appropriate header when required. */
 					xten_index_header();
 
