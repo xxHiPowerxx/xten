@@ -48,7 +48,7 @@ get_header(); ?>
 						if ( $archive_thumbnail ) :
 							$thumbnail_id = $archive_thumbnail['ID']
 							?>
-							<div class="featured-image card-style">
+							<div class="featured-image card-style main-featured-image">
 								<?php
 								
 								$thumbnail_img = wp_get_attachment_image( 
