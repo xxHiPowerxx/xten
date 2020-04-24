@@ -12,10 +12,10 @@ unset($post_types['page']);
 unset($post_types['attachment']);
 
 $args = array(
-'category'         => $category_id,
-'post_type'        => $post_types,
+'category'  => $category_id,
+'post_type' => $post_types,
 );
-$posts = get_posts($args);
+$posts               = get_posts($args);
 $querried_post_types = array();
 // var_dump($posts);
 foreach ( $posts as $post ) :
@@ -25,12 +25,12 @@ foreach ( $posts as $post ) :
 	endif;
 endforeach;
 $multiple_post_types = count($querried_post_types) > 1 ? true : false;
-$collapseClass     = $multiple_post_types ? 'collapse' : null;
+$collapseClass       = $multiple_post_types ? 'collapse' : null;
 
 foreach ( $querried_post_types as $post_type ) :
 	$post_type_object = get_post_type_object($post_type);
-	$post_type_name = esc_attr( $post_type_object->labels->name );
-	$archive_id = 'archive-' . $post_type;
+	$post_type_name   = esc_attr( $post_type_object->labels->name );
+	$archive_id       = 'archive-' . $post_type;
 	?>
 	<div class="archive-wrapper">
 		<?php
@@ -49,9 +49,9 @@ foreach ( $querried_post_types as $post_type ) :
 			<?php
 		endif; // endif ( $multiple_post_types ) :
 		$args = array(
-			'category'         => $category_id,
-			'post_type'        => $post_type,
-			);
+			'category'  => $category_id,
+			'post_type' => $post_type,
+		);
 		$posts_of_type = query_posts('cat='. $category_id . '&post_type='. $post_type);
 		if ( have_posts( $posts_of_type ) ) :
 			?>
