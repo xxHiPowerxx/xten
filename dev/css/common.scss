@@ -513,15 +513,23 @@ textarea {
 	line-height: $global_line_height;
 }
 
-.entry-header h1.entry-title {
-	//   font-size: 3.2em;
-	//   font-size: 2rem;
-	line-height: 1;
-	margin-top: 0;
-	margin-bottom: 0.25em;
-	word-wrap: normal;
-	hyphens: manual;
-}
+.entry-header {
+	h1 {
+		&.entry-title {
+			line-height: 1;
+			margin-top: 0;
+			margin-bottom: 0.25em;
+			word-wrap: normal;
+			hyphens: manual;
+		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	> :last-child {
+		margin-bottom: 0;
+	}
+} 
 
 dfn,
 cite,
