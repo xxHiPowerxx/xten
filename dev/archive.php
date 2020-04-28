@@ -73,7 +73,7 @@ get_header(); ?>
 					 */
 					if ( $is_category ) :
 
-						require get_template_directory() . '/archive-category.php';
+						get_template_part( 'archive-category' );
 
 					else : // else if ( ! $is_category ) :
 
