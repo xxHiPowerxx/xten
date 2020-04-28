@@ -17,7 +17,6 @@ $args = array(
 );
 $posts               = get_posts($args);
 $querried_post_types = array();
-// var_dump($posts);
 foreach ( $posts as $post ) :
 	$this_post_type = $post->post_type;
 	if ( ! in_array( $this_post_type, $querried_post_types ) ) :
