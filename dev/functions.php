@@ -441,3 +441,26 @@ else :
 endif;
 $home_url = esc_url( home_url( '/' ) );
 $GLOBALS['xten-site-logo-link'] = '<a href="' . $home_url . '" class="custom-logo-link" rel="home">' . $GLOBALS['xten-site-logo'] . '</a>';
+
+// Remove Archive Name From Archive Title if ACF Option is set to Yes In Category or Site Settings Page.
+function xten_remove_archive_name_from_title( $title ) {
+	$local_use_archive_title = get_field('local_use_archive_title', get_queried_object());
+	$use_archive_title       = $local_use_archive_title !== null ?
+															$local_use_archive_title :
+															get_field('global_use_archive_title', 'option');
+	if ( $use_archive_title === false ) :
+			if ( is_category() ) {
+					$title = single_cat_title( '', false );
+			} elseif ( is_tag() ) {
+					$title = single_tag_title( '', false );
+			} elseif ( is_author() ) {
+					$title = '<span class="vcard">' . get_the_author() . '</span>';
+			} elseif ( is_post_type_archive() ) {
+					$title = post_type_archive_title( '', false );
+			} elseif ( is_tax() ) {
+					$title = single_term_title( '', false );
+			}
+	endif;
+	return $title;
+}
+add_filter( 'get_the_archive_title', 'xten_remove_archive_name_from_title' );
