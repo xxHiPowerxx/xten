@@ -3,10 +3,14 @@
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
-//XTen theme Override
-.primary-sidebar h2 {
-	@include fontSize(28px);
-	line-height: 25px;
+.primary-sidebar {
+	h2 {
+		font-size: 2.2rem;
+		line-height: 1;
+		@media ( min-width: $vp_xl ) {
+			font-size: 2.8rem;
+		}
+	}
 }
 
 .widget {
