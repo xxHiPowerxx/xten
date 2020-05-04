@@ -1573,3 +1573,20 @@ article.page {
 		transform: scaleY(1) translateZ(0);
 	}
 }
+
+.xten-accordion {
+	transition: $smooth-transition;
+	#{$active} {
+		box-shadow: 0 .2rem .4rem .1rem rgba(15, 15, 15, .5);
+		.collapse-control-indicator {
+			transform: scaleY(1) translate3d(0, .1em, 0);
+		}
+	}
+	&[aria-expanded="true"] {
+		#{$active} {
+			.collapse-control-indicator {
+				transform: scaleY(-1) translate3d(0, .1em, 0);
+			}
+		}
+	}
+}
