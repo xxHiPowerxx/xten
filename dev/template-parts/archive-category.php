@@ -1,7 +1,15 @@
 <?php
+/**
+ * Template-Part for displaying Category Archives. 
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package xten
+ */
 $queried_object      = get_queried_object();
 $category_id         = $queried_object->term_id;
 $include_description = get_field( 'include_description', $queried_object );
+
 // Get Public Post Types.
 $post_type_args = array(
 	'public' => true,
@@ -20,7 +28,7 @@ $querried_post_types = array();
 foreach ( $posts as $post ) :
 	$this_post_type = $post->post_type;
 	if ( ! in_array( $this_post_type, $querried_post_types ) ) :
-		array_push( $querried_post_types, $post->post_type );
+		array_push( $querried_post_types, $this_post_type );
 	endif;
 endforeach;
 $multiple_post_types = count($querried_post_types) > 1 ? true : false;
@@ -41,7 +49,7 @@ foreach ( $querried_post_types as $post_type ) :
 				endif;
 			endif;
 			?>
-			<div id="<?php echo $post_type_name ?>-title" class="ctnr-archive-title page-header content-area card-style collapsed display-flex justify-content-between align-items-center" data-toggle="collapse" aria-controls="<?php echo $archive_id; ?>" data-target="#<?php echo $archive_id; ?>" aria-expanded="false" aria-label="Toggle Archive" tabindex="0">
+			<div id="<?php echo $post_type_name ?>-title" class="ctnr-archive-title xten-accordion page-header content-area card-style collapsed display-flex justify-content-between align-items-center" data-toggle="collapse" aria-controls="<?php echo $archive_id; ?>" data-target="#<?php echo $archive_id; ?>" aria-expanded="false" aria-label="Toggle Archive" tabindex="0">
 				<h2 class="archive-title page-title"><?php echo $post_type_name; ?></h2>
 				<span class="collapse-control-indicator fa fa-chevron-down"></span>
 			</div>
@@ -60,7 +68,6 @@ foreach ( $querried_post_types as $post_type ) :
 
 				/* Start the Loop */
 				while ( have_posts($posts_of_type) ) :
-					/*var_dump($post);*/
 					?>
 					<div class="article-container col-md-6">
 						<?php
