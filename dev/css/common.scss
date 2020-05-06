@@ -1591,3 +1591,9 @@ article.page {
 		}
 	}
 }
+
+.nowrap-parent {
+	> {
+		display: inline-block;
+	}
+}
