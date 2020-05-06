@@ -755,67 +755,6 @@ textarea {
 	width: 100%;
 }
 
-/*--------------------------------------------------------------
-# Content navigation
---------------------------------------------------------------*/
-
-.site-main .comment-navigation,
-.site-main .posts-navigation,
-.site-main .post-navigation {
-	margin-top: 3rem;
-	overflow: hidden;
-}
-
-.nav-links {
-	display: flex;
-	justify-content: space-between;
-	> [class*="nav"] {
-		max-width: 35rem;
-		a {
-			@extend .card-style;
-			transition: $smooth-transition;
-			padding: 1.5rem;
-			display: block;
-			text-decoration: none;
-			min-height: 100%;
-			#{$active} {
-				box-shadow: 0 0.15rem 0.3rem rgba(15, 15, 15, 0.55);
-			}
-		}
-	}
-}
-
-.nav-link-label {
-	width: 100%;
-	text-align: center;
-	font-weight: 700;
-	margin-bottom: 0.25em;
-	margin-bottom: 0.25em;
-	padding-bottom: 0.25em;
-	border-bottom: 0.1em solid $gray-100;
-}
-
-.comment-navigation .nav-previous,
-.posts-navigation .nav-previous,
-.post-navigation .nav-previous {
-	width: 50%;
-	flex: 1 0 50%;
-	margin-right: auto;
-}
-
-.comment-navigation .nav-next,
-.posts-navigation .nav-next,
-.post-navigation .nav-next {
-	text-align: end;
-	flex: 1 0 50%;
-	margin-left: auto;
-}
-
-.post-navigation-sub span {
-	color: $white;
-	text-decoration: none;
-	display: inline-block;
-}
 
 /*--------------------------------------------------------------
 # Infinite scroll
@@ -932,7 +871,7 @@ body input:focus {
 
 .post-navigation .nav-links {
 	@include font-size-leading(32px, 1.5);
-	word-break: break-all;
+	word-break: keep-all;
 }
 
 /*--------------------------------------------------------------
@@ -1069,10 +1008,81 @@ body.search-open {
 		}
 	}
 }
-
 /*--------------------------------------------------------------
 # Content navigation
 --------------------------------------------------------------*/
+$nav-link-bp: 475px;
+
+.site-main .comment-navigation,
+.site-main .posts-navigation,
+.site-main .post-navigation {
+	margin-top: 3rem;
+	overflow: hidden;
+}
+
+.nav-links {
+	display: flex;
+	justify-content: space-between;
+	> [class*="nav"] {
+		max-width: 35rem;
+		a {
+			@extend .card-style;
+			transition: $smooth-transition;
+			padding: 1.5rem;
+			display: block;
+			text-decoration: none;
+			min-height: 100%;
+			#{$active} {
+				box-shadow: 0 0.15rem 0.3rem rgba(15, 15, 15, 0.55);
+			}
+		}
+	}
+}
+
+.nav-link-label {
+	width: 100%;
+	text-align: center;
+	font-weight: 700;
+	margin-bottom: 1.5rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 0.1em solid $gray-100;
+	display: flex;
+	align-items: center;
+	@media ( min-width: $nav-link-bp ) {
+		display: block;
+	}
+}
+.nav-link-label-text {
+	display: inline-block;
+	max-width: 7.5em;
+	margin-left: auto;
+	margin-right: auto;
+	@media ( min-width: $nav-link-bp ) {
+		max-width: none;
+	}
+}
+
+.comment-navigation .nav-previous,
+.posts-navigation .nav-previous,
+.post-navigation .nav-previous {
+	width: 50%;
+	flex: 1 0 50%;
+	margin-right: auto;
+}
+
+.comment-navigation .nav-next,
+.posts-navigation .nav-next,
+.post-navigation .nav-next {
+	text-align: end;
+	flex: 1 0 50%;
+	margin-left: auto;
+}
+
+.post-navigation-sub span {
+	color: $white;
+	text-decoration: none;
+	display: inline-block;
+}
 
 .posts-navigation,
 .post-navigation {
@@ -1091,8 +1101,8 @@ body.search-open {
 					}
 				}
 				.nav-link-label-icon {
+					padding-right: 0.25em;
 					float: left;
-					margin-right: 0.25em;
 				}
 			}
 		}
@@ -1107,13 +1117,14 @@ body.search-open {
 
 				.nav-link-label-icon {
 					float: right;
-					margin-left: 0.25em;
+					padding-left: 0.25em;
 				}
 			}
 		}
 		.ctnr-nav-title {
 			display: flex;
 			align-items: center;
+			text-align: center;
 			// flex: 1;
 			min-height: 100%;
 			.nav-title {
@@ -1124,6 +1135,9 @@ body.search-open {
 		}
 	}
 }
+/*--------------------------------------------------------------
+# /Content navigation
+--------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
 # Search Form
@@ -1146,9 +1160,8 @@ body.search-open {
 		}
 	}
 }
-
 /*--------------------------------------------------------------
-# /Content navigation
+# /Search Form
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
