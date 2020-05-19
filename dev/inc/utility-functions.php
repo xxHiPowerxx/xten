@@ -64,6 +64,22 @@ class XTenUtilities {
 				endif; // endif ( $custom_logo_id ) :
 			}
 		endif; // endif ( ! function_exists( 'xten_get_custom_logo' ) ) :
+
+		
+		if ( ! function_exists( 'xten_word_wrap' ) ) :
+			/**
+			 * Utility that simplifies preg_replace.
+			 * @see https://www.php.net/manual/en/function.preg-replace.php
+			 * @param string $string - The String in which to Search
+			 * @param string $word_to_find - the String to find inside the $string.
+			 * @param string $wrap_before - The String to place before the $word_to_find.
+			 * @param string $wrap_after - The String to place after the $word_to_find.
+			 * @return string
+			 */
+			function xten_word_wrap( $string, $word_to_find, $wrap_before, $wrap_after ) {
+				return preg_replace("/($word_to_find)/", "$wrap_before$1$wrap_after", $string);
+			}
+		endif; // endif ( ! function_exists( 'xten_word_wrap' ) ) :
 	}
 }
 
