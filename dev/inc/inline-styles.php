@@ -163,8 +163,8 @@ function process_inline_css() {
 		'align-items:center;' .
 	'}' .
 	'.load-splash-inner > *{' .
-		'max-height:75%;' .
-		'max-width:75%;' .
+		'max-height:50%;' .
+		'max-width:50%;' .
 	'}';
 
 	// This function checks to make sure that JS is enabled
