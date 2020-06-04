@@ -150,7 +150,7 @@
 			detectPlatform();
 			sizeContent();
 			alerts();
-			// hideLoadSplash();
+			hideLoadSplash();
 			makeCollapseAccessible();
 		}
 
@@ -189,9 +189,9 @@
 			.on('load', function () {
 				loadFuncs();
 			})
-			/*.on( 'beforeunload', function( event ) {
-				showLoadSplash( event );
-			})*/;
+			.on('beforeunload', function (event) {
+				showLoadSplash(event);
+			});
 	});
 
 	function handleFirstTab(e) {
