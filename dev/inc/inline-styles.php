@@ -161,6 +161,10 @@ function process_inline_css() {
 		'-webkit-box-align:center;' .
 		'-ms-flex-align:center;' .
 		'align-items:center;' .
+	'}' .
+	'.load-splash-inner > *{' .
+		'max-height:75%;' .
+		'max-width:75%;' .
 	'}';
 
 	// This function checks to make sure that JS is enabled
