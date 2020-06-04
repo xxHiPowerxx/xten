@@ -164,6 +164,11 @@
 ## Category Archive.
 --------------------------------------------------------------*/
 .archive-wrapper {
+	.page-header {
+		margin-bottom: 0;
+		z-index: 1;
+		position: relative;
+	}
 	&:not(:first-of-type) {
 		margin-top: 1.5rem;
 	}
