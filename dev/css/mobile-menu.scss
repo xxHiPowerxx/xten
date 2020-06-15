@@ -365,7 +365,7 @@ html {
 	}
 
 	body {
-		&.ios {
+		&.os-ios {
 			.close-layer {
 				cursor: pointer;
 			}
