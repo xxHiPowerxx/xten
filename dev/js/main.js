@@ -31,7 +31,7 @@
 
 		function detectMac() {
 			if (-1 != navigator.userAgent.indexOf('Mac OS X')) {
-				$('body').addClass('mac');
+				$('body').addClass('browser-mac');
 				return true;
 			}
 		}
@@ -44,9 +44,9 @@
 				/Edge\/\d./i.test(navigator.userAgent)
 			) {
 				if (/Edge\/\d./i.test(navigator.userAgent)) {
-					$('body').addClass('edge');
+					$('body').addClass('browser-edge');
 				} else {
-					$('body').addClass('ie');
+					$('body').addClass('browser-ie');
 				}
 				return true;
 			}
@@ -55,7 +55,7 @@
 		function detectIOS() {
 			var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 			if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-				$('body').addClass('ios');
+				$('body').addClass('os-ios');
 				return 'iOS';
 			}
 		}
@@ -131,6 +131,8 @@
 					addHiding(loadSplash);
 				}
 			});
+			// Remove Load Splash after 3s regardless of whether work is finished or not.
+			setTimeout(addHiding(loadSplash), 3000);
 		}
 		function showLoadSplash() {
 			$loadSplash.addClass('unloading');
