@@ -9,7 +9,7 @@ module.exports = {
 	dev: {
 		browserSync: {
 			live: true,
-			proxyURL: "xten-lt-253728:8888/xten-blocks",
+			proxyURL: "localhost/illegalbankfees/",
 			bypassPort: "9999"
 		},
 		browserslist: [
