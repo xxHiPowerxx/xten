@@ -464,3 +464,79 @@ function xten_remove_archive_name_from_title( $title ) {
 	return $title;
 }
 add_filter( 'get_the_archive_title', 'xten_remove_archive_name_from_title' );
+
+/**
+ * Add Post Meta to Category Thumbnail when created.
+ * @see https://www.advancedcustomfields.com/resources/acf-update_value/
+ */
+function xten_set_category_featured_image( $value, $post_id, $field ){
+    if($value != ''){
+			//Add the value which is the image ID to the _thumbnail_id meta data for the current post
+			$term_id = str_replace( 'term_', '', $post_id );
+	    add_term_meta($term_id, '_thumbnail_id', $value);
+    }
+    return $value;
+}
+
+// acf/update_value/name={$field_name} - filter for a specific field based on it's name
+add_filter('acf/update_value/name=category_thumbnail', 'xten_set_category_featured_image', 10, 3);
+
+/**
+ * Set Open Graph Image for Archive Pages.
+ */
+function xten_wpseo_opengraph_image() {
+	// Check to see if Yoast SEO Plugin is not Activated.
+	$yoast_seo_plugin_file = 'wordpress-seo/wp-seo.php';
+	if ( ! is_plugin_active($yoast_seo_plugin_file) ) :
+		return;
+	else :
+		global $wp_query;
+		if ( $wp_query->is_archive ) :
+			$is_category         = $wp_query->is_category;
+			$is_custom_post_type = $wp_query->is_post_type_archive;
+			$post_ID             = get_the_ID();
+			$meta_tags           = '';
+			$og_image_url;
+			$og_image_alt;
+
+			// If page is a Category Archive OR is Investigation Archive, get the thumbnail.
+			if ( $is_category || $is_custom_post_type ) :
+				if ( $is_category ) :
+					$term_ID      = get_queried_object()->term_id;
+					$thumbnail_id = get_term_meta( $term_ID )['_thumbnail_id'][0];
+					// var_dump($term_ID, ' foobar');
+				else :
+					$thumbnail_id = has_post_thumbnail( $post_ID ) ?
+						get_post_thumbnail_id( $post_ID ) :
+						get_post_thumbnail_id( $home_page_id );
+				endif;
+				$thumbnail_details       = wp_get_attachment_image_src( $thumbnail_id, 'full' );
+				$og_image_url            = $thumbnail_details[0];
+				$og_image_width          = $thumbnail_details[1];
+				$og_image_height         = $thumbnail_details[2];
+				$thumbnail_post_meta_alt = get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true );
+				$og_image_alt            = $thumbnail_post_meta_alt ?
+				esc_attr( $thumbnail_post_meta_alt ) :
+				'';
+			endif;
+
+			if ( $og_image_url ) :
+				$meta_tags .= '<meta property="og:image" content="' . $og_image_url . '" />' .
+				'<meta property="og:image:width" content="' . $og_image_width . '" />' .
+				'<meta property="og:image:height" content="' . $og_image_height . '" />' .
+				'<meta property="twitter:image" content="' . $og_image_url . '" />';
+				if ( $og_image_alt ) :
+					$meta_tags .= '<meta property="og:image:alt" content="' . $og_image_alt . '" />' .
+					'<meta property="twitter:image:alt" content="' . $og_image_alt . '" />';
+				endif;
+			endif;
+		endif; // endif ( $wp_query->is_archive ) :
+
+		if ( $meta_tags !== '' ) :
+			echo $meta_tags;
+		else :
+			return;
+		endif;
+	endif; // if ( ! is_plugin_active($yoast_seo_plugin_file) ) :
+}
+add_action('wp_head', 'xten_wpseo_opengraph_image', 5);
