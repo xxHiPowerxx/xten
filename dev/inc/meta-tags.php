@@ -57,9 +57,18 @@ if ( ! is_plugin_active($yoast_seo_plugin_file) ) :
 	$logo           = wp_get_attachment_image( $custom_logo_id, 'full' );
 	$logo_url       = wp_get_attachment_image_src( $custom_logo_id, 'full' );
 	$post_ID        = get_the_ID();
+	$is_tax_archive = false;
+	if ( ! $post_ID ) :
+		$is_tax_archive = true;
+		$post_ID        = get_queried_object()->term_id;
+	endif;
 	$home_page_id   = get_option( 'page_on_front' );
 	if ( has_post_thumbnail( $post_ID ) || has_post_thumbnail( $home_page_id ) ) :
-		$thumbnail_id = has_post_thumbnail() ? get_post_thumbnail_id( $post_ID ) : get_post_thumbnail_id( $home_page_id );
+		if ( $is_tax_archive ) :
+			$thumbnail_id = get_field( 'category_thumbnail', get_queried_object() );
+		else:
+			$thumbnail_id = has_post_thumbnail( $post_ID ) ? get_post_thumbnail_id( $post_ID ) : get_post_thumbnail_id( $home_page_id );
+		endif;
 	elseif ( $custom_logo_id ) : // if thumbnail is set on current post or home page, fallback to custom logo.
 		$thumbnail_id = $custom_logo_id;
 	else :
