@@ -217,8 +217,12 @@ function xten_edit_post_link() {
  *
  * Wraps the post thumbnail in an anchor element on index views, or a div
  * element when on single views.
+ * 
+ * @param string|array $size = 'full' - Optional Argument, Accepts same arguements as wp_get_attachment_image()
+ * @see https://developer.wordpress.org/reference/functions/wp_get_attachment_image/
+ * 
  */
-function xten_post_thumbnail() {
+function xten_post_thumbnail( $size = 'full' ) {
 	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) :
 		return;
 	endif;
@@ -227,7 +231,7 @@ function xten_post_thumbnail() {
 		?>
 
 		<div class="post-thumbnail">
-			<?php the_post_thumbnail( 'full', array( 'class' => 'skip-lazy' ) ); ?>
+			<?php the_post_thumbnail( $size, array( 'class' => 'skip-lazy' ) ); ?>
 		</div><!-- .post-thumbnail -->
 
 		<?php
