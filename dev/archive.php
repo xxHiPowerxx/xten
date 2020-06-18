@@ -53,7 +53,7 @@ get_header(); ?>
 								
 								$thumbnail_img = wp_get_attachment_image( 
 									$thumbnail_id,
-									array(957, null),
+									array(930, null),
 									false,
 									array(
 										'title' => single_cat_title( '', false )
