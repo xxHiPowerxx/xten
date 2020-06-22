@@ -193,6 +193,9 @@
 			})
 			.on('beforeunload', function (event) {
 				showLoadSplash(event);
+			})
+			.on('focus', function () {
+				hideLoadSplash();
 			});
 	});
 
