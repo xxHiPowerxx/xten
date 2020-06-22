@@ -30,13 +30,16 @@
 }
 .listed-post{
 	.featured-image {
+		img {
+			transform: translate3d(-50%, -50%, 0) scale(1);
+			transform-origin: 50% 50%;
+			transition: $smooth-transition;
+			backface-visibility: hidden;
+		}
 		#{$active} {
 			img {
-				transform: translateZ(0) scale(1.05);
+				transform: translate3d(-50%, -50%, 0) scale(1.05);
 			}
-		}
-		img {
-			transition: $smooth-transition;
 		}
 	}
 }
