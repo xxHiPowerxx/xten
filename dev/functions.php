@@ -40,7 +40,8 @@ function xten_setup() {
 		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		*/
 		add_theme_support( 'post-thumbnails' );
-		add_image_size( 'archive-thumbnail', 426, 240, array( 'center', 'center' ) );
+		// TODO: Deprecate archive-thumbnail image size.
+		add_image_size( 'archive-thumbnail', 450, 253.52, array( 'center', 'center' ) );
 
 		// Hide featured image in post.
 		include get_template_directory() . '/inc/hide-featued-image.php';
@@ -296,6 +297,11 @@ require get_template_directory() . '/inc/widget-area.php';
 require get_template_directory() . '/pluggable/custom-header.php';
 
 /**
+ * Utility Functions.
+ */
+require get_template_directory() . '/inc/utility-functions.php';
+
+/**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
@@ -349,11 +355,6 @@ require get_template_directory() . '/inc/custom-fields.php';
  * Mobile class.
  */
 require get_template_directory() . '/inc/mobile-class.php';
-
-/**
- * Utility Functions.
- */
-require get_template_directory() . '/inc/utility-functions.php';
 
 /**
  * Implement the Custom Header feature.
