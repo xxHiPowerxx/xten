@@ -226,17 +226,25 @@ function xten_post_thumbnail( $size = 'full' ) {
 	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) :
 		return;
 	endif;
+	$image_id = get_post_thumbnail_id();
+	$wide_tall;
+	if ( $image_id ) :
+		$size = xten_get_optimal_image_size( $image_id, $size, array( 16, 9 ) );
+		if ( is_array( $size ) ) :
+			$wide_tall = xten_wide_tall_image( $size );
+		else :
+			$wide_tall = xten_wide_tall_image( get_post_thumbnail_id() );
+		endif;
+	endif;
 
 	if ( is_singular() ) :
 		?>
 
 		<div class="post-thumbnail">
-			<?php the_post_thumbnail( $size, array( 'class' => 'skip-lazy' ) ); ?>
+			<?php the_post_thumbnail( $size, array( 'class' => 'skip-lazy ' . $wide_tall ) ); ?>
 		</div><!-- .post-thumbnail -->
 
-		<?php
-	else :
-		?>
+	<?php else : ?>
 
 		<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
 			<?php
