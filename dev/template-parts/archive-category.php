@@ -20,8 +20,8 @@ unset($post_types['page']);
 unset($post_types['attachment']);
 
 $args = array(
-'category'  => $category_id,
-'post_type' => $post_types,
+	'category'  => $category_id,
+	'post_type' => $post_types,
 );
 $posts               = get_posts($args);
 $querried_post_types = array();
