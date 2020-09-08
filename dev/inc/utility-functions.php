@@ -81,6 +81,47 @@ class XTenUtilities {
 			}
 		endif; // endif ( ! function_exists( 'xten_word_wrap' ) ) :
 
+		if ( ! function_exists( 'xten_wide_tall_image' ) ) :
+			/**
+			 * Determine if image is wider than tall or vice-versa.
+			 * @param int|array $arg - Can be image ID or Size array(width,height).
+			 * @return string 'object-fit-cover ' . 'wide' || 'tall' || 'square'.
+			 */
+			function xten_wide_tall_image( $arg ) {
+				if ( ! $arg ) :
+					return;
+				endif;
+				$return_result = 'object-fit-cover ';
+				$image_id      = null;
+				$size          = null;
+				$image_width   = null;
+				$image_height  = null;
+				if ( is_int( $arg ) ) :
+					$image_id = $arg;
+				endif;
+				if ( is_array( $arg ) ) :
+					$size = $arg;
+				endif;
+				if ( $image_id ) :
+					$image_details = wp_get_attachment_image_src( $image_id, 'full' );
+					$image_width   = $image_details[1];
+					$image_height  = $image_details[2];
+				endif;
+				if ( $size ) :
+					$image_width  = $size[0];
+					$image_height = $size[1];
+				endif;
+				if ( $image_width > $image_height ) :
+					$return_result .= 'wide';
+				elseif ( $image_width < $image_height ) :
+					$return_result .= 'tall';
+				else:
+					$return_result .= 'square';
+				endif;
+				return $return_result;
+			}
+		endif; // if ( ! function_exists( 'xten_wide_tall_image' ) ) :
+
 		if ( ! function_exists( 'xten_get_optimal_image_size' ) ) :
 			/**
 			 * Get Optimal image size when only one dimension is provided
@@ -147,7 +188,7 @@ class XTenUtilities {
 					$actual_missing_dimension *
 					$calc_missing_dimension;
 		
-				if ( $calc_min_provided_dimension < $provided_min_dimension ) :
+				if ( $calc_min_provided_dimension <= $provided_min_dimension ) :
 					$optimal_missing_dimension = $calc_missing_dimension /
 						$calc_min_provided_dimension *
 						$provided_min_dimension;
