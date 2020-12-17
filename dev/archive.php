@@ -68,60 +68,45 @@ get_header(); ?>
 					/* Display the appropriate header when required. */
 					xten_index_header();
 
-					/**
-					 * Check if is page Category, and if so, get archive-category.php
-					 */
-					if ( $is_category ) :
+					if ( have_posts() ) :
+						?>
 
-						get_template_part( 'template-parts/archive-category' );
-
-					elseif ( $is_custom_post_type ) :
-
-						get_template_part( 'template-parts/archive-custom-post-type' );
-
-					else : // else if ( ! $is_category || ! $is_custom_post_type ) :
-
-						if ( have_posts() ) :
-							?>
-
-							<div class="archive-container d-flex flex-row flex-wrap align-items-stretch posts-list">
-								<?php
-								/* Start the Loop */
-								while ( have_posts() ) :
-									?>
-									<div class="article-container col-md-6">
-										<?php
-										the_post();
-
-										/*
-										* Include the Post-Type-specific template for the content.
-										* If you want to override this in a child theme, then include a file
-										* called content-___.php (where ___ is the Post Type name) and that will be used instead.
-										*/
-										get_template_part( 'template-parts/content', 'archive-post' );
-										?>
-									</div><!-- .article-container -->
-									<?php
-								endwhile;
-								?>
-							</div>
+						<div class="archive-container d-flex flex-row flex-wrap align-items-stretch posts-list">
 							<?php
+							/* Start the Loop */
+							while ( have_posts() ) :
+								?>
+								<div class="article-container col-md-6">
+									<?php
+									the_post();
 
-							the_posts_navigation(
-								array(
-									'prev_text'          => __( '<i class="fas fa-arrow-left"></i> Older posts', 'xten' ),
-									'next_text'          => __( 'Newer posts <i class="fas fa-arrow-right"></i>', 'xten' ),
-									'screen_reader_text' => __( 'Posts navigation', 'xten' ),
-								)
-							);
+									/*
+									* Include the Post-Type-specific template for the content.
+									* If you want to override this in a child theme, then include a file
+									* called content-___.php (where ___ is the Post Type name) and that will be used instead.
+									*/
+									get_template_part( 'template-parts/content', 'archive-post' );
+									?>
+								</div><!-- .article-container -->
+								<?php
+							endwhile;
+							?>
+						</div>
+						<?php
 
-						else : // else if ( ! have_posts() ) :
+						the_posts_navigation(
+							array(
+								'prev_text'          => __( '<i class="fas fa-arrow-left"></i> Older posts', 'xten' ),
+								'next_text'          => __( 'Newer posts <i class="fas fa-arrow-right"></i>', 'xten' ),
+								'screen_reader_text' => __( 'Posts navigation', 'xten' ),
+							)
+						);
 
-							get_template_part( 'template-parts/content', 'none' );
+					else : // else if ( ! have_posts() ) :
 
-						endif; // endif ( have_posts() ) :
+						get_template_part( 'template-parts/content', 'none' );
 
-					endif; // endif ( $is_category ) :
+					endif; // endif ( have_posts() ) :
 					?>
 
 				</main><!-- #main -->
