@@ -139,7 +139,7 @@ class XTenUtilities {
 				$size         = array( null, null ),
 				$aspect_ratio = array( 16, 9 )
 			) {
-				if ( ! $image_id ) :
+				if ( ! $image_id || $size === 'full' ) :
 					return;
 				endif;
 				$size_array = array();
@@ -175,7 +175,7 @@ class XTenUtilities {
 				$optimal_provided_dimension  = $actual_provided_dimension;
 		
 				$aspect_ratio_multiplicand   = $aspect_ratio_dividend / $aspect_ratio_divisor;
-		
+
 				// Whichever value was not provided (height or width) needs to be calculated.
 				$calc_missing_dimension      = $provided_min_dimension *
 					$aspect_ratio_multiplicand;
