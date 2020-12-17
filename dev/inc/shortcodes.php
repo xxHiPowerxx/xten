@@ -25,7 +25,7 @@ function site_info_default_func() {
 	$site_name               = esc_attr( get_bloginfo() );
 	$site_name_anchor_tag    = '<a href="' . $site_url . '" class="site-name-url">' . $site_name . '</a>';
 	$policy_page_id          = (int) get_option( 'wp_page_for_privacy_policy' );
-	$privacy_policy_elements;
+	$privacy_policy_elements = null;
 	if ( ! empty( $policy_page_id ) && get_post_status( $policy_page_id ) === 'publish' ) :
 		$privacy_policy_permalink = (string) get_permalink( $policy_page_id );
 		$privacy_policy_elements  = ' | <a href="' . $privacy_policy_permalink . '">Privacy Policy</a>';
