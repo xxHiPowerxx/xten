@@ -32,13 +32,18 @@
 		?>
 	</header><!-- .entry-header -->
 	<?php
-		$hide_post_image = get_post_meta( $post->ID, 'hide_featured_image', true );
-	?>
-	<?php if ( has_post_thumbnail() && ! $hide_post_image ) : ?>
-	<div class="featured-image">
-		<?php xten_post_thumbnail(); ?>
-	</div><!-- featured-image -->
-	<?php endif; ?>
+	$hide_post_image = get_post_meta( $post->ID, 'hide_featured_image', true );
+	if ( has_post_thumbnail() && ! $hide_post_image ) :
+		$post_thumb_width = 1106;
+		$sidebar_location = get_theme_mod( 'sidebar_location', 'sidebar_right' );
+		if ( $sidebar_location === 'sidebar_none' ) :
+			$post_thumb_width = 1688;
+		endif;
+		?>
+		<div class="featured-image">
+			<?php xten_post_thumbnail( array( $post_thumb_width, null ) ); ?>
+		</div><!-- featured-image -->
+	<?php endif; // endif( has_post_thumbnail() && ! $hide_post_image ) : ?>
 
 	<div class="entry-content">
 		<?php
