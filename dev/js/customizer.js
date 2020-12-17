@@ -10,6 +10,44 @@
 (function($) {
 	var rootDir = wpScriptVars.themeDirectory;
 
+	// Utility function to convert Hex to rgb.
+	function hexToRgb(hex) {
+		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+		return result ?
+			parseInt(result[1], 16) +
+				',' +
+				parseInt(result[2], 16) +
+				',' +
+				parseInt(result[3], 16)
+			: null;
+	}
+	// Utitliy Function to Give Correct rgb or rgba string.
+	function convertHextToRgba(hex, a) {
+		var rgb = hexToRgb(hex),
+		rgbA = 'rgb',
+		rgbVal = rgb,
+		a = a * .01;
+		if ( a < 1 ) {
+			rgbA += 'a';
+			rgbVal += ',' + a;
+		}
+		return rgbA + '(' + rgbVal + ')';
+	}
+	// Utility function to handle color update on Color Value Update or Opacity Value Update
+	function handleColorUpdate(that, unprovidedValHandle) {
+		var providedVal = that._value,
+		hex,
+		opacity;
+		if (parseInt(that._value)) {
+			hex = wp.customize(unprovidedValHandle)._value;
+			opacity = providedVal;
+		} else {
+			hex = providedVal;
+			opacity = wp.customize(unprovidedValHandle)._value;
+		}
+		return convertHextToRgba(hex, opacity);
+	}
+
 	// Site title and description.
 	wp.customize("blogname", function(value) {
 		value.bind(function(to) {
@@ -19,6 +57,31 @@
 	wp.customize("blogdescription", function(value) {
 		value.bind(function(to) {
 			$(".site-description").text(to);
+		});
+	});
+
+
+	// Header Background Color.
+	wp.customize("xten_header_bg_color", function(value) {
+		value.bind(function(to) {
+			if ("blank" !== to) {
+				var color = handleColorUpdate(this, "xten_header_bg_color_opacity");
+				$("#masthead.site-header").css({
+					"background-color": color
+				});
+			}
+		});
+	});
+
+	// Header Background Color Opacity.
+	wp.customize("xten_header_bg_color_opacity", function(value) {
+		value.bind(function(to) {
+			if ("blank" !== to) {
+				var color = handleColorUpdate(this, "xten_header_bg_color");
+				$("#masthead.site-header").css({
+					"background-color": color
+				});
+			}
 		});
 	});
 
@@ -117,4 +180,4 @@
 			});
 		});
 	});
-})(jQuery);
+})(jQuery );

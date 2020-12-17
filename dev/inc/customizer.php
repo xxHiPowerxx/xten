@@ -75,9 +75,9 @@ require get_template_directory() . '/inc/customizer/new-fields.php';
 require get_template_directory() . '/inc/customizer/theme-options.php';
 
 /**
- * Standard Header Options.
+ * Header Options.
  */
-require get_template_directory() . '/inc/customizer/standard-header-options.php';
+require get_template_directory() . '/inc/customizer/header-options.php';
 
 /**
  * Content Options.
