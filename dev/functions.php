@@ -118,7 +118,6 @@ add_action( 'after_setup_theme', 'xten_setup' );
 /**
  * Retrieve Standard Header Selection and start GLOBAL variable.
  */
-$GLOBALS['internet_or_xtenline'] = get_theme_mod( 'standard_header_selection', 'standard_internet_header' );
 $GLOBALS['mobile_nav_breakpoint'] = get_theme_mod( 'mobile_nav_breakpoint', 1050 );
 $GLOBALS['department_name']        = esc_attr( get_theme_mod( 'standard_header_logo_department_name' ) );
 
@@ -180,7 +179,7 @@ function xten_styles() {
 	wp_register_style( 'xten-page-hero-css', get_theme_file_uri( '/css/page-hero.css' ), array(), filemtime( get_template_directory() . '/css/page-hero.css' ) );
 
 	wp_register_style( 'xten-header-css', get_theme_file_uri( '/css/xten-header.css' ), array(), filemtime( get_template_directory() . '/css/xten-header.css' ) );
-	wp_enqueue_style( 'xten-standard-header-css', get_theme_file_uri( '/css/standard-header.css' ), array( 'xten-base-style','xten-header-css' ), filemtime( get_template_directory() . '/css/standard-header.css' ) );
+	wp_enqueue_style( 'xten-site-header-css', get_theme_file_uri( '/css/site-header.css' ), array( 'xten-base-style','xten-header-css' ), filemtime( get_template_directory() . '/css/site-header.css' ) );
 }
 add_action( 'wp_enqueue_scripts', 'xten_styles' );
 

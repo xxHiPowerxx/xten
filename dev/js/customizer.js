@@ -60,7 +60,7 @@
 		});
 	});
 
-	var headerSelector = '#menu-wrapper.xten-standard-internet-header .site-header, .mobile-sidebar-top';
+	var headerSelector = '.site-header, .mobile-sidebar-top';
 	// Header Background Color.
 	wp.customize("xten_header_bg_color", function(value) {
 		value.bind(function(to) {

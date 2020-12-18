@@ -1,11 +1,10 @@
 <?php
 /**
- * New XTen Header used in Standard Header (header-standard.php).
+ * New XTen Header used in Site Header (site-header.php).
  *
  * @package xten
  */
 
-$standard_header_selection = $GLOBALS['internet_or_xtenline'];
 $icon_fa_svg_chevron_down = '<svg focusable="false" xmlns="http://www.w3.org/2000/svg" class="fa-svg-chevron-down" style="width:.875em;height:1em;" viewBox="0 0 448 512"><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>';
 ?>
 
@@ -44,11 +43,7 @@ $icon_fa_svg_chevron_down = '<svg focusable="false" xmlns="http://www.w3.org/200
 	?>
 		<div class="xten-header-inner">
 			<nav class="xten-header-nav">
-				<?php if ( 'standard_intranet_header' === $standard_header_selection ) : ?>
-					<a class="xten-header-item" href="http://xtenline.xxhipowerxx.github.io/xten/main/" target="_blank" title="XTen Website">XTenline</a>
-				<?php else : ?>
-					<a class="xten-header-item" href="http://xxhipowerxx.github.io/xten" target="_blank" title="XTen Website">xten Home</a>
-				<?php endif; ?>
+				<a class="xten-header-item" href="http://xxhipowerxx.github.io/xten" target="_blank" title="XTen Website">xten Home</a>
 				<a class="xten-header-item" href="http://xxhipowerxx.github.io/xten/cao-vision/Home.aspx" target="_blank" title="XTenwide Vision">Vision</a>
 				<a class="xten-header-item" href="http://xxhipowerxx.github.io/xten/main/Pages/visiting.aspx" target="_blank" title="Visiting XTen">Visiting</a>
 				<a class="xten-header-item" href="http://xxhipowerxx.github.io/xten/main/Pages/living.aspx" target="_blank" title="Living in XTen">Living</a>

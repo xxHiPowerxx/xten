@@ -114,7 +114,7 @@ function process_inline_css() {
 		'}' .
 	'}';
 
-	$header_styles = '#menu-wrapper.xten-standard-internet-header .site-header, .mobile-sidebar-top {' .
+	$header_styles = '.site-header, .mobile-sidebar-top {' .
 		'background-color:' . $xten_header_bg_color .
 	'}';
 

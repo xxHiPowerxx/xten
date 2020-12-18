@@ -1,16 +1,16 @@
 <?php
 /**
- * XTen Standard Header Customizer
+ * XTen Site Header Customizer
  *
  * @package xten
  */
 
 /**
- * Add support for Standard Header Options in Customizer.
+ * Add support for Site Header Options in Customizer.
  *
- * @param WP_Customize_Manager $wp_customize Standard Header Customizer object.
+ * @param WP_Customize_Manager $wp_customize Site Header Customizer object.
  */
-function xten_customize_standard_header_register( $wp_customize ) {
+function xten_customize_site_header_register( $wp_customize ) {
 	$font_selection = include get_template_directory() . '/inc/customizer/font-selection.php';
 	/**
 	 * Header options.
@@ -95,37 +95,7 @@ function xten_customize_standard_header_register( $wp_customize ) {
 		)
 	);
 
-	// Standard Header Selection.
-	$wp_customize->add_setting(
-		'standard_header_selection',
-		array(
-			'default'           => 'standard_internet_header',
-			'transport'         => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'standard_header_selection',
-			array(
-				'priority'    => 1,
-				'label'       => __( 'Header Selection', 'xten' ),
-				'section'     => 'xten_header_options',
-				'settings'    => 'standard_header_selection',
-				'description' => __( 'Select Which Header to Use', 'xten' ),
-				'type'        => 'select',
-				'choices'     => array(
-					'standard_internet_header' => __( 'Internet', 'xten' ),
-					'standard_intranet_header' => __( 'Intranet', 'xten' ),
-				),
-			)
-		)
-	);
-
-	$wp_customize->get_setting( 'standard_header_selection' )->transport = 'postMessage';
-
-	// Standard Header Logo Department Name.
+	// Site Header Logo Department Name.
 	$wp_customize->add_setting(
 		'standard_header_logo_department_name',
 		array(
@@ -189,4 +159,4 @@ function xten_customize_standard_header_register( $wp_customize ) {
 
 	// Header Main Nav End!
 }
-add_action( 'customize_register', 'xten_customize_standard_header_register' );
+add_action( 'customize_register', 'xten_customize_site_header_register' );

@@ -152,12 +152,6 @@
 						display: block;
 						width: 100%;
 						text-decoration: none;
-						&,
-						&:active,
-						&:focus,
-						&:hover {
-							color: inherit;
-						}
 					}
 
 					.menu-item,
@@ -230,7 +224,7 @@
 								display: none;
 								position: absolute;
 								flex-direction: column;
-								background-color: #efefef;
+								background-color: $white;
 								border: none;
 								box-shadow: 0 0.6rem 0.5rem 0 rgba(0, 0, 0, 0.1);
 								margin: 0;
@@ -274,9 +268,9 @@
 										margin-left: 0;
 
 										a {
-											font-size: 1.4rem;
+											font-size: 1.8rem;
 											font-weight: normal;
-											padding: 0.5em 1em;
+											padding: .5em 1em;
 
 											&:hover {
 												background-color: #dadada;
@@ -389,9 +383,8 @@
 
 							.dropdown {
 								display: block;
-								@include font-size-leading(12px, 1);
+								font-size: 1.2rem;
 								line-height: inherit;
-								color: inherit;
 							}
 						}
 					}
@@ -401,123 +394,59 @@
 	}
 }
 
-// Internet & Intranet Header
-#menu-wrapper {
-	/*   Standard IntERnet Header   */
-	&.xten-standard-internet-header {
-		.site-header {
-			@at-root .mobile-sidebar-top,
-				& {
-				background-color: #2e528a;
-			}
-		}
-
-		.xten-header {
-			background-color: $gray;
-		}
-
-		.custom-logo {
-			.site-name {
-				color: $white;
-				border-color: $white;
-			}
-		}
-
-		.xten-logo-svg .mod-fill-elem {
-			fill: $white;
-		}
-
-		.header-search-toggle i,
-		.main-navigation > ul > li > a,
-		.main-navigation > ul > li > span.dropdown {
-			color: $white;
-		}
-
-		.main-navigation {
-			.menu {
-				> li {
-					&.current-menu-item,
-					&.current_page_item {
-						> a {
-							&:before {
-								background-image: linear-gradient(
-									88deg,
-									rgba($white, $opacity_zero),
-									$white 20%,
-									$white 80%,
-									rgba($blue, $opacity_zero)
-								);
-							}
-						}
-					}
-				}
-			}
-		}
-
-		.header-search-toggle {
-			i {
-				color: $white;
-			}
-		}
+.site-header {
+	@at-root .mobile-sidebar-top,
+		& {
+		background-color: #2e528a;
 	}
+}
 
-	/*   /Standard IntERnet Header   */
-	/*   Standard IntRAnet Header   */
-	&.xten-standard-intranet-header {
-		.site-header {
-			background-color: $white;
-		}
+.xten-header {
+	background-color: $gray;
+}
 
-		.xten-header,
-		.mobile-sidebar .xten-header {
-			background-color: #2e528a;
-		}
+.custom-logo {
+	.site-name {
+		color: $white;
+		border-color: $white;
+	}
+}
 
-		.custom-logo {
-			svg.xten-logo-svg {
-				path.st0 {
-					fill: #002d73;
-				}
-			}
+.xten-logo-svg .mod-fill-elem {
+	fill: $white;
+}
 
-			.site-name {
-				color: $blue;
-				border-color: $blue;
-			}
-		}
+.header-search-toggle i,
+.main-navigation > ul > li > a,
+.main-navigation > ul > li > span.dropdown {
+	color: $white;
+}
 
-		.xten-logo-svg .mod-fill-elem {
-			fill: $blue;
-		}
-
-		.header-search-toggle i {
-			color: $blue;
-		}
-
-		.main-navigation {
-			.menu {
-				> li {
-					color: $blue;
-
-					&.current-menu-item,
-					&.current_page_item {
-						> a {
-							&:before {
-								background-image: linear-gradient(
-									88deg,
-									rgba($blue, $opacity_zero),
-									$blue 20%,
-									$blue 80%,
-									rgba($blue, $opacity_zero)
-								);
-							}
-						}
+.main-navigation {
+	.menu {
+		> li {
+			&.current-menu-item,
+			&.current_page_item {
+				> a {
+					&:before {
+						background-image: linear-gradient(
+							88deg,
+							rgba($white, $opacity_zero),
+							$white 20%,
+							$white 80%,
+							rgba($blue, $opacity_zero)
+						);
 					}
 				}
 			}
 		}
 	}
-	/*   /Standard IntRAnet Header   */
+}
+
+.header-search-toggle {
+	i {
+		color: $white;
+	}
 }
 
 .desktop-navigation,

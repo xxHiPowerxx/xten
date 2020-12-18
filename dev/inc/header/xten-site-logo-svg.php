@@ -1,6 +1,6 @@
 <?php
 /**
- * XTen Logo SVGs included if Standard Header is Selected in Standard Header Options.
+ * XTen Logo SVGs included for Site Header.
  *
  * @package xten
  */
