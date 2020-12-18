@@ -20,6 +20,15 @@ function process_inline_css() {
 	$mobile_nav_dropdown_color         = esc_attr( get_theme_mod( 'mobile_nav_dropdown_color', '#003366' ) );
 
 	// Theme Options.
+	$xten_header_bg_color = esc_attr( get_theme_mod( 'xten_header_bg_color', '#2e528a' ) );
+	$xten_header_bg_color_opacity = esc_attr( get_theme_mod( 'xten_header_bg_color_opacity', '100' ) );
+	$xten_header_bg_color = $xten_header_bg_color_opacity > 100 ?
+		convert_hex_to_rgb(
+			$xten_header_bg_color,
+			$xten_header_bg_color_opacity
+		) :
+		$xten_header_bg_color;
+	
 	$xten_link_color      = esc_attr( get_theme_mod( 'xten_link_color', '#007db6' ) );
 	$xten_theme_color     = esc_attr( get_theme_mod( 'xten_theme_color', '#003366' ) );
 	$heading_default_font = json_decode( get_theme_mod( 'font_pairings', '{"heading":"roboto", "heading_fallback":"Arial, sans-serif"}' ) );
@@ -28,7 +37,7 @@ function process_inline_css() {
 	// /Header Mobile Nav.
 	// Begin Style Tag.
 	$styles     = '';
-	$bodyStyles = '';
+	$body_styles = '';
 
 	// Load Fonts Used.
 	// Theme Heading Default Font.
@@ -50,13 +59,13 @@ function process_inline_css() {
 		'src:url(' . $root_dir . '/assets/fonts/' . $headingPath . '/' . $headingPath . $fontWeight . ');' .
 	'}';
 
-	$bodyStyles .= '@font-face{' .
+	$body_styles .= '@font-face{' .
 		'font-family:' . $body_default_font->body . ';' .
 		'font-weight:normal;' .
 		'src:url(' . $root_dir . '/assets/fonts/' . $bodyPath . '/' . $bodyPath . '.ttf' . ');' .
 	'}';
 
-	$bodyStyles .= '@font-face{' .
+	$body_styles .= '@font-face{' .
 		'font-family:' . $body_default_font->body . ';' .
 		'font-weight:bold;' .
 		'src:url(' . $root_dir . '/assets/fonts/' . $bodyPath . '/' . $bodyPath . $fontWeight . ');' .
@@ -105,7 +114,13 @@ function process_inline_css() {
 		'}' .
 	'}';
 
-	$bodyStyles .= 'body,button,input,optgroup,select,textarea{' .
+	$header_styles = '#menu-wrapper.xten-standard-internet-header .site-header, .mobile-sidebar-top {' .
+		'background-color:' . $xten_header_bg_color .
+	'}';
+
+	$styles      .= $header_styles;
+
+	$body_styles .= 'body,button,input,optgroup,select,textarea{' .
 		'font-family:' . $body_font_w_fallback . ';' .
 		'}' .
 		'h2,h3,h4,h5,h6,.xten-highlight-font{' .
@@ -173,12 +188,13 @@ function process_inline_css() {
 	?>
 	document.documentElement.classList.remove("no-js");
 	<?php
+	$styles       = xten_minify_css( $styles );
 	$check_for_js = ob_get_clean();
 
 	wp_register_style( 'xten-inline-style', false );
 	wp_enqueue_style( 'xten-inline-style', '', 'xten-content-css' );
 	wp_add_inline_style( 'xten-inline-style', $styles );
-	wp_add_inline_style( 'xten-inline-style', $bodyStyles );
+	wp_add_inline_style( 'xten-inline-style', $body_styles );
 	wp_add_inline_style( 'xten-inline-style', $load_splash_style );
 	wp_register_script( 'xten-inline-script', false );
 	wp_enqueue_script( 'xten-inline-script' );

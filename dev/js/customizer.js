@@ -60,13 +60,13 @@
 		});
 	});
 
-
+	var headerSelector = '#menu-wrapper.xten-standard-internet-header .site-header, .mobile-sidebar-top';
 	// Header Background Color.
 	wp.customize("xten_header_bg_color", function(value) {
 		value.bind(function(to) {
 			if ("blank" !== to) {
 				var color = handleColorUpdate(this, "xten_header_bg_color_opacity");
-				$("#masthead.site-header").css({
+				$(headerSelector).css({
 					"background-color": color
 				});
 			}
@@ -78,7 +78,7 @@
 		value.bind(function(to) {
 			if ("blank" !== to) {
 				var color = handleColorUpdate(this, "xten_header_bg_color");
-				$("#masthead.site-header").css({
+				$(headerSelector).css({
 					"background-color": color
 				});
 			}
