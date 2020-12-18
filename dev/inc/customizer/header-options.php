@@ -95,35 +95,6 @@ function xten_customize_site_header_register( $wp_customize ) {
 		)
 	);
 
-	// Site Header Logo Department Name.
-	$wp_customize->add_setting(
-		'standard_header_logo_department_name',
-		array(
-			'default'           => '',
-			'transport'         => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'standard_header_logo_department_name',
-			array(
-				'priority'    => 1,
-				'label'       => __( 'Department Name', 'xten' ),
-				'section'     => 'xten_header_options',
-				'settings'    => 'standard_header_logo_department_name',
-				'description' => __( 'Department Name will Display In Logo', 'xten' ),
-				'type'        => 'text',
-				'input_attrs' => array(
-					'maxlength' => 50,
-				),
-			)
-		)
-	);
-
-	$wp_customize->get_setting( 'standard_header_logo_department_name' )->transport = 'postMessage';
-
 	// Mobile Nav Breakpoint.
 	$wp_customize->add_setting(
 		'mobile_nav_breakpoint',
