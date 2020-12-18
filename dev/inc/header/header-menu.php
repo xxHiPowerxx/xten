@@ -18,25 +18,27 @@ if ( $locations && isset( $locations[ $menu_name ] ) ) :
 	// Store result in variable to be later used to validate .mobile-navigation.
 ?>
 <div id="menu-wrapper" class="<?php echo esc_attr( $header_selection_class ); ?>" data-mobile-nav-breakpoint="<?php echo esc_attr( $mobile_nav_breakpoint ); ?>">
-	<?php
-	$GLOBALS['global_xten_header_file'] = get_template_directory() . '/inc/header/global-xten-header.php';
-	$global_xten_header_file            = $GLOBALS['global_xten_header_file'];
-	?>
 	<div id="mobile-sidebar" class="mobile-sidebar collapse"> <!-- Mobile Nav -->
 		<?php
 		$is_mobile_gobal_nav = true;
-		require get_template_directory() . '/inc/header/global-xten-header.php';
 
 		// Main Nav Mobile Accordion.
 		?>
-		<div class="site-branding">
-			<?php	$home_url = esc_url( home_url( '/' ) ); ?>
-			<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
-				<div class="ctnr-custom-logo <?php echo $GLOBALS['xten-using-child-logo'] ? 'child-logo' : ''; ?>">
-					<?php echo $GLOBALS['xten-site-logo'] ?>
+		<div class="mobile-sidebar-top">
+			<div class="site-branding">
+				<?php	$home_url = esc_url( home_url( '/' ) ); ?>
+				<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
+					<div class="ctnr-custom-logo <?php echo $GLOBALS['xten-using-child-logo'] ? 'child-logo' : ''; ?>">
+						<?php echo $GLOBALS['xten-site-logo'] ?>
+					</div>
+				</a>
+			</div><!-- /.site-branding -->
+			<button id="mobile-nav-close" class="mobile-toggler" type="button" data-toggle="collapse" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle Navigation" tabindex="0">
+				<div class="mobile-toggler-icon">
+					<i class="fas fa-times"></i>
 				</div>
-			</a>
-		</div><!-- /.site-branding -->
+			</button>
+		</div><!-- /.mobile-sidebar-top -->
 		<div class="mobile-main-navigation-wrapper">
 			<div class="collapse show" id="mobile-main-navigation">
 				<!-- Mobile Search -->

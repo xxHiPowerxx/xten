@@ -7,7 +7,6 @@
 
 wp_enqueue_style( 'xten-site-header-css' );
 
-$global_xten_header_file   = $GLOBALS['global_xten_header_file'];
 $site_name                 = $GLOBALS['department_name'];
 $mobile_nav_breakpoint     = $GLOBALS['mobile_nav_breakpoint'];
 $root_dir                  = get_template_directory_uri();
