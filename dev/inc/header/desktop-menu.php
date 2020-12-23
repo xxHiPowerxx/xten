@@ -5,8 +5,6 @@
  * @package xten
  */
 
-wp_enqueue_style( 'xten-site-header-css' );
-
 $site_name                 = esc_attr( get_bloginfo() );
 $mobile_nav_breakpoint     = $GLOBALS['mobile_nav_breakpoint'];
 $root_dir                  = get_template_directory_uri();
