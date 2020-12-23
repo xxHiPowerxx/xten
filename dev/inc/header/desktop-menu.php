@@ -27,7 +27,7 @@ wp_add_inline_style( 'xten-site-header-inline-style', $style );
 ?>
 <header id="masthead" class="site-header new-site-header fixed-header">
 	<div class="navbar" id="mainNav">
-		<div class="header-container">
+		<div class="container container-ext header-container">
 			<div class="site-branding">
 				<?php	$home_url = esc_url( home_url( '/' ) ); ?>
 				<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
