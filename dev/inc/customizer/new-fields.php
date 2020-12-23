@@ -67,61 +67,69 @@ function xten_customize_new_fields_register( $wp_customize ) {
 				$min_max = 'min="' . $min . '" max="' . $max . '"';
 				?>
 				<label>
-					<script>
-						(function($) {
-							$(document).on('ready', function(){
-								if(window.updateTextInputFunctions === undefined) {
-									/**
-										* Update Range Text Input's siblings.
-										*/
+					<?php
+					$GLOBALS['updateTextInputLoaded'] = $GLOBALS['updateTextInputLoaded'] ? : false;
+					if ( ! $GLOBALS['updateTextInputLoaded'] ) :
+						$GLOBALS['updateTextInputLoaded'] = true;
+						?>
+						<script>
+							(function($) {
+								$(document).ready( function(){
+									if(window.updateTextInputFunctions === undefined) {
+										/**
+											* Update Range Text Input's siblings.
+											*/
 
-									// Will use changeFromTextInput to prevent recursion in the text input triggering the range input.
-									var changeFromTextInput;
-									function updateTextInput(tar) {
-										if (changeFromTextInput !== true) {
-											var updateTextTar = tar.closest('.updateTextInputParent' ).find('.updateTextInputTar');
-											updateTextTar.val(tar.val());
+										// Will use changeFromTextInput to prevent recursion in the text input triggering the range input.
+										var changeFromTextInput;
+										function updateTextInput(tar) {
+											if (changeFromTextInput !== true) {
+												var updateTextTar = tar.closest('.updateTextInputParent' ).find('.updateTextInputTar');
+												updateTextTar.val(tar.val());
+											}
+											changeFromTextInput = false;
 										}
-										changeFromTextInput = false;
+										function updateRangeInput(tar) {
+											// return;
+											var updateRangeTar = tar.closest('.updateRangeInputParent' ).find('.updateRangeInputTar');
+											var min = parseFloat( updateRangeTar.attr('min') );
+											parseFloat( $('thing').css('padding-top') );
+											var max = parseFloat( updateRangeTar.attr('max') );
+											if ( tar.val() >= min && tar.val() <= max ) {
+												updateRangeTar.val(tar.val());
+											} else if ( tar.val() < min ) {
+												updateRangeTar.val(min);
+											} else if ( tar.val() > max ) {
+												updateRangeTar.val(max);
+											}
+											changeFromTextInput = true;
+											updateRangeTar.trigger('change');
+										}
+										$('.updateTextInput').on('input change', function(){// trigger on input (change for old browsers)
+											updateTextInput($(this));
+										}).each(function(){// trigger on ready.
+											updateTextInput($(this));
+										});
+										$('.updateRangeInput').on('blur input', function(){// trigger on blur
+											updateRangeInput($(this));
+										}).on('keydown', function(e){
+											if (e.keyCode === 38) {
+												this.value++;
+												$(this).trigger('input');
+											}
+											if (e.keyCode === 40) {
+												this.value--;
+												$(this).trigger('input');
+											}
+										});
+										window.updateTextInputFunctions = true;
 									}
-									function updateRangeInput(tar) {
-										// return;
-										var updateRangeTar = tar.closest('.updateRangeInputParent' ).find('.updateRangeInputTar');
-										var min = parseFloat( updateRangeTar.attr('min') );
-										parseFloat( $('thing').css('padding-top') );
-										var max = parseFloat( updateRangeTar.attr('max') );
-										if ( tar.val() >= min && tar.val() <= max ) {
-											updateRangeTar.val(tar.val());
-										} else if ( tar.val() < min ) {
-											updateRangeTar.val(min);
-										} else if ( tar.val() > max ) {
-											updateRangeTar.val(max);
-										}
-										changeFromTextInput = true;
-										updateRangeTar.trigger('change');
-									}
-									$('.updateTextInput').on('input change', function(){// trigger on input (change for old browsers)
-										updateTextInput($(this));
-									}).each(function(){// trigger on ready.
-										updateTextInput($(this));
-									});
-									$('.updateRangeInput').on('blur input', function(){// trigger on blur
-										updateRangeInput($(this));
-									}).on('keydown', function(e){
-										if (e.keyCode === 38) {
-											this.value++;
-											$(this).trigger('input');
-										}
-										if (e.keyCode === 40) {
-											this.value--;
-											$(this).trigger('input');
-										}
-									});
-									window.updateTextInputFunctions = true;
-								}
-							});
-						})(jQuery);
-					</script>
+								});
+							})(jQuery);
+						</script>
+						<?php
+					endif; // endif ( ! $GLOBALS['updateTextInputLoaded'] ) :
+					?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 					<div class="updateTextInputParent updateRangeInputParent" style="display: flex; flex-flow: row nowrap; align-items: justify-between; font-weight: bold;">
 						<input type="range" class="updateTextInput updateRangeInputTar" style="-webkit-flex:1;flex:1;min-width: 70%;"  name="points" <?php echo $min_max; ?> <?php $this->link(); ?>>
