@@ -13,7 +13,7 @@
 
 		onblur="this.placeholder = 'Search'" value="<?php the_search_query(); ?>">
 		<div class="input-group-append">
-			<button type="submit" role="button" aria-label="Search Button" class="btn submit xten-theme-color-bg fas fa-search" name="submit"></button>
+			<button type="submit" role="button" aria-label="Search Button" class="btn submit btn-theme-style fas fa-search" name="submit"></button>
 		</div>
 	</div>
 </form>
