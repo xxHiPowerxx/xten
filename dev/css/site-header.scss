@@ -57,7 +57,6 @@
 
 					.custom-logo-link {
 						display: inline-block;
-						margin: 0 auto;
 						max-width: 100%;
 						text-decoration: none;
 						&:focus,
@@ -151,7 +150,7 @@
 	// font-family: "Roboto", helvetica, arial, sans-serif;
 	font-size: inherit;
 	max-width: 85%;
-	.menu {
+	> ul {
 		> li {
 			&.current-menu-item,
 			&.current_page_item {
