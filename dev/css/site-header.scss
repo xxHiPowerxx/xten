@@ -17,29 +17,6 @@
 		top: 9px;
 	}
 }
-/*--------------------------------------------------------------
- Translate
---------------------------------------------------------------*/
-.goog-te-gadget-simple {
-	display: flex !important;
-	flex-direction: row;
-	> span {
-		align-self: center;
-	}
-
-	> span a {
-		display: flex;
-		flex-direction: row;
-
-		img {
-			display: none;
-		}
-
-		span {
-			border: none !important;
-		}
-	}
-}
 
 /*--------------------------------------------------------------
 ## Main navigation menu
