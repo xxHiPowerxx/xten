@@ -47,7 +47,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "https:\/\/www.facebook.com\/SanBernardinoXTen\/",
+                    "default_value": "",
                     "placeholder": ""
                 },
                 {
@@ -63,7 +63,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "https:\/\/twitter.com\/xten",
+                    "default_value": "",
                     "placeholder": ""
                 },
                 {
@@ -79,7 +79,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "https:\/\/www.youtube.com\/user\/xtenPIO",
+                    "default_value": "",
                     "placeholder": ""
                 },
                 {
@@ -95,7 +95,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "https:\/\/www.instagram.com\/xten\/",
+                    "default_value": "",
                     "placeholder": ""
                 },
                 {
@@ -111,7 +111,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "https:\/\/www.linkedin.com\/company\/xten",
+                    "default_value": "",
                     "placeholder": ""
                 }
             ]
@@ -170,5 +170,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1608323955
+    "modified": 1609282748
 }
