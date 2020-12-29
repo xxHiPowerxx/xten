@@ -7,7 +7,7 @@
 
 wp_enqueue_style( 'xten-site-header-css' );
 
-$site_name                 = $GLOBALS['department_name'];
+$site_name                 = esc_attr( get_bloginfo() );
 $mobile_nav_breakpoint     = $GLOBALS['mobile_nav_breakpoint'];
 $root_dir                  = get_template_directory_uri();
 $font                      = 'roboto';
@@ -27,7 +27,7 @@ wp_add_inline_style( 'xten-site-header-inline-style', $style );
 ?>
 <header id="masthead" class="site-header new-site-header fixed-header">
 	<div class="navbar" id="mainNav">
-		<div class="header-container">
+		<div class="container container-ext header-container">
 			<div class="site-branding">
 				<?php	$home_url = esc_url( home_url( '/' ) ); ?>
 				<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>

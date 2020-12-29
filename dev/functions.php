@@ -119,7 +119,6 @@ add_action( 'after_setup_theme', 'xten_setup' );
  * Retrieve Standard Header Selection and start GLOBAL variable.
  */
 $GLOBALS['mobile_nav_breakpoint'] = get_theme_mod( 'mobile_nav_breakpoint', 1050 );
-$GLOBALS['department_name']        = esc_attr( get_theme_mod( 'standard_header_logo_department_name' ) );
 
 /**
  * Set the embed width in pixels, based on the theme's design and stylesheet.

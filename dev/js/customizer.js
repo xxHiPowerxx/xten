@@ -60,30 +60,93 @@
 		});
 	});
 
-	var headerSelector = '.site-header, .mobile-sidebar-top';
 	// Header Background Color.
+	var headerSelector = '.site-header, .mobile-sidebar-top';
 	wp.customize("xten_header_bg_color", function(value) {
 		value.bind(function(to) {
+			var color = 'transparent';
 			if ("blank" !== to) {
-				var color = handleColorUpdate(this, "xten_header_bg_color_opacity");
-				$(headerSelector).css({
-					"background-color": color
-				});
+				 color = handleColorUpdate(this, "xten_header_bg_color_opacity");
 			}
+			$(headerSelector).css({
+				"background-color": color
+			});
 		});
 	});
+	// /Header Background Color.
 
 	// Header Background Color Opacity.
 	wp.customize("xten_header_bg_color_opacity", function(value) {
 		value.bind(function(to) {
+			var color = 'transparent';
 			if ("blank" !== to) {
-				var color = handleColorUpdate(this, "xten_header_bg_color");
-				$(headerSelector).css({
-					"background-color": color
-				});
+				 color = handleColorUpdate(this, "xten_header_bg_color_opacity");
 			}
+			$(headerSelector).css({
+				"background-color": color
+			});
 		});
 	});
+	// /Header Background Color Opacity.
+
+	// Header Menu Item Color.
+	var headerMenuItemSelector = '.header-search-toggle i, .main-navigation>ul>li>a, .main-navigation>ul>li>span.dropdown,.mobile-toggler';
+	wp.customize("xten_header_menu_item_color", function(value) {
+		value.bind(function(to) {
+			var color = 'transparent';
+			if ("blank" !== to) {
+				 color = handleColorUpdate(this, "xten_header_menu_item_color");
+			}
+			$(headerMenuItemSelector).css({
+				"color": color
+			});
+		});
+	});
+	// /Header Menu Item Color.
+
+	// // Header Sub-Menu Background Color.
+	var headerSubMenuSelector = '.main-navigation .sub-menu a';
+	wp.customize("xten_header_sub_menu_bg_color", function(value) {
+		value.bind(function(to) {
+			var color = 'transparent';
+			if ("blank" !== to) {
+				 color = handleColorUpdate(this, "xten_header_sub_menu_bg_color_opacity");
+			}
+			$(headerSubMenuSelector).css({
+				"background-color": color
+			});
+		});
+	});
+	// /Header Sub-Menu Background Color.
+
+	//  Header Sub-Menu Background Color Opacity
+	wp.customize("xten_header_bg_color_opacity", function(value) {
+		value.bind(function(to) {
+			var color = 'transparent';
+			if ("blank" !== to) {
+				 color = handleColorUpdate(this, "xten_header_bg_color_opacity");
+			}
+			$(headerSubMenuSelector).css({
+				"background-color": color
+			});
+		});
+	});
+	//  Header Sub-Menu Background Color Opacity.
+
+	// Header Sub-Menu Item Color.
+	var headerSubMenuItemSelector = '.main-navigation .sub-menu a';
+	wp.customize("xten_header_sub_menu_item_color", function(value) {
+		value.bind(function(to) {
+			var color = 'transparent';
+			if ("blank" !== to) {
+				 color = handleColorUpdate(this, "xten_header_sub_menu_item_color");
+			}
+			$(headerSubMenuItemSelector).css({
+				"color": color
+			});
+		});
+	});
+	// Header Sub-Menu Item Color.
 
 	// Header text color.
 	wp.customize("header_textcolor", function(value) {

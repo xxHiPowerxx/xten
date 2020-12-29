@@ -20,14 +20,64 @@ function process_inline_css() {
 	$mobile_nav_dropdown_color         = esc_attr( get_theme_mod( 'mobile_nav_dropdown_color', '#003366' ) );
 
 	// Theme Options.
-	$xten_header_bg_color = esc_attr( get_theme_mod( 'xten_header_bg_color', '#2e528a' ) );
-	$xten_header_bg_color_opacity = esc_attr( get_theme_mod( 'xten_header_bg_color_opacity', '100' ) );
-	$xten_header_bg_color = $xten_header_bg_color_opacity > 100 ?
-		convert_hex_to_rgb(
-			$xten_header_bg_color,
-			$xten_header_bg_color_opacity
-		) :
-		$xten_header_bg_color;
+
+	// Header
+	$xten_header = array();
+	// Header Background Color w/ Opacity.
+	$xten_header['bg_color']['value'] = esc_attr( get_theme_mod( 'xten_header_bg_color', '#2e528a' ) ) ? : 'transparent';
+	$xten_header['bg_color']['opacity'] = esc_attr( get_theme_mod( 'xten_header_bg_color_opacity', '100' ) );
+	$xten_header['bg_color']['value'] = xten_color_opacity(
+		$xten_header['bg_color']['value'],
+		$xten_header['bg_color']['opacity']
+	);
+	$xten_header['bg_color']['selector'] = '.site-header, .mobile-sidebar-top';
+	$header_styles .= xten_add_inline_style(
+		$xten_header['bg_color']['selector'],
+		array(
+			'background-color' => $xten_header['bg_color']['value'],
+		)
+	);
+	// /Header Background Color w/ Opacity.
+
+	// Header Menu Item Color.
+	$xten_header['menu_item_color']['value'] = esc_attr( get_theme_mod( 'xten_header_menu_item_color', '#fff' ) ) ? : 'transparent';
+	$xten_header['menu_item_color']['selector'] = '.header-search-toggle i, .main-navigation>ul>li>a, .main-navigation>ul>li>span.dropdown,.mobile-toggler';
+	$header_styles .= xten_add_inline_style(
+		$xten_header['menu_item_color']['selector'],
+		array(
+			'color' => $xten_header['menu_item_color']['value'],
+		)
+	);
+	// /Header Menu Item Color.
+
+	// Header Sub-Menu Background Color w/ Opacity.
+	$xten_header['sub_menu_bg_color']['value'] = esc_attr( get_theme_mod( 'xten_header_sub_menu_bg_color', '#fff' ) ) ? : 'transparent';
+	$xten_header['sub_menu_bg_color']['opacity'] = esc_attr( get_theme_mod( 'xten_header_sub_menu_bg_color_opacity', '100' ) );
+	$xten_header['sub_menu_bg_color']['value'] = xten_color_opacity(
+		$xten_header['sub_menu_bg_color']['value'],
+		$xten_header['sub_menu_bg_color']['opacity']
+	);
+	$xten_header['sub_menu_bg_color']['selector'] = '.main-navigation .sub-menu a';
+	$header_styles .= xten_add_inline_style(
+		$xten_header['sub_menu_bg_color']['selector'],
+		array(
+			'background-color' => $xten_header['sub_menu_bg_color']['value'],
+		)
+	);
+	// /Header Sub-Menu Background Color w/ Opacity.
+
+	// Header Sub-Menu Item Color.
+	$xten_header['sub_menu_item_color']['value'] = esc_attr( get_theme_mod( 'xten_header_sub_menu_item_color', '#2e528a' ) ) ? : 'transparent';
+	$xten_header['sub_menu_item_color']['selector'] = '.main-navigation .sub-menu a';
+	$header_styles .= xten_add_inline_style(
+		$xten_header['sub_menu_item_color']['selector'],
+		array(
+			'color' => $xten_header['sub_menu_item_color']['value'],
+		)
+	);
+	// /Header Sub-Menu Item Color.
+
+	// /Header
 	
 	$xten_link_color      = esc_attr( get_theme_mod( 'xten_link_color', '#007db6' ) );
 	$xten_theme_color     = esc_attr( get_theme_mod( 'xten_theme_color', '#003366' ) );
@@ -112,10 +162,6 @@ function process_inline_css() {
 			'-webkit-transform-origin:50%;' .
 			'transform-origin:50%;' .
 		'}' .
-	'}';
-
-	$header_styles = '.site-header, .mobile-sidebar-top {' .
-		'background-color:' . $xten_header_bg_color .
 	'}';
 
 	$styles      .= $header_styles;

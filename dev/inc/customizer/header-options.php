@@ -24,7 +24,7 @@ function xten_customize_site_header_register( $wp_customize ) {
 	);
 
 	// Header Main Nav Start!
-	// Create Custom Separator.
+	// Separator.
 	$wp_customize->add_setting( 'xten_header_options_group', array() );
 
 	$wp_customize->add_control(
@@ -33,10 +33,11 @@ function xten_customize_site_header_register( $wp_customize ) {
 			'xten_header_options_group',
 			array(
 				'section'    => 'xten_header_options',
-				'content'    => __( '<h2 style="font-size: 1.6em;">Select Header</h2> <hr style="border-color: rgb(140, 140, 140);">', 'xten' ),
+				'content'    => __( '<h2 style="font-size: 1.6em;">Header Colors</h2> <hr style="border-color: rgb(140, 140, 140);">', 'xten' ),
 			)
 		)
 	);
+	// /Separator.
 
 	// Header Background Color.
 	$wp_customize->add_setting(
@@ -94,35 +95,118 @@ function xten_customize_site_header_register( $wp_customize ) {
 			)
 		)
 	);
+	// /Header Background Color Opacity
 
-	// Site Header Logo Department Name.
+	// Header Menu Item Color.
 	$wp_customize->add_setting(
-		'standard_header_logo_department_name',
+		'xten_header_menu_item_color',
 		array(
-			'default'           => '',
+			'default'           => '#fff',
+			'sanitize_callback' => 'sanitize_hex_color',
 			'transport'         => 'postMessage',
 		)
 	);
 
 	$wp_customize->add_control(
-		new WP_Customize_Control(
+		new WP_Customize_Color_Control(
 			$wp_customize,
-			'standard_header_logo_department_name',
+			'xten_header_menu_item_color',
 			array(
-				'priority'    => 1,
-				'label'       => __( 'Department Name', 'xten' ),
+				'label'       => __( 'Header Menu Item Color', 'xten' ),
 				'section'     => 'xten_header_options',
-				'settings'    => 'standard_header_logo_department_name',
-				'description' => __( 'Department Name will Display In Logo', 'xten' ),
-				'type'        => 'text',
+				'settings'    => 'xten_header_menu_item_color',
+				'description' => __( 'Set Header Menu Item Color', 'xten' ),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'xten_header_menu_item_color' )->transport = 'postMessage';
+	// /Header Menu Item Color.
+
+	// Header Sub-Menu Background Color.
+	$wp_customize->add_setting(
+		'xten_header_sub_menu_bg_color',
+		array(
+			'default'           => '#fff',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'xten_header_sub_menu_bg_color',
+			array(
+				'label'       => __( 'Header Sub-Menu Background Color', 'xten' ),
+				'section'     => 'xten_header_options',
+				'settings'    => 'xten_header_sub_menu_bg_color',
+				'description' => __( 'Set Header Sub-Menu Background Color', 'xten' ),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'xten_header_sub_menu_bg_color' )->transport = 'postMessage';
+	// /Header Sub-Menu Background Color.
+
+	// Header Sub Menu Background Color Opacity
+	$wp_customize->add_setting(
+		'xten_header_sub_menu_bg_color_opacity',
+		array(
+			'default'           => '100',
+			'sanitize_callback' => 'wp_filter_nohtml_kses',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Range_Control(
+			$wp_customize,
+			'xten_header_sub_menu_bg_color_opacity',
+			array(
+				'label'       => __( 'Header Sub Menu Background Color Opacity', 'xten' ),
+				'section'     => 'xten_header_options',
+				'settings'    => 'xten_header_sub_menu_bg_color_opacity',
+				'description' => __( 'Set Opacity for Header Sub Menu Background Color', 'xten' ),
+				// 'type'        => 'range',
 				'input_attrs' => array(
-					'maxlength' => 50,
+					'min'   => 0,
+					'max'   => 100,
+					'unit'  => '%',
+					'step'  => 1,
+					'class' => 'updateTextInput',
+					'style' => 'color: #0a0',
 				),
 			)
 		)
 	);
+	// /Header Sub Menu Background Color Opacity
 
-	$wp_customize->get_setting( 'standard_header_logo_department_name' )->transport = 'postMessage';
+	// Header Sub-Menu Item Color.
+	$wp_customize->add_setting(
+		'xten_header_sub_menu_item_color',
+		array(
+			'default'           => '#2e528a',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'xten_header_sub_menu_item_color',
+			array(
+				'label'       => __( 'Header Sub-Menu Item Color', 'xten' ),
+				'section'     => 'xten_header_options',
+				'settings'    => 'xten_header_sub_menu_item_color',
+				'description' => __( 'Set Header Sub-Menu Item Color', 'xten' ),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'xten_header_sub_menu_item_color' )->transport = 'postMessage';
+	// /Header Sub-Menu Item Color.
+
+	// TODO: Create Mobile Menu Section
+	// Along with Mobile Menu Options.
 
 	// Mobile Nav Breakpoint.
 	$wp_customize->add_setting(
