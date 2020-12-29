@@ -41,92 +41,114 @@
 	// /Site Footer Variables //
 
 	// Site Footer   //
-		// $site_info_content = $site_info_default;
 	?>
-		<footer id="colophon" class="site-footer">
-			<div class="container container-ext footer-container">
-				<div class="footer-content-wrapper flex-column">
-					<div class="site-logo-wrapper">
-							<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo $site_name; ?>"><span class="hide-me">Home Link</span>
-								<div class="site-logo <?php echo file_exists( get_stylesheet_directory() . '/footer-logo.svg' ) ? 'child-logo' : ''; ?>">
-									<?php
-									if ( file_exists( get_stylesheet_directory() . '/footer-logo.svg' ) ) :
-										require get_stylesheet_directory() . '/footer-logo.svg';
-									else :
-										$xten_header_logo_svg = $GLOBALS['xten-header-logo'];
-										echo $xten_header_logo_svg;
-										?>
-										<?php if ( $site_name ) : ?>
-											<span class="site-name"><?php echo esc_attr( $site_name ); ?> </span>
-										<?php endif; ?>
-										<?php
-									endif;
-									?>
-								</div>
-							</a>
-						</div>
-					<?php if ( ! empty( $facebook_account ) || ! empty( $twitter_account ) || ! empty( $youtube_account ) || ! empty( $instagram_account ) || ! empty( $linkedin_account ) ) : ?>
-						<div class="site-footer-content">
-							<?php if ( ! empty( $facebook_account ) || ! empty( $twitter_account ) || ! empty( $youtube_account ) || ! empty( $instagram_account ) || ! empty( $linkedin_account ) ) : ?>
-								<div class="social-media-wrapper">
-									<?php
-									echo '<div class="social-icons">';
-										echo ( ! empty( $facebook_account ) ) ? $facebook_profile : null;
-										echo ( ! empty( $twitter_account ) ) ? $twitter_profile : null;
-										echo ( ! empty( $youtube_account ) ) ? $youtube_profile : null;
-										echo ( ! empty( $instagram_account ) ) ? $instagram_profile : null;
-										echo ( ! empty( $linkedin_account ) ) ? $linkedin_profile : null;
-									echo '</div>';
-									?>
-								</div>
-							<?php endif; ?>
-						</div>
-
-						<?php if ( is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' ) || is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' ) ) : ?>
-						<div class="footer-wrapper">
-								<?php
-								if ( is_active_sidebar( 'footer-1' ) ) :
-									?>
-								<div class="footer-1-wrapper">
-										<?php dynamic_sidebar( 'footer-1' ); ?>
-								</div>
-									<?php
-							endif;
-								if ( is_active_sidebar( 'footer-2' ) ) :
-									?>
-								<div class="footer-2-wrapper">
-										<?php dynamic_sidebar( 'footer-2' ); ?>
-								</div>
-									<?php
-							endif;
-								if ( is_active_sidebar( 'footer-3' ) ) :
-									?>
-								<div class="footer-3-wrapper">
-										<?php dynamic_sidebar( 'footer-3' ); ?>
-								</div>
-									<?php
-							endif;
-								if ( is_active_sidebar( 'footer-4' ) ) :
-									?>
-								<div class="footer-4-wrapper">
-										<?php dynamic_sidebar( 'footer-4' ); ?>
-								</div>
-									<?php
-							endif;
+	<footer id="colophon" class="site-footer">
+		<div class="container container-ext footer-container">
+			<div class="footer-content-wrapper flex-column">
+				<div class="site-logo-wrapper">
+					<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo $site_name; ?>"><span class="hide-me">Home Link</span>
+						<div class="site-logo <?php echo file_exists( get_stylesheet_directory() . '/footer-logo.svg' ) ? 'child-logo' : ''; ?>">
+							<?php
+							if ( file_exists( get_stylesheet_directory() . '/footer-logo.svg' ) ) :
+								require get_stylesheet_directory() . '/footer-logo.svg';
+							else :
+								$xten_header_logo_svg = $GLOBALS['xten-header-logo'];
+								echo $xten_header_logo_svg;
 								?>
+								<?php if ( $site_name ) : ?>
+									<span class="site-name"><?php echo esc_attr( $site_name ); ?> </span>
+								<?php endif; ?>
+								<?php
+							endif;
+							?>
+						</div>
+					</a>
+				</div>
+				<?php
+				if (
+					! empty( $facebook_account ) ||
+					! empty( $twitter_account ) ||
+					! empty( $youtube_account ) ||
+					! empty( $instagram_account ) ||
+					! empty( $linkedin_account )
+				) :
+				?>
+					<div class="site-footer-content">
+						<?php
+						if (
+							! empty( $facebook_account ) ||
+							! empty( $twitter_account ) ||
+							! empty( $youtube_account ) ||
+							! empty( $instagram_account ) ||
+							! empty( $linkedin_account )
+						) :
+						?>
+							<div class="social-media-wrapper">
+								<?php
+								echo '<div class="social-icons">';
+									echo ( ! empty( $facebook_account ) ) ? $facebook_profile : null;
+									echo ( ! empty( $twitter_account ) ) ? $twitter_profile : null;
+									echo ( ! empty( $youtube_account ) ) ? $youtube_profile : null;
+									echo ( ! empty( $instagram_account ) ) ? $instagram_profile : null;
+									echo ( ! empty( $linkedin_account ) ) ? $linkedin_profile : null;
+								echo '</div>';
+								?>
+							</div>
+						<?php endif; ?>
+					</div>
+
+					<?php
+					if (
+						is_active_sidebar( 'footer-1' ) ||
+						is_active_sidebar( 'footer-2' ) ||
+						is_active_sidebar( 'footer-3' ) ||
+						is_active_sidebar( 'footer-4' )
+					) :
+						?>
+						<div class="footer-wrapper">
+							<?php
+							if ( is_active_sidebar( 'footer-1' ) ) :
+								?>
+								<div class="footer-1-wrapper">
+									<?php dynamic_sidebar( 'footer-1' ); ?>
+								</div>
+								<?php
+							endif;
+							if ( is_active_sidebar( 'footer-2' ) ) :
+								?>
+								<div class="footer-2-wrapper">
+									<?php dynamic_sidebar( 'footer-2' ); ?>
+								</div>
+								<?php
+							endif;
+							if ( is_active_sidebar( 'footer-3' ) ) :
+								?>
+								<div class="footer-3-wrapper">
+									<?php dynamic_sidebar( 'footer-3' ); ?>
+								</div>
+								<?php
+							endif;
+							if ( is_active_sidebar( 'footer-4' ) ) :
+								?>
+								<div class="footer-4-wrapper">
+									<?php dynamic_sidebar( 'footer-4' ); ?>
+								</div>
+								<?php
+							endif;
+							?>
 						</div>
 					<?php endif; ?>
 				<?php endif; ?>
-				</div>
 			</div>
-			<div class="site-info-footer-wrapper">
-				<div class="container">
-					<div class="site-info">
-						<?php echo $site_info_content; ?>
-					</div><!-- .site-info -->
-				</div>
+		</div>
+		<div class="site-info-footer-wrapper">
+			<div class="container">
+				<div class="site-info">
+					<?php echo $site_info_content; ?>
+				</div><!-- .site-info -->
 			</div>
-		</footer><!-- #colophon -->
+		</div>
+	</footer><!-- #colophon -->
 
 
 <div class="close-layer-search"></div>
