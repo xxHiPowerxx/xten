@@ -1,6 +1,6 @@
 <?php
 /*
-	Plugin Name: SB Social Profile Widget
+	Plugin Name: XTen Social Profile Widget
 	Plugin URI: http://designmodo
 	Description: Links to Site social media profile
 	Author: Agbonghama Collins
@@ -8,16 +8,16 @@
  */
 
 /**
- * Adds SB_Social_Profile widget.
+ * Adds XTen_Social_Profile widget.
  */
-class SB_Social_Profile extends WP_Widget {
+class XTen_Social_Profile extends WP_Widget {
 
 		/**
 		 * Register widget with WordPress.
 		 */
 		function __construct() {
 				parent::__construct(
-					'SB_Social_Profile',
+					'XTen_Social_Profile',
 					__('Social Network Profiles', 'xten'), // Name
 					array('description' => __('Links to Site social media profile', 'xten'),)
 				);
@@ -67,7 +67,7 @@ class SB_Social_Profile extends WP_Widget {
 		 * @param array $instance Previously saved values from database.
 		 */
 		public function form($instance) {
-			$facebook  = isset($instance['facebook']) ? $instance['facebook'] : 'https://www.facebook.com/SanBernardinoXTen/';
+			$facebook  = isset($instance['facebook']) ? $instance['facebook'] : 'https://www.facebook.com/XTen/';
 			$twitter   = isset($instance['twitter']) ? $instance['twitter'] : 'https://twitter.com/xten';
 			$youtube   = isset($instance['youtube']) ? $instance['youtube'] : 'https://www.youtube.com/user/xtenPIO';
 			$instagram = isset($instance['instagram']) ? $instance['instagram'] : 'https://www.instagram.com/xten/';
@@ -85,7 +85,7 @@ class SB_Social_Profile extends WP_Widget {
 
 			<p>
 				<label for="<?php echo $this->get_field_id('youtube'); ?>"><?php _e('Youtube:'); ?></label> 
-				<input class="widefat foobar" id="<?php echo $this->get_field_id('youtube'); ?>" name="<?php echo $this->get_field_name('youtube'); ?>" type="text" value="<?php echo esc_attr($youtube); ?>">
+				<input class="widefat" id="<?php echo $this->get_field_id('youtube'); ?>" name="<?php echo $this->get_field_name('youtube'); ?>" type="text" value="<?php echo esc_attr($youtube); ?>">
 			</p>
 
 			<p>
@@ -124,9 +124,9 @@ class SB_Social_Profile extends WP_Widget {
 		}
 	}
 
-// register SB_Social_Profile widget
+// register XTen_Social_Profile widget
 function register_designmodo_social_profile() {
-		register_widget('SB_Social_Profile');
+		register_widget('XTen_Social_Profile');
 }
 
 add_action('widgets_init', 'register_designmodo_social_profile');
