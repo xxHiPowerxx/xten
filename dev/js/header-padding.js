@@ -10,8 +10,11 @@ var placeHolderImg,
 
 // Modify Custom Logo
 function createPlaceHolderImg(elem) {
-	var imgWidth = elem.style.width !== '' ? elem.getAttribute("width") : 0;
-	var imgHeight = elem.getAttribute("height");
+	if ( elem.nodeName.toUpperCase() !== 'IMG' ) {
+		return false;
+	}
+	var imgWidth = elem.style.width !== '' ? elem.naturalWidth : 0;
+	var imgHeight = elem.naturalHeight || 0;
 
 	var maxWidth = parseFloat(
 		window
