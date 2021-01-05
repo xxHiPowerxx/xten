@@ -47,12 +47,13 @@
 
 html {
 	height: auto !important;
-	line-height: 1.15;
-	/* 1 */
 	-webkit-text-size-adjust: 100%;
 	/* 2 */
 }
-
+body {
+	line-height: 1.25;
+	/* 1 */
+}
 /* Sections
    ========================================================================== */
 
@@ -1215,9 +1216,9 @@ article.page {
 --------------------------------------------------------------*/
 
 .site-footer {
-	.container.container-ext.footer-container {
-		padding-top: 3rem;
-		padding-bottom: 3rem;
+	.footer-container {
+		padding-top: 6rem;
+		padding-bottom: 6rem;
 	}
 	.custom-logo-link {
 		display: inline-block;
@@ -1295,23 +1296,11 @@ article.page {
 			margin: 0;
 		}
 	}
-	.arrowhead-logo {
-		width: 400px;
-		opacity: 0.2;
-	}
 	.site-logo-wrapper {
 		width: 100%;
-		min-width: 100%;
-		@media (min-width: $vp_sm) {
-			padding: 0 45px;
-		}
-		@media (min-width: $vp_m) {
-			padding: 0;
-		}
-		@media (min-width: $vp_lg) {
-			padding: 0 115px;
-		}
 	}
+
+	// TODO: Remove .site-footer-content when updating Social Media Links to component-based.
 	.site-footer-content {
 		display: flex;
 		flex-flow: column;
@@ -1368,32 +1357,6 @@ article.page {
 			}
 		}
 	}
-	.footer-content-wrapper {
-		padding: 0;
-		color: white;
-		@media (min-width: $vp_m) {
-			padding: 0;
-		}
-	}
-	.footer-content-wrapper > * {
-		padding: 0;
-		min-width: 100%;
-		position: relative;
-		a,
-		a:hover {
-			color: white;
-		}
-		@media (min-width: $vp_xs) {
-			min-width: 50%;
-		}
-		@media (min-width: $vp_m) {
-			min-width: 50%;
-		}
-		@media (min-width: $vp_lg) {
-			min-width: 25%;
-			margin-bottom: 0;
-		}
-	}
 	.xten-logo-svg {
 		flex: 1;
 		max-width: 15rem;
@@ -1443,6 +1406,31 @@ article.page {
 		p {
 			margin: 0;
 		}
+	}
+}
+.footer-content-wrapper {
+	padding: 0;
+	color: white;
+	flex-direction: column;
+	> * {
+		padding: 0;
+		min-width: 100%;
+		position: relative;
+		@media (min-width: $vp_xs) {
+			min-width: 50%;
+		}
+		@media (min-width: $vp_m) {
+			min-width: 50%;
+			padding: 0;
+		}
+		@media (min-width: $vp_lg) {
+			min-width: 25%;
+			margin-bottom: 0;
+		}
+	}
+	a,
+	a:hover {
+		color: white;
 	}
 }
 .site-info {
