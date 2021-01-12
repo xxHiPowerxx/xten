@@ -371,6 +371,33 @@ class XTenUtilities {
 				return $color;
 			}
 		endif; // endif ( ! function_exists( 'xten_color_opacity' ) ) :
+
+		if ( ! function_exists( 'xten_kses_post' ) ) :
+		/**
+		 * Sanitizes string but leaves support for SVGs.
+		 * @param string $string to be sanitized.
+		 * @return string Sanitized string with SVG support.
+		 */
+		function xten_kses_post( $string ) {
+			$svg_args = array(
+				'svg'   => array(
+						'class' => true,
+						'aria-hidden' => true,
+						'aria-labelledby' => true,
+						'role' => true,
+						'xmlns' => true,
+						'width' => true,
+						'height' => true,
+						'viewbox' => true, // <= Must be lower case!
+					),
+					'g'     => array( 'fill' => true ),
+					'title' => array( 'title' => true ),
+					'path'  => array( 'd' => true, 'fill' => true,  ),
+			);
+			$allowed_tags = array_merge( $kses_defaults, $svg_args );
+			return wp_kses( $string, $allowed_tags );
+		}
+		endif; // endif ( ! function_exists( 'xten_kses_post' ) ) :
 	}
 }
 
