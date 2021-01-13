@@ -8,6 +8,8 @@
  */
 
 jQuery(document).ready(function($) {
+	var body = $("body");
+
 	$("nav#nav-mega-menu").accessibleMegaMenu({
 		// update with desktop nav
 		/* prefix for generated unique id attributes, which are required
@@ -151,7 +153,6 @@ jQuery(document).ready(function($) {
 	);
 
 	function activateMobileMenu() {
-		var body = $("body");
 		var wrapper = $("#menu-wrapper");
 		var breakPoint = wrapper.attr("data-mobile-nav-breakpoint");
 		var windowWidth = window.innerWidth;
@@ -165,16 +166,43 @@ jQuery(document).ready(function($) {
 		}
 	}
 
+	function scrolledPastHeader() {
+		$('.scrolledPastHeaderRef').each(function() {
+			var thisRect = this.getBoundingClientRect();
+			if ($(window).scrollTop() >= thisRect.height + this.offsetTop) {
+				body.addClass('scrolledPastHeader');
+			} else {
+				body.removeClass('scrolledPastHeader');
+			}
+		});
+	}
+
 	function readyFuncs() {
 		activateMobileMenu();
+		scrolledPastHeader();
 	}
 
 	function resizeFuncs() {
 		activateMobileMenu();
+		scrolledPastHeader();
 	}
+	function scrollFuncs() {
+		scrolledPastHeader();
+	}
+	$(window).on('scroll', function() {
+		scrollFuncs();
+	});
 
 	readyFuncs();
 	$(window).resize(function() {
 		resizeFuncs();
 	});
+	function dispatchResize() {
+		var resizeEvent = window.document.createEvent('UIEvents');
+		resizeEvent.initUIEvent('resize', true, false, window, 0);
+		window.dispatchEvent(resizeEvent);
+	}
+	window.onload = new function() {
+		dispatchResize();
+	};
 });
