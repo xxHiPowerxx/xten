@@ -503,7 +503,6 @@ function xten_wpseo_opengraph_image() {
 				if ( $is_category ) :
 					$term_ID      = get_queried_object()->term_id;
 					$thumbnail_id = get_term_meta( $term_ID )['_thumbnail_id'][0];
-					// var_dump($term_ID, ' foobar');
 				else :
 					$thumbnail_id = has_post_thumbnail( $post_ID ) ?
 						get_post_thumbnail_id( $post_ID ) :
