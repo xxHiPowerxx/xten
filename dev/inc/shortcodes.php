@@ -98,3 +98,11 @@ function get_site_phone_number_func( $atts = '' ) {
 }
 add_shortcode( 'site_phone_number', 'get_site_phone_number_func' );
 add_filter( 'widget_text', 'do_shortcode' );
+
+/**
+ * Post Title Shortcode
+ */
+function post_title_shortcode(){
+	return get_the_title();
+}
+add_shortcode('post_title','post_title_shortcode');
