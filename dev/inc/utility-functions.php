@@ -373,14 +373,15 @@ class XTenUtilities {
 		endif; // endif ( ! function_exists( 'xten_color_opacity' ) ) :
 
 		if ( ! function_exists( 'xten_kses_post' ) ) :
-		/**
-		 * Sanitizes string but leaves support for SVGs.
-		 * @param string $string to be sanitized.
-		 * @return string Sanitized string with SVG support.
-		 */
-		function xten_kses_post( $string ) {
-			$svg_args = array(
-				'svg'   => array(
+			/**
+			 * Sanitizes string but leaves support for SVGs.
+			 * @param string $string to be sanitized.
+			 * @return string Sanitized string with SVG support.
+			 */
+			function xten_kses_post( $string ) {
+				$kses_defaults = wp_kses_allowed_html( 'post' );
+				$svg_args = array(
+					'svg' => array(
 						'class' => true,
 						'aria-hidden' => true,
 						'aria-labelledby' => true,
@@ -392,11 +393,19 @@ class XTenUtilities {
 					),
 					'g'     => array( 'fill' => true ),
 					'title' => array( 'title' => true ),
-					'path'  => array( 'd' => true, 'fill' => true,  ),
-			);
-			$allowed_tags = array_merge( $kses_defaults, $svg_args );
-			return wp_kses( $string, $allowed_tags );
-		}
+					'path'  => array( 'd' => true, 'fill' => true, ),
+				);
+				$allowed_tags = array_merge( $kses_defaults, $svg_args );
+		
+				foreach ( $allowed_tags as $key=>$allowed_tag ) :
+					$tabindex = array(
+						'tabindex' => true,
+					);
+					$allowed_tags[$key] = array_merge( $allowed_tag, $tabindex );
+				endforeach;
+		
+				return wp_kses( $string, $allowed_tags );
+			}
 		endif; // endif ( ! function_exists( 'xten_kses_post' ) ) :
 	}
 }
