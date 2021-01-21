@@ -2,7 +2,7 @@
 /**
  * Template Name: Fixed Width
  *
- * @package     XTen
+ * @package xten
  */
 
 get_header();

@@ -2,7 +2,7 @@
 /**
  * Template Name: Fixed Hero with Title
  *
- * @package     XTen
+ * @package xten
  */
 
 get_header();
