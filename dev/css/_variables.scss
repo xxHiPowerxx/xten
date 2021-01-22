@@ -132,8 +132,16 @@ $opacity_zero: 0;
 
 /*-----TRANSITIONS------*/
 $smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
-.smooth-transition {
+@mixin smooth-transition {
 	transition: $smooth-transition;
+}
+@mixin smoother-transition {
+	@include smooth-transition;
+	backface-visibility: hidden;
+}
+@mixin smoothest-transition {
+	@include smoother-transition;
+	transform: translateZ(0);
 }
 
 /*-----FONT CALCULATIONS-----*/
@@ -192,11 +200,5 @@ $smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 $global_line_height: 1.4rem;
 $xten_header_height_m: 4.5rem;
 $xten_header_height_lg: 3.68rem;
-
-/*   Smooth Transition    */
-.smoother-transition {
-	transform: translateZ(0);
-	backface-visibility: hidden;
-}
 
 $active: "&:hover,&:focus,&.active";

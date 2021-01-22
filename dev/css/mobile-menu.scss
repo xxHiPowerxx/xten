@@ -58,8 +58,7 @@ html {
 		border-top: none;
 		text-align: left;
 		padding: 0;
-		@extend .smooth-transition;
-		@extend .smoother-transition;
+		@include smoother-transition;
 		transform: translate3d(100%, 0, 0);
 		@media (min-width: 700px) {
 			width: 400px;
@@ -86,7 +85,7 @@ html {
 			.fa {
 				margin-right: 25px;
 				text-align: center;
-				@extend .smooth-transition;
+				@include smooth-transition;
 				backface-visibility: hidden;
 				transform: scaleY(1) translateZ(0);
 			}
@@ -233,7 +232,7 @@ html {
 						font-size: 2.5rem;
 						line-height: 1;
 						background-color: $_dark-blue;
-						@extend .smooth-transition;
+						@include smooth-transition;
 
 						#{$active} {
 							text-decoration: underline;
@@ -278,7 +277,7 @@ html {
 					padding: 0;
 					list-style-type: none;
 					width: 100%;
-					@extend .smooth-transition;
+					@include smooth-transition;
 					border-left: solid 0.75rem $_gold;
 					background-color: $_blue;
 
@@ -360,8 +359,7 @@ html {
 		content: "";
 		z-index: 9998;
 		overflow-x: hidden;
-		@extend .smooth-transition;
-		@extend .smoother-transition;
+		@include smoother-transition;
 	}
 
 	body {
@@ -416,8 +414,7 @@ html {
 	color: $white;
 	background-color: transparent;
 	border: none;
-	@extend .smooth-transition;
-	@extend .smoother-transition;
+	@include smoother-transition;
 	#{$active} {
 		transform: scale(1.1) translateZ(0);
 	}

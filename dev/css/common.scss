@@ -854,6 +854,17 @@ body input:focus {
 	display: inline-block;
 }
 
+/*   Smooth Transition    */
+.smooth-transition {
+	@include smooth-transition;
+}
+.smoother-transition {
+	@include smoother-transition;
+}
+.smoothest-transition {
+	@include smoothest-transition;
+}
+
 /* /Global
 	========================================================================== */
 
@@ -1526,12 +1537,19 @@ article.page {
 
 .collapse-control-indicator {
 	transform-style: preserve-3d;
-	@extend .smooth-transition;
-	backface-visibility: hidden;
-	transform: scaleY(-1) translateZ(0);
-	@at-root .collapsed & {
-		transform: scaleY(1) translateZ(0);
+}
+[data-toggle="collapse"] {
+	&[aria-expanded="true"] {
+		.collapse-control-indicator {
+			&.fa-chevron-down {
+				transform: scaleY(-1) translateZ(0);
+			}
+		}
 	}
+}
+.collapse-control-indicator {
+	@include smoother-transition;
+	transform: scaleY(1) translateZ(0);
 }
 
 .xten-accordion {
