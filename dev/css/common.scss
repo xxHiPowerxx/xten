@@ -1,7 +1,7 @@
 @import "./variables";
 @import "./bootstrap-overrides";
 @import "./color-palette";
-@import "./typography.css";
+@import "./typography.scss";
 @import "./alerts.scss";
 @import "./buttons.scss";
 @import "./box-shadow.scss";
@@ -849,8 +849,8 @@ body input:focus {
 }
 
 .edit-link {
-	margin-top: 0.937em;
-	@include font-size-leading(25.6px, 1.5);
+	margin-top: .5em;
+	font-size: 2rem;
 	display: inline-block;
 }
 
