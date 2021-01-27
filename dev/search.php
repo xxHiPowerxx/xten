@@ -68,7 +68,7 @@ get_header(); ?>
 				?>
 			</div>
 		</div>
-	</main><!-- #primary -->
+	</main><!-- #main-->
 </div> <!-- end sizeContent -->
 
 <?php

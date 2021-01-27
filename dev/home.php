@@ -14,8 +14,10 @@ get_header(); ?>
 	<?php
 	$sidebar_location = get_theme_mod( 'sidebar_location', 'sidebar_right' );
 	$column           = '';
+	$article_col_size = '3';
 	if ( 'sidebar_none' !== $sidebar_location ) {
-		$column = '-xl-8';
+		$column           = '-xl-8';
+		$article_col_size = '6';
 	};
 	?>
 
@@ -45,7 +47,7 @@ get_header(); ?>
 							/* Start the Loop */
 							while ( have_posts() ) :
 								?>
-								<div class="article-container col-md-6">
+								<div class="article-container col-md-<?php echo $article_col_size; ?>">
 									<?php
 									the_post();
 
@@ -79,7 +81,7 @@ get_header(); ?>
 
 					?>
 
-				</main><!-- #primary -->
+				</main><!-- #main-->
 			</div> <!-- end column -->
 			<?php
 			/**
