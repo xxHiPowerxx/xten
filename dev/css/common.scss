@@ -870,11 +870,10 @@ body input:focus {
 
 .card-style {
 	background-color: $white;
-	box-shadow: 0 0.1rem 0.25rem rgba(15, 15, 15, 0.35);
-}
-
-.card-style.content-area {
-	padding: 1.5rem; //30px
+	@include card-style;
+	&.content-area {
+		padding: 1.5rem;
+	}
 }
 
 /*--------------------------------------------------------------
@@ -999,25 +998,42 @@ body.search-open {
 # Pagination
 --------------------------------------------------------------*/
 .pagination {
-	margin: 15px auto;
+	margin: 1.5rem auto;
+
+	.page-item {
+		font-size: 2.5rem;
+		line-height: 1.5;
+	}
 
 	a {
 		color: $dark-gray;
-		@include font-size-leading(32px, 1.5);
 
 		&:visted,
-		:hover {
+		#{$active} {
 			color: $dark-gray;
 		}
 	}
 
 	.current {
 		color: $dark-gray;
-		@include font-size-leading(32px, 1.5);
+		font-size: inherit;
+		@include card-style;
+		border-color: $dark-gray;
 
-		&:hover {
+		#{$active} {
 			color: $white;
 		}
+	}
+}
+.page-item {
+	.page-link {
+		font-size: inherit;
+		line-height: inherit;
+	}
+}
+.page-link {
+	#{$active} {
+		color: inherit;
 	}
 }
 /*--------------------------------------------------------------
@@ -1038,7 +1054,7 @@ $nav-link-bp: 475px;
 	> [class*="nav"] {
 		max-width: 35rem;
 		a {
-			@extend .card-style;
+			@include card-style;
 			transition: $smooth-transition;
 			padding: 1.5rem;
 			display: block;
