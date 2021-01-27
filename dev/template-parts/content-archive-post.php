@@ -97,7 +97,7 @@
 					<h5 class="post-category-title">Category:</h5>
 					<?php xten_post_categories(); ?>
 				</div>
-				<a href="<?php echo esc_url( get_the_permalink( $post->ID ) ); ?>" title="<?php echo get_the_title(); ?>" class="post-link xten-theme-color-bg material-btn"><i class="fas fa-arrow-right"></i><span class="hide-me"><?php echo get_the_title(); ?></span></a>
+				<a href="<?php echo esc_url( get_the_permalink( $post->ID ) ); ?>" title="<?php echo get_the_title(); ?>" class="btn btn-theme-style post-link"><i class="fas fa-arrow-right"></i><span class="hide-me"><?php echo get_the_title(); ?></span></a>
 			</div>
 			<?php
 			xten_edit_post_link();
