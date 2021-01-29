@@ -409,12 +409,15 @@ html {
 }
 
 .mobile-toggler {
-	padding: 0.5em;
+	padding: .5em;
+	@at-root .header-container & {
+		margin: -.5em;
+	}
 	font-size: 2.8rem;
 	color: $white;
 	background-color: transparent;
 	border: none;
-	@include smoother-transition;
+	@include smoothest-transition;
 	#{$active} {
 		transform: scale(1.1) translateZ(0);
 	}
