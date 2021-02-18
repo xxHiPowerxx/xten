@@ -206,3 +206,10 @@ $xten_header_height_m: 4.5rem;
 $xten_header_height_lg: 3.68rem;
 
 $active: "&:hover,&:focus,&.active";
+
+@mixin flex-margin( $margin ) {
+	margin: -$margin;
+	> * {
+		margin: $margin;
+	}
+}
