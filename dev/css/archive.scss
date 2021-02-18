@@ -5,9 +5,6 @@
 --------------------------------------------------------------*/
 
 
-.article-container:first-child {
-	margin-top: 0;
-}
 .archive-page > .featured-image {
 	&.main-featured-image {
 		position: relative;
@@ -45,30 +42,7 @@
 }
 
 .article-container {
-	padding-left: 0;
-	padding-right: 0;
-	margin-top: 1.5rem;
-	@media screen and (min-width: $vp_sm) {
-		/* First 2 .article-container(s)  */
-		&:nth-child(-n + 2) {
-			margin-top: 0;
-		}
-	}
-	@media screen and (min-width: $vp_sm) {
-		/* Odd .article-container(s) */
-		&:nth-child(2n + 1) {
-			.hentry {
-				margin-right: 1.5rem;
-			}
-		}
-	
-		/* Even .article-container(s) */
-		&:nth-child(2n) {
-			.hentry {
-				margin-left: 1.5rem;
-			}
-		}
-	}
+	padding: 1.5rem;
 	.hentry {
 		min-height: 100%;
 		padding: 0;
