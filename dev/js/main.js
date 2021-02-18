@@ -25,13 +25,35 @@
 
 		// Local Variables.
 		var windowLoaded = false,
+			$body = $('body'),
 			transitionEndEvent = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
 			$loadSplash = $('#load-splash'),
 			loadSplash = $loadSplash[0];
+			window.mouseDetected = window.mouseDetected || false;
+
+		function detectMouse() {
+			function checkPointer(mediaQueryItem) {
+				if (mediaQueryItem.matches) {
+					window.mouseDetected = true;
+					$body.addClass('mouse-detected');
+					$(window).trigger('mouseDetected');
+				} else {
+					window.mouseDetected = false;
+					$body.removeClass('mouse-detected');
+					$(window).trigger('mouseUndetected');
+				}
+				return mediaQueryItem;
+			}
+			var mediaRule = window.matchMedia('(pointer:fine)');
+			checkPointer(mediaRule);
+			mediaRule.addEventListener('change', function(){
+				checkPointer(this);
+			});
+		};
 
 		function detectMac() {
 			if (-1 != navigator.userAgent.indexOf('Mac OS X')) {
-				$('body').addClass('browser-mac');
+				$body.addClass('browser-mac');
 				return true;
 			}
 		}
@@ -44,9 +66,9 @@
 				/Edge\/\d./i.test(navigator.userAgent)
 			) {
 				if (/Edge\/\d./i.test(navigator.userAgent)) {
-					$('body').addClass('browser-edge');
+					$body.addClass('browser-edge');
 				} else {
-					$('body').addClass('browser-ie');
+					$body.addClass('browser-ie');
 				}
 				return true;
 			}
@@ -55,7 +77,7 @@
 		function detectIOS() {
 			var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 			if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-				$('body').addClass('os-ios');
+				$body.addClass('os-ios');
 				return 'iOS';
 			}
 		}
@@ -153,6 +175,7 @@
 			sizeContent();
 			alerts();
 			hideLoadSplash();
+			detectMouse();
 			makeCollapseAccessible();
 		}
 
