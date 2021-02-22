@@ -425,6 +425,25 @@ class XTenUtilities {
 				return $reuseable_block_content;
 			}
 		endif; // endif ( ! function_exists( 'xten_get_reuseable_block' ) ) :
+
+		if ( ! function_exists( 'xten_post_custom_css' ) ) :
+			function xten_post_custom_css( $css = null ) {
+				global $post;
+				if ( ! $post ) :
+					return;
+				endif;
+				if ( $css === null ) :
+					$css = esc_attr( get_field( 'post_custom_css' ) );
+				endif;
+
+				$min_css = xten_minify_css( $css );
+
+				$inline_style = 'post-' . $post->ID . '-css';
+				wp_register_style( $inline_style, false );
+				wp_enqueue_style( $inline_style );
+				wp_add_inline_style( $inline_style, $min_css );
+			}
+		endif; // endif ( ! function_exists( 'xten_post_custom_css' ) ) :
 	}
 }
 

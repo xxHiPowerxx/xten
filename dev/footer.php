@@ -9,6 +9,8 @@
  * @package xten
  */
 
+// Get Post Custom CSS if it exists.
+xten_post_custom_css();
 ?>
 		</div> <!-- /row -->
 	</div> <!-- /container -->
