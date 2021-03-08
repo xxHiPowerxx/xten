@@ -444,6 +444,31 @@ class XTenUtilities {
 				wp_add_inline_style( $inline_style, $min_css );
 			}
 		endif; // endif ( ! function_exists( 'xten_post_custom_css' ) ) :
+
+		if ( ! function_exists( 'xten_stringify_attrs' ) ) :
+			/**
+			 * Convert Attributes array into String
+			 * 
+			 * @param array $attr_array - The Attributes 
+			 * @param bool (optional) $sanitize - default = true - Optionally Sanitize Output. 
+			 * @return string - The Attributes as name-value pairs for HTML.
+			 */
+			function xten_stringify_attrs( $attr_array, $sanitize = true ) {
+				$attr_string = '';
+				foreach ($attr_array as $key => $value) :
+					if ( $value !== null ) :
+						if ( $sanitize ) :
+							$value = esc_attr( $value );
+						endif;
+						$space = $key !== $attr_array[0] ?
+							' ' :
+							null;
+						$attr_string.= "$space$key='$value'";
+					endif;
+				endforeach;
+				return $attr_string;
+			}
+		endif; // /endif ( ! function_exists( 'xten_stringify_attrs' ) ) :
 	}
 }
 
