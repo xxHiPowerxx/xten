@@ -207,9 +207,13 @@ $xten_header_height_lg: 3.68rem;
 
 $active: "&:hover,&:focus,&.active";
 
-@mixin flex-margin( $margin ) {
-	margin: -$margin;
+@mixin flex-margin( $units, $padding: false ) {
+	margin: -$units;
 	> * {
-		margin: $margin;
+		@if $padding {
+			padding: $units;
+		} @else {
+			margin: $units;
+		}
 	}
 }
