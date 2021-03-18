@@ -41,8 +41,16 @@
 	}
 }
 
+.archive-container {
+	@include flex-margin(3rem, true);
+	@media (min-width: $vp_sm) and (max-width: $vp_m - 1) {
+		@include flex-margin(1.5rem, true);
+	}
+	@media (min-width: $vp_xxl) {
+		@include flex-margin(6rem, true);
+	}
+}
 .article-container {
-	padding: 1.5rem;
 	.hentry {
 		min-height: 100%;
 		padding: 0;
