@@ -341,7 +341,9 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 .wp-block-separator {
 	margin-top: 4em;
 	margin-bottom: 4em;
-	width: 5em;
+	&:not(.is-style-wide) {
+		width: 5em;
+	}
 }
 
 /*--------------------------------------------------------------
