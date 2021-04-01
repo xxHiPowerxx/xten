@@ -1,11 +1,19 @@
 @import "./variables";
 
 :root {
-	font-size: 8px;
-
-	@media screen and (min-width: $vp_m) {
+	font-size: 2vmin;
+	@media (min-width: 400px) and (min-height: 400px) {
+		font-size: 8px;
+	}
+	@media (min-width: $vp_xs) {
 		font-size: 10px;
 	}
+	@media (min-width: $vp_xxl) {
+		font-size: 1vmin;
+	}
+}
+body {
+	font-size: 100%;
 }
 
 //@include font-size-leading(pixel val, line height val) converts px to rem and lineheight and includes fallback px selector as well.
