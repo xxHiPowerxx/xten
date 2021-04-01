@@ -549,7 +549,7 @@ template {
 
 @media (min-width: $vp_xxl) {
 	.container.container-ext {
-		max-width: 1748px;
+		max-width: 174.8rem;
 	}
 }
 
@@ -840,8 +840,12 @@ textarea {
 /* Global
 	 ========================================================================== */
 
-html {
-	min-width: 350px;
+body {
+	@media (min-width: 340px) {
+		min-width: 340px;
+		max-width: 100%;
+		overflow-x: hidden;
+	}
 }
 
 .content-wrapper {
