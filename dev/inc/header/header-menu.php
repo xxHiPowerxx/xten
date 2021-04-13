@@ -28,7 +28,7 @@ if ( $locations && isset( $locations[ $menu_name ] ) ) :
 			<div class="site-branding">
 				<?php	$home_url = esc_url( home_url( '/' ) ); ?>
 				<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
-					<div class="ctnr-custom-logo <?php echo $GLOBALS['xten-using-child-logo'] ? 'child-logo' : ''; ?>">
+					<div class="ctnr-custom-logo <?php echo $GLOBALS['xten-logo-type'] === 'child' ? 'child-logo' : ''; ?>">
 						<?php echo $GLOBALS['xten-site-logo'] ?>
 					</div>
 				</a>

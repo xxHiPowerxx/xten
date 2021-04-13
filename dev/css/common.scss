@@ -1306,38 +1306,15 @@ article.page {
 		rgba(0, 45, 115, 1) 0%,
 		rgba(0, 23, 58, 1) 100%
 	);
-	&:before {
-		content: "";
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		display: block;
-		top: 0;
-		left: 0;
-		background-repeat: no-repeat;
-		background-position: 20em 0;
-		background-size: auto 120%;
-		@media (min-width: $vp_sm) {
-			background-position: 30em 0;
-		}
-		@media (min-width: $vp_m) {
-			background-position: 175.9% -75px;
-			background-size: auto 130%;
-		}
-		@media (min-width: $vp_lg) {
-			background-position: 103.9% 15px;
-			background-size: auto 110%;
-		}
-	}
-	> * {
-		position: relative;
-	}
 	.footer-container {
 		padding-top: 6rem;
 		padding-bottom: 6rem;
 	}
 	.custom-logo-link {
 		display: inline-block;
+		&.logo-type-site-name {
+			font-size: 3rem;
+		}
 	}
 	.site-logo {
 		display: flex;
@@ -1346,34 +1323,6 @@ article.page {
 	}
 	.custom-logo {
 		max-width: 100%;
-	}
-	.site-name {
-		position: relative;
-		left: auto;
-		color: white;
-		font-size: 2rem;
-		line-height: 1;
-		font-family: "Times New Roman", Times, serif;
-		margin-top: auto;
-		margin-bottom: auto;
-		margin-left: 1em;
-		border-left: 1px solid white;
-		padding: 0.65em 0 0.65em 1em;
-		@media (min-width: $vp_xs) {
-			font-size: 2.6rem;
-		}
-		@media (min-width: $vp_sm) {
-			font-size: 3.312rem;
-			margin-left: 1em;
-			padding: 0.65em 0 0.65em 1em;
-		}
-		@media (min-width: $vp_m) {
-			margin-left: 1.3em;
-			padding: 0.65em 0 0.65em 1.5em;
-		}
-		& a:hover {
-			text-decoration: none;
-		}
 	}
 	/* Social Media Icons Styles */
 	.widget_sb_social_profile {

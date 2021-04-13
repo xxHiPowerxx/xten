@@ -241,6 +241,27 @@ function xten_customize_site_header_register( $wp_customize ) {
 		)
 	);
 
+	// Header Search Icon.
+	$wp_customize->add_setting(
+		'main_nav_search',
+		array(
+			'default'           => true,
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		'main_nav_search',
+		array(
+			'label'           => __( 'Header Search Icon', 'xten' ),
+			'section'         => 'xten_header_options',
+			'type'            => 'checkbox',
+			'description'     => __( 'Choose Whether Header Search Icon Shows or Not.', 'xten' ),
+		)
+	);
+	$wp_customize->get_setting( 'main_nav_search' )->transport = 'postMessage';
+	// /Header Search Icon.
+
 	// Header Main Nav End!
 }
 add_action( 'customize_register', 'xten_customize_site_header_register' );

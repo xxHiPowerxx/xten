@@ -430,11 +430,16 @@ $custom_logo_id                    = get_theme_mod( 'custom_logo' );
 $GLOBALS['xten-child-logo-path']   = get_stylesheet_directory() . '/header-logo.svg';
 $GLOBALS['xten-child-logo-exists'] = file_exists( $GLOBALS['xten-child-logo-path'] );
 if ( $custom_logo_id ) :
+	$GLOBALS['xten-logo-type'] = 'custom';
 	$GLOBALS['xten-site-logo'] = xten_get_custom_logo( $custom_logo_id );
 elseif ( $GLOBALS['xten-child-logo-exists'] ) :
-	$GLOBALS['xten-using-child-logo'] = true;
+	$GLOBALS['xten-logo-type'] = 'child';
 	$GLOBALS['xten-site-logo'] = file_get_contents( $GLOBALS['xten-child-logo-path'] );
+elseif ( $site_name = get_bloginfo() ) :
+	$GLOBALS['xten-logo-type'] = 'site_name';
+	$GLOBALS['xten-site-logo'] = "<div class=\"site-name\">$site_name</div>";
 else :
+	$GLOBALS['xten-logo-type'] = 'default';
 	require get_template_directory() . '/inc/header/xten-site-logo-svg.php';
 	$GLOBALS['xten-site-logo'] = $GLOBALS['xten-header-logo'];
 endif;

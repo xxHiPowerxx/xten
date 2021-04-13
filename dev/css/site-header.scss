@@ -61,11 +61,17 @@
 					.custom-logo-link {
 						display: inline-block;
 						max-width: 100%;
-						text-decoration: none;
 						flex: 1;
-						&:focus,
-						&:hover {
-							text-decoration: none;
+						&.logo-type-site-name {
+							font-size: 3rem;
+							line-height: 1;
+							color: $white; // TODO: Choose this color in Customizer.
+						}
+						&:not(.logo-type-site-name) {
+							&,
+							#{$active} {
+								text-decoration: none;
+							}
 						}
 
 						.custom-logo {
@@ -129,13 +135,6 @@
 
 .xten-header {
 	background-color: $gray;
-}
-
-.custom-logo {
-	.site-name {
-		color: $white;
-		border-color: $white;
-	}
 }
 
 .xten-logo-svg .mod-fill-elem {
