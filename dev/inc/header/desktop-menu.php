@@ -51,15 +51,18 @@ $logo_link_attrs   = xten_stringify_attrs( array(
 				$locations = get_nav_menu_locations();
 
 				if ( $locations && isset( $locations[ $menu_name ] ) && $locations[ $menu_name ] > 0 ) :
-					wp_nav_menu(
+					$nav_menu = wp_nav_menu(
 						array(
 							'theme_location' => 'primary',
 							'menu_id'        => 'desktop-menu',
 							'container'      => 'ul',
 							'depth'          => 2,
 							'walker'         => new XTen_Walker(),
+							// ensure that $nav_menu does not render until we tell it to.
+							'echo'           => false,
 						)
 					);
+					echo $nav_menu;
 				endif;
 				?>
 			</nav><!-- #site-navigation -->
@@ -73,12 +76,13 @@ $logo_link_attrs   = xten_stringify_attrs( array(
 					<i class="fas fa-search"></i>
 				</button>
 			<?php	endif; ?>
-
-			<button id="mobile-nav-open" class="mobile-toggler collapsed" type="button" data-toggle="collapse" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle navigation" tabindex="0" data-target="#mobile-sidebar">
-				<div class="mobile-toggler-icon">
-					<i class="fas fa-bars"></i>
-				</div>
-			</button>
+			<?php if ( $main_nav_search || $nav_menu ) : ?>
+				<button id="mobile-nav-open" class="mobile-toggler collapsed" type="button" data-toggle="collapse" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle navigation" tabindex="0" data-target="#mobile-sidebar">
+					<div class="mobile-toggler-icon">
+						<i class="fas fa-bars"></i>
+					</div>
+				</button>
+			<?php endif; ?>
 		</div><!-- /.header-container -->
 	</div><!-- /#mainNav -->
 	<?php	if ( $main_nav_search ) : ?>
