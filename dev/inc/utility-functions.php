@@ -433,7 +433,7 @@ class XTenUtilities {
 					return;
 				endif;
 				if ( $css === null ) :
-					$css = esc_attr( get_field( 'post_custom_css' ) );
+					$css = get_field( 'post_custom_css', false, false );
 				endif;
 
 				$min_css = xten_minify_css( $css );
