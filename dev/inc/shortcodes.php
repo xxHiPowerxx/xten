@@ -89,9 +89,9 @@ add_shortcode( 'text_mod', 'text_modification_shortcode_func' );
  */
 function get_site_phone_number_func( $atts = '' ) {
 	$site_phone_number      = esc_attr( get_theme_mod('site_phone_number', '') );
-	$site_phone_number_span = '<span class="desktop site-phone-number">' . $site_phone_number . '</span>';
+	$site_phone_number_span = '<span class="site-phone-number">' . $site_phone_number . '</span>';
 	if ( $atts !== '' ) :
-		$return_result = '<a class="anchor-site-phone-number" href="tel:' . $site_phone_number_span . '">' . $site_phone_number . '</a>';
+		$return_result = '<a class="anchor-site-phone-number desktop" href="tel:' . $site_phone_number . '">' . $site_phone_number_span . '</a>';
 	else :
 		$return_result = $site_phone_number_span;
 	endif;
