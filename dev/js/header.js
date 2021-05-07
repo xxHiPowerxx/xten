@@ -166,13 +166,28 @@ jQuery(document).ready(function($) {
 		}
 	}
 
+	window.scrolledPastHeader = false;
+	function triggerScrolledPastHeader() {
+		if ( window.scrolledPastHeader === false ) {
+			$(window).trigger('scrolledPastHeader');
+			window.scrolledPastHeader = true;
+		}
+	}
+	function triggerScrolledIntoHeader() {
+		if ( window.scrolledPastHeader === true ) {
+			$(window).trigger('scrolledIntoHeader');
+			window.scrolledPastHeader = false;
+		}
+	}
 	function scrolledPastHeader() {
 		$('.scrolledPastHeaderRef').each(function() {
 			var thisRect = this.getBoundingClientRect();
 			if ($(window).scrollTop() >= thisRect.height + this.offsetTop) {
 				body.addClass('scrolledPastHeader');
+				triggerScrolledPastHeader();
 			} else {
 				body.removeClass('scrolledPastHeader');
+				triggerScrolledIntoHeader();
 			}
 		});
 	}
