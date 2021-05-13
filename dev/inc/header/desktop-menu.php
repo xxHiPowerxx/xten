@@ -43,6 +43,13 @@ $logo_link_attrs   = xten_stringify_attrs( array(
 						<?php echo $GLOBALS['xten-site-logo']; ?>
 					</div>
 				</a>
+				<?php
+				$display_site_phone_number = get_theme_mod( 'xten_site_phone_number_with_logo', false );
+				if ( $display_site_phone_number ) :
+					$site_phone_number = get_site_phone_number_func( true );
+					echo $site_phone_number;
+				endif;
+				?>
 			</div><!-- .site-branding -->
 			<nav id="nav-mega-menu" class="main-navigation desktop-navigation navbar-nav ml-auto" aria-label="<?php esc_attr_e( 'Main menu', 'xten' ); ?>">
 				<?php
