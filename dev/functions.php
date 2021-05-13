@@ -425,11 +425,14 @@ function get_field_without_wpautop( $field_name, $option ) {
 /**
  * Figure Out Site Logo.
  */
-// If PNG has been chosen use that.
+$custom_logo_svg                   = get_theme_mod( 'custom_logo_svg' );
 $custom_logo_id                    = get_theme_mod( 'custom_logo' );
 $GLOBALS['xten-child-logo-path']   = get_stylesheet_directory() . '/header-logo.svg';
 $GLOBALS['xten-child-logo-exists'] = file_exists( $GLOBALS['xten-child-logo-path'] );
-if ( $custom_logo_id ) :
+if ( $custom_logo_svg ) :
+	$GLOBALS['xten-logo-type'] = 'custom_svg';
+	$GLOBALS['xten-site-logo'] = "<div class=\"custom-logo\">$custom_logo_svg</div>";
+elseif ( $custom_logo_id ) :
 	$GLOBALS['xten-logo-type'] = 'custom';
 	$GLOBALS['xten-site-logo'] = xten_get_custom_logo( $custom_logo_id );
 elseif ( $GLOBALS['xten-child-logo-exists'] ) :
@@ -441,7 +444,7 @@ elseif ( $site_name = get_bloginfo() ) :
 else :
 	$GLOBALS['xten-logo-type'] = 'default';
 	require get_template_directory() . '/inc/header/xten-site-logo-svg.php';
-	$GLOBALS['xten-site-logo'] = $GLOBALS['xten-header-logo'];
+	$GLOBALS['xten-site-logo'] = '<div class=\"custom-logo\">' . $GLOBALS['xten-header-logo'] . '</div>';
 endif;
 $home_url = esc_url( home_url( '/' ) );
 $GLOBALS['xten-site-logo-link'] = '<a href="' . $home_url . '" class="custom-logo-link" rel="home">' . $GLOBALS['xten-site-logo'] . '</a>';

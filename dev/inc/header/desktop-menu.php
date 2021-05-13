@@ -37,7 +37,6 @@ $logo_link_attrs   = xten_stringify_attrs( array(
 	<div class="navbar" id="mainNav">
 		<div class="container container-ext header-container">
 			<div class="site-branding">
-				<?php	$home_url = esc_url( home_url( '/' ) ); ?>
 				<a <?php echo $logo_link_attrs; ?>>
 					<span class="hide-me">Home Link</span>
 					<div class="ctnr-custom-logo">
