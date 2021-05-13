@@ -21,7 +21,7 @@
 /*--------------------------------------------------------------
 ## Main navigation menu
 --------------------------------------------------------------*/
-
+// TODO: Simplify these selectors for the love of all that is holy!
 .header-wrapper {
 	position: fixed;
 	width: 100%;
@@ -123,6 +123,29 @@
 				}
 			}
 		}
+	}
+}
+
+.site-branding {
+  display: flex;
+	align-items: center;
+	.anchor-site-phone-number {
+		font-size: 4.455vmin;
+		@media (min-width: 450px) {
+			font-size: 3rem;
+		}
+		@media (min-width: $vp_sm) {
+			font-size: 3.5rem;
+		}
+		margin-left: 1.5rem;
+		// TODO: Colors: make Border Left Dynamic.
+		// border-left: .2rem solid $secondary;
+		border-left: .2rem solid;
+		padding-left: 1.5rem;
+	}
+	.site-phone-number {
+		display: inline-block;
+		line-height: 1;
 	}
 }
 
