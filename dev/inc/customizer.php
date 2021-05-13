@@ -33,9 +33,35 @@ function xten_customize_register( $wp_customize ) {
 	}
 
 	/* Remove Sections */
-	$wp_customize->remove_section( 'colors' );
+	// $wp_customize->remove_section( 'colors' );
 	$wp_customize->remove_section( 'header_image' );
 	$wp_customize->remove_section( 'background_image' );
+
+	// Custom Logo SVG.
+	$wp_customize->add_setting(
+		'custom_logo_svg',
+		array(
+			'default'           => null,
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'custom_logo_svg',
+			array(
+				'priority'    => 8,
+				'label'       => __( 'Custom Logo SVG', 'xten' ),
+				'section'     => 'title_tagline',
+				'settings'    => 'custom_logo_svg',
+				'description' => __( 'The <b>Custom Logo SVG</b> will be shown in all places throughout the site where the <b>Logo</b> would normally be found, including the Header and the Footer. Place the <code>SVG Code</code> in the Textarea Below.', 'xten' ),
+				'type'        => 'textarea',
+			)
+		)
+	);
+	$wp_customize->get_setting( 'custom_logo_svg' )->transport = 'postMessage';
+	// /Custom Logo SVG.
 
 	// Site Phone Number.
 	$wp_customize->add_setting(
@@ -52,15 +78,16 @@ function xten_customize_register( $wp_customize ) {
 			'site_phone_number',
 			array(
 				'priority'    => 12,
-				'label'       => __( 'Site Phone Number', 'bolt-on' ),
+				'label'       => __( 'Site Phone Number', 'xten' ),
 				'section'     => 'title_tagline',
 				'settings'    => 'site_phone_number',
-				'description' => __( 'The Site Phone Number Will Be displayed in multple areas', 'bolt-on' ),
+				'description' => __( 'The Site Phone Number Will Be displayed in multple areas', 'xten' ),
 				'type'        => 'text',
 			)
 		)
 	);
 	$wp_customize->get_setting( 'site_phone_number' )->transport = 'postMessage';
+	// /Site Phone Number.
 }
 add_action( 'customize_register', 'xten_customize_register' );
 
