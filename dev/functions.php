@@ -546,3 +546,33 @@ function xten_wpseo_opengraph_image() {
 	endif; // if ( ! is_plugin_active($yoast_seo_plugin_file) ) :
 }
 add_action('wp_head', 'xten_wpseo_opengraph_image', 5);
+
+function xten_customize_universal_colors() {
+	$defaults = array(
+		'#000000',
+		'#ffffff',
+		'#dd3333',
+		'#dd9933',
+		'#eeee22',
+		'#1e73be',
+		'#8224e3',
+	);
+	$theme_colors = array(
+		get_theme_mod( 'xten_theme_color' , '#003366'),
+		get_theme_mod( 'xten_secondary_theme_color' , '#ffffff'),
+	);
+	$colors = array_replace( $defaults, $theme_colors );
+	$colors_s = json_encode( $colors );
+	?>
+	<script>
+		jQuery(document).ready(function($){
+			var colors = <?php echo $colors_s; ?>;
+			$.wp.wpColorPicker.prototype.options = {
+				palettes: colors
+			};
+		});
+	</script>
+	<?php
+}
+add_action('admin_print_footer_scripts', 'xten_customize_universal_colors', 0);
+add_action('customize_controls_print_footer_scripts', 'xten_customize_universal_colors', 0);
