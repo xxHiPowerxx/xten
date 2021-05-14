@@ -118,6 +118,58 @@ function xten_customize_theme_register( $wp_customize ) {
 	// /Theme Colors Separator.
 
 	// TODO: Place Defaults into a $GLOBALS, for a SINGLE SOURCE OF TRUTH.
+
+	// Black Theme Color.
+	$wp_customize->add_setting(
+		'xten_theme_color_black',
+		array(
+			'default'           => '#333333',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'xten_theme_color_black',
+			array(
+				'label'       => __( 'Black Theme Color', 'xten' ),
+				'section'     => 'theme_options',
+				'settings'    => 'xten_theme_color_black',
+				'priority'    => array_search('theme_colors', $priorities),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'xten_theme_color_black' )->transport = 'postMessage';
+	// /Black Theme Color.
+
+	// White Theme Color.
+	$wp_customize->add_setting(
+		'xten_theme_color_white',
+		array(
+			'default'           => '#ffffff',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'xten_theme_color_white',
+			array(
+				'label'       => __( 'White Theme Color', 'xten' ),
+				'section'     => 'theme_options',
+				'settings'    => 'xten_theme_color_white',
+				'priority'    => array_search('theme_colors', $priorities),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'xten_theme_color_white' )->transport = 'postMessage';
+	// /White Theme Color.
+
+	// Primary Theme Colors Group.
 	// Primary Theme Color.
 	$wp_customize->add_setting(
 		'xten_theme_color',
@@ -143,11 +195,63 @@ function xten_customize_theme_register( $wp_customize ) {
 	$wp_customize->get_setting( 'xten_theme_color' )->transport = 'postMessage';
 	// /Primary Theme Color.
 
+	// Primary Theme Color Light Variant.
+	$wp_customize->add_setting(
+		'xten_theme_color_light',
+		array(
+			'default'           => '#4e9ff1',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'xten_theme_color_light',
+			array(
+				'label'       => __( 'Primary Theme Color Light Variant', 'xten' ),
+				'section'     => 'theme_options',
+				'settings'    => 'xten_theme_color_light',
+				'priority'    => array_search('theme_colors', $priorities),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'xten_theme_color_light' )->transport = 'postMessage';
+	// /Primary Theme Color Light Variant.
+
+	// Primary Theme Color Dark Variant.
+	$wp_customize->add_setting(
+		'xten_theme_color_dark',
+		array(
+			'default'           => '#002347',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'xten_theme_color_dark',
+			array(
+				'label'       => __( 'Primary Theme Color Dark Variant', 'xten' ),
+				'section'     => 'theme_options',
+				'settings'    => 'xten_theme_color_dark',
+				'priority'    => array_search('theme_colors', $priorities),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'xten_theme_color_dark' )->transport = 'postMessage';
+	// /Primary Theme Color Dark Variant.
+	// /Primary Theme Colors Group.
+
+	// Secondary Theme Colors Group.
 	// Secondary Theme Color.
 	$wp_customize->add_setting(
 		'xten_secondary_theme_color',
 		array(
-			'default'           => '#ffffff',
+			'default'           => null,
 			'sanitize_callback' => 'sanitize_hex_color',
 			'transport'         => 'postMessage',
 		)
@@ -168,11 +272,11 @@ function xten_customize_theme_register( $wp_customize ) {
 	$wp_customize->get_setting( 'xten_secondary_theme_color' )->transport = 'postMessage';
 	// /Secondary Theme Color.
 
-	// Link Color.
+	// Secondary Theme Color Light Variant.
 	$wp_customize->add_setting(
-		'xten_link_color',
+		'xten_secondary_theme_color_light',
 		array(
-			'default'           => '#007db6',
+			'default'           => null,
 			'sanitize_callback' => 'sanitize_hex_color',
 			'transport'         => 'postMessage',
 		)
@@ -181,16 +285,43 @@ function xten_customize_theme_register( $wp_customize ) {
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(
 			$wp_customize,
-			'xten_link_color',
+			'xten_secondary_theme_color_light',
 			array(
-				'label'       => __( 'Link Color', 'xten' ),
+				'label'       => __( 'Secondary Theme Color Light Variant', 'xten' ),
 				'section'     => 'theme_options',
-				'settings'    => 'xten_link_color',
+				'settings'    => 'xten_secondary_theme_color_light',
 				'priority'    => array_search('theme_colors', $priorities),
 			)
 		)
 	);
-	$wp_customize->get_setting( 'xten_link_color' )->transport = 'postMessage';
+	$wp_customize->get_setting( 'xten_secondary_theme_color_light' )->transport = 'postMessage';
+	// /Secondary Theme Color Light Variant.
+
+	// Secondary Theme Color Light Variant.
+	$wp_customize->add_setting(
+		'xten_secondary_theme_color_dark',
+		array(
+			'default'           => null,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'xten_secondary_theme_color_dark',
+			array(
+				'label'       => __( 'Secondary Theme Color Light Variant', 'xten' ),
+				'section'     => 'theme_options',
+				'settings'    => 'xten_secondary_theme_color_dark',
+				'priority'    => array_search('theme_colors', $priorities),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'xten_secondary_theme_color_dark' )->transport = 'postMessage';
+	// /Secondary Theme Color Light Variant.
+	// /Secondary Theme Colors Group.
 	// /Theme Colors Group
 
 }
