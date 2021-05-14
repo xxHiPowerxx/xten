@@ -214,7 +214,7 @@ function xten_scripts() {
 
 	// Enqueue the header script.
 	wp_register_script( 'xten-accessible-mega-menu', get_theme_file_uri( '/lib/accessible-mega-menu/jquery-accessibleMegaMenu.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/lib/accessible-mega-menu/jquery-accessibleMegaMenu.js' ), true );
-	wp_enqueue_script( 'xten-header-padding', get_theme_file_uri( '/js/header-padding.js' ), array('jquery'), filemtime( get_template_directory() . '/js/header-padding.js' ), true );
+	wp_enqueue_script( 'xten-header-padding', get_theme_file_uri( '/js/header-padding.js' ), array('jquery' ), filemtime( get_template_directory() . '/js/header-padding.js' ), true );
 	wp_enqueue_script( 'xten-header', get_theme_file_uri( '/js/header.js' ), array( 'jquery', 'xten-vendor-bootstrap-js', 'xten-accessible-mega-menu' ), filemtime( get_template_directory() . '/js/header.js' ), true );
 	wp_localize_script(
 		'xten-header',
@@ -254,13 +254,13 @@ define( 'MY_ACF_URL', get_template_directory_uri() . '/lib/advanced-custom-field
 include_once( MY_ACF_PATH . 'acf.php' );
 
 // Customize the url setting to fix incorrect asset URLs.
-add_filter('acf/settings/url', 'my_acf_settings_url');
+add_filter('acf/settings/url', 'my_acf_settings_url' );
 function my_acf_settings_url( $url ) {
 	return MY_ACF_URL;
 }
 
 // (Optional) Hide the ACF admin menu item.
-// add_filter('acf/settings/show_admin', 'my_acf_settings_show_admin');
+// add_filter( 'acf/settings/show_admin', 'my_acf_settings_show_admin' );
 // function my_acf_settings_show_admin( $show_admin ) {
 //     return false;
 // }
@@ -388,7 +388,7 @@ function xten_json_load_point( $paths ) {
 
 // Check to see if xten Save fields file exsists and adds save point if it does.
 $save_acf_fields = get_template_directory() . '/save-acf-fields.php';
-$select_where_to_save_acf_field_groups = get_field('select_where_to_save_acf_field_groups', 'options');
+$select_where_to_save_acf_field_groups = get_field( 'select_where_to_save_acf_field_groups', 'options' );
 $select_where_to_save_acf_field_groups = $select_where_to_save_acf_field_groups !== null ? $select_where_to_save_acf_field_groups : 'parent';
 if ( $select_where_to_save_acf_field_groups === 'parent' ) :
 	if ( file_exists( $save_acf_fields ) ) :
@@ -416,9 +416,9 @@ add_filter( 'theme_page_templates', 'xten_remove_dev_template', 20, 3 );
  * Remove <p> Tags from ACF wysiwyg Fields.
  */
 function get_field_without_wpautop( $field_name, $option ) {
-	remove_filter('acf_the_content', 'wpautop');
+	remove_filter( 'acf_the_content', 'wpautop' );
 	$field = get_field( $field_name, $option );
-	add_filter('acf_the_content', 'wpautop');
+	add_filter( 'acf_the_content', 'wpautop' );
 	return $field;
 }
 
@@ -451,10 +451,10 @@ $GLOBALS['xten-site-logo-link'] = '<a href="' . $home_url . '" class="custom-log
 
 // Remove Archive Name From Archive Title if ACF Option is set to Yes In Category or Site Settings Page.
 function xten_remove_archive_name_from_title( $title ) {
-	$local_use_archive_title = get_field('local_use_archive_title', get_queried_object());
+	$local_use_archive_title = get_field( 'local_use_archive_title', get_queried_object() );
 	$use_archive_title       = $local_use_archive_title !== null ?
 															$local_use_archive_title :
-															get_field('global_use_archive_title', 'option');
+															get_field( 'global_use_archive_title', 'option' );
 	if ( $use_archive_title === false ) :
 			if ( is_category() ) {
 					$title = single_cat_title( '', false );
@@ -477,7 +477,7 @@ add_filter( 'get_the_archive_title', 'xten_remove_archive_name_from_title' );
  * @see https://www.advancedcustomfields.com/resources/acf-update_value/
  */
 function xten_set_category_featured_image( $value, $post_id, $field ){
-    if($value != ''){
+    if( $value != '' ){
 			//Add the value which is the image ID to the _thumbnail_id meta data for the current post
 			$term_id = str_replace( 'term_', '', $post_id );
 	    add_term_meta($term_id, '_thumbnail_id', $value);
@@ -558,10 +558,16 @@ function xten_customize_universal_colors() {
 		'#8224e3',
 	);
 	$theme_colors = array(
-		get_theme_mod( 'xten_theme_color' , '#003366'),
-		get_theme_mod( 'xten_secondary_theme_color' , '#ffffff'),
+		get_theme_mod( 'xten_theme_color_black', '#ffffff' ),
+		get_theme_mod( 'xten_theme_color_white', '#003366' ),
+		get_theme_mod( 'xten_theme_color', '#003366' ),
+		get_theme_mod( 'xten_theme_color_light', '#4e9ff1' ),
+		get_theme_mod( 'xten_theme_color_dark', '#002347' ),
+		get_theme_mod( 'xten_secondary_theme_color', null ),
+		get_theme_mod( 'xten_secondary_theme_color_light', null ),
+		get_theme_mod( 'xten_secondary_theme_color_dark', null ),
 	);
-	$colors = array_replace( $defaults, $theme_colors );
+	$colors = array_replace( $defaults, array_filter( $theme_colors ) );
 	$colors_s = json_encode( $colors );
 	?>
 	<script>
