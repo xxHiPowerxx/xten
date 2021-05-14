@@ -33,7 +33,7 @@ function xten_customize_register( $wp_customize ) {
 	}
 
 	/* Remove Sections */
-	// $wp_customize->remove_section( 'colors' );
+	$wp_customize->remove_section( 'colors' );
 	$wp_customize->remove_section( 'header_image' );
 	$wp_customize->remove_section( 'background_image' );
 
