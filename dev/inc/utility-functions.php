@@ -515,6 +515,18 @@ class XTenUtilities {
 				return  $component_id;
 			}
 		endif; // endif ( ! function_exists( 'xten_register_component_id' ) ) :
+
+		if ( ! function_exists( 'xten_get_color' ) ) :
+			/**
+			 * Get theme_mod color with global default
+			 * 
+			 * @param string - $handle - name of theme_mod and associated $GLOBALS['xten_default_colors'].
+			 * @return mixed - Value of theme_mod.
+			 */
+			function xten_get_color( $handle ) {
+				return get_theme_mod( $handle, $GLOBALS['xten_default_colors'][$handle] );
+			}
+		endif; // /endif ( ! function_exists( 'xten_get_color' ) ) :
 	}
 }
 

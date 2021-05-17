@@ -547,6 +547,20 @@ function xten_wpseo_opengraph_image() {
 }
 add_action('wp_head', 'xten_wpseo_opengraph_image', 5);
 
+function xten_define_default_colors() {
+	$GLOBALS['xten_default_colors'] = array(
+		'xten_theme_color_black'           => '#333333',
+		'xten_theme_color_white'           => '#ffffff',
+		'xten_theme_color'                 => '#003366',
+		'xten_theme_color_light'           => '#4e9ff1',
+		'xten_theme_color_dark'            => '#002347',
+		'xten_secondary_theme_color'       => null,
+		'xten_secondary_theme_color_light' => null,
+		'xten_secondary_theme_color_dark'  => null,
+	);
+}
+add_action( 'after_setup_theme', 'xten_define_default_colors' );
+
 function xten_customize_universal_colors() {
 	$defaults = array(
 		'#000000',
@@ -558,16 +572,16 @@ function xten_customize_universal_colors() {
 		'#8224e3',
 	);
 	$theme_colors = array(
-		get_theme_mod( 'xten_theme_color_black', '#ffffff' ),
-		get_theme_mod( 'xten_theme_color_white', '#003366' ),
-		get_theme_mod( 'xten_theme_color', '#003366' ),
-		get_theme_mod( 'xten_theme_color_light', '#4e9ff1' ),
-		get_theme_mod( 'xten_theme_color_dark', '#002347' ),
-		get_theme_mod( 'xten_secondary_theme_color', null ),
-		get_theme_mod( 'xten_secondary_theme_color_light', null ),
-		get_theme_mod( 'xten_secondary_theme_color_dark', null ),
+		xten_get_color( 'xten_theme_color_black' ),
+		xten_get_color( 'xten_theme_color_white' ),
+		xten_get_color( 'xten_theme_color' ),
+		xten_get_color( 'xten_theme_color_light' ),
+		xten_get_color( 'xten_theme_color_dark' ),
+		xten_get_color( 'xten_secondary_theme_color' ),
+		xten_get_color( 'xten_secondary_theme_color_light' ),
+		xten_get_color( 'xten_secondary_theme_color_dark' ),
 	);
-	$colors = array_replace( $defaults, array_filter( $theme_colors ) );
+	$colors   = array_replace( $defaults, array_filter( $theme_colors ) );
 	$colors_s = json_encode( $colors );
 	?>
 	<script>
