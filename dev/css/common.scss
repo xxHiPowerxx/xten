@@ -1114,6 +1114,7 @@ $nav-link-bp: 475px;
 	> [class*="nav"] {
 		max-width: 35rem;
 		a {
+			background-color: $white;
 			@include card-style;
 			transition: $smooth-transition;
 			padding: 1.5rem;
@@ -1427,7 +1428,7 @@ article.page {
 	.site-info {
 		margin-left: auto;
 		margin-right: auto;
-		color: white;
+		color: rgb(124, 117, 117);
 		font-family: Roboto, helvetica, arial, sans-serif;
 		text-align: left;
 		@media (min-width: $vp_xxs) {
