@@ -49,7 +49,7 @@ function xten_customize_theme_register( $wp_customize ) {
 	$wp_customize->add_setting(
 	'primary_font_family',
 	array(
-		'default'   => '{"type":"google","value":"cabin"}',
+		'default'   => '{"type":"google", "value":"opensans", "serif":"sans-serif"}',
 		'transport' => 'postMessage',
 	)
 	);
@@ -76,7 +76,7 @@ function xten_customize_theme_register( $wp_customize ) {
 	$wp_customize->add_setting(
 	'secondary_font_family',
 		array(
-			'default'   => '{"type":"google","value":"roboto"}',
+			'default'   => '{"type":"google", "value":"roboto", "serif":"sans-serif"}',
 			'transport' => 'postMessage',
 		)
 	);
@@ -92,7 +92,7 @@ function xten_customize_theme_register( $wp_customize ) {
 				'description' => __( 'Font-Family mostly used for Headings', 'xten' ),
 				'type'        => 'select',
 				'choices'     => $font_selection,
-				'priority'   => array_search('theme_fonts', $priorities),
+				'priority'    => array_search('theme_fonts', $priorities),
 			)
 		)
 	);
