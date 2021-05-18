@@ -11,8 +11,7 @@
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
 function xten_customize_theme_register( $wp_customize ) {
-	$pairing_selection = include get_template_directory() . '/inc/customizer/pairing-selection.php';
-	// var_dump( $pairing_selection );
+	$font_selection = include get_template_directory() . '/inc/customizer/font-selection.php';
 	/**
 	 * Theme options.
 	 */
@@ -24,80 +23,58 @@ function xten_customize_theme_register( $wp_customize ) {
 		)
 	);
 
-	// Font Pairing Selection
+	// Primary Font-Family.
+
 	$wp_customize->add_setting(
-		'font_pairings',
+	'primary_font_family',
+	array(
+		'default'   => '{"type":"google","value":"cabin"}',
+		'transport' => 'postMessage',
+	)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'primary_font_family',
+			array(
+				'label'       => __( 'Primary Font Family', 'xten' ),
+				'section'     => 'theme_options',
+				'settings'    => 'primary_font_family',
+				'description' => __( 'Font Family for Body, &lt;p&gt;, &lt;ul&gt;, &lt;ol&gt;, etc...', 'xten' ),
+				'type'        => 'select',
+				'choices'     => $font_selection,
+			)
+		)
+	);
+	$wp_customize->get_setting( 'primary_font_family' )->transport = 'postMessage';
+	// /Primary Font-Family.
+
+	// Secondary Font-Family.
+	$wp_customize->add_setting(
+	'secondary_font_family',
 		array(
-			'default'           => '{"heading":"roboto","heading_fallback":"Arial, sans-serif","body":"opensans","body_fallback":"Arial, sans-serif"}',
-			'transport'         => 'postMessage',
+			'default'   => '{"type":"google","value":"roboto"}',
+			'transport' => 'postMessage',
 		)
 	);
 
 	$wp_customize->add_control(
-		'font_pairings',
-		array(
-			'label'           => __( 'Font Pairings', 'xten' ),
-			'section'         => 'theme_options',
-			'type'            => 'radio',
-			'description'     => __( 'Six standardized font treatments are provided below as follows: The first font listed in each pairing is used for Headings H1-H3 while the second font is used for Headings H4-H6, P and Body tags.', 'xten' ),
-			'choices'         => $pairing_selection,
+		new WP_Customize_Control(
+			$wp_customize,
+			'secondary_font_family',
+			array(
+				'label'       => __( 'Secondary Font Family', 'xten' ),
+				'section'     => 'theme_options',
+				'settings'    => 'secondary_font_family',
+				'description' => __( 'Font-Family mostly used for Headings', 'xten' ),
+				'type'        => 'select',
+				'choices'     => $font_selection,
+			)
 		)
 	);
-
-	$wp_customize->get_setting( 'font_pairings' )->transport = 'postMessage';
-
-	// Theme Font-Family.
-
-	// $wp_customize->add_setting(
-	// 'theme_font_family',
-	// array(
-	// 'default'   => '{"type":"google","value":"cabin"}',
-	// 'transport' => 'postMessage',
-	// )
-	// );
-
-	// $wp_customize->add_control(
-	// new WP_Customize_Control(
-	// $wp_customize,
-	// 'theme_font_family',
-	// array(
-	// 'label'       => __( 'Theme Font Family', 'xten' ),
-	// 'section'     => 'theme_options',
-	// 'settings'    => 'theme_font_family',
-	// 'description' => __( 'Theme Body, P Font-Family', 'xten' ),
-	// 'type'        => 'select',
-	// 'choices'     => $font_selection,
-	// )
-	// )
-	// );
-	// $wp_customize->get_setting( 'theme_font_family' )->transport = 'postMessage';
-
-	// // Theme Heading Font-Family.
-	// $wp_customize->add_setting(
-	// 'theme_heading_font_family',
-	// array(
-	// 'default'   => '{"type":"google","value":"roboto"}',
-	// 'transport' => 'postMessage',
-	// )
-	// );
-
-	// $wp_customize->add_control(
-	// new WP_Customize_Control(
-	// $wp_customize,
-	// 'theme_heading_font_family',
-	// array(
-	// 'label'       => __( 'Theme Heading Font Family', 'xten' ),
-	// 'section'     => 'theme_options',
-	// 'settings'    => 'theme_heading_font_family',
-	// 'description' => __( 'Theme Heading Font-Family', 'xten' ),
-	// 'type'        => 'select',
-	// 'choices'     => $font_selection,
-	// )
-	// )
-	// );
-
-	// $wp_customize->get_setting( 'theme_heading_font_family' )->transport = 'postMessage';
-
+	$wp_customize->get_setting( 'secondary_font_family' )->transport = 'postMessage';
+	// /Secondary Font-Family.
 	// Theme Color.
 	$wp_customize->add_setting(
 		'xten_theme_color',

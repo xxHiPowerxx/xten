@@ -26,22 +26,22 @@ xten_post_custom_css();
 					<footer id="colophon" class="site-footer">
 						<div class="container container-ext footer-container">
 							<div class="footer-content-wrapper">
-								<div class="site-logo-wrapper">
-									<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo $site_name; ?>"><span class="hide-me">Home Link</span>
-										<div class="site-logo <?php echo file_exists( get_stylesheet_directory() . '/footer-logo.svg' ) ? 'child-logo' : ''; ?>">
-											<?php
-											if ( file_exists( get_stylesheet_directory() . '/footer-logo.svg' ) ) :
-												require get_stylesheet_directory() . '/footer-logo.svg';
-											else :
-												$xten_header_logo_svg = $GLOBALS['xten-header-logo'];
-												echo $xten_header_logo_svg;
-												?>
-												<?php if ( $site_name ) : ?>
-													<span class="site-name"><?php echo esc_attr( $site_name ); ?> </span>
-												<?php endif; ?>
-												<?php
-											endif;
-											?>
+							<div class="site-logo-wrapper">
+									<?php
+									$child_logo_type   = ' logo-type-' . str_replace( '_', '-', $GLOBALS['xten-logo-type'] );
+									$logo_link_classes = 'custom-logo-link' . $child_logo_type;
+									$logo_link_attrs   = xten_stringify_attrs( array(
+										'class'    => $logo_link_classes,
+										'href'     => esc_url( home_url( '/' ) ),
+										'rel'      => 'home',
+										'itemprop' => 'url',
+										'title'    => $site_name,
+									) );
+									?>
+									<a <?php echo $logo_link_attrs; ?>>
+										<span class="hide-me">Home Link</span>
+										<div class="ctnr-custom-logo">
+											<?php echo $GLOBALS['xten-site-logo']; ?>
 										</div>
 									</a>
 								</div>

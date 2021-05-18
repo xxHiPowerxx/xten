@@ -22,15 +22,26 @@ $style                     =
 wp_register_style( 'xten-site-header-inline-style', false );
 wp_enqueue_style( 'xten-site-header-inline-style', '', 'xten-content-css' );
 wp_add_inline_style( 'xten-site-header-inline-style', $style );
+
+$child_logo_type   = ' logo-type-' . str_replace( '_', '-', $GLOBALS['xten-logo-type'] );
+$logo_link_classes = 'custom-logo-link' . $child_logo_type;
+$logo_link_attrs   = xten_stringify_attrs( array(
+	'class'    => $logo_link_classes,
+	'href'     => esc_url( home_url( '/' ) ),
+	'rel'      => 'home',
+	'itemprop' => 'url',
+	'title'    => $site_name,
+) );
 ?>
 <header id="masthead" class="site-header new-site-header fixed-header">
 	<div class="navbar" id="mainNav">
 		<div class="container container-ext header-container">
 			<div class="site-branding">
 				<?php	$home_url = esc_url( home_url( '/' ) ); ?>
-				<a class="custom-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" itemprop="url" title="<?php echo esc_attr( $site_name ); ?>"><span class="hide-me">Home Link</span>
-					<div class="ctnr-custom-logo <?php echo $GLOBALS['xten-using-child-logo'] ? 'child-logo' : ''; ?>">
-						<?php echo $GLOBALS['xten-site-logo'] ?>
+				<a <?php echo $logo_link_attrs; ?>>
+					<span class="hide-me">Home Link</span>
+					<div class="ctnr-custom-logo">
+						<?php echo $GLOBALS['xten-site-logo']; ?>
 					</div>
 				</a>
 			</div><!-- .site-branding -->
@@ -40,15 +51,18 @@ wp_add_inline_style( 'xten-site-header-inline-style', $style );
 				$locations = get_nav_menu_locations();
 
 				if ( $locations && isset( $locations[ $menu_name ] ) && $locations[ $menu_name ] > 0 ) :
-					wp_nav_menu(
+					$nav_menu = wp_nav_menu(
 						array(
 							'theme_location' => 'primary',
 							'menu_id'        => 'desktop-menu',
 							'container'      => 'ul',
 							'depth'          => 2,
 							'walker'         => new XTen_Walker(),
+							// ensure that $nav_menu does not render until we tell it to.
+							'echo'           => false,
 						)
 					);
+					echo $nav_menu;
 				endif;
 				?>
 			</nav><!-- #site-navigation -->
@@ -62,12 +76,13 @@ wp_add_inline_style( 'xten-site-header-inline-style', $style );
 					<i class="fas fa-search"></i>
 				</button>
 			<?php	endif; ?>
-
-			<button id="mobile-nav-open" class="mobile-toggler collapsed" type="button" data-toggle="collapse" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle navigation" tabindex="0" data-target="#mobile-sidebar">
-				<div class="mobile-toggler-icon">
-					<i class="fas fa-bars"></i>
-				</div>
-			</button>
+			<?php if ( $main_nav_search || $nav_menu ) : ?>
+				<button id="mobile-nav-open" class="mobile-toggler collapsed" type="button" data-toggle="collapse" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="Toggle navigation" tabindex="0" data-target="#mobile-sidebar">
+					<div class="mobile-toggler-icon">
+						<i class="fas fa-bars"></i>
+					</div>
+				</button>
+			<?php endif; ?>
 		</div><!-- /.header-container -->
 	</div><!-- /#mainNav -->
 	<?php	if ( $main_nav_search ) : ?>
