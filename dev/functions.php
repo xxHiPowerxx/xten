@@ -561,6 +561,79 @@ function xten_define_default_colors() {
 }
 add_action( 'after_setup_theme', 'xten_define_default_colors' );
 
+function xten_define_global_theme_variables() {
+	$GLOBALS['xten_theme_colors'] = array(
+		'xten_theme_color_black'           => xten_get_color( 'xten_theme_color_black' ),
+		'xten_theme_color_white'           => xten_get_color( 'xten_theme_color_white' ),
+		'xten_theme_color'                 => xten_get_color( 'xten_theme_color' ),
+		'xten_theme_color_light'           => xten_get_color( 'xten_theme_color_light' ),
+		'xten_theme_color_dark'            => xten_get_color( 'xten_theme_color_dark' ),
+		'xten_secondary_theme_color'       => xten_get_color( 'xten_secondary_theme_color' ),
+		'xten_secondary_theme_color_light' => xten_get_color( 'xten_secondary_theme_color_light' ),
+		'xten_secondary_theme_color_dark'  => xten_get_color( 'xten_secondary_theme_color_dark' ),
+	);
+
+	// Fonts
+	$primary_font_family   = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"opensans", "serif":"sans-serif"}' ) );
+	$secondary_font_family = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"roboto", "serif":"sans-serif"}' ) );
+
+	// Primary Font.
+	$primary_font_fallback   = $primary_font_family->serif === 'sans-serif' ?
+		'Helvetica, Arial, sans-serif' :
+		'Times New Roman, serif';
+	$primary_font_path       = $primary_font_family->value;
+	$primary_font_w_fallback = $primary_font_family->value . ',' . $primary_font_fallback;
+
+	// Secondary Font
+	$secondary_font_fallback   = $secondary_font_family->serif === 'sans-serif' ?
+		'Helvetica, Arial, sans-serif' :
+		'Times New Roman, serif';
+	$secondary_font_path       = $secondary_font_family->value;
+	$secondary_font_w_fallback = $secondary_font_family->value . ',' . $secondary_font_fallback;
+
+	$GLOBALS['xten_theme_fonts'] = array(
+		'font_objects'   => array(
+			'primary_font_object'   => $primary_font_family,
+			'secondary_font_object' => $secondary_font_family,
+		),
+		'font_families'  => array(
+			'primary_font_family'   => $primary_font_w_fallback,
+			'secondary_font_family' => $secondary_font_w_fallback,
+		),
+	);
+}
+add_action( 'after_setup_theme', 'xten_define_global_theme_variables' );
+
+function xten_define_theme_css() {
+	$css           = '';
+	$css_variables = '';
+	// Colors
+	foreach( $GLOBALS['xten_theme_colors'] as $name => $value ) :
+		if ( $value === null ) :
+			continue;
+		endif;
+		$name_f        = xten_snake_to_dash( $name );
+		$name_bg       = str_replace( 'color', 'bg-color', $name_f );
+		$css           .= ".$name_f{color:$value;}";
+		$css           .= ".$name_bg{background-color:$value;}";
+		$css_variables .= "--$name_f:$value;";
+	endforeach;
+	// /Colors
+	// Fonts
+	foreach( $GLOBALS['xten_theme_fonts']['font_families'] as $name => $value ) :
+		$name_f         = xten_snake_to_dash( $name );
+		$css           .= '.' . $name_f . '{font-family:' . $value . ';}';
+		// var_dump('.' . $name_f . '{font-family:' . $value} . ')';
+		// die;
+		$css_variables .= '--' . $name_f . ':' . $value . ';';
+	endforeach;
+	// /Fonts
+
+	$css .= ':root{' . $css_variables . '}';
+	return $GLOBALS['xten_theme_css'] = $css;
+}
+add_action( 'after_setup_theme', 'xten_define_theme_css' );
+
 function xten_customize_universal_colors() {
 	$defaults = array(
 		'#000000',
@@ -571,16 +644,7 @@ function xten_customize_universal_colors() {
 		'#1e73be',
 		'#8224e3',
 	);
-	$theme_colors = array(
-		xten_get_color( 'xten_theme_color_black' ),
-		xten_get_color( 'xten_theme_color_white' ),
-		xten_get_color( 'xten_theme_color' ),
-		xten_get_color( 'xten_theme_color_light' ),
-		xten_get_color( 'xten_theme_color_dark' ),
-		xten_get_color( 'xten_secondary_theme_color' ),
-		xten_get_color( 'xten_secondary_theme_color_light' ),
-		xten_get_color( 'xten_secondary_theme_color_dark' ),
-	);
+	$theme_colors = $GLOBALS['xten_theme_colors'];
 	$colors   = array_replace( $defaults, array_filter( $theme_colors ) );
 	$colors_s = json_encode( $colors );
 	?>

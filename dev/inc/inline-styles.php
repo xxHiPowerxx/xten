@@ -22,7 +22,10 @@ function process_inline_css() {
 	// Theme Options.
 
 	// Header
-	$xten_header = array();
+	$xten_header = array(
+		'bg_color' => array(),
+	);
+	$header_styles = '';
 	// Header Background Color w/ Opacity.
 	$xten_header['bg_color']['value'] = esc_attr( get_theme_mod( 'xten_header_bg_color', '#2e528a' ) ) ? : 'transparent';
 	$xten_header['bg_color']['opacity'] = esc_attr( get_theme_mod( 'xten_header_bg_color_opacity', '100' ) );
@@ -79,10 +82,10 @@ function process_inline_css() {
 
 	// /Header
 	
-	$xten_link_color      = esc_attr( get_theme_mod( 'xten_link_color', '#007db6' ) );
-	$xten_theme_color     = esc_attr( get_theme_mod( 'xten_theme_color', '#003366' ) );
-	$primary_font_family  = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"opensans", "serif":"sans-serif"}' ) );
-	$secondary_font_family = json_decode( get_theme_mod( 'secondary_font_family', '{"heading":"roboto", "heading_fallback":"Arial, sans-serif"}' ) );
+	$xten_link_color           = esc_attr( get_theme_mod( 'xten_link_color', '#007db6' ) );
+	$xten_theme_color          = esc_attr( $GLOBALS['xten_theme_colors']['xten_theme_color'] );
+	$primary_font_w_fallback   = $GLOBALS['xten_theme_fonts']['font_families']['primary_font_family'];
+	$secondary_font_w_fallback = $GLOBALS['xten_theme_fonts']['font_families']['secondary_font_family'];
 
 
 	// /Header Mobile Nav.
@@ -90,8 +93,15 @@ function process_inline_css() {
 	$styles     = '';
 	$body_styles = '';
 
+	// $styles .= xten_define_theme_css();
+	$styles .= ! empty( $GLOBALS['xten_theme_css'] ) ?
+		 $GLOBALS['xten_theme_css'] :
+		 null;
+
 	// Load Fonts Used.
 	// Primary Font.
+	$primary_font_family   = $GLOBALS['xten_theme_fonts']['font_objects']['primary_font_object'];
+	$secondary_font_family = $GLOBALS['xten_theme_fonts']['font_objects']['secondary_font_object'];
 	$primary_font_fallback   = $primary_font_family->serif === 'sans-serif' ?
 		'Helvetica, Arial, sans-serif' :
 		'Times New Roman, serif';
@@ -103,7 +113,6 @@ function process_inline_css() {
 		'Times New Roman, serif';
 	$secondary_font_path       = $secondary_font_family->value;
 	$secondary_font_w_fallback = $secondary_font_family->value . ',' . $secondary_font_fallback;
-
 
 	if (
 		'playfairdisplay' == $secondary_font_path ||
@@ -139,7 +148,7 @@ function process_inline_css() {
 	$styles .= 'h1,.section-heading{' .
 		'font-family:' . $secondary_font_w_fallback . ';' .
 	'}' .
-	'.xten-theme-color-bg, .pagination .current, .search-form button:hover{' .
+	'.xten-theme-bg-color, .pagination .current, .search-form button:hover{' .
 		'background-color:' . $xten_theme_color . ';' .
 	'}' .
 	'body.user-is-tabbing *:focus, input:focus{' .
@@ -148,6 +157,12 @@ function process_inline_css() {
 	'}' .
 	'.xten-theme-color-text{' .
 		'color:' . $xten_theme_color . ';' .
+	'}' .
+	'a,a:active,a:focus,a:hover,.xten-link,.xten-link:active,.xten-link:focus,.xten-link:hover{' .
+		'color:' . $xten_link_color . ';' .
+	'}' .
+	'.site-branding	.anchor-site-phone-number{' .
+		'border-color:' . $xten_theme_color . ';' .
 	'}' .
 	'@media (min-width:' . $mobile_nav_breakpoint . 'px ){' .
 		'.desktop-navigation{' .
