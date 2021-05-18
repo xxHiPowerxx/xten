@@ -469,6 +469,52 @@ class XTenUtilities {
 				return $attr_string;
 			}
 		endif; // /endif ( ! function_exists( 'xten_stringify_attrs' ) ) :
+
+		if ( ! function_exists( 'xten_render_component' ) ) :
+			/**
+			 * Render Markup for Component.
+			 * Function will attempt to get required file to render Component
+			 * 
+			 * @param string $handle name of handle will be used to find correct file.
+			 * @param mixed array|string $post_id optional post or array of posts of data being passed.
+			 * @return string rendered markup as string.
+			 */
+			function xten_render_component( $handle, $post_id = null ) {
+				$comp_dir  = '/template-parts/components/';
+				$file_path = $dir . $comp_dir;
+				$file_name = 'component-' . $handle . '.php';
+				$comp_dir_file_name = $comp_dir . $file_name;
+				$full_file_path = file_exists( get_stylesheet_directory() . $comp_dir_file_name ) ?
+					get_stylesheet_directory() . $comp_dir_file_name :
+					get_template_directory() . $comp_dir_file_name;
+				if ( file_exists( $full_file_path ) ) :
+					require_once( $full_file_path );
+					$handle_snake_case = str_replace('-', '_', $handle );
+					$component_func = 'component_' . $handle_snake_case;
+					if ( function_exists( $component_func ) ) :
+						return $component_func( $post_id );
+					endif;
+				endif;
+			}
+		endif; // endif ( ! function_exists( 'xten_render_component' ) ) :
+
+		if ( ! function_exists( 'xten_register_component_id' ) ) :
+			/**
+			 * Create Component ID
+			 * Function Increments Id based on handle
+			 * @param string $handle name of handle.
+			 * @return int component id.
+			 */
+			function xten_register_component_id( $handle ) {
+				$GLOBALS['component_ids'][$handle] = $GLOBALS['component_ids'][$handle] !== null ?
+					$GLOBALS['component_ids'][$handle] :
+					0;
+					$GLOBALS['component_ids'][$handle] ++;
+					$component_id = $handle . '-' . $GLOBALS['component_ids'][$handle];
+
+				return  $component_id;
+			}
+		endif; // endif ( ! function_exists( 'xten_register_component_id' ) ) :
 	}
 }
 

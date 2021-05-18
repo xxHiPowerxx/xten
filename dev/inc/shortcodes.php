@@ -107,3 +107,17 @@ function post_title_shortcode(){
 	return get_the_title();
 }
 add_shortcode('post_title','post_title_shortcode');
+
+/**
+ * Social Media Icons List Shortcode
+ * Renders ALL Social Media Icons Configured on "Site Settings Page"
+ */
+function social_media_icons_list_shortcode( $atts = '' ) {
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	// Get Component Function.
+	return xten_render_component( 'social-media-icons-list' );
+}
+add_shortcode( 'social_media_icons_list', 'social_media_icons_list_shortcode' );
