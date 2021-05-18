@@ -460,7 +460,7 @@ class XTenUtilities {
 						if ( $sanitize ) :
 							$value = esc_attr( $value );
 						endif;
-						$space = $key !== $attr_array[0] ?
+						$space = $key !== reset($attr_array) ?
 							' ' :
 							null;
 						$attr_string.= "$space$key='$value'";
@@ -527,7 +527,33 @@ class XTenUtilities {
 				return get_theme_mod( $handle, $GLOBALS['xten_default_colors'][$handle] );
 			}
 		endif; // /endif ( ! function_exists( 'xten_get_color' ) ) :
+
+		if ( ! function_exists( 'xten_snake_to_camel' ) ) :
+			function xten_snake_to_camel( $string ) {
+				return lcfirst( str_replace( ' ', '', ucwords( str_replace( '_', ' ', $string ) ) ) );
+			}
+		endif; // endif ( ! function_exists( 'xten_snake_to_camel' ) ) :
+		
+		if ( ! function_exists( 'xten_camel_to_snake' ) ) :
+			function xten_camel_to_snake( $string ) {
+				return strtolower( preg_replace( '/(?<!^)[A-Z]/', '_$0', $string) );
+			}
+		endif; // endif ( ! function_exists( 'xten_camel_to_snake' ) ) :
+		
+		if ( ! function_exists( 'xten_snake_to_dash' ) ) :
+			function xten_snake_to_dash( $string ) {
+				return str_replace( '_', '-', $string );
+			}
+		endif; // endif ( ! function_exists( 'xten_snake_to_dash' ) ) :
+		
+		if ( ! function_exists( 'xten_dash_to_snake' ) ) :
+			function xten_dash_to_snake( $string ) {
+				return str_replace( '-', '_', $string );
+			}
+		endif; // endif ( ! function_exists( 'xten_dash_to_snake' ) ) :
+
 	}
+	
 }
 
 $ob = new XTenUtilities();
