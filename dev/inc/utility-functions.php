@@ -481,7 +481,6 @@ class XTenUtilities {
 			 */
 			function xten_render_component( $handle, $post_id = null ) {
 				$comp_dir  = '/template-parts/components/';
-				$file_path = $dir . $comp_dir;
 				$file_name = 'component-' . $handle . '.php';
 				$comp_dir_file_name = $comp_dir . $file_name;
 				$full_file_path = file_exists( get_stylesheet_directory() . $comp_dir_file_name ) ?
@@ -506,6 +505,9 @@ class XTenUtilities {
 			 * @return int component id.
 			 */
 			function xten_register_component_id( $handle ) {
+				$GLOBALS['component_ids'] = isset( $GLOBALS['component_ids'] ) ?
+					$GLOBALS['component_ids'] :
+					array();
 				$GLOBALS['component_ids'][$handle] = $GLOBALS['component_ids'][$handle] !== null ?
 					$GLOBALS['component_ids'][$handle] :
 					0;
