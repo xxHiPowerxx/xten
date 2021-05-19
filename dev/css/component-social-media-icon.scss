@@ -1,0 +1,18 @@
+@import 'variables';
+
+.component-social-media-icons-list {
+	display: flex;
+	@include flex-margin(.75rem);
+}
+.component-social-media-icon {
+	font-size: 3.9rem;
+	background-color: rgba($white, .8);
+	@include smoothest-transition;
+  min-width: 6.2rem;
+  text-align: center;
+	padding: 0.2692em;
+	&,
+	#{$active} {
+		text-decoration: none;
+	}
+}
