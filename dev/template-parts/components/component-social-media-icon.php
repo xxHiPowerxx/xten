@@ -8,18 +8,17 @@ function component_social_media_icon( $account ) {
 	// Enqueue Stylesheet.
 	$handle             = 'social-media-icon';
 	$component_handle   = 'component-' . $handle;
-	$component_css_path = '/assets/css/' . $component_handle . '.min.css';
+	$style_handle       = $component_handle . '-css';
+	$component_css_path = '/css/' . $component_handle . '.css';
 	wp_register_style(
-		$component_handle . '-css',
+		$style_handle,
 		get_theme_file_uri( $component_css_path ),
-		array(
-			'child-style',
-			'xten-base-style',
-		),
-		filemtime( get_stylesheet_directory() . $component_css_path ),
+		array(),
+		filemtime( get_template_directory() . $component_css_path ),
 		'all'
 	);
-	wp_enqueue_style( $component_handle . '-css' );
+	wp_enqueue_style( $style_handle );
+
 	$styles = '';
 
 	$component_id    = xten_register_component_id( $handle );
