@@ -508,11 +508,11 @@ class XTenUtilities {
 				$GLOBALS['component_ids'] = isset( $GLOBALS['component_ids'] ) ?
 					$GLOBALS['component_ids'] :
 					array();
-				$GLOBALS['component_ids'][$handle] = $GLOBALS['component_ids'][$handle] !== null ?
+				$GLOBALS['component_ids'][$handle] = ! empty( $GLOBALS['component_ids'][$handle] ) ?
 					$GLOBALS['component_ids'][$handle] :
 					0;
-					$GLOBALS['component_ids'][$handle] ++;
-					$component_id = $handle . '-' . $GLOBALS['component_ids'][$handle];
+				$GLOBALS['component_ids'][$handle] ++;
+				$component_id = $handle . '-' . $GLOBALS['component_ids'][$handle];
 
 				return  $component_id;
 			}
