@@ -1323,6 +1323,7 @@ article.page {
 		display: inline-block;
 		&.logo-type-site-name {
 			font-size: 3rem;
+			line-height: 1;
 		}
 	}
 	.site-logo {
@@ -1461,6 +1462,9 @@ article.page {
 		padding: 0;
 		width: 100%;
 		position: relative;
+		&:not(:first-child) {
+			margin-top: 3rem;
+		}
 		@media (min-width: $vp_xs) {
 			width: auto;
 			min-width: 50%;
