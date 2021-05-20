@@ -297,7 +297,7 @@ function xten_customize_theme_register( $wp_customize ) {
 	$wp_customize->get_setting( 'xten_secondary_theme_color_light' )->transport = 'postMessage';
 	// /Secondary Theme Color Light Variant.
 
-	// Secondary Theme Color Light Variant.
+	// Secondary Theme Color Dark Variant.
 	$wp_customize->add_setting(
 		'xten_secondary_theme_color_dark',
 		array(
@@ -312,7 +312,7 @@ function xten_customize_theme_register( $wp_customize ) {
 			$wp_customize,
 			'xten_secondary_theme_color_dark',
 			array(
-				'label'       => __( 'Secondary Theme Color Light Variant', 'xten' ),
+				'label'       => __( 'Secondary Theme Color Dark Variant', 'xten' ),
 				'section'     => 'theme_options',
 				'settings'    => 'xten_secondary_theme_color_dark',
 				'priority'    => array_search('theme_colors', $priorities),
@@ -320,7 +320,7 @@ function xten_customize_theme_register( $wp_customize ) {
 		)
 	);
 	$wp_customize->get_setting( 'xten_secondary_theme_color_dark' )->transport = 'postMessage';
-	// /Secondary Theme Color Light Variant.
+	// /Secondary Theme Color Dark Variant.
 	// /Secondary Theme Colors Group.
 	// /Theme Colors Group
 
