@@ -26,6 +26,7 @@ function xten_customize_theme_register( $wp_customize ) {
 	$priorities = array(
 		'theme_fonts',
 		'theme_colors',
+		'load_splash',
 	);
 
 	// Theme Fonts Group
@@ -323,6 +324,71 @@ function xten_customize_theme_register( $wp_customize ) {
 	// /Secondary Theme Color Dark Variant.
 	// /Secondary Theme Colors Group.
 	// /Theme Colors Group
+
+	// Load Splash Group
+	// Load Splash Separator.
+	$wp_customize->add_setting( 'xten_load_splash_group', array() );
+
+	$wp_customize->add_control(
+		new Prefix_Custom_Content(
+			$wp_customize,
+			'xten_load_splash_group',
+			array(
+				'section'    => 'theme_options',
+				'content'    => __( '<h2 style="font-size: 1.6em;">Load Splash</h2> <hr style="border-color: rgb(140, 140, 140);">', 'xten' ),
+				'priority'   => array_search('load_splash', $priorities),
+			)
+		)
+	);
+	// /Load Splash Separator.
+
+	// Display Load Splash.
+	$wp_customize->add_setting(
+		'xten_display_load_splash',
+		array(
+			'default'           => true,
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		'xten_display_load_splash',
+		array(
+			'priority'    => array_search('load_splash', $priorities),
+			'type'        => 'checkbox',
+			'label'       => __( 'Display Load Splash?', 'xten' ),
+			'section'     => 'theme_options',
+			'settings'    => 'xten_display_load_splash',
+		)
+	);
+	$wp_customize->get_setting( 'xten_display_load_splash' )->transport = 'postMessage';
+	// /Display Load Splash.
+
+	// Load Splash Background Color.
+	$wp_customize->add_setting(
+		'xten_load_splash_bg_color',
+		array(
+			'default'           => null,
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'xten_load_splash_bg_color',
+			array(
+				'label'       => __( 'Load Splash Background Color', 'xten' ),
+				'section'     => 'theme_options',
+				'settings'    => 'xten_load_splash_bg_color',
+				'priority'    => array_search('load_splash', $priorities),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'xten_load_splash_bg_color' )->transport = 'postMessage';
+	// /Load Splash Background Color.
+	// /Load Splash Group
 
 }
 add_action( 'customize_register', 'xten_customize_theme_register' );
