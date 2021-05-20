@@ -11,7 +11,6 @@
  * @param WP_Customize_Manager $wp_customize Site Header Customizer object.
  */
 function xten_customize_site_header_register( $wp_customize ) {
-	$font_selection = include get_template_directory() . '/inc/customizer/font-selection.php';
 	/**
 	 * Header options.
 	 */
