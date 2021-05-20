@@ -1635,8 +1635,8 @@ article.page {
 	}
 }
 
-body {
-	&.browser-ie {
+html {
+	&.browser-name-ie {
 		img {
 			&.object-fit-cover {
 				&.wide {
