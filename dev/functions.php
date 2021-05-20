@@ -644,8 +644,13 @@ function xten_customize_universal_colors() {
 		'#1e73be',
 		'#8224e3',
 	);
-	$theme_colors = $GLOBALS['xten_theme_colors'];
-	$colors   = array_replace( $defaults, array_filter( $theme_colors ) );
+	$theme_colors          = $GLOBALS['xten_theme_colors'];
+	$filtered_theme_colors = array_filter( $theme_colors );
+	$colors                = $defaults;
+	foreach ( $filtered_theme_colors as $key=>$value ) :
+		$index = array_search( $key, array_keys( $filtered_theme_colors ) );
+		$colors[$index] = $value;
+	endforeach;
 	$colors_s = json_encode( $colors );
 	?>
 	<script>
