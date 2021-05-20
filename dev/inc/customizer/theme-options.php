@@ -47,11 +47,11 @@ function xten_customize_theme_register( $wp_customize ) {
 
 	// Primary Font-Family.
 	$wp_customize->add_setting(
-	'primary_font_family',
-	array(
-		'default'   => '{"type":"google", "value":"opensans", "serif":"sans-serif"}',
-		'transport' => 'postMessage',
-	)
+		'primary_font_family',
+		array(
+			'default'   => '{"type":"google","value":"roboto","serif":"sans-serif"}',
+			'transport' => 'postMessage',
+		)
 	);
 
 	$wp_customize->add_control(
@@ -76,7 +76,7 @@ function xten_customize_theme_register( $wp_customize ) {
 	$wp_customize->add_setting(
 	'secondary_font_family',
 		array(
-			'default'   => '{"type":"google", "value":"roboto", "serif":"sans-serif"}',
+			'default'   => '{"type":"google","value":"opensans","serif":"sans-serif"}',
 			'transport' => 'postMessage',
 		)
 	);
