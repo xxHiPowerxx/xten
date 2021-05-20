@@ -1310,11 +1310,6 @@ article.page {
 
 .site-footer {
 	position: relative;
-	background: linear-gradient(
-		to bottom,
-		rgba(0, 45, 115, 1) 0%,
-		rgba(0, 23, 58, 1) 100%
-	);
 	.footer-container {
 		padding-top: 6rem;
 		padding-bottom: 6rem;
@@ -1347,6 +1342,7 @@ article.page {
 	}
 
 	// TODO: Remove .site-footer-content when updating Social Media Links to component-based.
+	// TODO: Test this on IBF child before removing.
 	.site-footer-content {
 		display: flex;
 		flex-flow: column;
@@ -1434,7 +1430,6 @@ article.page {
 	.site-info {
 		margin-left: auto;
 		margin-right: auto;
-		color: rgb(124, 117, 117);
 		font-family: Roboto, helvetica, arial, sans-serif;
 		text-align: left;
 		@media (min-width: $vp_xxs) {
@@ -1456,8 +1451,24 @@ article.page {
 }
 .footer-content-wrapper {
 	padding: 0;
-	color: white;
+	display: flex;
 	flex-direction: column;
+	@at-root [data-footer-orientation="footer-logo-beside"] & {
+		flex-direction: row;
+		align-items: center;
+		flex-wrap: wrap;
+		.footer-wrapper {
+			flex: 0 1 auto;
+		}
+		.site-logo-wrapper {
+			width: auto;
+			max-width: 100%;
+		}
+		> :not(:first-child) {
+			margin-top: 0;
+			margin-left: 3rem;
+		}
+	}
 	> * {
 		padding: 0;
 		width: 100%;
@@ -1478,19 +1489,9 @@ article.page {
 			margin-bottom: 0;
 		}
 	}
-	a,
-	a:hover {
-		color: white;
-	}
 }
 .site-info {
 	font-size: 1.4rem;
-	a {
-		&,
-		&:hover {
-			color: #cc9d0d;
-		}
-	}
 }
 
 /*   /Footer Styles   */
