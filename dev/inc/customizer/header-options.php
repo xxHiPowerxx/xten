@@ -42,7 +42,7 @@ function xten_customize_site_header_register( $wp_customize ) {
 		)
 	);
 	$wp_customize->get_setting( 'xten_site_phone_number_with_logo' )->transport = 'postMessage';
-	// /Display Site Phone Number Next to Logo.
+	// /Display Site Phone Number Next to Header Logo.
 
 	// Header Main Nav Start!
 	// Separator.

@@ -20,10 +20,17 @@
 
 	<body data-spy="scroll" data-target="#xten-scroll-nav" data-offset="100">
 
-		<div id="load-splash" class="loading xten-theme-bg-color">
-			<div class="load-splash-inner">
-				<?php echo $GLOBALS['xten-site-logo']; ?>
-			</div>
+		<div id="load-splash" class="loading">
+			<?php
+			$display_load_splash = get_theme_mod( 'xten_display_load_splash', true );
+			if ( $display_load_splash ) :
+				?>
+				<div class="load-splash-inner">
+					<?php echo $GLOBALS['xten-site-logo']; ?>
+				</div>
+				<?php
+			endif; // endif ( $display_load_splash ) :
+			?>
 		</div>
 		<div id="page" class="site">
 			<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'xten' ); ?></a>

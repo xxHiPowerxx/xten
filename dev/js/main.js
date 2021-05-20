@@ -28,7 +28,7 @@
 			$body = $('body'),
 			transitionEndEvent = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
 			$loadSplash = $('#load-splash'),
-			loadSplash = $loadSplash[0];
+			loadSplash = $loadSplash[0] || null;
 			window.mouseDetected = window.mouseDetected || false;
 
 		function detectMouse() {
