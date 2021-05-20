@@ -21,12 +21,21 @@ xten_post_custom_css();
 					$site_info_default = do_shortcode( wp_kses_post( '[site-info-default]' ) );
 					$site_info_content = ( ! $site_info_content ) ? $site_info_default : $site_info_content;
 
-					// Site Footer   //
+					//   Site Footer   //
+					$xten_footer_orientation = esc_attr ( xten_snake_to_dash( get_theme_mod( 'xten_footer_orientation', 'footer_logo_on_top' ) ) );
+					$xten_site_phone_number_with_logo_footer = esc_attr ( get_theme_mod( 'xten_site_phone_number_with_logo_footer', false ) );
+					$footer_attrs = array(
+						'id'                      => 'colophon',
+						'class'                   => 'site-footer',
+						'data-footer-orientation' => $xten_footer_orientation,
+						'data-display-site-phone-number' => $xten_site_phone_number_with_logo_footer,
+					);
+					$footer_attrs_s = xten_stringify_attrs( $footer_attrs );
 					?>
-					<footer id="colophon" class="site-footer">
+					<footer <?php echo $footer_attrs_s; ?>>
 						<div class="container container-ext footer-container">
 							<div class="footer-content-wrapper">
-							<div class="site-logo-wrapper">
+								<div class="site-logo-wrapper">
 									<?php
 									$child_logo_type   = ' logo-type-' . str_replace( '_', '-', $GLOBALS['xten-logo-type'] );
 									$logo_link_classes = 'custom-logo-link' . $child_logo_type;
@@ -44,6 +53,11 @@ xten_post_custom_css();
 											<?php echo $GLOBALS['xten-site-logo']; ?>
 										</div>
 									</a>
+									<?php
+									if ( $xten_site_phone_number_with_logo_footer ) :
+										echo get_site_phone_number_func(true);
+									endif;
+									?>
 								</div>
 								<?php
 								if (

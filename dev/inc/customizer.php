@@ -107,6 +107,11 @@ require get_template_directory() . '/inc/customizer/theme-options.php';
 require get_template_directory() . '/inc/customizer/header-options.php';
 
 /**
+ * Footer Options.
+ */
+require get_template_directory() . '/inc/customizer/footer-options.php';
+
+/**
  * Content Options.
  */
 require get_template_directory() . '/inc/customizer/content-options.php';

@@ -3,6 +3,7 @@
 /**
  * Process Inline CSS
  */
+// TODO: Organize this file to reflect the fields being pulled from the customizer.
 function process_inline_css() {
 
 	// Get the Stylesheet Directory.
@@ -18,6 +19,7 @@ function process_inline_css() {
 	$mobile_nav_secondary_accent_color = esc_attr( get_theme_mod( 'mobile_nav_secondary_accent_color', '#00488B' ) );
 	$mobile_nav_background_color       = esc_attr( get_theme_mod( 'mobile_nav_background_color', '#003366' ) );
 	$mobile_nav_dropdown_color         = esc_attr( get_theme_mod( 'mobile_nav_dropdown_color', '#003366' ) );
+	// /Header Mobile Nav.
 
 	// Theme Options.
 
@@ -81,19 +83,79 @@ function process_inline_css() {
 	// /Header Sub-Menu Item Color.
 
 	// /Header
-	
 	$xten_link_color           = esc_attr( get_theme_mod( 'xten_link_color', '#007db6' ) );
 	$xten_theme_color          = esc_attr( $GLOBALS['xten_theme_colors']['xten_theme_color'] );
 	$primary_font_w_fallback   = $GLOBALS['xten_theme_fonts']['font_families']['primary_font_family'];
 	$secondary_font_w_fallback = $GLOBALS['xten_theme_fonts']['font_families']['secondary_font_family'];
 
+	// Footer
+	$footer_styles = '';
 
-	// /Header Mobile Nav.
+	// Site Footer
+	$xten_footer = array(
+		'bg_color'   => array(),
+		'color'      => esc_attr( get_theme_mod( 'xten_footer_color', '#ffffff' ) ),
+		'link_color' => esc_attr( get_theme_mod( 'xten_footer_link_color', '#ffffff' ) ),
+	);
+	// Footer Background Color w/ Opacity.
+	$xten_footer['bg_color']['value'] = esc_attr( get_theme_mod( 'xten_footer_bg_color', '#2e528a' ) ) ? : 'transparent';
+	$xten_footer['bg_color']['opacity'] = esc_attr( get_theme_mod( 'xten_footer_bg_color_opacity', '100' ) );
+	$xten_footer['bg_color']['value'] = xten_color_opacity(
+		$xten_footer['bg_color']['value'],
+		$xten_footer['bg_color']['opacity']
+	);
+	// /Footer Background Color w/ Opacity.
+	$footer_styles .= xten_add_inline_style(
+		'.site-footer',
+		array(
+			'background-color' => $xten_footer['bg_color']['value'],
+			'color'            => $xten_footer['color'],
+		)
+	);
+	$footer_styles .= xten_add_inline_style(
+		'.site-footer a, .site-footer a:hover',
+		array(
+			'color' => $xten_footer['link_color'],
+		)
+	);
+	// /Site Footer
+
+	// Site Info
+	$xten_site_info = array(
+		'bg_color'   => array(),
+		'color'      => esc_attr( get_theme_mod( 'xten_site_info_color', '#ffffff' ) ),
+		'link_color' => esc_attr( get_theme_mod( 'xten_site_info_link_color', '#ffffff' ) ),
+	);
+
+	// Footer Background Color w/ Opacity.
+	$xten_site_info['bg_color']['value'] = esc_attr( get_theme_mod( 'xten_site_info_bg_color', '#333333' ) ) ? : 'transparent';
+	$xten_site_info['bg_color']['opacity'] = esc_attr( get_theme_mod( 'xten_site_info_bg_color_opacity', '100' ) );
+	$xten_site_info['bg_color']['value'] = xten_color_opacity(
+		$xten_site_info['bg_color']['value'],
+		$xten_site_info['bg_color']['opacity']
+	);
+	// /Footer Background Color w/ Opacity.
+
+	$footer_styles .= xten_add_inline_style(
+		'.site-info-footer-wrapper',
+		array(
+			'background-color' => $xten_site_info['bg_color']['value'],
+			'color'            => $xten_site_info['color'],
+		)
+	);
+	$footer_styles .= xten_add_inline_style(
+		'.site-info-footer-wrapper a, .site-info-footer-wrapper a:hover',
+		array(
+			'color' => $xten_site_info['link_color'],
+		)
+	);
+	// /Site Info
+	// /Footer
+
 	// Begin Style Tag.
 	$styles     = '';
 	$body_styles = '';
 
-	// $styles .= xten_define_theme_css();
 	$styles .= ! empty( $GLOBALS['xten_theme_css'] ) ?
 		 $GLOBALS['xten_theme_css'] :
 		 null;
@@ -194,6 +256,7 @@ function process_inline_css() {
 	'}';
 
 	$styles      .= $header_styles;
+	$styles      .= $footer_styles;
 
 	$body_styles .= 'body,button,input,optgroup,select,textarea{' .
 		'font-family:' . $primary_font_w_fallback . ';' .
@@ -270,6 +333,8 @@ function process_inline_css() {
 			'font-size:50px;' .
 		'}' .
 	'}';
+
+	$footer_styles = "";
 
 	// This function checks to make sure that JS is enabled
 	// and removes the "no-js" class from the HTML element.
