@@ -1,0 +1,43 @@
+{
+    "key": "group_6034155e1937a",
+    "title": "Advanced Post Fields",
+    "fields": [
+        {
+            "key": "field_6034156d1377c",
+            "label": "Custom CSS",
+            "name": "post_custom_css",
+            "type": "textarea",
+            "instructions": "Enter any Custom CSS here.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "!=",
+                "value": "services"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Advanced Post Fields such as Custom CSS, etc.",
+    "modified": 1614026149
+}

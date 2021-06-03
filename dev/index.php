@@ -64,7 +64,7 @@ get_header(); ?>
 				endif;
 				?>
 
-				</main><!-- #primary -->
+				</main><!-- #main-->
 			</div> <!-- end column -->
 			<?php
 			/**

@@ -88,13 +88,36 @@ add_shortcode( 'text_mod', 'text_modification_shortcode_func' );
  * Will Render Site Phone Number in Widget or Content.
  */
 function get_site_phone_number_func( $atts = '' ) {
-	$site_phone_number = esc_attr( get_theme_mod('site_phone_number', '') );
+	$site_phone_number      = esc_attr( get_theme_mod('site_phone_number', '') );
+	$site_phone_number_span = '<span class="site-phone-number">' . $site_phone_number . '</span>';
 	if ( $atts !== '' ) :
-		$return_result = '<a class="anchor-site-phone-number" href="tel:' . $site_phone_number . '"><span class="desktop site-phone-number">' . $site_phone_number . '</span></a>';
+		$return_result = '<a class="anchor-site-phone-number desktop" href="tel:' . $site_phone_number . '">' . $site_phone_number_span . '</a>';
 	else :
-		$return_result = $site_phone_number;
+		$return_result = $site_phone_number_span;
 	endif;
 	return $return_result;
 }
 add_shortcode( 'site_phone_number', 'get_site_phone_number_func' );
 add_filter( 'widget_text', 'do_shortcode' );
+
+/**
+ * Post Title Shortcode
+ */
+function post_title_shortcode(){
+	return get_the_title();
+}
+add_shortcode('post_title','post_title_shortcode');
+
+/**
+ * Social Media Icons List Shortcode
+ * Renders ALL Social Media Icons Configured on "Site Settings Page"
+ */
+function social_media_icons_list_shortcode( $atts = '' ) {
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	// Get Component Function.
+	return xten_render_component( 'social-media-icons-list' );
+}
+add_shortcode( 'social_media_icons_list', 'social_media_icons_list_shortcode' );

@@ -2,7 +2,7 @@
 /**
  * Default Page Template (Full-Width Blank)
  *
- * @package     XTen
+ * @package xten
  */
 
 get_header();

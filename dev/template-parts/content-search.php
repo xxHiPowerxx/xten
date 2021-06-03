@@ -24,8 +24,8 @@ $key       = esc_html( $s, 1 );
 	<?php
 	if ( get_the_excerpt() ) :
 		?>
-		<div class="entry-summary">
+		<p class="entry-summary">
 			<?php search_term( get_the_excerpt(), $key ); ?>
-		</div><!-- .entry-summary -->
+		</p><!-- .entry-summary -->
 	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->

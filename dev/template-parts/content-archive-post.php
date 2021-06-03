@@ -16,12 +16,9 @@
 			$image_id = get_post_thumbnail_id();
 			$wide_tall;
 			if ( $image_id ) :
-				// Optimal Width of Image is larger when Sidebar is not present.
 				$sidebar_location = get_theme_mod( 'sidebar_location', 'sidebar_right' );
-				$image_width = 'sidebar_none' !== $sidebar_location ?
-					450 :
-					690;
-				$size = xten_get_optimal_image_size( $image_id, array( 450, null ), array( 16, 9 ) );
+				$image_width = $sidebar_location !== 'sidebar_none' ? 450 : 540;
+				$size = xten_get_optimal_image_size( $image_id, array( $image_width, null ), array( 16, 9 ) );
 				if ( is_array( $size ) ) :
 					$wide_tall = xten_wide_tall_image( $size );
 				else :
@@ -102,7 +99,7 @@
 					<h5 class="post-category-title">Category:</h5>
 					<?php xten_post_categories(); ?>
 				</div>
-				<a href="<?php echo esc_url( get_the_permalink( $post->ID ) ); ?>" title="<?php echo get_the_title(); ?>" class="post-link xten-theme-color-bg material-btn"><i class="fas fa-arrow-right"></i><span class="hide-me"><?php echo get_the_title(); ?></span></a>
+				<a href="<?php echo esc_url( get_the_permalink( $post->ID ) ); ?>" title="<?php echo get_the_title(); ?>" class="btn btn-theme-style post-link"><i class="fas fa-arrow-right"></i><span class="hide-me"><?php echo get_the_title(); ?></span></a>
 			</div>
 			<?php
 			xten_edit_post_link();

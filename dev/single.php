@@ -37,7 +37,7 @@ get_header(); ?>
 					endwhile; // End of the loop.
 					?>
 
-				</main><!-- #primary -->
+				</main><!-- #main -->
 			</div> <!-- end column -->
 			<?php
 			/**

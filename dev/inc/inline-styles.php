@@ -20,19 +20,70 @@ function process_inline_css() {
 	$mobile_nav_dropdown_color         = esc_attr( get_theme_mod( 'mobile_nav_dropdown_color', '#003366' ) );
 
 	// Theme Options.
-	$xten_header_bg_color = esc_attr( get_theme_mod( 'xten_header_bg_color', '#2e528a' ) );
-	$xten_header_bg_color_opacity = esc_attr( get_theme_mod( 'xten_header_bg_color_opacity', '100' ) );
-	$xten_header_bg_color = $xten_header_bg_color_opacity > 100 ?
-		convert_hex_to_rgb(
-			$xten_header_bg_color,
-			$xten_header_bg_color_opacity
-		) :
-		$xten_header_bg_color;
+
+	// Header
+	$xten_header = array();
+	// Header Background Color w/ Opacity.
+	$xten_header['bg_color']['value'] = esc_attr( get_theme_mod( 'xten_header_bg_color', '#2e528a' ) ) ? : 'transparent';
+	$xten_header['bg_color']['opacity'] = esc_attr( get_theme_mod( 'xten_header_bg_color_opacity', '100' ) );
+	$xten_header['bg_color']['value'] = xten_color_opacity(
+		$xten_header['bg_color']['value'],
+		$xten_header['bg_color']['opacity']
+	);
+	$xten_header['bg_color']['selector'] = '.site-header, .mobile-sidebar-top';
+	$header_styles .= xten_add_inline_style(
+		$xten_header['bg_color']['selector'],
+		array(
+			'background-color' => $xten_header['bg_color']['value'],
+		)
+	);
+	// /Header Background Color w/ Opacity.
+
+	// Header Menu Item Color.
+	$xten_header['menu_item_color']['value'] = esc_attr( get_theme_mod( 'xten_header_menu_item_color', '#fff' ) ) ? : 'transparent';
+	$xten_header['menu_item_color']['selector'] = '.header-search-toggle i, .main-navigation>ul>li>a, .main-navigation>ul>li>span.dropdown,.mobile-toggler';
+	$header_styles .= xten_add_inline_style(
+		$xten_header['menu_item_color']['selector'],
+		array(
+			'color' => $xten_header['menu_item_color']['value'],
+		)
+	);
+	// /Header Menu Item Color.
+
+	// Header Sub-Menu Background Color w/ Opacity.
+	$xten_header['sub_menu_bg_color']['value'] = esc_attr( get_theme_mod( 'xten_header_sub_menu_bg_color', '#fff' ) ) ? : 'transparent';
+	$xten_header['sub_menu_bg_color']['opacity'] = esc_attr( get_theme_mod( 'xten_header_sub_menu_bg_color_opacity', '100' ) );
+	$xten_header['sub_menu_bg_color']['value'] = xten_color_opacity(
+		$xten_header['sub_menu_bg_color']['value'],
+		$xten_header['sub_menu_bg_color']['opacity']
+	);
+	$xten_header['sub_menu_bg_color']['selector'] = '.main-navigation .sub-menu a';
+	$header_styles .= xten_add_inline_style(
+		$xten_header['sub_menu_bg_color']['selector'],
+		array(
+			'background-color' => $xten_header['sub_menu_bg_color']['value'],
+		)
+	);
+	// /Header Sub-Menu Background Color w/ Opacity.
+
+	// Header Sub-Menu Item Color.
+	$xten_header['sub_menu_item_color']['value'] = esc_attr( get_theme_mod( 'xten_header_sub_menu_item_color', '#2e528a' ) ) ? : 'transparent';
+	$xten_header['sub_menu_item_color']['selector'] = '.main-navigation .sub-menu a';
+	$header_styles .= xten_add_inline_style(
+		$xten_header['sub_menu_item_color']['selector'],
+		array(
+			'color' => $xten_header['sub_menu_item_color']['value'],
+		)
+	);
+	// /Header Sub-Menu Item Color.
+
+	// /Header
 	
 	$xten_link_color      = esc_attr( get_theme_mod( 'xten_link_color', '#007db6' ) );
 	$xten_theme_color     = esc_attr( get_theme_mod( 'xten_theme_color', '#003366' ) );
-	$heading_default_font = json_decode( get_theme_mod( 'font_pairings', '{"heading":"roboto", "heading_fallback":"Arial, sans-serif"}' ) );
-	$body_default_font    = json_decode( get_theme_mod( 'font_pairings', '{"body":"opensans", "body_fallback":"Arial, sans-serif"}' ) );
+	$primary_font_family  = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"opensans", "serif":"sans-serif"}' ) );
+	$secondary_font_family = json_decode( get_theme_mod( 'secondary_font_family', '{"heading":"roboto", "heading_fallback":"Arial, sans-serif"}' ) );
+
 
 	// /Header Mobile Nav.
 	// Begin Style Tag.
@@ -40,40 +91,53 @@ function process_inline_css() {
 	$body_styles = '';
 
 	// Load Fonts Used.
-	// Theme Heading Default Font.
-	$headingPath             = $heading_default_font->heading;
-	$heading_font_w_fallback = $heading_default_font->heading . ',' . $heading_default_font->heading_fallback;
-	$bodyPath                = $body_default_font->body;
-	$body_font_w_fallback    = $body_default_font->body . ',' . $body_default_font->body_fallback;
+	// Primary Font.
+	$primary_font_fallback   = $primary_font_family->serif === 'sans-serif' ?
+		'Helvetica, Arial, sans-serif' :
+		'Times New Roman, serif';
+	$primary_font_path       = $primary_font_family->value;
+	$primary_font_w_fallback = $primary_font_family->value . ',' . $primary_font_fallback;
+	// Secondary Font
+	$secondary_font_fallback   = $secondary_font_family->serif === 'sans-serif' ?
+		'Helvetica, Arial, sans-serif' :
+		'Times New Roman, serif';
+	$secondary_font_path       = $secondary_font_family->value;
+	$secondary_font_w_fallback = $secondary_font_family->value . ',' . $secondary_font_fallback;
 
 
-	if ( 'playfairdisplay' == $headingPath || ( 'merriweather' == $headingPath && 'sourcesanspro' == $bodyPath ) ) {
-		$fontWeight = '-black.ttf';
-	} else {
-		$fontWeight = '-bold.ttf';
-	}
+	if (
+		'playfairdisplay' == $secondary_font_path ||
+		(
+			'merriweather' == $secondary_font_path &&
+			'sourcesanspro' == $primary_font_path
+		)
+	) :
+		$font_weight = '-black.ttf';
+	else :
+		$font_weight = '-bold.ttf';
+	endif;
 
 	$styles .= '@font-face{' .
-		'font-family:' . $heading_default_font->heading . ';' .
-		'font-weight:bold;' .
-		'src:url(' . $root_dir . '/assets/fonts/' . $headingPath . '/' . $headingPath . $fontWeight . ');' .
+		'font-family:' . $secondary_font_family->value . ';' .
+		'font-weight:700;' .
+		'src:url(' . $root_dir . '/assets/fonts/' . $secondary_font_path . '/' . $secondary_font_path . $font_weight . ');' .
 	'}';
 
 	$body_styles .= '@font-face{' .
-		'font-family:' . $body_default_font->body . ';' .
-		'font-weight:normal;' .
-		'src:url(' . $root_dir . '/assets/fonts/' . $bodyPath . '/' . $bodyPath . '.ttf' . ');' .
+		'font-family:' . $primary_font_family->value . ';' .
+		'font-weight:400;' .
+		'src:url(' . $root_dir . '/assets/fonts/' . $primary_font_path . '/' . $primary_font_path . '.ttf' . ');' .
 	'}';
 
 	$body_styles .= '@font-face{' .
-		'font-family:' . $body_default_font->body . ';' .
-		'font-weight:bold;' .
-		'src:url(' . $root_dir . '/assets/fonts/' . $bodyPath . '/' . $bodyPath . $fontWeight . ');' .
+		'font-family:' . $primary_font_family->value . ';' .
+		'font-weight:700;' .
+		'src:url(' . $root_dir . '/assets/fonts/' . $primary_font_path . '/' . $primary_font_path . $font_weight . ');' .
 	'}';
 
 	// Assign Styles.
 	$styles .= 'h1,.section-heading{' .
-		'font-family:' . $heading_font_w_fallback . ';' .
+		'font-family:' . $secondary_font_w_fallback . ';' .
 	'}' .
 	'.xten-theme-color-bg, .pagination .current, .search-form button:hover{' .
 		'background-color:' . $xten_theme_color . ';' .
@@ -114,21 +178,18 @@ function process_inline_css() {
 		'}' .
 	'}';
 
-	$header_styles = '.site-header, .mobile-sidebar-top {' .
-		'background-color:' . $xten_header_bg_color .
-	'}';
-
 	$styles      .= $header_styles;
 
 	$body_styles .= 'body,button,input,optgroup,select,textarea{' .
-		'font-family:' . $body_font_w_fallback . ';' .
+		'font-family:' . $primary_font_w_fallback . ';' .
 		'}' .
 		'h2,h3,h4,h5,h6,.xten-highlight-font{' .
-			'font-family:' . $body_font_w_fallback . ';' .
+			'font-family:' . $primary_font_w_fallback . ';' .
 		'}';
 
 	$load_splash_style = '#load-splash{' .
-		'position:fixed;height:100%;' .
+		'position:fixed;' .
+		'height:100%;' .
 		'width:100%;' .
 		'top:0;' .
 		'left:0;' .
@@ -180,6 +241,19 @@ function process_inline_css() {
 	'.load-splash-inner > *{' .
 		'max-height:50%;' .
 		'max-width:50%;' .
+	'}' .
+	'#load-splash .site-name{' .
+		'font-size:8.683vmin;' .
+		'color:white;' .
+		'text-align:center;' .
+		'max-width:100%;' .
+		'padding:.5em;' .
+		'max-height:none;' .
+	'}' .
+	'@media (min-width: 576px) {' .
+		'#load-splash .site-name{' .
+			'font-size:50px;' .
+		'}' .
 	'}';
 
 	// This function checks to make sure that JS is enabled

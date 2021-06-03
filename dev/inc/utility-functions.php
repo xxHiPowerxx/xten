@@ -200,7 +200,58 @@ class XTenUtilities {
 				return $size_array;
 			}
 		endif; // endif ( ! function_exists( 'xten_get_optimal_image_size' ) ) :
-		
+
+		if ( ! function_exists( 'xten_add_inline_style' ) ) :
+			/**
+			 * Add Inline Style
+			 *
+			 * @param string $selector - Selector for Style Rule
+			 * @param array $rule_array - opacity value from customizer.
+			 * @param string $validator - optional value for validation checking.
+			 * @param string|array $media_query - optional value for Media Query Breakpoint.
+			 * @return string $rule - The completed Style Rule.
+			 * 
+			 */
+			function xten_add_inline_style(
+				$selector,
+				$rule_array,
+				$validator = true,
+				$media_query = null
+			) {
+				if ( $validator ) :
+					$rule = $selector . '{';
+					foreach ( $rule_array as $property => $value ) :
+						$rule .=	$property . ':' . $value . ';';
+					endforeach;
+					$rule .= '}';
+					if ( $media_query ) :
+						// Check if $media_query is string or array.
+						if ( is_array( $media_query ) ) :
+							$media_string = '@media ';
+							foreach ( $media_query as $single_media_query ) :
+								// Check if first $single_media_query.
+								if ( $single_media_query === reset( $media_query ) ) :
+									$media_string .= '(' . $single_media_query . ')';
+								else :
+									$media_string .= ' and (' . $single_media_query . ')';
+								endif;
+							endforeach;
+							$media_string .= ') {' .
+								$rule .
+							'}';
+							$rule = $media_string;
+						endif;
+						if ( is_string( $media_query ) ) :
+						$rule = '@media (' . $media_query . ') {' .
+											$rule .
+										'}';
+						endif;
+					endif;
+					return $rule;
+				endif;
+			}
+		endif; // endif ( ! function_exists( 'xten_add_inline_style' ) ) :
+
 		if ( ! function_exists( 'xten_minify_css' ) ) :
 			require_once get_template_directory() . '/inc/minify-css.php';
 			$singleQuoteSequenceFinder = new QuoteSequenceFinder('\'');
@@ -244,6 +295,226 @@ class XTenUtilities {
 				return trim($css);
 			}
 		endif; // endif ( ! function_exists( 'xten_minify_css' ) ) :
+
+		if ( ! function_exists( 'xten_add_inline_style' ) ) :
+			/**
+			 * Add Inline Style
+			 *
+			 * @param string $selector - Selector for Style Rule
+			 * @param array $rule_array - opacity value from customizer.
+			 * @param string $validator - optional value for validation checking.
+			 * @param string|array $media_query - optional value for Media Query Breakpoint.
+			 * @return string $rule - The completed Style Rule.
+			 * 
+			 */
+			function xten_add_inline_style(
+				$selector,
+				$rule_array,
+				$validator = true,
+				$media_query = null
+			) {
+				if ( $validator ) :
+					$rule = $selector . '{';
+					foreach ( $rule_array as $property => $value ) :
+						$rule .=	$property . ':' . $value . ';';
+					endforeach;
+					$rule .= '}';
+					if ( $media_query ) :
+						// Check if $media_query is string or array.
+						if ( is_array( $media_query ) ) :
+							$media_string = '@media ';
+							foreach ( $media_query as $single_media_query ) :
+								// Check if first $single_media_query.
+								if ( $single_media_query === reset( $media_query ) ) :
+									$media_string .= '(' . $single_media_query . ')';
+								else :
+									$media_string .= ' and (' . $single_media_query . ')';
+								endif;
+							endforeach;
+							$media_string .= ') {' .
+								$rule .
+							'}';
+							$rule = $media_string;
+						endif;
+						if ( is_string( $media_query ) ) :
+						$rule = '@media (' . $media_query . ') {' .
+											$rule .
+										'}';
+						endif;
+					endif;
+					return $rule;
+				endif;
+			}
+		endif; // endif ( ! function_exists( 'xten_add_inline_style' ) ) :
+
+		if ( ! function_exists( 'xten_color_opacity' ) ) :
+			/**
+			 * Handle Color Opacity
+			 *
+			 * @param string $hex - Hex Color
+			 * @param string $opacity - Color Opaicty
+			 * @return string $color - hex/rgba depending on opacity provided.
+			 */
+			function xten_color_opacity( $hex, $opacity ) {
+				$color = $hex;
+				if (
+					$hex !== null ||
+					$hex !== 'transparent'
+				) :
+					$color = $opacity < 100 ?
+						convert_hex_to_rgb(
+							$hex,
+							$opacity
+						) :
+						$hex;
+				endif;
+				return $color;
+			}
+		endif; // endif ( ! function_exists( 'xten_color_opacity' ) ) :
+
+		if ( ! function_exists( 'xten_kses_post' ) ) :
+			/**
+			 * Sanitizes string but leaves support for SVGs.
+			 * @param string $string to be sanitized.
+			 * @return string Sanitized string with SVG support.
+			 */
+			function xten_kses_post( $string ) {
+				$kses_defaults = wp_kses_allowed_html( 'post' );
+				$svg_args = array(
+					'svg' => array(
+						'class' => true,
+						'aria-hidden' => true,
+						'aria-labelledby' => true,
+						'role' => true,
+						'xmlns' => true,
+						'width' => true,
+						'height' => true,
+						'viewbox' => true, // <= Must be lower case!
+					),
+					'g'     => array( 'fill' => true ),
+					'title' => array( 'title' => true ),
+					'path'  => array( 'd' => true, 'fill' => true, ),
+				);
+				$allowed_tags = array_merge( $kses_defaults, $svg_args );
+		
+				foreach ( $allowed_tags as $key=>$allowed_tag ) :
+					$tabindex = array(
+						'tabindex' => true,
+					);
+					$allowed_tags[$key] = array_merge( $allowed_tag, $tabindex );
+				endforeach;
+		
+				return wp_kses( $string, $allowed_tags );
+			}
+		endif; // endif ( ! function_exists( 'xten_kses_post' ) ) :
+		if ( ! function_exists( 'xten_get_reuseable_block' ) ) :
+			/**
+			 * Gets Reusable Block by String, Post Object, or ID.
+			 * @param string|object|int $block - Block Title, Block Post Object, or Block Post ID.
+			 * @return string Reusable Block Content.
+			 */
+			function xten_get_reuseable_block( $block ) {
+				if ( is_string( $block ) ) :
+					$reuseable_block = get_page_by_title( $block, OBJECT, 'wp_block' );
+				elseif ( is_object( $block ) || is_numeric( $block ) ) :
+					$reuseable_block = get_post( $block );
+				else:
+					return false;
+				endif;
+				$reuseable_block_content = apply_filters( 'the_content', $reuseable_block->post_content );
+				return $reuseable_block_content;
+			}
+		endif; // endif ( ! function_exists( 'xten_get_reuseable_block' ) ) :
+
+		if ( ! function_exists( 'xten_post_custom_css' ) ) :
+			function xten_post_custom_css( $css = null ) {
+				global $post;
+				if ( ! $post ) :
+					return;
+				endif;
+				if ( $css === null ) :
+					$css = get_field( 'post_custom_css', false, false );
+				endif;
+
+				$min_css = xten_minify_css( $css );
+
+				$inline_style = 'post-' . $post->ID . '-css';
+				wp_register_style( $inline_style, false );
+				wp_enqueue_style( $inline_style );
+				wp_add_inline_style( $inline_style, $min_css );
+			}
+		endif; // endif ( ! function_exists( 'xten_post_custom_css' ) ) :
+
+		if ( ! function_exists( 'xten_stringify_attrs' ) ) :
+			/**
+			 * Convert Attributes array into String
+			 * 
+			 * @param array $attr_array - The Attributes 
+			 * @param bool (optional) $sanitize - default = true - Optionally Sanitize Output. 
+			 * @return string - The Attributes as name-value pairs for HTML.
+			 */
+			function xten_stringify_attrs( $attr_array, $sanitize = true ) {
+				$attr_string = '';
+				foreach ($attr_array as $key => $value) :
+					if ( $value !== null ) :
+						if ( $sanitize ) :
+							$value = esc_attr( $value );
+						endif;
+						$space = $key !== $attr_array[0] ?
+							' ' :
+							null;
+						$attr_string.= "$space$key='$value'";
+					endif;
+				endforeach;
+				return $attr_string;
+			}
+		endif; // /endif ( ! function_exists( 'xten_stringify_attrs' ) ) :
+
+		if ( ! function_exists( 'xten_render_component' ) ) :
+			/**
+			 * Render Markup for Component.
+			 * Function will attempt to get required file to render Component
+			 * 
+			 * @param string $handle name of handle will be used to find correct file.
+			 * @param mixed array|string $post_id optional post or array of posts of data being passed.
+			 * @return string rendered markup as string.
+			 */
+			function xten_render_component( $handle, $post_id = null ) {
+				$comp_dir  = '/template-parts/components/';
+				$file_path = $dir . $comp_dir;
+				$file_name = 'component-' . $handle . '.php';
+				$comp_dir_file_name = $comp_dir . $file_name;
+				$full_file_path = file_exists( get_stylesheet_directory() . $comp_dir_file_name ) ?
+					get_stylesheet_directory() . $comp_dir_file_name :
+					get_template_directory() . $comp_dir_file_name;
+				if ( file_exists( $full_file_path ) ) :
+					require_once( $full_file_path );
+					$handle_snake_case = str_replace('-', '_', $handle );
+					$component_func = 'component_' . $handle_snake_case;
+					if ( function_exists( $component_func ) ) :
+						return $component_func( $post_id );
+					endif;
+				endif;
+			}
+		endif; // endif ( ! function_exists( 'xten_render_component' ) ) :
+
+		if ( ! function_exists( 'xten_register_component_id' ) ) :
+			/**
+			 * Create Component ID
+			 * Function Increments Id based on handle
+			 * @param string $handle name of handle.
+			 * @return int component id.
+			 */
+			function xten_register_component_id( $handle ) {
+				$GLOBALS['component_ids'][$handle] = $GLOBALS['component_ids'][$handle] !== null ?
+					$GLOBALS['component_ids'][$handle] :
+					0;
+					$GLOBALS['component_ids'][$handle] ++;
+					$component_id = $handle . '-' . $GLOBALS['component_ids'][$handle];
+
+				return  $component_id;
+			}
+		endif; // endif ( ! function_exists( 'xten_register_component_id' ) ) :
 	}
 }
 

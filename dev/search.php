@@ -12,7 +12,7 @@ get_header(); ?>
 <div class="sizeContent container container-ext main-container">
 	<main id="primary" class="content-area site-main card-style">
 		<div class="row">
-			<div class="col-12 col-md-8 mx-auto search-wrapper">
+			<div class="col-12 col-md-6 mx-auto search-wrapper">
 				<?php
 				wp_print_styles( array( 'xten-search-css' ) );
 				if ( have_posts() ) :
@@ -68,7 +68,7 @@ get_header(); ?>
 				?>
 			</div>
 		</div>
-	</main><!-- #primary -->
+	</main><!-- #main-->
 </div> <!-- end sizeContent -->
 
 <?php
