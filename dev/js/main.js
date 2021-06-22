@@ -170,6 +170,21 @@
 			});
 		}
 
+		// TODO: create a naming convention for this instead of (or in addition to)
+		// finding SPECIFIC Link tags.
+		// EG: var $linkTags = $('[id*="before-child"]')
+		function movePreloadedLinkToPreloadLocation() {
+			var $preloadTags = $('link[rel="preload"]');
+			$preloadTags.each(function(){
+				var thisId = $(this).attr('id'),
+					styleSheetId = thisId.replace('preload', 'css'),
+					$styleSheetTag = $('[id="' + styleSheetId + '"]');
+				if ( $styleSheetTag.length ) {
+					$styleSheetTag.detach().insertAfter($(this));
+				}
+			});
+		}
+
 		function readyFuncs() {
 			detectPlatform();
 			sizeContent();
@@ -177,6 +192,7 @@
 			hideLoadSplash();
 			detectMouse();
 			makeCollapseAccessible();
+			movePreloadedLinkToPreloadLocation();
 		}
 
 		/**

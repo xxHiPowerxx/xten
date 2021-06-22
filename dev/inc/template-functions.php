@@ -125,7 +125,8 @@ function xten_add_body_style() {
 	}
 
 }
-add_action( 'wp_head', 'xten_add_body_style' );
+// add_action( 'wp_head', 'xten_add_body_style' );
+add_action( 'wp_enqueue_scripts', 'xten_add_body_style', 2 );
 
 /**
  * Add dropdown symbol to nav menu items with children.

@@ -180,7 +180,7 @@ function xten_styles() {
 	wp_register_style( 'xten-header-css', get_theme_file_uri( '/css/xten-header.css' ), array(), filemtime( get_template_directory() . '/css/xten-header.css' ) );
 	wp_enqueue_style( 'xten-site-header-css', get_theme_file_uri( '/css/site-header.css' ), array( 'xten-base-style','xten-header-css' ), filemtime( get_template_directory() . '/css/site-header.css' ) );
 }
-add_action( 'wp_enqueue_scripts', 'xten_styles' );
+add_action( 'wp_enqueue_scripts', 'xten_styles', 1 );
 
 /**
  * Admin Styles.
