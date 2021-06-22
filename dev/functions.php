@@ -8,6 +8,11 @@
  */
 
 /**
+ * Utility Functions.
+ */
+require get_template_directory() . '/inc/utility-functions.php';
+
+/**
  * Sets up theme defaults and registers support for various WordPress features.
  *
  * Note that this function is hooked into the after_setup_theme hook, which
@@ -145,6 +150,8 @@ add_action( 'enqueue_block_editor_assets', 'xten_gutenberg_styles' );
  * Enqueue styles.
  */
 function xten_styles() {
+	// Vendor
+
 	// Bootstrap.
 	$handle = 'xten-vendor-bootstrap-css';
 	if ( ! wp_style_is( $handle, 'registered' ) ) {
@@ -158,8 +165,37 @@ function xten_styles() {
 	// Fontawesome.
 	$handle = 'xten-vendor-fontawesome-css';
 	if ( ! wp_style_is( $handle, 'registered' ) ) {
-		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), ' 5.7.1', 'all' );
+		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), '5.7.1', 'all' );
 	}
+
+	// Fancybox Vendor
+	// Fancybox JS
+	$fancybox_version = '3.5.7';
+	$handle = 'xten-vendor-fancybox-js';
+	if ( ! wp_script_is( $handle, 'registered' ) ) {
+		wp_register_script( $handle, get_theme_file_uri( '/assets/vendor/fancybox/jquery.fancybox.min.js' ), array( 'jquery' ), $fancybox_version, true );
+	}
+	// Fancybox CSS
+	$handle = 'xten-vendor-fancybox-css';
+	if ( ! wp_style_is( $handle, 'registered' ) ) {
+		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fancybox/jquery.fancybox.min.css' ), array(), $fancybox_version, 'all' );
+	}
+
+	// /Vendor
+
+	// Shared
+
+	$handle = 'xten-fancybox-js';
+	$file_path = '/js/shared/xten-fancybox.js';
+	wp_register_script(
+		$handle,
+		get_theme_file_uri( $file_path ),
+		array( 'jquery', 'xten-vendor-fancybox-js' ),
+		xten_filemtime( get_template_directory() . $file_path ),
+		true
+	);
+
+	// /Shared
 
 	// Enqueue main stylesheet.
 	wp_enqueue_style( 'xten-base-style', get_theme_file_uri( '/css/common.css' ), array( 'xten-vendor-bootstrap-css', 'xten-vendor-fontawesome-css' ), filemtime( get_template_directory() . '/css/common.css' ) );
@@ -293,11 +329,6 @@ require get_template_directory() . '/inc/widget-area.php';
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/pluggable/custom-header.php';
-
-/**
- * Utility Functions.
- */
-require get_template_directory() . '/inc/utility-functions.php';
 
 /**
  * Custom template tags for this theme.
