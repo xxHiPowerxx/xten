@@ -928,7 +928,12 @@ body input:focus {
 /* /Global
 	========================================================================== */
 
+:root {
+	--card-style: #{$card-style};
+}
 .card-style {
+	// TODO: Remove Background Color and Test.
+	// Background Color could be defined with bootstrap's .bg-white;
 	background-color: $white;
 	@include card-style;
 	&.content-area {

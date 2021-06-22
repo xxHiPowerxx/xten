@@ -198,6 +198,7 @@ $smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 $card-style: 0 0.1rem 0.25rem rgba(15, 15, 15, 0.35);
 @mixin card-style {
 	box-shadow: $card-style;
+	box-shadow: var(--card-style);
 }
 
 /*-----EVERYTHING ELSE-----*/
