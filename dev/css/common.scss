@@ -29,6 +29,7 @@
 # CUSTOM
 # Color
 # Footer
+# Wordpress Block Styles
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -551,6 +552,13 @@ template {
 	.container.container-ext {
 		max-width: 174.8rem;
 	}
+	.container,
+	.container-lg,
+	.container-md,
+	.container-sm,
+	.container-xl {
+		max-width: 114rem;
+	}
 }
 
 /*   /Container EXT   */
@@ -681,12 +689,15 @@ hr {
 	background-color: $light-gray;
 	border: 0;
 	height: 1px;
-	margin-bottom: 1.5em;
 }
 
+hr,
 ul,
 ol {
 	margin-bottom: 1.5em;
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 ul {
@@ -1650,5 +1661,61 @@ body {
 		.hide-if-no-mouse {
 			display: none;
 		}
+	}
+}
+
+// /*--------------------------------------------------------------
+// # Wordpress Block Styles
+// --------------------------------------------------------------*/
+.img-card-style {
+	figure {
+		box-shadow: 0 .5rem .5rem rgba($black,.5);
+	}
+}
+.wp-block-media-text {
+	&.has-media-on-the-right {
+		.wp-block-media-text__content {
+			padding-left: 0;
+		}
+	}
+	&:not(.has-media-on-the-right) {
+		.wp-block-media-text__content {
+			padding-right: 0;
+		}
+	}
+}
+.wp-block-media-text {
+	&.float-img {
+		display: block;
+		&.is-image-fill {
+			.wp-block-media-text__media{
+				width: 50%;
+			}
+		}
+		&.has-media-on-the-right {
+			.wp-block-media-text__media {
+				float: right;
+				margin-left: 3rem;
+			}
+			.wp-block-media-text__content {
+				padding-right: 0;
+			}
+		}
+		&:not(.has-media-on-the-right) {
+			.wp-block-media-text__media {
+				float: left;
+				margin-right: 3rem;
+			}
+			.wp-block-media-text__content {
+				padding-left: 0;
+			}
+		}
+		.wp-block-media-text__media {
+			max-width: 50%;
+			margin-bottom: 3rem;
+		}
+	}
+	&:not(:last-child) {
+		margin-bottom: 2.75rem;
 	}
 }
