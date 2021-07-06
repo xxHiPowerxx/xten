@@ -1,0 +1,62 @@
+{
+    "key": "group_60b9046d27755",
+    "title": "Posts Page Fields",
+    "fields": [
+        {
+            "key": "field_60b9049e1c7e7",
+            "label": "Before Posts Archive",
+            "name": "before_posts_archive",
+            "type": "wysiwyg",
+            "instructions": "Enter any Text or HTML the place BEFORE the Posts Archive.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 1
+        },
+        {
+            "key": "field_60b9050e1c7e8",
+            "label": "After Posts Archive",
+            "name": "after_posts_archive",
+            "type": "wysiwyg",
+            "instructions": "Enter any Text or HTML the place AFTER the Posts Archive.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "posts_page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1622738422
+}
