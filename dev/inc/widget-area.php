@@ -17,7 +17,7 @@ function xten_widgets_init() {
 		'description'   => esc_html__( 'Add widgets here.', 'xten' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s card-style">',
 		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title xten-theme-color-bg">',
+		'before_title'  => '<h2 class="widget-title xten-theme-bg-color">',
 		'after_title'   => '</h2>',
 	));
 
@@ -27,7 +27,7 @@ function xten_widgets_init() {
 		'description'   => esc_html__( 'Add Column 1 Footer widgets here.', 'xten' ),
 		'before_widget' => '<div id="%1$s" class="widget footer-1 %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<h2 class="widget-title xten-theme-color-bg">',
+		'before_title'  => '<h2 class="widget-title xten-theme-bg-color">',
 		'after_title'   => '</h2>',
 	));
 
@@ -37,7 +37,7 @@ function xten_widgets_init() {
 		'description'   => esc_html__( 'Add Column 2 Footer widgets here.', 'xten' ),
 		'before_widget' => '<div id="%1$s" class="widget footer-2 %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<h2 class="widget-title xten-theme-color-bg">',
+		'before_title'  => '<h2 class="widget-title xten-theme-bg-color">',
 		'after_title'   => '</h2>',
 	));
 
@@ -47,7 +47,7 @@ function xten_widgets_init() {
 		'description'   => esc_html__( 'Add Column 3 Footer widgets here.', 'xten' ),
 		'before_widget' => '<div id="%1$s" class="widget footer-3 %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<h2 class="widget-title xten-theme-color-bg">',
+		'before_title'  => '<h2 class="widget-title xten-theme-bg-color">',
 		'after_title'   => '</h2>',
 	));
 
@@ -57,7 +57,7 @@ function xten_widgets_init() {
 		'description'   => esc_html__( 'Add Column 4 Footer widgets here.', 'xten' ),
 		'before_widget' => '<div id="%1$s" class="widget footer-4 %2$s">',
 		'after_widget'  => '</div>',
-		'before_title'  => '<h2 class="widget-title xten-theme-color-bg">',
+		'before_title'  => '<h2 class="widget-title xten-theme-bg-color">',
 		'after_title'   => '</h2>',
 	));
 

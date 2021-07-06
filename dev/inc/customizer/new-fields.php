@@ -68,7 +68,9 @@ function xten_customize_new_fields_register( $wp_customize ) {
 				?>
 				<label>
 					<?php
-					$GLOBALS['updateTextInputLoaded'] = $GLOBALS['updateTextInputLoaded'] ? : false;
+					$GLOBALS['updateTextInputLoaded'] = isset( $GLOBALS['updateTextInputLoaded'] ) ?
+						$GLOBALS['updateTextInputLoaded'] :
+						false;
 					if ( ! $GLOBALS['updateTextInputLoaded'] ) :
 						$GLOBALS['updateTextInputLoaded'] = true;
 						?>

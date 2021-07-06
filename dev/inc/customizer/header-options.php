@@ -11,7 +11,6 @@
  * @param WP_Customize_Manager $wp_customize Site Header Customizer object.
  */
 function xten_customize_site_header_register( $wp_customize ) {
-	$font_selection = include get_template_directory() . '/inc/customizer/font-selection.php';
 	/**
 	 * Header options.
 	 */
@@ -22,6 +21,28 @@ function xten_customize_site_header_register( $wp_customize ) {
 			'priority'    => 130, // Before Additional CSS.
 		)
 	);
+
+	// Display Site Phone Number Next to Header Logo.
+	$wp_customize->add_setting(
+		'xten_site_phone_number_with_logo',
+		array(
+			'default'           => false,
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		'xten_site_phone_number_with_logo',
+		array(
+			'priority'    => 2,
+			'type'        => 'checkbox',
+			'label'       => __( 'Display Site Phone Number Next to Header Logo?', 'xten' ),
+			'section'     => 'xten_header_options',
+			'settings'    => 'xten_site_phone_number_with_logo',
+		)
+	);
+	$wp_customize->get_setting( 'xten_site_phone_number_with_logo' )->transport = 'postMessage';
+	// /Display Site Phone Number Next to Header Logo.
 
 	// Header Main Nav Start!
 	// Separator.

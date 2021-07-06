@@ -28,7 +28,7 @@
 			$body = $('body'),
 			transitionEndEvent = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
 			$loadSplash = $('#load-splash'),
-			loadSplash = $loadSplash[0];
+			loadSplash = $loadSplash[0] || null;
 			window.mouseDetected = window.mouseDetected || false;
 
 		function detectMouse() {
@@ -51,41 +51,140 @@
 			});
 		};
 
-		function detectMac() {
-			if (-1 != navigator.userAgent.indexOf('Mac OS X')) {
-				$body.addClass('browser-mac');
-				return true;
-			}
-		}
+		function detectBrowser() {
+			function detectBrowserCore() {
+				"use strict";
+		
+				var module = {
+					options: [],
+					header: [
+						navigator.platform,
+						navigator.userAgent,
+						navigator.appVersion,
+						navigator.vendor,
+						window.opera,
+					],
+					dataos: [
+						{ name: "Windows Phone", value: "Windows Phone", version: "OS" },
+						{ name: "Windows", value: "Win", version: "NT" },
+						{ name: "iPhone", value: "iPhone", version: "OS" },
+						{ name: "iPad", value: "iPad", version: "OS" },
+						{ name: "Kindle", value: "Silk", version: "Silk" },
+						{ name: "Android", value: "Android", version: "Android" },
+						{ name: "PlayBook", value: "PlayBook", version: "OS" },
+						{ name: "BlackBerry", value: "BlackBerry", version: "/" },
+						{ name: "Macintosh", value: "Mac", version: "OS X" },
+						{ name: "Linux", value: "Linux", version: "rv" },
+						{ name: "Palm", value: "Palm", version: "PalmOS" },
+					],
+					databrowser: [
+						{ name: "Chrome", value: "Chrome", version: "Chrome" },
+						{ name: "Firefox", value: "Firefox", version: "Firefox" },
+						{ name: "Safari", value: "Safari", version: "Version" },
+						{ name: "Internet Explorer", value: "MSIE", version: "MSIE" },
+						{ name: "Opera", value: "Opera", version: "Opera" },
+						{ name: "BlackBerry", value: "CLDC", version: "CLDC" },
+						{ name: "Mozilla", value: "Mozilla", version: "Mozilla" },
+					],
+					init: function () {
+						var agent = this.header.join(" "),
+							os = this.matchItem(agent, this.dataos),
+							browser = this.matchItem(agent, this.databrowser);
 
-		function detectIe() {
-			if (
-				/MSIE 10/i.test(navigator.userAgent) ||
-				/MSIE 9/i.test(navigator.userAgent) ||
-				/rv:11.0/i.test(navigator.userAgent) ||
-				/Edge\/\d./i.test(navigator.userAgent)
-			) {
-				if (/Edge\/\d./i.test(navigator.userAgent)) {
-					$body.addClass('browser-edge');
-				} else {
-					$body.addClass('browser-ie');
+						return { os: os, browser: browser };
+					},
+					matchItem: function (string, data) {
+						var i = 0,
+							j = 0,
+							html = "",
+							regex,
+							regexv,
+							match,
+							matches,
+							version;
+
+						for (i = 0; i < data.length; i += 1) {
+							regex = new RegExp(data[i].value, "i");
+							match = regex.test(string);
+							if (match) {
+								regexv = new RegExp(data[i].version + "[- /:;]([\\d._]+)", "i");
+								matches = string.match(regexv);
+								version = "";
+								if (matches) {
+									if (matches[1]) {
+										matches = matches[1];
+									}
+								}
+								if (matches) {
+									matches = matches.split(/[._]+/);
+									for (j = 0; j < matches.length; j += 1) {
+										if (j === 0) {
+											version += matches[j] + ".";
+										} else {
+											version += matches[j];
+										}
+									}
+								} else {
+									version = "0";
+								}
+								return {
+									name: data[i].name,
+									version: parseFloat(version),
+								};
+							}
+						}
+						return { name: "unknown", version: 0 };
+					},
+				};
+
+				var e = module.init(),
+					debug = "";
+/*
+				debug += "os.name = " + e.os.name + "\n";
+				debug += "os.version = " + e.os.version + "\n";
+				debug += "browser.name = " + e.browser.name + "\n";
+				debug += "browser.version = " + e.browser.version + "\n";
+		
+				debug += "\n";
+				debug += "navigator.userAgent = " + navigator.userAgent + "\n";
+				debug += "navigator.appVersion = " + navigator.appVersion + "\n";
+				debug += "navigator.platform = " + navigator.platform + "\n";
+				debug += "navigator.vendor = " + navigator.vendor + "\n";
+
+				// console.log("debug", debug);
+*/
+				return e;
+			}
+
+			/**
+			 * detect IEEdge
+			 * returns version of IE/Edge or false, if browser is not a Microsoft browser
+			 */
+			function detectIEEdge() {
+				var ua = window.navigator.userAgent,
+					msie = ua.indexOf("MSIE "),
+					trident = ua.indexOf("Trident/");
+				if (msie > 0 || trident > 0) {
+					// IE 10 or older => return version number ||
+					// IE 11 => return version number
+					return true;
 				}
-				return true;
+				// other browser
+				return false;
 			}
-		}
 
-		function detectIOS() {
-			var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-			if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-				$body.addClass('os-ios');
-				return 'iOS';
+			var html = $("html"),
+				machine = detectBrowserCore(),
+				browserOsClass = "browser-os-" + machine.os.name.replace(/\s+/g, "-").toLowerCase(),
+				browserNameClass;
+			if (detectIEEdge()) {
+				browserNameClass = "browser-name-ie";
+			} else {
+				browserNameClass = "browser-name-" + machine.browser.name.replace(/\s+/g, "-").toLowerCase();
 			}
-		}
+			html.addClass(browserNameClass).addClass(browserOsClass);
 
-		function detectPlatform() {
-			detectMac();
-			detectIe();
-			detectIOS();
+			return machine;
 		}
 
 		/**
@@ -170,13 +269,29 @@
 			});
 		}
 
+		// TODO: create a naming convention for this instead of (or in addition to)
+		// finding SPECIFIC Link tags.
+		// EG: var $linkTags = $('[id*="before-child"]')
+		function movePreloadedLinkToPreloadLocation() {
+			var $preloadTags = $('link[rel="preload"]');
+			$preloadTags.each(function(){
+				var thisId = $(this).attr('id'),
+					styleSheetId = thisId.replace('preload', 'css'),
+					$styleSheetTag = $('[id="' + styleSheetId + '"]');
+				if ( $styleSheetTag.length ) {
+					$styleSheetTag.detach().insertAfter($(this));
+				}
+			});
+		}
+
 		function readyFuncs() {
-			detectPlatform();
+			detectBrowser();
 			sizeContent();
 			alerts();
 			hideLoadSplash();
 			detectMouse();
 			makeCollapseAccessible();
+			movePreloadedLinkToPreloadLocation();
 		}
 
 		/**

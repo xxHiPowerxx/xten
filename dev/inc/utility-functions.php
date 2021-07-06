@@ -16,6 +16,17 @@ class XTenUtilities {
 	 */
 	public function global_utilities() {
 		/**
+		 * Safely Get FileMTime
+		 */
+		if ( ! function_exists( 'xten_filemtime' ) ) :
+			function xten_filemtime($file) {
+				if ( file_exists( $file ) ):
+					return filemtime( $file );
+				endif;
+			}
+		endif;
+
+		/**
 		 * Convert Hex to RGB
 		 *
 		 * @param string $hex_string hex value from customizer.
@@ -460,7 +471,7 @@ class XTenUtilities {
 						if ( $sanitize ) :
 							$value = esc_attr( $value );
 						endif;
-						$space = $key !== $attr_array[0] ?
+						$space = $key !== reset($attr_array) ?
 							' ' :
 							null;
 						$attr_string.= "$space$key='$value'";
@@ -481,7 +492,6 @@ class XTenUtilities {
 			 */
 			function xten_render_component( $handle, $post_id = null ) {
 				$comp_dir  = '/template-parts/components/';
-				$file_path = $dir . $comp_dir;
 				$file_name = 'component-' . $handle . '.php';
 				$comp_dir_file_name = $comp_dir . $file_name;
 				$full_file_path = file_exists( get_stylesheet_directory() . $comp_dir_file_name ) ?
@@ -506,16 +516,121 @@ class XTenUtilities {
 			 * @return int component id.
 			 */
 			function xten_register_component_id( $handle ) {
-				$GLOBALS['component_ids'][$handle] = $GLOBALS['component_ids'][$handle] !== null ?
+				$GLOBALS['component_ids'] = isset( $GLOBALS['component_ids'] ) ?
+					$GLOBALS['component_ids'] :
+					array();
+				$GLOBALS['component_ids'][$handle] = ! empty( $GLOBALS['component_ids'][$handle] ) ?
 					$GLOBALS['component_ids'][$handle] :
 					0;
-					$GLOBALS['component_ids'][$handle] ++;
-					$component_id = $handle . '-' . $GLOBALS['component_ids'][$handle];
+				$GLOBALS['component_ids'][$handle] ++;
+				$component_id = $handle . '-' . $GLOBALS['component_ids'][$handle];
 
 				return  $component_id;
 			}
 		endif; // endif ( ! function_exists( 'xten_register_component_id' ) ) :
+
+		if ( ! function_exists( 'xten_get_color' ) ) :
+			/**
+			 * Get theme_mod color with global default
+			 * 
+			 * @param string - $handle - name of theme_mod and associated $GLOBALS['xten_default_colors'].
+			 * @return mixed - Value of theme_mod.
+			 */
+			function xten_get_color( $handle ) {
+				return get_theme_mod( $handle, $GLOBALS['xten_default_colors'][$handle] );
+			}
+		endif; // /endif ( ! function_exists( 'xten_get_color' ) ) :
+
+		if ( ! function_exists( 'xten_snake_to_camel' ) ) :
+			function xten_snake_to_camel( $string ) {
+				return lcfirst( str_replace( ' ', '', ucwords( str_replace( '_', ' ', $string ) ) ) );
+			}
+		endif; // endif ( ! function_exists( 'xten_snake_to_camel' ) ) :
+		
+		if ( ! function_exists( 'xten_camel_to_snake' ) ) :
+			function xten_camel_to_snake( $string ) {
+				return strtolower( preg_replace( '/(?<!^)[A-Z]/', '_$0', $string) );
+			}
+		endif; // endif ( ! function_exists( 'xten_camel_to_snake' ) ) :
+		
+		if ( ! function_exists( 'xten_snake_to_dash' ) ) :
+			function xten_snake_to_dash( $string ) {
+				return str_replace( '_', '-', $string );
+			}
+		endif; // endif ( ! function_exists( 'xten_snake_to_dash' ) ) :
+		
+		if ( ! function_exists( 'xten_dash_to_snake' ) ) :
+			function xten_dash_to_snake( $string ) {
+				return str_replace( '-', '_', $string );
+			}
+		endif; // endif ( ! function_exists( 'xten_dash_to_snake' ) ) :
+
+		if ( ! function_exists( 'merge_inner_blocks_with_parent' ) ) :
+			/**
+			 * Recursively Merge Inner Blocks Array with Parent Array.
+			 * 
+			 * @param array $blocks - Parent Blocks.
+			 * @return array $blocks - Returns Blocks merged with found $block['innerBlocks'].
+			 */
+			function merge_inner_blocks_with_parent( $blocks ) {
+				foreach ( $blocks as $block ) {
+					if ( ! empty( $block['innerBlocks'] ) ) {
+						// or call the function recursively, to find heading blocks in inner blocks
+						$blocks = array_merge( $blocks, merge_inner_blocks_with_parent( $block['innerBlocks'] ) );
+					}
+				}
+				return $blocks;
+			}
+		endif; // endif ( ! function_exists( 'merge_inner_blocks_with_parent' ) ) :
+
+		if ( ! function_exists( 'check_the_content_for_fancybox' ) ) :
+			/**
+			 * Check the_content for .fancybox and Load up Fancybox Assets.
+			 */
+			function check_the_content_for_fancybox( $content ) {
+				$blocks_contain_fancybox = false;
+				// Find blocks if they exist (particularly re-usable blocks).
+				if ( has_blocks( $content ) ) :
+					$blocks = parse_blocks( $content );
+					$blocks = merge_inner_blocks_with_parent( $blocks );
+					foreach ( $blocks as $block ) :
+						$block_content = $block['innerHTML'];
+						// Reusable blocks have an ['attrs'] called ['ref']
+						// Check to see if is Reusable Block.
+						if ( $block['attrs']['ref'] ) :
+							// If so, get the block content.
+							$block_post_object = get_post( $block['attrs']['ref'] );
+							$block_content .= $block_post_object->post_content;
+						endif;
+						if ( strpos( $block_content, 'fancybox' ) ) :
+							$blocks_contain_fancybox = true;
+							break; // stop looking.
+						endif;
+					endforeach;
+				endif;
+		
+				// Check if either the Content or the Blocks contain 'fancybox'.
+				if (
+					strpos( $content, 'fancybox' ) ||
+					$blocks_contain_fancybox
+				) :
+					$handle = 'xten-fancybox-js';
+					if ( ! wp_style_is( $handle, 'enqueued' ) ) :
+						wp_enqueue_script( $handle );
+					endif;
+					$handle = 'xten-vendor-fancybox-css';
+					if ( ! wp_style_is( $handle, 'enqueued' ) ) :
+						wp_enqueue_style( $handle );
+					endif;
+				endif;
+		
+				return $content;
+			}
+			add_filter( 'the_content', 'check_the_content_for_fancybox', 1 );
+		endif; // endif ( ! function_exists( 'check_the_content_for_fancybox' ) ) :
+
 	}
+	
 }
 
 $ob = new XTenUtilities();

@@ -37,13 +37,19 @@ $logo_link_attrs   = xten_stringify_attrs( array(
 	<div class="navbar" id="mainNav">
 		<div class="container container-ext header-container">
 			<div class="site-branding">
-				<?php	$home_url = esc_url( home_url( '/' ) ); ?>
 				<a <?php echo $logo_link_attrs; ?>>
 					<span class="hide-me">Home Link</span>
 					<div class="ctnr-custom-logo">
 						<?php echo $GLOBALS['xten-site-logo']; ?>
 					</div>
 				</a>
+				<?php
+				$display_site_phone_number = get_theme_mod( 'xten_site_phone_number_with_logo', false );
+				if ( $display_site_phone_number ) :
+					$site_phone_number = get_site_phone_number_func( true );
+					echo $site_phone_number;
+				endif;
+				?>
 			</div><!-- .site-branding -->
 			<nav id="nav-mega-menu" class="main-navigation desktop-navigation navbar-nav ml-auto" aria-label="<?php esc_attr_e( 'Main menu', 'xten' ); ?>">
 				<?php

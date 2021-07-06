@@ -3,6 +3,7 @@
 /**
  * Process Inline CSS
  */
+// TODO: Organize this file to reflect the fields being pulled from the customizer.
 function process_inline_css() {
 
 	// Get the Stylesheet Directory.
@@ -18,11 +19,15 @@ function process_inline_css() {
 	$mobile_nav_secondary_accent_color = esc_attr( get_theme_mod( 'mobile_nav_secondary_accent_color', '#00488B' ) );
 	$mobile_nav_background_color       = esc_attr( get_theme_mod( 'mobile_nav_background_color', '#003366' ) );
 	$mobile_nav_dropdown_color         = esc_attr( get_theme_mod( 'mobile_nav_dropdown_color', '#003366' ) );
+	// /Header Mobile Nav.
 
 	// Theme Options.
 
 	// Header
-	$xten_header = array();
+	$xten_header = array(
+		'bg_color' => array(),
+	);
+	$header_styles = '';
 	// Header Background Color w/ Opacity.
 	$xten_header['bg_color']['value'] = esc_attr( get_theme_mod( 'xten_header_bg_color', '#2e528a' ) ) ? : 'transparent';
 	$xten_header['bg_color']['opacity'] = esc_attr( get_theme_mod( 'xten_header_bg_color_opacity', '100' ) );
@@ -78,20 +83,87 @@ function process_inline_css() {
 	// /Header Sub-Menu Item Color.
 
 	// /Header
-	
-	$xten_link_color      = esc_attr( get_theme_mod( 'xten_link_color', '#007db6' ) );
-	$xten_theme_color     = esc_attr( get_theme_mod( 'xten_theme_color', '#003366' ) );
-	$primary_font_family  = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"opensans", "serif":"sans-serif"}' ) );
-	$secondary_font_family = json_decode( get_theme_mod( 'secondary_font_family', '{"heading":"roboto", "heading_fallback":"Arial, sans-serif"}' ) );
+	$xten_link_color           = esc_attr( get_theme_mod( 'xten_link_color', '#007db6' ) );
+	$xten_theme_color          = esc_attr( $GLOBALS['xten_theme_colors']['xten_theme_color'] );
+	$primary_font_w_fallback   = $GLOBALS['xten_theme_fonts']['font_families']['primary_font_family'];
+	$secondary_font_w_fallback = $GLOBALS['xten_theme_fonts']['font_families']['secondary_font_family'];
 
+	// Footer
+	$footer_styles = '';
 
-	// /Header Mobile Nav.
+	// Site Footer
+	$xten_footer = array(
+		'bg_color'   => array(),
+		'color'      => esc_attr( get_theme_mod( 'xten_footer_color', '#ffffff' ) ),
+		'link_color' => esc_attr( get_theme_mod( 'xten_footer_link_color', '#ffffff' ) ),
+	);
+	// Footer Background Color w/ Opacity.
+	$xten_footer['bg_color']['value'] = esc_attr( get_theme_mod( 'xten_footer_bg_color', '#2e528a' ) ) ? : 'transparent';
+	$xten_footer['bg_color']['opacity'] = esc_attr( get_theme_mod( 'xten_footer_bg_color_opacity', '100' ) );
+	$xten_footer['bg_color']['value'] = xten_color_opacity(
+		$xten_footer['bg_color']['value'],
+		$xten_footer['bg_color']['opacity']
+	);
+	// /Footer Background Color w/ Opacity.
+	$footer_styles .= xten_add_inline_style(
+		'.site-footer',
+		array(
+			'background-color' => $xten_footer['bg_color']['value'],
+			'color'            => $xten_footer['color'],
+		)
+	);
+	$footer_styles .= xten_add_inline_style(
+		'.site-footer a, .site-footer a:hover',
+		array(
+			'color' => $xten_footer['link_color'],
+		)
+	);
+	// /Site Footer
+
+	// Site Info
+	$xten_site_info = array(
+		'bg_color'   => array(),
+		'color'      => esc_attr( get_theme_mod( 'xten_site_info_color', '#ffffff' ) ),
+		'link_color' => esc_attr( get_theme_mod( 'xten_site_info_link_color', '#ffffff' ) ),
+	);
+
+	// Footer Background Color w/ Opacity.
+	$xten_site_info['bg_color']['value'] = esc_attr( get_theme_mod( 'xten_site_info_bg_color', '#333333' ) ) ? : 'transparent';
+	$xten_site_info['bg_color']['opacity'] = esc_attr( get_theme_mod( 'xten_site_info_bg_color_opacity', '100' ) );
+	$xten_site_info['bg_color']['value'] = xten_color_opacity(
+		$xten_site_info['bg_color']['value'],
+		$xten_site_info['bg_color']['opacity']
+	);
+	// /Footer Background Color w/ Opacity.
+
+	$footer_styles .= xten_add_inline_style(
+		'.site-info-footer-wrapper',
+		array(
+			'background-color' => $xten_site_info['bg_color']['value'],
+			'color'            => $xten_site_info['color'],
+		)
+	);
+	$footer_styles .= xten_add_inline_style(
+		'.site-info-footer-wrapper a, .site-info-footer-wrapper a:hover',
+		array(
+			'color' => $xten_site_info['link_color'],
+		)
+	);
+	// /Site Info
+	// /Footer
+
 	// Begin Style Tag.
 	$styles     = '';
 	$body_styles = '';
 
+	$styles .= ! empty( $GLOBALS['xten_theme_css'] ) ?
+		 $GLOBALS['xten_theme_css'] :
+		 null;
+
 	// Load Fonts Used.
 	// Primary Font.
+	$primary_font_family   = $GLOBALS['xten_theme_fonts']['font_objects']['primary_font_object'];
+	$secondary_font_family = $GLOBALS['xten_theme_fonts']['font_objects']['secondary_font_object'];
 	$primary_font_fallback   = $primary_font_family->serif === 'sans-serif' ?
 		'Helvetica, Arial, sans-serif' :
 		'Times New Roman, serif';
@@ -103,7 +175,6 @@ function process_inline_css() {
 		'Times New Roman, serif';
 	$secondary_font_path       = $secondary_font_family->value;
 	$secondary_font_w_fallback = $secondary_font_family->value . ',' . $secondary_font_fallback;
-
 
 	if (
 		'playfairdisplay' == $secondary_font_path ||
@@ -139,7 +210,7 @@ function process_inline_css() {
 	$styles .= 'h1,.section-heading{' .
 		'font-family:' . $secondary_font_w_fallback . ';' .
 	'}' .
-	'.xten-theme-color-bg, .pagination .current, .search-form button:hover{' .
+	'.xten-theme-bg-color, .pagination .current, .search-form button:hover{' .
 		'background-color:' . $xten_theme_color . ';' .
 	'}' .
 	'body.user-is-tabbing *:focus, input:focus{' .
@@ -148,6 +219,12 @@ function process_inline_css() {
 	'}' .
 	'.xten-theme-color-text{' .
 		'color:' . $xten_theme_color . ';' .
+	'}' .
+	'a,a:active,a:focus,a:hover,.xten-link,.xten-link:active,.xten-link:focus,.xten-link:hover{' .
+		'color:' . $xten_link_color . ';' .
+	'}' .
+	'.site-branding	.anchor-site-phone-number{' .
+		'border-color:' . $xten_theme_color . ';' .
 	'}' .
 	'@media (min-width:' . $mobile_nav_breakpoint . 'px ){' .
 		'.desktop-navigation{' .
@@ -179,6 +256,7 @@ function process_inline_css() {
 	'}';
 
 	$styles      .= $header_styles;
+	$styles      .= $footer_styles;
 
 	$body_styles .= 'body,button,input,optgroup,select,textarea{' .
 		'font-family:' . $primary_font_w_fallback . ';' .
@@ -187,74 +265,85 @@ function process_inline_css() {
 			'font-family:' . $primary_font_w_fallback . ';' .
 		'}';
 
-	$load_splash_style = '#load-splash{' .
-		'position:fixed;' .
-		'height:100%;' .
-		'width:100%;' .
-		'top:0;' .
-		'left:0;' .
-		'z-index:99999;' .
-		' opacity:1;' .
-		'-webkit-transition:all .5s cubic-bezier(.22,.61,.36,1);' .
-		'transition:all .5s cubic-bezier(.22,.61,.36,1);' .
-		'-webkit-transform:scale(1) translateZ(0);' .
-		'transform:scale(1) translateZ(0);' .
-		'-webkit-backface-visibility:hidden;' .
-		'backface-visibility:hidden;' .
-		'-webkit-transform-origin:50%,50%;' .
-		'transform-origin:50%,50%;' .
-		'cursor:pointer;' .
-	'}' .
-	'html.no-js #load-splash{' .
-		'display:none !important;' .
-	'}' .
-	'#load-splash{' .
-		'display:none;' .
-	'}' .
-	'#load-splash.unloading,'.
-	'#load-splash.loading{' .
-		'display:block;' .
-	'}' .
-	'#load-splash.unloading{' .
-		'-webkit-transition-duration: .25s' .
-		'transition-duration: .25s' .
-	'}'.
-	'#load-splash.hiding{' .
-		'opacity:0;' .
-		'background-color:rgb(255,255,255);' .
-		'-webkit-transform:scale(0) translateZ(0);' .
-		'transform:scale(0) translateZ(0);' .
-	'}' .
-	'.load-splash-inner{' .
-		'height:100%;' .
-		'width:100%;' .
-		'display:-webkit-box;' .
-		'display:-ms-flexbox;' .
-		'display:flex;' .
-		'-webkit-box-pack:center;' .
-		'-ms-flex-pack:center;' .
-		'justify-content:center;' .
-		'-webkit-box-align:center;' .
-		'-ms-flex-align:center;' .
-		'align-items:center;' .
-	'}' .
-	'.load-splash-inner > *{' .
-		'max-height:50%;' .
-		'max-width:50%;' .
-	'}' .
-	'#load-splash .site-name{' .
-		'font-size:8.683vmin;' .
-		'color:white;' .
-		'text-align:center;' .
-		'max-width:100%;' .
-		'padding:.5em;' .
-		'max-height:none;' .
-	'}' .
-	'@media (min-width: 576px) {' .
-		'#load-splash .site-name{' .
-			'font-size:50px;' .
+	$display_load_splash = get_theme_mod( 'xten_display_load_splash', true );
+	if ( $display_load_splash ) :
+		$xten_load_splash_bg_color = esc_attr( get_theme_mod( 'xten_load_splash_bg_color', null ) );
+		$load_splash_bg_rule = $xten_load_splash_bg_color ?
+			"background-color:$xten_load_splash_bg_color;" :
+			null;
+		$load_splash_style = '#load-splash{' .
+			$load_splash_bg_rule .
+			'position:fixed;' .
+			'height:100%;' .
+			'width:100%;' .
+			'top:0;' .
+			'left:0;' .
+			'z-index:99999;' .
+			' opacity:1;' .
+			'-webkit-transition:all .5s cubic-bezier(.22,.61,.36,1);' .
+			'transition:all .5s cubic-bezier(.22,.61,.36,1);' .
+			'-webkit-transform:scale(1) translateZ(0);' .
+			'transform:scale(1) translateZ(0);' .
+			'-webkit-backface-visibility:hidden;' .
+			'backface-visibility:hidden;' .
+			'-webkit-transform-origin:50%,50%;' .
+			'transform-origin:50%,50%;' .
+			'cursor:pointer;' .
 		'}' .
-	'}';
+		'html.no-js #load-splash{' .
+			'display:none !important;' .
+		'}' .
+		'#load-splash{' .
+			'display:none;' .
+		'}' .
+		'#load-splash.unloading,'.
+		'#load-splash.loading{' .
+			'display:block;' .
+		'}' .
+		'#load-splash.unloading{' .
+			'-webkit-transition-duration: .25s' .
+			'transition-duration: .25s' .
+		'}'.
+		'#load-splash.hiding{' .
+			'opacity:0;' .
+			'background-color:rgb(255,255,255);' .
+			'-webkit-transform:scale(0) translateZ(0);' .
+			'transform:scale(0) translateZ(0);' .
+		'}' .
+		'.load-splash-inner{' .
+			'height:100%;' .
+			'width:100%;' .
+			'display:-webkit-box;' .
+			'display:-ms-flexbox;' .
+			'display:flex;' .
+			'-webkit-box-pack:center;' .
+			'-ms-flex-pack:center;' .
+			'justify-content:center;' .
+			'-webkit-box-align:center;' .
+			'-ms-flex-align:center;' .
+			'align-items:center;' .
+		'}' .
+		'.load-splash-inner > *{' .
+			'max-height:50%;' .
+			'max-width:50%;' .
+		'}' .
+		'#load-splash .site-name{' .
+			'font-size:8.683vmin;' .
+			'color:white;' .
+			'text-align:center;' .
+			'max-width:100%;' .
+			'padding:.5em;' .
+			'max-height:none;' .
+		'}' .
+		'@media (min-width: 576px) {' .
+			'#load-splash .site-name{' .
+				'font-size:50px;' .
+			'}' .
+		'}';
+	endif;
+	// endif ( $display_load_splash ) :
+
+	$footer_styles = "";
 
 	// This function checks to make sure that JS is enabled
 	// and removes the "no-js" class from the HTML element.
@@ -269,7 +358,9 @@ function process_inline_css() {
 	wp_enqueue_style( 'xten-inline-style', '', 'xten-content-css' );
 	wp_add_inline_style( 'xten-inline-style', $styles );
 	wp_add_inline_style( 'xten-inline-style', $body_styles );
-	wp_add_inline_style( 'xten-inline-style', $load_splash_style );
+	if ( $display_load_splash ) :
+		wp_add_inline_style( 'xten-inline-style', $load_splash_style );
+	endif;
 	wp_register_script( 'xten-inline-script', false );
 	wp_enqueue_script( 'xten-inline-script' );
 	wp_add_inline_script( 'xten-inline-script', $check_for_js );

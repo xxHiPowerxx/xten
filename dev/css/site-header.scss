@@ -21,7 +21,7 @@
 /*--------------------------------------------------------------
 ## Main navigation menu
 --------------------------------------------------------------*/
-
+// TODO: Simplify these selectors for the love of all that is holy!
 .header-wrapper {
 	position: fixed;
 	width: 100%;
@@ -29,100 +29,143 @@
 	top: 0;
 	left: 0;
 	z-index: 99;
+}
+.site-header {
+	box-shadow: 0 0.6rem 0.9rem rgba(0, 0, 0, 0.16);
+	transition: all 0.15s $smooth-transition;
 
-	.site-header {
-		box-shadow: 0 0.6rem 0.9rem rgba(0, 0, 0, 0.16);
-		transition: all 0.15s $smooth-transition;
-
-		.navbar {
-			padding: 0;
-
-			.header-container {
-				display: flex;
-				align-items: center;
-				flex-wrap: nowrap;
-				width: 100%;
-				padding-top: 1.5rem;
-				padding-bottom: 1.5rem;
-				justify-content: flex-end;
-
-				.site-branding {
-					margin-right: 1.5rem;
-					text-align: left;
-					line-height: 0;
-					width: auto;
-					flex: 0 1 auto;
-					margin-right: auto;
-					display: flex;
-					@media screen and (min-width: $vp_sm) {
-						width: auto;
-					}
-
-					.custom-logo-link {
-						display: inline-block;
-						max-width: 100%;
-						flex: 1;
-						&.logo-type-site-name {
-							font-size: 3rem;
-							line-height: 1;
-							color: $white; // TODO: Choose this color in Customizer.
-						}
-						&:not(.logo-type-site-name) {
-							&,
-							#{$active} {
-								text-decoration: none;
-							}
-						}
-
-						.custom-logo {
-							display: flex;
-							align-items: center;
-							width: auto; //100%;
-							max-width: 100%;
-							max-height: 7.5rem;
-
-							@media screen and (min-width: $vp_sm) {
-								width: auto;
-							}
-
-							.xten-logo-svg {
-								width: 13.75rem; //20.34rem
-								height: auto; //14.817rem
-								margin-top: -0.5rem;
-								z-index: 1;
-								@media (min-width: $vp_xs) {
-									width: 12.75rem;
-								}
-							}
-
-							.site-name {
-								font-family: "Times New Roman", Times, serif;
-								line-height: 1;
-								border-left: 1px solid;
-								flex: 1;
-								white-space: normal;
-								padding: 0 0 0 0.6053em;
-								@include fontSize(20px);
-								@media (min-width: $vp_xs) {
-									@include fontSize(25px);
-									flex: initial;
-									white-space: nowrap;
-									max-width: none;
-									padding-top: 0.0915em;
-									padding-bottom: 0.0915em;
-								}
-							}
-
-							&.child-logo {
-								svg {
-									height: auto;
-								}
-							}
-						}
-					}
+	.navbar {
+		padding: 0;
+	}
+	.header-container {
+		display: flex;
+		align-items: center;
+		flex-wrap: nowrap;
+		width: 100%;
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
+		justify-content: flex-end;
+	}
+	.site-branding {
+		margin-right: 1.5rem;
+		text-align: left;
+		line-height: 0;
+		width: auto;
+		flex: 0 1 auto;
+		margin-right: auto;
+		display: flex;
+		@media screen and (min-width: $vp_sm) {
+			width: auto;
+		}
+		.custom-logo-link {
+			display: inline-block;
+			max-width: 100%;
+			flex: 1;
+			&.logo-type-site-name {
+				font-size: 3rem;
+				line-height: 1;
+				color: $white; // TODO: Choose this color in Customizer.
+			}
+			&:not(.logo-type-site-name) {
+				&,
+				#{$active} {
+					text-decoration: none;
 				}
 			}
 		}
+		.custom-logo {
+			display: flex;
+			align-items: center;
+			width: auto; //100%;
+			max-width: 100%;
+			max-height: 7.5rem;
+		}
+	}
+}
+
+.custom-logo {
+	@media screen and (min-width: $vp_sm) {
+		width: auto;
+	}
+
+	.xten-logo-svg {
+		width: 13.75rem; //20.34rem
+		height: auto; //14.817rem
+		margin-top: -0.5rem;
+		z-index: 1;
+		@media (min-width: $vp_xs) {
+			width: 12.75rem;
+		}
+	}
+
+	.site-name {
+		font-family: "Times New Roman", Times, serif;
+		line-height: 1;
+		border-left: 1px solid;
+		flex: 1;
+		white-space: normal;
+		padding: 0 0 0 0.6053em;
+		@include fontSize(20px);
+		@media (min-width: $vp_xs) {
+			@include fontSize(25px);
+			flex: initial;
+			white-space: nowrap;
+			max-width: none;
+			padding-top: 0.0915em;
+			padding-bottom: 0.0915em;
+		}
+	}
+
+	&.child-logo {
+		svg {
+			height: auto;
+		}
+	}
+}
+
+.site-branding {
+  display: flex;
+	align-items: center;
+	.anchor-site-phone-number {
+		font-size: 4.455vmin;
+		@media (min-width: 450px) {
+			font-size: 3rem;
+		}
+		@media (min-width: $vp_sm) {
+			font-size: 3.5rem;
+		}
+		margin-left: 1.5rem;
+		// TODO: Colors: make Border Left Dynamic.
+		// border-left: .2rem solid $secondary;
+		border-left: .2rem solid;
+		padding-left: 1.5rem;
+	}
+	.site-phone-number {
+		display: inline-block;
+		line-height: 1;
+	}
+}
+
+.site-branding {
+  display: flex;
+	align-items: center;
+	.anchor-site-phone-number {
+		font-size: 4.455vmin;
+		@media (min-width: 450px) {
+			font-size: 3rem;
+		}
+		@media (min-width: $vp_sm) {
+			font-size: 3.5rem;
+		}
+		margin-left: 1.5rem;
+		// TODO: Colors: make Border Left Dynamic.
+		// border-left: .2rem solid $secondary;
+		border-left: .2rem solid;
+		padding-left: 1.5rem;
+	}
+	.site-phone-number {
+		display: inline-block;
+		line-height: 1;
 	}
 }
 

@@ -8,6 +8,11 @@
  */
 
 /**
+ * Utility Functions.
+ */
+require get_template_directory() . '/inc/utility-functions.php';
+
+/**
  * Sets up theme defaults and registers support for various WordPress features.
  *
  * Note that this function is hooked into the after_setup_theme hook, which
@@ -145,6 +150,8 @@ add_action( 'enqueue_block_editor_assets', 'xten_gutenberg_styles' );
  * Enqueue styles.
  */
 function xten_styles() {
+	// Vendor
+
 	// Bootstrap.
 	$handle = 'xten-vendor-bootstrap-css';
 	if ( ! wp_style_is( $handle, 'registered' ) ) {
@@ -158,8 +165,37 @@ function xten_styles() {
 	// Fontawesome.
 	$handle = 'xten-vendor-fontawesome-css';
 	if ( ! wp_style_is( $handle, 'registered' ) ) {
-		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), ' 5.7.1', 'all' );
+		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), '5.7.1', 'all' );
 	}
+
+	// Fancybox Vendor
+	// Fancybox JS
+	$fancybox_version = '3.5.7';
+	$handle = 'xten-vendor-fancybox-js';
+	if ( ! wp_script_is( $handle, 'registered' ) ) {
+		wp_register_script( $handle, get_theme_file_uri( '/assets/vendor/fancybox/jquery.fancybox.min.js' ), array( 'jquery' ), $fancybox_version, true );
+	}
+	// Fancybox CSS
+	$handle = 'xten-vendor-fancybox-css';
+	if ( ! wp_style_is( $handle, 'registered' ) ) {
+		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fancybox/jquery.fancybox.min.css' ), array(), $fancybox_version, 'all' );
+	}
+
+	// /Vendor
+
+	// Shared
+
+	$handle = 'xten-fancybox-js';
+	$file_path = '/js/shared/xten-fancybox.js';
+	wp_register_script(
+		$handle,
+		get_theme_file_uri( $file_path ),
+		array( 'jquery', 'xten-vendor-fancybox-js' ),
+		xten_filemtime( get_template_directory() . $file_path ),
+		true
+	);
+
+	// /Shared
 
 	// Enqueue main stylesheet.
 	wp_enqueue_style( 'xten-base-style', get_theme_file_uri( '/css/common.css' ), array( 'xten-vendor-bootstrap-css', 'xten-vendor-fontawesome-css' ), filemtime( get_template_directory() . '/css/common.css' ) );
@@ -180,7 +216,7 @@ function xten_styles() {
 	wp_register_style( 'xten-header-css', get_theme_file_uri( '/css/xten-header.css' ), array(), filemtime( get_template_directory() . '/css/xten-header.css' ) );
 	wp_enqueue_style( 'xten-site-header-css', get_theme_file_uri( '/css/site-header.css' ), array( 'xten-base-style','xten-header-css' ), filemtime( get_template_directory() . '/css/site-header.css' ) );
 }
-add_action( 'wp_enqueue_scripts', 'xten_styles' );
+add_action( 'wp_enqueue_scripts', 'xten_styles', 1 );
 
 /**
  * Admin Styles.
@@ -214,7 +250,7 @@ function xten_scripts() {
 
 	// Enqueue the header script.
 	wp_register_script( 'xten-accessible-mega-menu', get_theme_file_uri( '/lib/accessible-mega-menu/jquery-accessibleMegaMenu.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/lib/accessible-mega-menu/jquery-accessibleMegaMenu.js' ), true );
-	wp_enqueue_script( 'xten-header-padding', get_theme_file_uri( '/js/header-padding.js' ), array('jquery'), filemtime( get_template_directory() . '/js/header-padding.js' ), true );
+	wp_enqueue_script( 'xten-header-padding', get_theme_file_uri( '/js/header-padding.js' ), array('jquery' ), filemtime( get_template_directory() . '/js/header-padding.js' ), true );
 	wp_enqueue_script( 'xten-header', get_theme_file_uri( '/js/header.js' ), array( 'jquery', 'xten-vendor-bootstrap-js', 'xten-accessible-mega-menu' ), filemtime( get_template_directory() . '/js/header.js' ), true );
 	wp_localize_script(
 		'xten-header',
@@ -254,13 +290,13 @@ define( 'MY_ACF_URL', get_template_directory_uri() . '/lib/advanced-custom-field
 include_once( MY_ACF_PATH . 'acf.php' );
 
 // Customize the url setting to fix incorrect asset URLs.
-add_filter('acf/settings/url', 'my_acf_settings_url');
+add_filter('acf/settings/url', 'my_acf_settings_url' );
 function my_acf_settings_url( $url ) {
 	return MY_ACF_URL;
 }
 
 // (Optional) Hide the ACF admin menu item.
-// add_filter('acf/settings/show_admin', 'my_acf_settings_show_admin');
+// add_filter( 'acf/settings/show_admin', 'my_acf_settings_show_admin' );
 // function my_acf_settings_show_admin( $show_admin ) {
 //     return false;
 // }
@@ -293,11 +329,6 @@ require get_template_directory() . '/inc/widget-area.php';
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/pluggable/custom-header.php';
-
-/**
- * Utility Functions.
- */
-require get_template_directory() . '/inc/utility-functions.php';
 
 /**
  * Custom template tags for this theme.
@@ -388,7 +419,7 @@ function xten_json_load_point( $paths ) {
 
 // Check to see if xten Save fields file exsists and adds save point if it does.
 $save_acf_fields = get_template_directory() . '/save-acf-fields.php';
-$select_where_to_save_acf_field_groups = get_field('select_where_to_save_acf_field_groups', 'options');
+$select_where_to_save_acf_field_groups = get_field( 'select_where_to_save_acf_field_groups', 'options' );
 $select_where_to_save_acf_field_groups = $select_where_to_save_acf_field_groups !== null ? $select_where_to_save_acf_field_groups : 'parent';
 if ( $select_where_to_save_acf_field_groups === 'parent' ) :
 	if ( file_exists( $save_acf_fields ) ) :
@@ -416,20 +447,23 @@ add_filter( 'theme_page_templates', 'xten_remove_dev_template', 20, 3 );
  * Remove <p> Tags from ACF wysiwyg Fields.
  */
 function get_field_without_wpautop( $field_name, $option ) {
-	remove_filter('acf_the_content', 'wpautop');
+	remove_filter( 'acf_the_content', 'wpautop' );
 	$field = get_field( $field_name, $option );
-	add_filter('acf_the_content', 'wpautop');
+	add_filter( 'acf_the_content', 'wpautop' );
 	return $field;
 }
 
 /**
  * Figure Out Site Logo.
  */
-// If PNG has been chosen use that.
+$custom_logo_svg                   = get_theme_mod( 'custom_logo_svg' );
 $custom_logo_id                    = get_theme_mod( 'custom_logo' );
 $GLOBALS['xten-child-logo-path']   = get_stylesheet_directory() . '/header-logo.svg';
 $GLOBALS['xten-child-logo-exists'] = file_exists( $GLOBALS['xten-child-logo-path'] );
-if ( $custom_logo_id ) :
+if ( $custom_logo_svg ) :
+	$GLOBALS['xten-logo-type'] = 'custom_svg';
+	$GLOBALS['xten-site-logo'] = "<div class=\"custom-logo\">$custom_logo_svg</div>";
+elseif ( $custom_logo_id ) :
 	$GLOBALS['xten-logo-type'] = 'custom';
 	$GLOBALS['xten-site-logo'] = xten_get_custom_logo( $custom_logo_id );
 elseif ( $GLOBALS['xten-child-logo-exists'] ) :
@@ -441,17 +475,17 @@ elseif ( $site_name = get_bloginfo() ) :
 else :
 	$GLOBALS['xten-logo-type'] = 'default';
 	require get_template_directory() . '/inc/header/xten-site-logo-svg.php';
-	$GLOBALS['xten-site-logo'] = $GLOBALS['xten-header-logo'];
+	$GLOBALS['xten-site-logo'] = '<div class=\"custom-logo\">' . $GLOBALS['xten-header-logo'] . '</div>';
 endif;
 $home_url = esc_url( home_url( '/' ) );
 $GLOBALS['xten-site-logo-link'] = '<a href="' . $home_url . '" class="custom-logo-link" rel="home">' . $GLOBALS['xten-site-logo'] . '</a>';
 
 // Remove Archive Name From Archive Title if ACF Option is set to Yes In Category or Site Settings Page.
 function xten_remove_archive_name_from_title( $title ) {
-	$local_use_archive_title = get_field('local_use_archive_title', get_queried_object());
+	$local_use_archive_title = get_field( 'local_use_archive_title', get_queried_object() );
 	$use_archive_title       = $local_use_archive_title !== null ?
 															$local_use_archive_title :
-															get_field('global_use_archive_title', 'option');
+															get_field( 'global_use_archive_title', 'option' );
 	if ( $use_archive_title === false ) :
 			if ( is_category() ) {
 					$title = single_cat_title( '', false );
@@ -474,7 +508,7 @@ add_filter( 'get_the_archive_title', 'xten_remove_archive_name_from_title' );
  * @see https://www.advancedcustomfields.com/resources/acf-update_value/
  */
 function xten_set_category_featured_image( $value, $post_id, $field ){
-    if($value != ''){
+    if( $value != '' ){
 			//Add the value which is the image ID to the _thumbnail_id meta data for the current post
 			$term_id = str_replace( 'term_', '', $post_id );
 	    add_term_meta($term_id, '_thumbnail_id', $value);
@@ -543,3 +577,122 @@ function xten_wpseo_opengraph_image() {
 	endif; // if ( ! is_plugin_active($yoast_seo_plugin_file) ) :
 }
 add_action('wp_head', 'xten_wpseo_opengraph_image', 5);
+
+function xten_define_default_colors() {
+	$GLOBALS['xten_default_colors'] = array(
+		'xten_theme_color_black'           => '#333333',
+		'xten_theme_color_white'           => '#ffffff',
+		'xten_theme_color'                 => '#003366',
+		'xten_theme_color_light'           => '#4e9ff1',
+		'xten_theme_color_dark'            => '#002347',
+		'xten_secondary_theme_color'       => null,
+		'xten_secondary_theme_color_light' => null,
+		'xten_secondary_theme_color_dark'  => null,
+	);
+}
+add_action( 'after_setup_theme', 'xten_define_default_colors' );
+
+function xten_define_global_theme_variables() {
+	$GLOBALS['xten_theme_colors'] = array(
+		'xten_theme_color_black'           => xten_get_color( 'xten_theme_color_black' ),
+		'xten_theme_color_white'           => xten_get_color( 'xten_theme_color_white' ),
+		'xten_theme_color'                 => xten_get_color( 'xten_theme_color' ),
+		'xten_theme_color_light'           => xten_get_color( 'xten_theme_color_light' ),
+		'xten_theme_color_dark'            => xten_get_color( 'xten_theme_color_dark' ),
+		'xten_secondary_theme_color'       => xten_get_color( 'xten_secondary_theme_color' ),
+		'xten_secondary_theme_color_light' => xten_get_color( 'xten_secondary_theme_color_light' ),
+		'xten_secondary_theme_color_dark'  => xten_get_color( 'xten_secondary_theme_color_dark' ),
+	);
+
+	// Fonts
+	$primary_font_family   = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"opensans", "serif":"sans-serif"}' ) );
+	$secondary_font_family = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"roboto", "serif":"sans-serif"}' ) );
+
+	// Primary Font.
+	$primary_font_fallback   = $primary_font_family->serif === 'sans-serif' ?
+		'Helvetica, Arial, sans-serif' :
+		'Times New Roman, serif';
+	$primary_font_path       = $primary_font_family->value;
+	$primary_font_w_fallback = $primary_font_family->value . ',' . $primary_font_fallback;
+
+	// Secondary Font
+	$secondary_font_fallback   = $secondary_font_family->serif === 'sans-serif' ?
+		'Helvetica, Arial, sans-serif' :
+		'Times New Roman, serif';
+	$secondary_font_path       = $secondary_font_family->value;
+	$secondary_font_w_fallback = $secondary_font_family->value . ',' . $secondary_font_fallback;
+
+	$GLOBALS['xten_theme_fonts'] = array(
+		'font_objects'   => array(
+			'primary_font_object'   => $primary_font_family,
+			'secondary_font_object' => $secondary_font_family,
+		),
+		'font_families'  => array(
+			'primary_font_family'   => $primary_font_w_fallback,
+			'secondary_font_family' => $secondary_font_w_fallback,
+		),
+	);
+}
+add_action( 'after_setup_theme', 'xten_define_global_theme_variables' );
+
+function xten_define_theme_css() {
+	$css           = '';
+	$css_variables = '';
+	// Colors
+	foreach( $GLOBALS['xten_theme_colors'] as $name => $value ) :
+		if ( $value === null ) :
+			continue;
+		endif;
+		$name_f        = xten_snake_to_dash( $name );
+		$name_bg       = str_replace( 'color', 'bg-color', $name_f );
+		$css           .= ".$name_f{color:$value;}";
+		$css           .= ".$name_bg{background-color:$value;}";
+		$css_variables .= "--$name_f:$value;";
+	endforeach;
+	// /Colors
+	// Fonts
+	foreach( $GLOBALS['xten_theme_fonts']['font_families'] as $name => $value ) :
+		$name_f         = xten_snake_to_dash( $name );
+		$css           .= '.' . $name_f . '{font-family:' . $value . ';}';
+		// var_dump('.' . $name_f . '{font-family:' . $value} . ')';
+		// die;
+		$css_variables .= '--' . $name_f . ':' . $value . ';';
+	endforeach;
+	// /Fonts
+
+	$css .= ':root{' . $css_variables . '}';
+	return $GLOBALS['xten_theme_css'] = $css;
+}
+add_action( 'after_setup_theme', 'xten_define_theme_css' );
+
+function xten_customize_universal_colors() {
+	$defaults = array(
+		'#000000',
+		'#ffffff',
+		'#dd3333',
+		'#dd9933',
+		'#eeee22',
+		'#1e73be',
+		'#8224e3',
+	);
+	$theme_colors          = $GLOBALS['xten_theme_colors'];
+	$filtered_theme_colors = array_filter( $theme_colors );
+	$colors                = $defaults;
+	foreach ( $filtered_theme_colors as $key=>$value ) :
+		$index = array_search( $key, array_keys( $filtered_theme_colors ) );
+		$colors[$index] = $value;
+	endforeach;
+	$colors_s = json_encode( $colors );
+	?>
+	<script>
+		jQuery(document).ready(function($){
+			var colors = <?php echo $colors_s; ?>;
+			$.wp.wpColorPicker.prototype.options = {
+				palettes: colors
+			};
+		});
+	</script>
+	<?php
+}
+add_action('admin_print_footer_scripts', 'xten_customize_universal_colors', 0);
+add_action('customize_controls_print_footer_scripts', 'xten_customize_universal_colors', 0);

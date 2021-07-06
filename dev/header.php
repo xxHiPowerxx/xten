@@ -11,19 +11,26 @@
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?> class="no-js xten-theme-color-bg">
+<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?> class="no-js xten-theme-bg-color">
 	<head>
 		<!--insert meta tags  -->
 		<?php require_once get_template_directory() . '/inc/meta-tags.php'; ?>
 		<?php wp_head(); ?>
 	</head>
 
-	<body <?php body_class('xten-theme-color-bg'); ?> data-spy="scroll" data-target="#xten-scroll-nav" data-offset="100">
+	<body data-spy="scroll" data-target="#xten-scroll-nav" data-offset="100">
 
-		<div id="load-splash" class="loading xten-theme-color-bg">
-			<div class="load-splash-inner">
-				<?php echo $GLOBALS['xten-site-logo']; ?>
-			</div>
+		<div id="load-splash" class="loading">
+			<?php
+			$display_load_splash = get_theme_mod( 'xten_display_load_splash', true );
+			if ( $display_load_splash ) :
+				?>
+				<div class="load-splash-inner">
+					<?php echo $GLOBALS['xten-site-logo']; ?>
+				</div>
+				<?php
+			endif; // endif ( $display_load_splash ) :
+			?>
 		</div>
 		<div id="page" class="site">
 			<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'xten' ); ?></a>
