@@ -84,6 +84,9 @@ p {
 	font-size: 2rem;
 	line-height: 1.25;
 	margin-bottom: 1em;
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 // .main-container a {

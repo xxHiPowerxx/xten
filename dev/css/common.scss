@@ -29,6 +29,7 @@
 # CUSTOM
 # Color
 # Footer
+# Wordpress Block Styles
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -551,6 +552,13 @@ template {
 	.container.container-ext {
 		max-width: 174.8rem;
 	}
+	.container,
+	.container-lg,
+	.container-md,
+	.container-sm,
+	.container-xl {
+		max-width: 114rem;
+	}
 }
 
 /*   /Container EXT   */
@@ -681,12 +689,15 @@ hr {
 	background-color: $light-gray;
 	border: 0;
 	height: 1px;
-	margin-bottom: 1.5em;
 }
 
+hr,
 ul,
 ol {
 	margin-bottom: 1.5em;
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 ul {
@@ -1663,3 +1674,117 @@ html {
 		}
 	}
 }
+
+// /*--------------------------------------------------------------
+// # Wordpress Block Styles
+// --------------------------------------------------------------*/
+.img-card-style {
+	figure {
+		box-shadow: 0 .5rem .5rem rgba($black,.5);
+	}
+}
+.wp-block-media-text {
+	grid-column-gap: 3rem;
+	&.has-media-on-the-right {
+		.wp-block-media-text__content {
+			padding-left: 0;
+		}
+	}
+	&:not(.has-media-on-the-right) {
+		.wp-block-media-text__content {
+			padding-right: 0;
+		}
+	}
+	&.float-img {
+		display: block;
+		&.is-image-fill {
+			.wp-block-media-text__media{
+				width: 50%;
+			}
+		}
+		&.has-media-on-the-right {
+			.wp-block-media-text__media {
+				float: right;
+				margin-left: 3rem;
+			}
+			.wp-block-media-text__content {
+				padding-right: 0;
+			}
+		}
+		&:not(.has-media-on-the-right) {
+			.wp-block-media-text__media {
+				float: left;
+				margin-right: 3rem;
+			}
+			.wp-block-media-text__content {
+				padding-left: 0;
+			}
+		}
+		.wp-block-media-text__media {
+			max-width: 50%;
+			margin-bottom: 3rem;
+		}
+	}
+	&:not(:last-child) {
+		margin-bottom: 2.75rem;
+	}
+	&.is-stacked-on-mobile {
+		grid-row-gap: 3rem;
+		&.bp-m {
+			@media (max-width: $vp_m - 1) {
+				grid-template-columns: 100% !important;
+				.wp-block-media-text__media {
+					grid-column: 1;
+					grid-row: 1;
+				}
+				.wp-block-media-text__content {
+					grid-column: 1;
+					grid-row: 2;
+				}
+			}
+		}
+		&.bp-lg {
+			@media (max-width: $vp_lg - 1) {
+				grid-template-columns: 100% !important;
+				.wp-block-media-text__media {
+					grid-column: 1;
+					grid-row: 1;
+				}
+				.wp-block-media-text__content {
+					grid-column: 1;
+					grid-row: 2;
+				}
+			}
+		}
+		&.bp-xl {
+			@media (max-width: $vp_xl - 1) {
+				grid-template-columns: 100% !important;
+				.wp-block-media-text__media {
+					grid-column: 1;
+					grid-row: 1;
+				}
+				.wp-block-media-text__content {
+					grid-column: 1;
+					grid-row: 2;
+				}
+			}
+		}
+		&.is-image-fill {
+			// When Sidebar is present .is-image-fill can become too tall.
+			// The Image needs to be stacked until the Sidebar wraps to the bottom.
+			@at-root #primary.col-xl-8 & {
+				@media (min-width: $vp_lg) and (max-width: $vp_xl - 1) {
+					grid-template-columns: 100% !important;
+					.wp-block-media-text__media {
+						grid-column: 1;
+						grid-row: 1;
+					}
+					.wp-block-media-text__content {
+						grid-column: 1;
+						grid-row: 2;
+					}
+				}
+			}
+		}
+	}
+} // /.wp-block-media-text

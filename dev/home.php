@@ -25,6 +25,23 @@ if ( 'sidebar_none' !== $sidebar_location ) {
 			<main id="main" class="site-main archive-page">
 
 				<?php
+				$page_for_posts       = get_option( 'page_for_posts' );
+				$before_posts_archive = xten_kses_post( get_field( 'before_posts_archive', $page_for_posts, false ) );
+				$after_posts_archive  = xten_kses_post( get_field( 'after_posts_archive', $page_for_posts, false ) );
+				$separator            = ' <!-- separator --> ';
+				$full_string          = $before_posts_archive . $separator . $after_posts_archive;
+				$full_string          = apply_filters( 'the_content', $full_string );
+				$full_string_array    = explode( $separator, $full_string );
+				$before_posts_archive = reset( $full_string_array );
+				$after_posts_archive  = end( $full_string_array );
+
+				if ( $before_posts_archive ) :
+					?>
+					<div class="before-post-archive">
+						<?php echo $before_posts_archive; ?>
+					</div>
+					<?php
+				endif;
 
 				if ( have_posts() ) :
 					/*
@@ -70,6 +87,15 @@ if ( 'sidebar_none' !== $sidebar_location ) {
 							'screen_reader_text' => __( 'Posts navigation', 'xten' ),
 						)
 					);
+
+					if ( $after_posts_archive ) :
+						$after_posts_archive = apply_filters( 'the_content', $after_posts_archive );
+						?>
+						<div class="after-post-archive">
+							<?php echo $after_posts_archive; ?>
+						</div>
+						<?php
+					endif;
 
 				else :
 
