@@ -284,6 +284,69 @@
 			});
 		}
 
+		function getQueryParam(name){
+			var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+			return results ? (results[1] || null) : null;
+		}
+		function setCookie(cname, cvalue, exdays) {
+			exdays = exdays || 7;
+			var d = new Date();
+			d.setTime(d.getTime() + (exdays*24*60*60*1000));
+			var expires = "expires="+ d.toUTCString();
+			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+		}
+		function getCookie(cname) {
+			var name = cname + "=",
+				decodedCookie = decodeURIComponent(document.cookie),
+				ca = decodedCookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length, c.length);
+				}
+			}
+			return "";
+		}
+		function getSetCookie(cname, cvalue, exdays) {
+			var result = getCookie(cname);
+			if ( ! result ) {
+				setCookie(cname, cvalue, exdays)
+				result = getCookie(cname);
+			}
+			return result;
+		}
+		function setClientReferrerTagVal() {
+			$('input[name="client_referrer"]').each(function(){
+				var googleClickId = (
+						getQueryParam('gclid') ||
+						getQueryParam('wbraid') ||
+						getQueryParam('gbraid')
+				),
+					referrerVal = document.referrer || 'no referrer',
+					referrerCookie = getSetCookie('original_referrer', referrerVal),
+					suffix = '',
+					suffixCookie,
+					referrerType,
+					value;
+				if (! googleClickId && window.google_tag_manager) {
+					googleClickId = window.google_tag_manager.reported_gclid;
+				}
+				if (googleClickId) {
+					referrerType = 'Google Paid';
+				}
+				suffixCookie = getSetCookie('original_referrer_type', referrerType);
+				// if googleClickId is found append Type to referrer.
+				if ( suffixCookie ) {
+					suffix = ' - ' + referrerType;
+				}
+				value = referrerCookie + suffix;
+				$(this).val(value);
+			});
+		}
+
 		function readyFuncs() {
 			detectBrowser();
 			sizeContent();
@@ -292,6 +355,7 @@
 			detectMouse();
 			makeCollapseAccessible();
 			movePreloadedLinkToPreloadLocation();
+			setClientReferrerTagVal();
 		}
 
 		/**
