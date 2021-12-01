@@ -121,3 +121,51 @@ function social_media_icons_list_shortcode( $atts = '' ) {
 	return xten_render_component( 'social-media-icons-list' );
 }
 add_shortcode( 'social_media_icons_list', 'social_media_icons_list_shortcode' );
+
+/**
+ * Recent Posts shortcode.
+ */
+function recent_posts_function( $atts ) {
+	// Set Post Type Default to post.
+	$atts['post_type'] = $atts['post_type'] ? : 'post';
+
+	if ( ! empty( $atts['post_parent'] ) && ! is_numeric( $atts['post_parent'] ) ) :
+		$parent_post = get_page_by_title( $atts['post_parent'], 'OBJECT', $atts['post_type'] );
+		$atts['post_parent'] = $parent_post ? $parent_post->ID : null;
+	endif;
+	foreach( $atts as $key=>$att ) :
+		// TODO: figure out an identifier for Arrays instead of this crude method of finding the key.
+		if ( $key === 'post__not_in' ) :
+			// Create our array of values
+			// First, sanitize the data and remove white spaces
+			$no_whitespaces = preg_replace( '/\s*,\s*/', ',', filter_var( $att, FILTER_SANITIZE_STRING ) ); 
+			$atts[$key] = explode( ',', $no_whitespaces );
+		endif;
+	endforeach;
+
+	$posts = query_posts( $atts );
+
+	ob_start();
+	if ( have_posts() ) :
+		?>
+		<div class="archive-list display-flex theme-content component-blog-archive">
+			<?php
+			while ( have_posts() ):
+				the_post();
+				$post_type               = get_post_type();
+				$template_part_post_type = get_post_type() == 'page' ? 'post' : $post_type;
+				$args = array(
+					'use_meta_description' => true,
+					'exclude_date'          => true,
+				);
+				get_template_part( 'template-parts/content-archive', $template_part_post_type, $args );
+			endwhile;
+			?>
+		</div>
+		<?php
+	endif;
+
+	wp_reset_query();
+	return ob_get_clean();
+}
+add_shortcode('recent-posts', 'recent_posts_function');
