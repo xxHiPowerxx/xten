@@ -361,6 +361,12 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 		width: 5em;
 	}
 }
+// Cover Block
+.wp-block-cover-image .wp-block-cover__inner-container,
+.wp-block-cover .wp-block-cover__inner-container {
+  color: inherit !important;
+}
+// /Cover Block
 
 /*--------------------------------------------------------------
 ## Custom block font sizes.
@@ -558,4 +564,36 @@ object {
 
 .gallery-caption {
 	@include font-size-leading(12.8px, 1.5);
+}
+
+
+.archive-list {
+	flex-wrap: wrap;
+	&.component-blog-archive {
+		@include flex-margin(1.5rem);
+	}
+	.listed-post {
+		flex: 1;
+		max-width: 40rem;
+		padding: 0;
+		.featured-image {
+			margin-bottom: 0;
+		}
+		.post-body {
+			padding: 1.5rem;
+			flex: 1;
+			.entry-title {
+				margin-bottom: 0;
+			}
+		}
+		.entry-content {
+			margin-bottom: 1.5rem;
+		}
+		.entry-footer {
+			margin-top: auto;
+			.post-link {
+				margin-left: auto;
+			}
+		}
+	}
 }
