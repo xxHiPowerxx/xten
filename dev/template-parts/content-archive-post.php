@@ -68,20 +68,25 @@
 			<div class="entry-content">
 				<?php
 
-				the_excerpt(
-					sprintf(
-						wp_kses(
-							/* translators: %s: Name of current post. Only visible to screen readers */
-							__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'xten' ),
-							array(
-								'span' => array(
-									'class' => array(),
-								),
-							)
-						),
-						get_the_title()
-					)
-				);
+				// Check if $args['use_meta_description'] is set.
+				if ( $args['use_meta_description'] ) :
+					echo xten_kses_post( xten_get_post_meta_description( $post ) );
+				else:
+					the_excerpt(
+						sprintf(
+							wp_kses(
+								/* translators: %s: Name of current post. Only visible to screen readers */
+								__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'xten' ),
+								array(
+									'span' => array(
+										'class' => array(),
+									),
+								)
+							),
+							get_the_title()
+						)
+					);
+				endif; // endif ( $args['use_meta_description'] ) :
 
 				wp_link_pages(
 					array(
