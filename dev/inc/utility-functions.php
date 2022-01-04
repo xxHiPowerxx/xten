@@ -629,6 +629,21 @@ class XTenUtilities {
 			add_filter( 'the_content', 'check_the_content_for_fancybox', 1 );
 		endif; // endif ( ! function_exists( 'check_the_content_for_fancybox' ) ) :
 
+		/**
+		 * Trim String and use Excerpt apply ellipsis on end.
+		 *
+		 * @param string $string - String to be trimmed.
+		 * @param int $max_words - Number of words before string is trimmed.
+		 */
+		if ( ! function_exists( 'xten_trim_string' ) ) :
+			function xten_trim_string($string, $max_words) {
+				$stripped_content                = strip_tags( $string );
+				$excerpt_length                  = apply_filters( 'excerpt_length', $max_words );
+				$excerpt_more                    = apply_filters( 'excerpt_more', ' [...]' );
+				return wp_trim_words( $stripped_content, $excerpt_length, $excerpt_more );
+			}
+		endif; // endif ( ! function_exists( 'xten_trim_string' ) ) :
+
 		if ( ! function_exists( 'xten_get_post_meta_description' ) ) :
 			/**
 			 * Get Meta Description, Excerpt, or create an excerpt.
