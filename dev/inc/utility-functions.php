@@ -637,9 +637,9 @@ class XTenUtilities {
 		 */
 		if ( ! function_exists( 'xten_trim_string' ) ) :
 			function xten_trim_string($string, $max_words) {
-				$stripped_content                = strip_tags( $string );
-				$excerpt_length                  = apply_filters( 'excerpt_length', $max_words );
-				$excerpt_more                    = apply_filters( 'excerpt_more', ' [...]' );
+				$stripped_content = strip_tags( $string );
+				$excerpt_length   = apply_filters( 'excerpt_length', $max_words );
+				$excerpt_more     = apply_filters( 'excerpt_more', ' [...]' );
 				return wp_trim_words( $stripped_content, $excerpt_length, $excerpt_more );
 			}
 		endif; // endif ( ! function_exists( 'xten_trim_string' ) ) :
