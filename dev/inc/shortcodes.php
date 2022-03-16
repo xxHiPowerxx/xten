@@ -169,3 +169,42 @@ function recent_posts_function( $atts ) {
 	return ob_get_clean();
 }
 add_shortcode('recent-posts', 'recent_posts_function');
+
+/**
+ * Office Locations Shortcode
+ * Renders Office Locations.
+ */
+function xten_button_shortcode( $atts = '', $content = null ) {
+	$atts = shortcode_atts(
+		array(
+			'alt'   => true,
+			'href'  => null,
+			'target'=> null,
+			'class' => '',
+		),
+		$atts
+	);
+	if ( ! $content ) :
+		return;
+	endif;
+	$tag = $atts['href'] ? 'a' : 'button';
+	$href_atts = 'href="' . esc_url( $atts['href'] ) . '"';
+	$href_target = $atts['target'] ?
+		' target="' . $atts['target'] . '"' :
+		null;
+	$tag_atts .= $atts['href'] ?
+		$href_atts . $href_target :
+		'type="button"';
+	$btn_default_classes = 'btn btn-theme-style';
+	$btn_classes = "$btn_default_classes $atts[class]";
+	$tag_atts .= " class=\"$btn_classes\"";
+	ob_start();
+	?>
+	<<?php echo $tag; ?> <?php echo $tag_atts; ?>>
+		<?php echo wp_kses_post( $content ); ?>
+	</<?php echo $tag; ?>>
+	<?php
+	return do_shortcode( ob_get_clean() );
+
+}
+add_shortcode( 'xten_button', 'xten_button_shortcode' );
