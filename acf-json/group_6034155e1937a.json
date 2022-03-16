@@ -20,6 +20,25 @@
             "maxlength": "",
             "rows": 4,
             "new_lines": ""
+        },
+        {
+            "key": "field_62320e395a21a",
+            "label": "Hide From Site Search Results?",
+            "name": "hide_from_site_search_results",
+            "type": "true_false",
+            "instructions": "Choose whether to hide this Post or Page from the site search results.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -37,7 +56,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "Advanced Post Fields such as Custom CSS, etc.",
-    "modified": 1614026149
+    "modified": 1647447763
 }

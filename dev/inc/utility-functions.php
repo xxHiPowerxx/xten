@@ -629,13 +629,13 @@ class XTenUtilities {
 			add_filter( 'the_content', 'check_the_content_for_fancybox', 1 );
 		endif; // endif ( ! function_exists( 'check_the_content_for_fancybox' ) ) :
 
-		/**
-		 * Trim String and use Excerpt apply ellipsis on end.
-		 *
-		 * @param string $string - String to be trimmed.
-		 * @param int $max_words - Number of words before string is trimmed.
-		 */
 		if ( ! function_exists( 'xten_trim_string' ) ) :
+			/**
+			 * Trim String and use Excerpt apply ellipsis on end.
+			 *
+			 * @param string $string - String to be trimmed.
+			 * @param int $max_words - Number of words before string is trimmed.
+			 */
 			function xten_trim_string($string, $max_words) {
 				$stripped_content = strip_tags( $string );
 				$excerpt_length   = apply_filters( 'excerpt_length', $max_words );
@@ -650,7 +650,7 @@ class XTenUtilities {
 			 * @param obj - $post Post Object
 			 * @return string - post Meta Description, Excerpt, or create an excerpt.
 			 */
-			function xten_get_post_meta_description( $post ) {
+			function xten_get_post_meta_description( $post = null ) {
 				if ( ! $post ) :
 					global $post;
 				endif;
@@ -681,6 +681,31 @@ class XTenUtilities {
 				return $description;
 			}
 		endif; // endif ( ! function_exists( 'xten_get_post_meta_description' ) ) :
+
+		if ( ! function_exists( 'xten_exclude_hidden_results_from_search_meta_query' ) ) :
+			/**
+			 * Exlcude Hidden Results from Search Meta Query Arguments
+			 * 
+			 * @return array - The array needed to exlude posts hidden with the option 'Hide From Search Results' on
+			 */
+			function xten_exclude_hidden_results_from_search_meta_query() {
+				$arr = array(
+					'relation' => 'OR',
+					// ONLY show Items WHEN
+					// hide_from_search_results DOES NOT EXIST
+					array(
+						'key' => 'hide_from_search_results',
+						'compare' => 'NOT EXISTS',
+					),
+					// OR hide_from_search_results is set to FALSE
+					array(
+						'key' => 'hide_from_search_results',
+						'value' => 0,
+					),
+				);
+				return $arr;
+			}
+		endif; // endif ( ! function_exists( 'xten_exclude_hidden_results_from_search_meta_query' ) ) :
 
 	}
 	

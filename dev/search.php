@@ -17,8 +17,13 @@ get_header(); ?>
 				wp_print_styles( array( 'xten-search-css' ) );
 				if ( have_posts() ) :
 
-					/* Display the appropriate header when required. */
-					$allsearch = new WP_Query( "s=$s&showposts=-1" );
+					$search_args = array(
+						's'          => $s,
+						'showposts'  => -1,
+						// Use xten_exclude_hidden_results_from_search_meta_query defined in functions.php.
+						'meta_query' => xten_exclude_hidden_results_from_search_meta_query(),
+					);
+					$allsearch = new WP_Query( $search_args );
 					$count     = $allsearch->post_count;
 					/**
 					 * Wrap Search Term in span with yellow background color.
