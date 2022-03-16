@@ -696,3 +696,50 @@ function xten_customize_universal_colors() {
 }
 add_action('admin_print_footer_scripts', 'xten_customize_universal_colors', 0);
 add_action('customize_controls_print_footer_scripts', 'xten_customize_universal_colors', 0);
+
+// Function requires Contact Form 7 to run.
+// Used to Add Server-Side Referrer Page in Hidden CF7 Tag
+(function() {
+	// Bail if Contact Form 7 Plugin is not Activated.
+	$cf7_plugin_file = 'contact-form-7/wp-contact-form-7.php';
+	if ( ! is_plugin_active($cf7_plugin_file) ) :
+		return;
+	endif;
+	/**
+	 * Referer code for contact form 7
+	 * @link https://www.fldtrace.com/referral-conversion-tracking-with-wordpress-contact-form-7
+	 */
+	function getIP() {
+		$sProxy = '';
+		if ( getenv( 'HTTP_CLIENT_IP' ) ) {
+				$sProxy = $_SERVER['REMOTE_ADDR'];
+				$sIP    = getenv( 'HTTP_CLIENT_IP' ) ;
+		} elseif( $_SERVER['HTTP_X_FORWARDED_FOR'] ) {
+				$sProxy = $_SERVER['REMOTE_ADDR'];
+				$sIP    = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+				$sIP    = $_SERVER['REMOTE_ADDR'];
+		}
+		if ( ! empty( $sProxy ) ) {
+				$sIP = $sIP . 'via-proxy:' . $sProxy;
+		}
+		return $sIP;
+	}
+	function setRefererTransient( $uniqueID ) {
+		if ( false === ( $void = get_transient( $uniqueID ) ) ) {
+				// set a transient for 2 hours
+				set_transient( $uniqueID, $_SERVER['HTTP_REFERER'], 60*60*2 );
+		}
+	}
+	function getReferrerPage( $form_tag ) {
+		if ( $form_tag['name'] == 'server_referrer' ) {
+				$uniqueID = getIP();
+				setRefererTransient( $uniqueID );
+				$form_tag['values'][] =  get_transient( $uniqueID );
+		}
+		return $form_tag;
+	}
+	if ( !is_admin() ) {
+		add_filter( 'wpcf7_form_tag', 'getReferrerPage' );
+	}
+})();

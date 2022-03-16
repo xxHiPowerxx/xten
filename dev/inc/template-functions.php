@@ -120,7 +120,7 @@ function xten_add_body_style() {
 
 	// Output the preload markup in <head>.
 	foreach ( $preloads as $handle => $src ) {
-		echo '<link rel="preload" id="' . esc_attr( $handle ) . '-preload" href="' . esc_url( $src ) . '" as="style" />';
+		echo '<link rel="stylesheet preload prefetch" id="' . esc_attr( $handle ) . '-preload" href="' . esc_url( $src ) . '" as="style" />';
 		echo "\n";
 	}
 
