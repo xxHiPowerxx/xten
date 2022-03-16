@@ -70,7 +70,7 @@
 
 				// Check if $args['use_meta_description'] is set.
 				if ( $args['use_meta_description'] ) :
-					echo xten_kses_post( xten_get_post_meta_description( $post ) );
+					echo xten_kses_post( xten_get_post_meta_description( $post = null ) );
 				else:
 					the_excerpt(
 						sprintf(
