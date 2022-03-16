@@ -24,7 +24,7 @@
         {
             "key": "field_62320e395a21a",
             "label": "Hide From Site Search Results?",
-            "name": "hide_from_site_search_results",
+            "name": "hide_from_search_results",
             "type": "true_false",
             "instructions": "Choose whether to hide this Post or Page from the site search results.",
             "required": 0,
@@ -58,5 +58,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "Advanced Post Fields such as Custom CSS, etc.",
-    "modified": 1647447763
+    "modified": 1647470429
 }

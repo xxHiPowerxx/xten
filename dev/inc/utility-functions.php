@@ -682,33 +682,8 @@ class XTenUtilities {
 			}
 		endif; // endif ( ! function_exists( 'xten_get_post_meta_description' ) ) :
 
-		if ( ! function_exists( 'xten_exclude_hidden_results_from_search_meta_query' ) ) :
-			/**
-			 * Exlcude Hidden Results from Search Meta Query Arguments
-			 * 
-			 * @return array - The array needed to exlude posts hidden with the option 'Hide From Search Results' on
-			 */
-			function xten_exclude_hidden_results_from_search_meta_query() {
-				$arr = array(
-					'relation' => 'OR',
-					// ONLY show Items WHEN
-					// hide_from_search_results DOES NOT EXIST
-					array(
-						'key' => 'hide_from_search_results',
-						'compare' => 'NOT EXISTS',
-					),
-					// OR hide_from_search_results is set to FALSE
-					array(
-						'key' => 'hide_from_search_results',
-						'value' => 0,
-					),
-				);
-				return $arr;
-			}
-		endif; // endif ( ! function_exists( 'xten_exclude_hidden_results_from_search_meta_query' ) ) :
-
 	}
-	
+
 }
 
 $ob = new XTenUtilities();

@@ -20,7 +20,7 @@ get_header(); ?>
 					$search_args = array(
 						's'          => $s,
 						'showposts'  => -1,
-						// Use xten_exclude_hidden_results_from_search_meta_query defined in functions.php.
+						// Use xten_exclude_hidden_results_from_search_meta_query.
 						'meta_query' => xten_exclude_hidden_results_from_search_meta_query(),
 					);
 					$allsearch = new WP_Query( $search_args );

@@ -743,3 +743,37 @@ add_action('customize_controls_print_footer_scripts', 'xten_customize_universal_
 		add_filter( 'wpcf7_form_tag', 'getReferrerPage' );
 	}
 })();
+
+if ( ! function_exists( 'xten_exclude_hidden_results_from_search_meta_query' ) ) :
+	function xten_exclude_hidden_results_from_search_meta_query() {
+		/**
+		 * Exlcude Hidden Results from Search Meta Query Arguments
+		 * 
+		 * @return array - The array needed to exlude posts hidden with the option 'Hide From Search Results' on
+		 */
+		$arr = array(
+			'relation' => 'OR',
+			// ONLY show Items WHEN
+			// hide_from_search_results DOES NOT EXIST
+			array(
+				'key' => 'hide_from_search_results',
+				'compare' => 'NOT EXISTS',
+			),
+			// OR hide_from_search_results is set to FALSE
+			array(
+				'key' => 'hide_from_search_results',
+				'value' => 0,
+			),
+		);
+		return $arr;
+	}
+endif; // endif ( ! function_exists( 'xten_exclude_hidden_results_from_search_meta_query' ) ) :
+
+if ( ! function_exists( 'exclude_pages_from_search' ) ) :
+	function exclude_pages_from_search($query) {
+		if ( !is_admin() && $query->is_main_query() && $query->is_search ) :
+			$query->set('meta_query', xten_exclude_hidden_results_from_search_meta_query());
+		endif;
+	}
+	add_action('pre_get_posts','exclude_pages_from_search');
+endif; // endif ( ! function_exists( 'exclude_pages_from_search' ) ) :
