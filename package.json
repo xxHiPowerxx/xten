@@ -2,7 +2,7 @@
   "name": "xten",
   "version": "1.0.3",
   "description": "A progressive theme development rig for WordPress.",
-  "author": "Morten Rand-Hendriksen",
+  "author": "Ricky Adams",
   "license": "GPL-3.0",
   "main": "index.php",
   "homepage": "https://github.com/xten/xten#readme",
@@ -78,6 +78,7 @@
   },
   "scripts": {
     "watch": "gulp",
+    "watchBS": "gulp firstRunBS",
     "build": "gulp bundleTheme",
     "composer": "composer install"
   }

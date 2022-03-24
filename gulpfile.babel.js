@@ -216,6 +216,15 @@ export function images() {
  * Watch everything
  */
 export function watch() {
+	gulp.watch(paths.php.src, gulp.series(php));
+	gulp.watch(paths.config.themeConfig, gulp.series(php));
+	gulp.watch(paths.styles.sass, gulp.series(sassStyles));
+	gulp.watch(paths.scripts.src, gulp.series(scripts));
+	gulp.watch(paths.scripts.min, gulp.series(jsMin));
+	gulp.watch(paths.scripts.libs, gulp.series(jsLibs));
+	gulp.watch(paths.images.src, gulp.series(images));
+}
+export function watchBS() {
 	gulp.watch(paths.php.src, gulp.series(php, reload));
 	gulp.watch(paths.config.themeConfig, gulp.series(php, reload));
 	gulp.watch(paths.styles.sass, gulp.series(sassStyles, reload));
@@ -229,13 +238,15 @@ export function watch() {
 /**
  * Map out the sequence of events on first load:
  */
-const firstRun = gulp.series(php, gulp.parallel(scripts, jsMin, jsLibs), sassStyles, images, serve, watch);
+const firstRun = gulp.series(php, gulp.parallel(scripts, jsMin, jsLibs), sassStyles, images, watch);
+const firstRunBS = gulp.series(php, gulp.parallel(scripts, jsMin, jsLibs), sassStyles, images, serve, watchBS);
 
 
 /**
  * Run the whole thing.
  */
 export default firstRun;
+export {firstRunBS};
 
 /**
  * Clean Dist
