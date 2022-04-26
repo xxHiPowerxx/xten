@@ -181,6 +181,19 @@ function xten_styles() {
 		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fancybox/jquery.fancybox.min.css' ), array(), $fancybox_version, 'all' );
 	}
 
+	// AOS Vendor
+	// AOS JS
+	$aos_version = '2.3.4';
+	$handle = 'xten-vendor-aos-js';
+	if ( ! wp_script_is( $handle, 'registered' ) ) {
+		wp_register_script( $handle, get_theme_file_uri( '/assets/vendor/aos/aos.js' ), array(), $aos_version, true );
+	}
+	// AOS CSS
+	$handle = 'xten-vendor-aos-css';
+	if ( ! wp_style_is( $handle, 'registered' ) ) {
+		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/aos/aos.css' ), array(), $aos_version, 'all' );
+	}
+
 	// /Vendor
 
 	// Shared
@@ -606,7 +619,7 @@ function xten_define_global_theme_variables() {
 
 	// Fonts
 	$primary_font_family   = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"opensans", "serif":"sans-serif"}' ) );
-	$secondary_font_family = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"roboto", "serif":"sans-serif"}' ) );
+	$secondary_font_family = json_decode( get_theme_mod( 'secondary_font_family', '{"type":"google", "value":"roboto", "serif":"sans-serif"}' ) );
 
 	// Primary Font.
 	$primary_font_fallback   = $primary_font_family->serif === 'sans-serif' ?

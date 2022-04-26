@@ -404,7 +404,11 @@ class XTenUtilities {
 					),
 					'g'     => array( 'fill' => true ),
 					'title' => array( 'title' => true ),
-					'path'  => array( 'd' => true, 'fill' => true, ),
+					'path'  => array(
+						'd'     => true,
+						'fill'  => true,
+						'style' => true,
+					),
 				);
 				$allowed_tags = array_merge( $kses_defaults, $svg_args );
 		
@@ -418,6 +422,7 @@ class XTenUtilities {
 				return wp_kses( $string, $allowed_tags );
 			}
 		endif; // endif ( ! function_exists( 'xten_kses_post' ) ) :
+
 		if ( ! function_exists( 'xten_get_reuseable_block' ) ) :
 			/**
 			 * Gets Reusable Block by String, Post Object, or ID.
@@ -583,37 +588,66 @@ class XTenUtilities {
 			}
 		endif; // endif ( ! function_exists( 'merge_inner_blocks_with_parent' ) ) :
 
-		if ( ! function_exists( 'check_the_content_for_fancybox' ) ) :
+		if ( ! function_exists( 'check_the_content_for_keyword' ) ) :
+			function check_the_content_for_keyword( $args ) {
+				$content  = $args['content'];
+				$keywords = $args['keywords'];
+				$keywords_found_in_content = array();
+		
+				foreach( $keywords as $keyword ) :
+					$keyword_found_in_content = false;
+					$blocks_contain_keyword   = false;
+					// Find blocks if they exist (particularly re-usable blocks).
+					if ( has_blocks( $content ) ) :
+						$blocks = parse_blocks( $content );
+						$blocks = merge_inner_blocks_with_parent( $blocks );
+						foreach ( $blocks as $block ) :
+							$block_content = $block['innerHTML'];
+							// Reusable blocks have an ['attrs'] called ['ref']
+							// Check to see if is Reusable Block.
+							if ( $block['attrs']['ref'] ) :
+								// If so, get the block content.
+								$block_post_object = get_post( $block['attrs']['ref'] );
+								$block_content .= $block_post_object->post_content;
+							endif;
+							if ( strpos( $block_content, $keyword ) ) :
+								$blocks_contain_keyword = true;
+								break; // stop looking.
+							endif;
+						endforeach;
+					endif;
+		
+					// Check if either the Content or the Blocks contain $keyword.
+					if (
+						strpos( $content, $keyword ) ||
+						$blocks_contain_keyword
+					) :
+						$keyword_found_in_content = true;
+					endif;
+					$keywords_found_in_content[$keyword] = $keyword_found_in_content;
+				endforeach;
+		
+				return $keywords_found_in_content;
+			}
+		endif; // endif ( ! function_exists( 'check_the_content_for_keyword' ) ) :
+		
+		if ( ! function_exists( 'load_assets_if_keyword_in_content' ) ) :
 			/**
 			 * Check the_content for .fancybox and Load up Fancybox Assets.
 			 */
-			function check_the_content_for_fancybox( $content ) {
-				$blocks_contain_fancybox = false;
-				// Find blocks if they exist (particularly re-usable blocks).
-				if ( has_blocks( $content ) ) :
-					$blocks = parse_blocks( $content );
-					$blocks = merge_inner_blocks_with_parent( $blocks );
-					foreach ( $blocks as $block ) :
-						$block_content = $block['innerHTML'];
-						// Reusable blocks have an ['attrs'] called ['ref']
-						// Check to see if is Reusable Block.
-						if ( $block['attrs']['ref'] ) :
-							// If so, get the block content.
-							$block_post_object = get_post( $block['attrs']['ref'] );
-							$block_content .= $block_post_object->post_content;
-						endif;
-						if ( strpos( $block_content, 'fancybox' ) ) :
-							$blocks_contain_fancybox = true;
-							break; // stop looking.
-						endif;
-					endforeach;
-				endif;
+			function load_assets_if_keyword_in_content( $content ) {
 		
-				// Check if either the Content or the Blocks contain 'fancybox'.
-				if (
-					strpos( $content, 'fancybox' ) ||
-					$blocks_contain_fancybox
-				) :
+				$args = array(
+					'content'  => $content,
+					'keywords' => array(
+						'fancybox',
+						'data-aos',
+					),
+				);
+		
+				$keywords_in_content_results = check_the_content_for_keyword( $args );
+				
+				if ( $keywords_in_content_results['fancybox'] === true ) :
 					$handle = 'xten-fancybox-js';
 					if ( ! wp_style_is( $handle, 'enqueued' ) ) :
 						wp_enqueue_script( $handle );
@@ -624,10 +658,21 @@ class XTenUtilities {
 					endif;
 				endif;
 		
+				if ( $keywords_in_content_results['data-aos'] === true ) :
+					$handle = 'xten-aos-js';
+					if ( ! wp_style_is( $handle, 'enqueued' ) ) :
+						wp_enqueue_script( $handle );
+					endif;
+					$handle = 'xten-vendor-aos-css';
+					if ( ! wp_style_is( $handle, 'enqueued' ) ) :
+						wp_enqueue_style( $handle );
+					endif;
+				endif;
+		
 				return $content;
 			}
-			add_filter( 'the_content', 'check_the_content_for_fancybox', 1 );
-		endif; // endif ( ! function_exists( 'check_the_content_for_fancybox' ) ) :
+			add_filter( 'the_content', 'load_assets_if_keyword_in_content', 1 );
+		endif; // endif ( ! function_exists( 'load_assets_if_keyword_in_content' ) ) :
 
 		if ( ! function_exists( 'xten_trim_string' ) ) :
 			/**
