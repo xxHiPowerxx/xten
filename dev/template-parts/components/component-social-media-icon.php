@@ -37,7 +37,7 @@ function component_social_media_icon( $account ) {
 		null;
 	ob_start();
 	?>
-	<a id="<?php echo esc_attr( $component_id ); ?>" class="component-<?php echo $handle; ?> fab<?php echo $icon_class; ?>" <?php echo $href; ?><?php echo $title_attr ?>></a>
+	<a id="<?php echo esc_attr( $component_id ); ?>" class="component-<?php echo $handle; ?>" <?php echo $href; ?> <?php echo $title_attr ?>><span class="fab<?php echo $icon_class; ?> <?php echo $handle; ?>"></span></a>
 	<?php
 	$html = ob_get_clean();
 
