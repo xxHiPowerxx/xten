@@ -93,9 +93,10 @@ function process_inline_css() {
 
 	// Site Footer
 	$xten_footer = array(
-		'bg_color'   => array(),
-		'color'      => esc_attr( get_theme_mod( 'xten_footer_color', '#ffffff' ) ),
-		'link_color' => esc_attr( get_theme_mod( 'xten_footer_link_color', '#ffffff' ) ),
+		'bg_color'     => array(),
+		'color'        => esc_attr( get_theme_mod( 'xten_footer_color', '#ffffff' ) ),
+		'link_color'   => esc_attr( get_theme_mod( 'xten_footer_link_color', '#ffffff' ) ),
+		'bg_image_url' => esc_attr( get_theme_mod( 'footer_bg_image', null ) ),
 	);
 	// Footer Background Color w/ Opacity.
 	$xten_footer['bg_color']['value'] = esc_attr( get_theme_mod( 'xten_footer_bg_color', '#2e528a' ) ) ? : 'transparent';
@@ -106,7 +107,7 @@ function process_inline_css() {
 	);
 	// /Footer Background Color w/ Opacity.
 	$footer_styles .= xten_add_inline_style(
-		'.site-footer',
+		'.site-footer-inner',
 		array(
 			'background-color' => $xten_footer['bg_color']['value'],
 			'color'            => $xten_footer['color'],
@@ -116,6 +117,12 @@ function process_inline_css() {
 		'.site-footer a, .site-footer a:hover',
 		array(
 			'color' => $xten_footer['link_color'],
+		)
+	);
+	$footer_styles .= xten_add_inline_style(
+		'.site-footer',
+		array(
+			'background-image' => "url('$xten_footer[bg_image_url]');",
 		)
 	);
 	// /Site Footer
@@ -164,6 +171,7 @@ function process_inline_css() {
 	// Primary Font.
 	$primary_font_family   = $GLOBALS['xten_theme_fonts']['font_objects']['primary_font_object'];
 	$secondary_font_family = $GLOBALS['xten_theme_fonts']['font_objects']['secondary_font_object'];
+
 	$primary_font_fallback   = $primary_font_family->serif === 'sans-serif' ?
 		'Helvetica, Arial, sans-serif' :
 		'Times New Roman, serif';
@@ -207,7 +215,7 @@ function process_inline_css() {
 	'}';
 
 	// Assign Styles.
-	$styles .= 'h1,.section-heading{' .
+	$styles .= 'h1,xten-h1,h2,xten-h2,h3,xten-h3,h4,xten-h4,h5,xten-h5,h6,xten-h6,.font-fam-secondary,.section-heading{' .
 		'font-family:' . $secondary_font_w_fallback . ';' .
 	'}' .
 	'.xten-theme-bg-color, .pagination .current, .search-form button:hover{' .
@@ -258,11 +266,8 @@ function process_inline_css() {
 	$styles      .= $header_styles;
 	$styles      .= $footer_styles;
 
-	$body_styles .= 'body,button,input,optgroup,select,textarea{' .
+	$body_styles .= 'body,button,input,optgroup,select,textarea,.font-fam-primary{' .
 		'font-family:' . $primary_font_w_fallback . ';' .
-		'}' .
-		'h2,h3,h4,h5,h6,.xten-highlight-font{' .
-			'font-family:' . $primary_font_w_fallback . ';' .
 		'}';
 
 	$display_load_splash = get_theme_mod( 'xten_display_load_splash', true );

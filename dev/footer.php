@@ -22,84 +22,99 @@ xten_post_custom_css();
 					$site_info_content = ( ! $site_info_content ) ? $site_info_default : $site_info_content;
 
 					//   Site Footer   //
+					$footer_custom_logo_svg  = get_theme_mod( 'footer_custom_logo_svg', null );
+					$footer_custom_logo      = get_theme_mod( 'footer_custom_logo', null );
+					$footer_logo             = $footer_custom_logo_svg ?
+						:
+						(
+							$footer_custom_logo ?
+								:
+								$GLOBALS['xten-site-logo']
+						);
 					$xten_footer_orientation = esc_attr ( xten_snake_to_dash( get_theme_mod( 'xten_footer_orientation', 'footer_logo_on_top' ) ) );
 					$xten_site_phone_number_with_logo_footer = esc_attr ( get_theme_mod( 'xten_site_phone_number_with_logo_footer', false ) );
-					$footer_attrs = array(
-						'id'                      => 'colophon',
-						'class'                   => 'site-footer',
-						'data-footer-orientation' => $xten_footer_orientation,
+					$footer_has_bg_image = get_theme_mod( 'footer_bg_image', null ) ?
+						'true' :
+						'false';
+					$footer_attrs            = array(
+						'id'                             => 'colophon',
+						'class'                          => 'site-footer',
+						'data-footer-orientation'        => $xten_footer_orientation,
 						'data-display-site-phone-number' => $xten_site_phone_number_with_logo_footer,
+						'data-has-bg-image'              => $footer_has_bg_image,
 					);
 					$footer_attrs_s = xten_stringify_attrs( $footer_attrs );
 					?>
 					<footer <?php echo $footer_attrs_s; ?>>
-						<div class="container container-ext footer-container">
-							<div class="footer-content-wrapper">
-								<div class="site-logo-wrapper">
-									<?php
-									$child_logo_type   = ' logo-type-' . str_replace( '_', '-', $GLOBALS['xten-logo-type'] );
-									$logo_link_classes = 'custom-logo-link' . $child_logo_type;
-									$logo_link_attrs   = xten_stringify_attrs( array(
-										'class'    => $logo_link_classes,
-										'href'     => esc_url( home_url( '/' ) ),
-										'rel'      => 'home',
-										'itemprop' => 'url',
-										'title'    => $site_name,
-									) );
-									?>
-									<a <?php echo $logo_link_attrs; ?>>
-										<span class="hide-me">Home Link</span>
-										<div class="ctnr-custom-logo">
-											<?php echo $GLOBALS['xten-site-logo']; ?>
-										</div>
-									</a>
-									<?php
-									if ( $xten_site_phone_number_with_logo_footer ) :
-										echo get_site_phone_number_func(true);
-									endif;
-									?>
-								</div>
-								<?php
-								if (
-									is_active_sidebar( 'footer-1' ) ||
-									is_active_sidebar( 'footer-2' ) ||
-									is_active_sidebar( 'footer-3' ) ||
-									is_active_sidebar( 'footer-4' )
-								) :
-									?>
-									<div class="footer-wrapper">
+						<div class="site-footer-inner">
+							<div class="container container-ext footer-container">
+								<div class="footer-content-wrapper">
+									<div class="site-logo-wrapper">
 										<?php
-										if ( is_active_sidebar( 'footer-1' ) ) :
-											?>
-											<div class="footer-1-wrapper">
-												<?php dynamic_sidebar( 'footer-1' ); ?>
+										$child_logo_type   = ' logo-type-' . str_replace( '_', '-', $GLOBALS['xten-logo-type'] );
+										$logo_link_classes = 'custom-logo-link' . $child_logo_type;
+										$logo_link_attrs   = xten_stringify_attrs( array(
+											'class'    => $logo_link_classes,
+											'href'     => esc_url( home_url( '/' ) ),
+											'rel'      => 'home',
+											'itemprop' => 'url',
+											'title'    => $site_name,
+										) );
+										?>
+										<a <?php echo $logo_link_attrs; ?>>
+											<span class="hide-me">Home Link</span>
+											<div class="ctnr-custom-logo">
+												<?php echo $footer_logo; ?>
 											</div>
-											<?php
-										endif;
-										if ( is_active_sidebar( 'footer-2' ) ) :
-											?>
-											<div class="footer-2-wrapper">
-												<?php dynamic_sidebar( 'footer-2' ); ?>
-											</div>
-											<?php
-										endif;
-										if ( is_active_sidebar( 'footer-3' ) ) :
-											?>
-											<div class="footer-3-wrapper">
-												<?php dynamic_sidebar( 'footer-3' ); ?>
-											</div>
-											<?php
-										endif;
-										if ( is_active_sidebar( 'footer-4' ) ) :
-											?>
-											<div class="footer-4-wrapper">
-												<?php dynamic_sidebar( 'footer-4' ); ?>
-											</div>
-											<?php
+										</a>
+										<?php
+										if ( $xten_site_phone_number_with_logo_footer ) :
+											echo get_site_phone_number_func(true);
 										endif;
 										?>
 									</div>
-								<?php endif; // endif ( is_active_sidebar( 'footer-1' ) || ) ?>
+									<?php
+									if (
+										is_active_sidebar( 'footer-1' ) ||
+										is_active_sidebar( 'footer-2' ) ||
+										is_active_sidebar( 'footer-3' ) ||
+										is_active_sidebar( 'footer-4' )
+									) :
+										?>
+										<div class="footer-wrapper">
+											<?php
+											if ( is_active_sidebar( 'footer-1' ) ) :
+												?>
+												<div class="footer-1-wrapper">
+													<?php dynamic_sidebar( 'footer-1' ); ?>
+												</div>
+												<?php
+											endif;
+											if ( is_active_sidebar( 'footer-2' ) ) :
+												?>
+												<div class="footer-2-wrapper">
+													<?php dynamic_sidebar( 'footer-2' ); ?>
+												</div>
+												<?php
+											endif;
+											if ( is_active_sidebar( 'footer-3' ) ) :
+												?>
+												<div class="footer-3-wrapper">
+													<?php dynamic_sidebar( 'footer-3' ); ?>
+												</div>
+												<?php
+											endif;
+											if ( is_active_sidebar( 'footer-4' ) ) :
+												?>
+												<div class="footer-4-wrapper">
+													<?php dynamic_sidebar( 'footer-4' ); ?>
+												</div>
+												<?php
+											endif;
+											?>
+										</div>
+									<?php endif; // endif ( is_active_sidebar( 'footer-1' ) || ) ?>
+								</div>
 							</div>
 						</div>
 						<div class="site-info-footer-wrapper">
