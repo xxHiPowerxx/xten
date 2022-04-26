@@ -1367,8 +1367,18 @@ article.page {
 			margin: 0;
 		}
 	}
+	&[data-footer-orientation="footer-logo-on-top"] {
+		.site-logo-wrapper {
+			justify-content: center;
+		}
+	}
 	.site-logo-wrapper {
 		width: 100%;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		font-size: 4rem;
+		@include flex-margin(.25em);
 	}
 
 	// TODO: Remove .site-footer-content when updating Social Media Links to component-based.
