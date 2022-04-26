@@ -1,4 +1,12 @@
 <?php
+/**
+ * Included file for Mobile-Menu included in header.php
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package xten
+ */
+
 $site_name                 = esc_attr( get_bloginfo() );
 $menu_name                 = 'primary';
 $locations                 = get_nav_menu_locations();
@@ -10,12 +18,12 @@ if ( $locations && isset( $locations[ $menu_name ] ) ) :
 	$primary_menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
 	if ( $primary_menu ) :
 		$menu_items = wp_get_nav_menu_items( $primary_menu->term_id );
-		endif;
 	endif;
+endif;
 
-	$mobile_menu_bottom_active = is_active_sidebar( 'mobile-menu-bottom' );
+$mobile_menu_bottom_active = is_active_sidebar( 'mobile-menu-bottom' );
 
-	// Store result in variable to be later used to validate .mobile-navigation.
+// Store result in variable to be later used to validate .mobile-navigation.
 ?>
 <div id="menu-wrapper" class="<?php echo esc_attr( $header_selection_class ); ?>" data-mobile-nav-breakpoint="<?php echo esc_attr( $mobile_nav_breakpoint ); ?>">
 	<div id="mobile-sidebar" class="mobile-sidebar collapse"> <!-- Mobile Nav -->
@@ -76,14 +84,3 @@ if ( $locations && isset( $locations[ $menu_name ] ) ) :
 		endif;
 		?>
 	</div><!-- .mobile-sidebar -->
-
-	<?php
-
-	$size_header_pad = 'sizeHeaderPad';
-	$size_header_ref = 'sizeHeaderRef';
-
-	?>
-	<div class="header-wrapper sizeHeaderRef">
-		<?php require_once get_template_directory() . '/inc/header/desktop-menu.php'; ?>
-	</div>
-</div>
