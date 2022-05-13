@@ -960,6 +960,10 @@ body input:focus {
 
 :root {
 	--card-style: #{$card-style};
+	--box-shadow: #{$box-shadow};
+	--box-shadow-em: #{$box-shadow-em};
+	--text-shadow: #{$text-shadow};
+	--smooth-transition: #{$smooth-transition};
 }
 .card-style {
 	// TODO: Remove Background Color and Test.
@@ -969,6 +973,15 @@ body input:focus {
 	&.content-area {
 		padding: 1.5rem;
 	}
+}
+.box-shadow {
+	@include box-shadow;
+}
+.box-shadow-em {
+	@include box-shadow-em;
+}
+.text-shadow {
+	@include text-shadow;
 }
 
 /*--------------------------------------------------------------

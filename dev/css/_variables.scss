@@ -200,6 +200,26 @@ $card-style: 0 0.1rem 0.25rem rgba(15, 15, 15, 0.35);
 	box-shadow: $card-style;
 	box-shadow: var(--card-style);
 }
+$box-shadow: 0 0.1rem 0.25rem rgba(15, 15, 15, 0.35);
+@mixin box-shadow {
+	box-shadow: $box-shadow;
+	box-shadow: var(--box-shadow);
+}
+$box-shadow: 0 0.1rem 0.25rem rgba(black, 0.35);
+@mixin box-shadow {
+	box-shadow: $box-shadow;
+	box-shadow: var(--box-shadow);
+}
+$box-shadow-em: 0 .05em .05em rgba(black, 0.35);
+@mixin box-shadow-em {
+	box-shadow: $box-shadow-em;
+	box-shadow: var(--box-shadow-em);
+}
+$text-shadow: 0 0.05em 0.05em rgba(black, 0.35);
+@mixin text-shadow {
+	text-shadow: $text-shadow;
+	text-shadow: var(--text-shadow);
+}
 
 /*-----EVERYTHING ELSE-----*/
 $global_line_height: 1.4rem;
