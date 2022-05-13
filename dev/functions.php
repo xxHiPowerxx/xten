@@ -165,7 +165,7 @@ function xten_styles() {
 	// Fontawesome.
 	$handle = 'xten-vendor-fontawesome-css';
 	if ( ! wp_style_is( $handle, 'registered' ) ) {
-		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), '5.7.1', 'all' );
+		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), '6.1.1', 'all' );
 	}
 
 	// Fancybox Vendor
@@ -656,19 +656,22 @@ function xten_define_theme_css() {
 		if ( $value === null ) :
 			continue;
 		endif;
-		$name_f        = xten_snake_to_dash( $name );
-		$name_bg       = str_replace( 'color', 'bg-color', $name_f );
-		$css           .= ".$name_f{color:$value;}";
+		$name_c        = xten_snake_to_dash( $name );
+		$name_bg       = str_replace( 'color', 'bg-color', $name_c );
+		$css           .= ".$name_c{color:$value;}";
 		$css           .= ".$name_bg{background-color:$value;}";
-		$css_variables .= "--$name_f:$value;";
+		$css_variables .= "--$name_c:$value;";
+		// Add !important Variant of each.
+		$name_c_i      = "$name_c-i";
+		$name_bg_i     = "$name_bg-i";
+		$css           .= ".$name_c_i{color:$value !important;}";
+		$css           .= ".$name_bg_i{background-color:$value !important;}";
 	endforeach;
 	// /Colors
 	// Fonts
 	foreach( $GLOBALS['xten_theme_fonts']['font_families'] as $name => $value ) :
 		$name_f         = xten_snake_to_dash( $name );
 		$css           .= '.' . $name_f . '{font-family:' . $value . ';}';
-		// var_dump('.' . $name_f . '{font-family:' . $value} . ')';
-		// die;
 		$css_variables .= '--' . $name_f . ':' . $value . ';';
 	endforeach;
 	// /Fonts
