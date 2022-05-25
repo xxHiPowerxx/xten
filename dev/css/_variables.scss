@@ -10,7 +10,7 @@ $orange-gold: #cc9d0d;
 $light-gray: #ccc;
 $gray: #596068;
 $mobile-gray: #596068;
-$mobile-trans-gray: rgba(0, 0, 0, 0.35);
+$mobile-trans-gray: rgba(0, 0, 0, .35);
 $dark-gray: #333;
 $red: #d54e21;
 $light-yellow: #fff9c0;
@@ -127,11 +127,11 @@ $vp_xl: 1680px;
 $vp_xxl: 1920px;
 
 /*-----OPACITY----------*/
-$opacity_eighty: 0.8;
+$opacity_eighty: .8;
 $opacity_zero: 0;
 
 /*-----TRANSITIONS------*/
-$smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+$smooth-transition: all .35s cubic-bezier(.22, .61, .36, 1);
 @mixin smooth-transition {
 	transition: $smooth-transition;
 }
@@ -195,27 +195,27 @@ $smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 	margin: $size auto; //Fallback in px
 	margin: calculateRem($size) auto;
 }
-$card-style: 0 0.1rem 0.25rem rgba(15, 15, 15, 0.35);
+$card-style: 0 .1rem .25rem rgba(15, 15, 15, .35);
 @mixin card-style {
 	box-shadow: $card-style;
 	box-shadow: var(--card-style);
 }
-$box-shadow: 0 0.1rem 0.25rem rgba(15, 15, 15, 0.35);
+$box-shadow: 0 .1rem .25rem rgba(15, 15, 15, .35);
 @mixin box-shadow {
 	box-shadow: $box-shadow;
 	box-shadow: var(--box-shadow);
 }
-$box-shadow: 0 0.1rem 0.25rem rgba(black, 0.35);
+$box-shadow: 0 .1rem .25rem rgba(black, .35);
 @mixin box-shadow {
 	box-shadow: $box-shadow;
 	box-shadow: var(--box-shadow);
 }
-$box-shadow-em: 0 .05em .05em rgba(black, 0.35);
+$box-shadow-em: 0 .5em .5em rgba(black, .35);
 @mixin box-shadow-em {
 	box-shadow: $box-shadow-em;
 	box-shadow: var(--box-shadow-em);
 }
-$text-shadow: 0 0.05em 0.05em rgba(black, 0.35);
+$text-shadow: 0 .1em .1em rgba(black, .35);
 @mixin text-shadow {
 	text-shadow: $text-shadow;
 	text-shadow: var(--text-shadow);

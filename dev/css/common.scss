@@ -1669,12 +1669,13 @@ article.page {
 }
 
 .landscape-img,
-.landscape-div {
+.landscape-div,
+.square-div,
+.square-img {
 	position: relative;
 	&:before {
 		content: "";
 		display: block;
-		padding-bottom: 56.25%;
 	}
 	> * {
 		width: 100%;
@@ -1686,7 +1687,20 @@ article.page {
 		transform: translate3d(-50%, -50%, 0);
 	}
 }
+.landscape-div
 .landscape-img {
+	&:before {
+		padding-bottom: 56.25%;
+	}
+}
+.square-div
+.square-img {
+	&:before {
+		padding-bottom: 100%;
+	}
+}
+.landscape-img,
+.square-img {
 	display: block;
 	overflow: hidden;
 }
