@@ -18,7 +18,7 @@
 		<?php wp_head(); ?>
 	</head>
 
-	<body data-spy="scroll" data-target="#xten-scroll-nav" data-offset="100">
+	<body data-spy="scroll" data-target="#xten-scroll-nav" data-offset="100" <?php body_class(); ?>>
 
 		<div id="load-splash" class="loading">
 			<?php
