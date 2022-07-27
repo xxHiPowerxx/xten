@@ -371,6 +371,33 @@ textarea {
 	/* 2 */
 }
 
+//   Forms/Inputs
+.form-group,
+.form-control {
+	font-size: 2rem;
+}
+.form-group {
+	label {
+		font-size: .8em;
+	}
+	.form-control {
+		font-size: inherit;
+		padding: .15em .25em;
+		line-height: 1;
+	}
+	textarea {
+		&.form-control {
+			line-height: 1.25;
+		}
+	}
+}
+.wpcf7-not-valid-tip {
+	&[class*="wpcf7-not-valid-tip"] {
+		font-size: .75em;
+	}
+}
+//   /Forms/Inputs
+
 /* Interactive
    ========================================================================== */
 
@@ -1687,13 +1714,13 @@ article.page {
 		transform: translate3d(-50%, -50%, 0);
 	}
 }
-.landscape-div
+.landscape-div,
 .landscape-img {
 	&:before {
 		padding-bottom: 56.25%;
 	}
 }
-.square-div
+.square-div,
 .square-img {
 	&:before {
 		padding-bottom: 100%;
@@ -1872,3 +1899,28 @@ html {
 	}
 }
 // /.wp-block-embed-youtube
+
+// .wp-block-gallery
+.wp-block-gallery {
+	&.xten-gallery {
+		figure.wp-block-image {
+			figcaption {
+				position: static;
+				font-size: 1.6rem;
+				background-image: none;
+				color: $black;
+			}
+		}
+	}
+}
+// /.wp-block-gallery
+
+.background-attachment-fixed {
+	background-attachment: fixed;
+	&.wp-block-cover {
+		background-attachment: initial;
+		.wp-block-cover__gradient-background.has-background-gradient {
+			background-attachment: fixed !important;
+		}
+	}
+}
