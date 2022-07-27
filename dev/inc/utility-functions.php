@@ -700,7 +700,7 @@ class XTenUtilities {
 					global $post;
 				endif;
 
-				$post_id = $post->ID;
+				$post_id     = $post->ID;
 				$description = get_post_meta($post_id, '_yoast_wpseo_metadesc', true);
 
 				if ( empty( $description ) ) :
