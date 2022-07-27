@@ -2,6 +2,7 @@
 
 .component-social-media-icons-list {
 	display: flex;
+	justify-content: center;
 	@include flex-margin(.75rem);
 }
 .component-social-media-icon {
