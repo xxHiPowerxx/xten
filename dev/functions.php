@@ -240,15 +240,17 @@ function admin_style() {
 add_action( 'admin_enqueue_scripts', 'admin_style' );
 
 /**
- * Add class to body if device is mobile.
+ * Add class to body if front page.
  */
-function xten_is_mobile( $classes ) {
+function xten_add_classes_to_body( $classes ) {
+	// Add class to body if device is mobile.
 	if ( wp_is_mobile() ) :
 		$classes[] = 'xten-is-mobile';
 	endif;
+
 	return $classes;
 }
-add_filter( 'body_class', 'xten_is_mobile' );
+add_filter( 'body_class', 'xten_add_classes_to_body' );
 
 /**
  * Enqueue scripts.
