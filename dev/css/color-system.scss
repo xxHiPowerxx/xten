@@ -33,3 +33,15 @@
 		}
 	}
 }
+
+$primary-light-static: rgb(17, 56, 82);
+$primary-light: var(--xten-theme-color-light);
+$primary-static: rgb(17, 56, 82);
+$primary: var(--xten-theme-color, $primary-static);
+$primary-dark: var(--xten-theme-color-dark);
+$secondary-light-static: rgb(255, 205, 99);
+$secondary-light: var(--xten-secondary-theme-color-light, $secondary-light-static);
+$secondary: var(--xten-secondary-theme-color);
+$secondary-dark: var(--xten-secondary-theme-color-dark);
+$dark: var(--xten-dark);
+$light: var(--xten-light);
