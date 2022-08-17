@@ -8,7 +8,10 @@
  */
 
 jQuery(document).ready(function($) {
-	var body = $("body");
+	var $window = $(window),
+		$body = $('body'),
+		$searchToggle = $('.header-search-toggle'),
+		$headerSearch = $($searchToggle.attr('data-target'));
 
 	$("nav#nav-mega-menu").accessibleMegaMenu({
 		// update with desktop nav
@@ -40,7 +43,7 @@ jQuery(document).ready(function($) {
 	});
 
 	// Redirects to Top Level Mega Menu Link on Dektop.
-	$("body.desktop .top-nav-item a").click(function() {
+	$body.filter('.desktop').find(".top-nav-item a").on('click', function() {
 		if ($(this).attr("href")) {
 			window.location.href = $(this).attr("href");
 		}
@@ -79,20 +82,37 @@ jQuery(document).ready(function($) {
 	);
 
 	// Search Toggler
-	$(".header-search-toggle").on("click", function() {
+	function openSearch(e) {
+		setTimeout(function() {
+			if ( e && e.target !== $searchToggle[0] ) {
+				$headerSearch.collapse("show");
+			}
+			$(".header-search-toggle .fas").addClass("fa-times");
+			$body.addClass("search-open");
+		});
+		setTimeout(function() {
+			$(".header-search-wrapper .search-field").focus();
+		}, 100);
+		$window.trigger('xten.search-opened');
+	}
+	function closeSearch(e) {
+		var $searchToggleIcon = $searchToggle.find('.fas');
+		$searchToggle.attr("aria-expanded", "false");
+		$searchToggleIcon.removeClass("fa-times");
+		$body.removeClass("search-open");
+		if ( e && e.target !== $searchToggle[0] ) {
+			$headerSearch.collapse("hide");
+		}
+		$window.trigger('xten.search-closed');
+	}
+	$(".header-search-toggle").on("click", function(e) {
 		if ("false" === $(this).attr("aria-expanded")) {
-			setTimeout(function() {
-				$(".header-search-toggle .fas").addClass("fa-times");
-				$("body").addClass("search-open");
-			});
-			setTimeout(function() {
-				$(".header-search-wrapper .search-field").focus();
-			}, 100);
+			openSearch(e);
 		} else {
-			$(".header-search-toggle .fas").removeClass("fa-times");
-			$("body").removeClass("search-open");
+			closeSearch(e);
 		}
 	});
+	$window.on('xten.search-open', openSearch).on('xten.search-close', closeSearch);
 
 	// Sub Menu Open Animation sub-menu-toggler
 	$("#mobile-menu .menu-item .sub-menu").on("show.bs.collapse", function() {
@@ -106,12 +126,9 @@ jQuery(document).ready(function($) {
 	});
 
 	// Close Search Toggler
-	$("body").on("click", function(e) {
+	$body.on("click", function(e) {
 		if (0 === $(e.target).closest(".header-search").length) {
-			$(".header-search-toggle").attr("aria-expanded", "false");
-			$(".header-search-toggle .fas").removeClass("fa-times");
-			$(".header-search").collapse("hide");
-			$(this).removeClass("search-open");
+			closeSearch(e);
 		}
 	});
 
@@ -160,33 +177,33 @@ jQuery(document).ready(function($) {
 		var inactiveClassName = "xten-mobile-menu-inactive";
 
 		if (windowWidth < breakPoint) {
-			body.addClass(activeClassName).removeClass(inactiveClassName);
+			$body.addClass(activeClassName).removeClass(inactiveClassName);
 		} else {
-			body.removeClass(activeClassName).addClass(inactiveClassName);
+			$body.removeClass(activeClassName).addClass(inactiveClassName);
 		}
 	}
 
 	window.scrolledPastHeader = false;
 	function triggerScrolledPastHeader() {
 		if ( window.scrolledPastHeader === false ) {
-			$(window).trigger('scrolledPastHeader');
+			$window.trigger('scrolledPastHeader');
 			window.scrolledPastHeader = true;
 		}
 	}
 	function triggerScrolledIntoHeader() {
 		if ( window.scrolledPastHeader === true ) {
-			$(window).trigger('scrolledIntoHeader');
+			$window.trigger('scrolledIntoHeader');
 			window.scrolledPastHeader = false;
 		}
 	}
 	function scrolledPastHeader() {
 		$('.scrolledPastHeaderRef').each(function() {
 			var thisRect = this.getBoundingClientRect();
-			if ($(window).scrollTop() >= thisRect.height + this.offsetTop) {
-				body.addClass('scrolledPastHeader');
+			if ($window.scrollTop() >= thisRect.height + this.offsetTop) {
+				$body.addClass('scrolledPastHeader');
 				triggerScrolledPastHeader();
 			} else {
-				body.removeClass('scrolledPastHeader');
+				$body.removeClass('scrolledPastHeader');
 				triggerScrolledIntoHeader();
 			}
 		});
@@ -204,12 +221,12 @@ jQuery(document).ready(function($) {
 	function scrollFuncs() {
 		scrolledPastHeader();
 	}
-	$(window).on('scroll', function() {
+	$window.on('scroll', function() {
 		scrollFuncs();
 	});
 
 	readyFuncs();
-	$(window).resize(function() {
+	$window.resize(function() {
 		resizeFuncs();
 	});
 	function dispatchResize() {

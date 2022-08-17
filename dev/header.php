@@ -133,12 +133,10 @@
 						<?php	if ( $main_nav_search ) : ?>
 							<div class="collapse header-search" id="header-search">
 								<div class="header-search-wrapper">
-									<div class="container">
-										<div class="row">
-											<div class=" col-sm-12 col-lg-8 offset-lg-2">
-												<?php echo get_search_form(); ?>
-											</div>
-										</div>
+									<div class="container container-ext">
+										<?php
+										get_template_part( 'inc/header/header-search' );
+										?>
 									</div>
 								</div>
 							</div>

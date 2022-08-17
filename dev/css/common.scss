@@ -380,15 +380,17 @@ textarea {
 	label {
 		font-size: .8em;
 	}
-	.form-control {
-		font-size: inherit;
-		padding: .15em .25em;
-		line-height: 1;
-	}
 	textarea {
 		&.form-control {
 			line-height: 1.25;
 		}
+	}
+}
+.form-control {
+	[class*="form-control"] {
+		padding: .15em .25em;
+		font-size: inherit;
+		line-height: 1;
 	}
 }
 .wpcf7-not-valid-tip {
@@ -1301,31 +1303,6 @@ $nav-link-bp: 475px;
 }
 /*--------------------------------------------------------------
 # /Content navigation
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-# Search Form
---------------------------------------------------------------*/
-.search-form {
-	input,
-	button {
-		@include font-size-leading(24px, 1.1);
-	}
-
-	input {
-		border: 1px solid #cecece;
-	}
-
-	button {
-		color: $white;
-
-		&:hover {
-			opacity: 0.8;
-		}
-	}
-}
-/*--------------------------------------------------------------
-# /Search Form
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------

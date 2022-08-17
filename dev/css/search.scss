@@ -1,57 +1,110 @@
 @import './variables';
 
 .search-wrapper {
-    padding-top: 2em; //5em
-    padding-bottom: 2em; //5em
+	padding-top: 2em; //5em
+	padding-bottom: 2em; //5em
 
-    .result-count {
-        margin-top: 1em;
-    }
+	.result-count {
+		margin-top: 1em;
+	}
 
-    .search-result {
-        padding: 30px 0;
-        border-bottom: 1px solid #cacaca;
+	.search-result {
+		padding: 30px 0;
+		border-bottom: 1px solid #cacaca;
 
-        .anchor-search-result {
-            display: inline;
+		.anchor-listed-search-result {
+			display: inline;
 
-            .entry-header {
-                margin-bottom: 0;
-                display: inline-block;
+			.entry-header {
+				margin-bottom: 0;
+				display: inline-block;
 
-                .entry-title {
-                    margin-bottom: 0;
-                }
-            }
-        }
+				.entry-title {
+					margin-bottom: 0;
+				}
+			}
+		}
 
-        .page-url {
-            color: $gray;
-            @include fontSize(12.8px);
-        }
+		.page-url {
+			color: $gray;
+			@include fontSize(12.8px);
+		}
 
-        .entry-content {
-            margin: 1em 0 0;
-        }
+		.entry-content {
+			margin: 1em 0 0;
+		}
 
-        span {
-            &.yellow {
-                background-color: $yellow;
-            }
+		span {
+			&.yellow {
+				background-color: $yellow;
+			}
 
-            &.bold {
-                font-weight: bold;
-            }
-        }
-    }
+			&.bold {
+				font-weight: bold;
+			}
+		}
+	}
 
-    .search-result:last-child {
-        border-bottom: none;
-    }
+	.search-result:last-child {
+		border-bottom: none;
+	}
 
-    .no-results,
-    .not-found {
-        margin: 15px auto;
-    }
+	.no-results,
+	.not-found {
+		margin: 15px auto;
+	}
 
+}
+.search-form {
+	input,
+	button {
+		font-size: 2.4rem;
+	}
+
+	input {
+		border: 1px solid #cecece;
+	}
+}
+
+.xten-search-results-list {
+	display: flex;
+	flex-wrap: wrap;
+	overflow: auto;
+}
+$featured-image-width: 300px;
+$search-result-padding: 1.5rem;
+.listed-search-result {
+	padding: 1.5rem;
+	flex: 0 1 16.666%;
+	min-width: calc(#{$featured-image-width} + ( #{$search-result-padding * 2} ));
+	text-align: center;
+	.entry-wrapper {
+		padding: 1.5rem;
+	}
+	.entry-header {
+		margin-bottom: 0;
+	}
+	.entry-title {
+		font-size: 2rem;
+		margin-bottom: .25em;
+	}
+	.meta-type {
+		font-size: 1.6rem;
+	}
+	.entry-content {
+		margin-top: 0.5em;
+		color: $black;
+	}
+}
+.anchor-listed-search-result {
+	background-color: $white;
+	display: inline-block;
+	box-shadow: $box-shadow-em;
+	width: 100%;
+	height: 100%;
+	max-width: $featured-image-width;
+	text-align: left;
+}
+.entry-description {
+  font-size: 1.4rem;
 }

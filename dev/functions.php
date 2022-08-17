@@ -263,6 +263,21 @@ function xten_scripts() {
 	wp_register_script( 'xten-js-cookie', get_theme_file_uri( '/lib/js-cookie/js.cookie.min.js' ), array( ), filemtime( get_template_directory() . '/lib/js-cookie/js.cookie.min.js' ), true );
 	wp_enqueue_script( 'xten-main', get_theme_file_uri( '/js/main.js' ), array( 'jquery', 'xten-js-cookie' ), filemtime( get_template_directory() . '/js/main.js' ), false );
 
+
+	wp_enqueue_script( 'xten-quick-search', get_theme_file_uri( '/js/quick-search.js' ), array( 'xten-main' ), filemtime( get_template_directory() . '/js/quick-search.js' ), false );
+
+	wp_localize_script(
+		'xten-quick-search',
+		'xtenMagic',
+		array(
+			'ajaxurl'        => esc_url( admin_url( 'admin-ajax.php' ) ),
+			'postID'         => isset($post->ID) ? $post->ID : '',
+			'rooturl'        => esc_url( home_url() ),
+			'magicNonce'     => wp_create_nonce( 'xten-magic-nonce' ),
+			// 'mapApiKey'      => ( ! empty( $xten_options['google-maps-api-key'] ) ) ? $xten_options['google-maps-api-key'] : '',
+		)
+	);
+
 	// Enqueue the header script.
 	wp_register_script( 'xten-accessible-mega-menu', get_theme_file_uri( '/lib/accessible-mega-menu/jquery-accessibleMegaMenu.js' ), array( 'jquery' ), filemtime( get_template_directory() . '/lib/accessible-mega-menu/jquery-accessibleMegaMenu.js' ), true );
 	wp_enqueue_script( 'xten-header-padding', get_theme_file_uri( '/js/header-padding.js' ), array('jquery' ), filemtime( get_template_directory() . '/js/header-padding.js' ), true );
@@ -414,6 +429,11 @@ require get_template_directory() . '/inc/site-settings.php';
  * Editor Role Modifications
  */
 require get_template_directory() . '/inc/editor-role.php';
+
+/**
+ * Quick Search
+ */
+require get_template_directory(). '/inc/classes/class-xten-quick-search.php';
 
 /**
  * Load ACF Fields

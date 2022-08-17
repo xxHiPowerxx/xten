@@ -12,7 +12,7 @@ $key       = esc_html( $s, 1 );
 ?>
 
 <article id="post-<?php the_ID(); ?>" class="search-result">
-	<a class="anchor-search-result" href="<?php the_permalink(); ?>" rel="bookmark">
+	<a class="anchor-listed-search-result" href="<?php the_permalink(); ?>" rel="bookmark">
 		<header class="entry-header">
 			<h5 class="entry-title"><?php search_term( get_the_title(), $key ); ?></h5>
 		</header><!-- .entry-header -->
