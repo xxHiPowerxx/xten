@@ -168,6 +168,19 @@ function xten_styles() {
 		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), '6.1.1', 'all' );
 	}
 
+	// Slick Slider Vendor
+	// Slick JS
+	$slick_version = '1.8.0';
+	$handle = 'xten-vendor-slick-js';
+	if ( ! wp_script_is( $handle, 'registered' ) ) {
+		wp_register_script( $handle, get_theme_file_uri( '/assets/vendor/slick/slick.min.js' ), array( 'jquery' ), $slick_version, true );
+	}
+	// Slick CSS
+	$handle = 'xten-vendor-slick-css';
+	if ( ! wp_style_is( $handle, 'registered' ) ) {
+		wp_register_style( $handle, $get_theme_file_uri( '/assets/vendor/slick/slick.min.css' ), array(), $slick_version, 'all' );
+	}
+
 	// Fancybox Vendor
 	// Fancybox JS
 	$fancybox_version = '3.5.7';
