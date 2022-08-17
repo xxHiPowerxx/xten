@@ -63,6 +63,68 @@
 
 			});
 		}
+		function aosCascade() {
+			function getTextNodesIn(node, includeWhitespaceNodes) {
+				var textNodes = [], nonWhitespaceMatcher = /\S/;
+		
+				function getTextNodes(node, level) {
+					level = level || 0;
+					if (node.nodeType == 3) {
+						if (includeWhitespaceNodes || nonWhitespaceMatcher.test(node.nodeValue)) {
+							textNodes.push(node);
+						}
+					} else {
+						if ( level === 0 ) {
+							for (var i = 0, len = node.childNodes.length; i < len; ++i) {
+								getTextNodes(node.childNodes[i], level);
+								level ++;
+							}
+						}
+					}
+				}
+				getTextNodes(node);
+				return textNodes;
+			}
+			/**
+			 * Wraps a string around each word
+			 *
+			 * @param {string} str The string to transform
+			 * @param {string} tmpl Template that gets interpolated
+			 * @returns {string} The given input splitted by words
+			 */
+			 function wrapWords(str, tmpl) {
+				return str.replace(/\w+/g, tmpl || "<span>$&</span>");
+			}
+			function wrapWordsInTextNodes(el) {
+				var nodes = getTextNodesIn(el);
+				$(nodes).each(function(){
+					$(this).replaceWith(wrapWords($(this).text()));
+				});
+			}
+			$('.aosCascade').each(function(){
+				var interval = parseInt($(this).attr('data-aos-cascade-interval')) || 200,
+					delay = parseInt($(this).attr('data-aos-cascade-delay')) || 0,
+					offset = delay + interval,
+					animation = $(this).attr('data-aos-cascade') || 'fade-up',
+					$children;
+				wrapWordsInTextNodes(this);
+				$children = $(this).children();
+				$children.each(function(){
+					$(this).attr({
+						'data-aos': animation,
+						'data-aos-delay': offset,
+					});
+					offset += interval;
+				});
+			})
+		}
+
+		// Sometimes AOS doesn't on load so we dispatch resize.
+		function dispatchResize() {
+			var resizeEvent = window.document.createEvent('UIEvents');
+			resizeEvent.initUIEvent('resize', true, false, window, 0);
+			window.dispatchEvent(resizeEvent);
+		}
 		function initAOS() {
 			var aosConf = {
 				startEvent: 'load',
@@ -70,15 +132,19 @@
 				easing: 'ease-out',
 			};
 			if (waitForClassesToAttributes === true) {
-				$(window).on('aosclassesconvertedtoattributes.xten', function(){
+				aosConf.startEvent = 'aosclassesconvertedtoattributes.xten';
+				$(window).on('aosclassesconvertedtoattributes.xten', function(e){
 					AOS.init(aosConf);
+					dispatchResize();
 				});
 			} else {
 				AOS.init(aosConf);
+				dispatchResize();
 			}
 		}
 		function readyFuncs() {
 			convertAOSClassesToDataAttributes();
+			aosCascade();
 			initAOS();
 		}
 		readyFuncs();
