@@ -347,6 +347,15 @@
 			});
 		}
 
+		function preventExpandedCollapse() {
+		$('.preventExpandedCollapse, [data-expand-only="true"]').on('click', function(e) {
+			if ($(this).attr('aria-expanded') == 'true') {
+				e.stopImmediatePropagation();
+				e.preventDefault();
+			}
+		});
+	}
+
 		function readyFuncs() {
 			detectBrowser();
 			sizeContent();
@@ -356,6 +365,7 @@
 			makeCollapseAccessible();
 			movePreloadedLinkToPreloadLocation();
 			setClientReferrerTagVal();
+			preventExpandedCollapse();
 		}
 
 		/**
