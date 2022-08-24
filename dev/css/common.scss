@@ -893,6 +893,12 @@ textarea {
 .site-phone-number {
 	white-space: nowrap;
 }
+.custom-logo {
+	max-width: 100%;
+	svg {
+		max-width: 100%;
+	}
+}
 @import "mobile-menu.scss";
 
 /*--------------------------------------------------------------
@@ -1373,9 +1379,6 @@ article.page {
 		flex-direction: row;
 		align-items: center;
 	}
-	.custom-logo {
-		max-width: 100%;
-	}
 	/* Social Media Icons Styles */
 	.widget_sb_social_profile {
 		margin: 15px 0;
@@ -1806,7 +1809,7 @@ html {
 			}
 		}
 		&.bp-lg {
-			@media (max-width: $vp_lg - 1) {
+			@media (max-width: ($vp_lg - 1)) {
 				grid-template-columns: 100% !important;
 				.wp-block-media-text__media {
 					grid-column: 1;
@@ -1819,7 +1822,7 @@ html {
 			}
 		}
 		&.bp-xl {
-			@media (max-width: $vp_xl - 1) {
+			@media (max-width: ($vp_xl - 1)) {
 				grid-template-columns: 100% !important;
 				.wp-block-media-text__media {
 					grid-column: 1;
