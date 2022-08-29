@@ -21,6 +21,58 @@
 	});
 }());
 (function ($) {
+
+	(function triggerXTenActivateEvent() {
+		var listeningEvents = 'click keydown keyup';
+		$(document).on(listeningEvents, function(e){
+			if (
+				(e.type === 'keydown' && e.keyCode !== 32) ||
+				(e.type === 'keyup' && e.keyCode !== 13 && e.keyCode !== 32)
+			) {
+				return;
+			}
+			// TODO: Stop spacebar from skipping. on Event.
+			// if (e.type === 'keydown' && e.keyCode === 32 ) {
+			// 	e.preventDefault();
+			// }
+			$(e.target).trigger('xten.activate', e);
+		})
+	}());
+
+	// Needs to be available for use before ready event.
+	(function createXTenActivateMethod() {
+		// Make sure this doesn't already exist.
+		// May have been defined in XTen Sections plugin.
+		if ( $.fn.xtenActivate !== undefined ) {
+			return;
+		}
+		$.fn.xtenActivate = function(firstArg, func) {
+			var listeningEvents = 'click keydown keyup',
+				actualEvent;
+			if (typeof firstArg === 'function') {
+				func = firstArg;
+			} else if(typeof firstArg === 'string') {
+				listeningEvents = firstArg;
+			}
+			$(this).on(listeningEvents, function(e) {
+				actualEvent = e;
+				if (
+					(e.type === 'keydown' && e.keyCode !== 32) ||
+					(e.type === 'keyup' && e.keyCode !== 13 && e.keyCode !== 32)
+				) {
+					return $(this);
+				}
+				// Stop spacebar from skipping.
+				if (e.type === 'keydown' && e.keyCode === 32 ) {
+					e.preventDefault();
+				}
+				// $(this).trigger('xten.activate');
+				return func.call(this, actualEvent);
+			});
+			return $(this);
+		}
+	}());
+
 	$(document).ready(function () {
 
 		// Local Variables.
@@ -221,7 +273,7 @@
 				}
 			});
 
-			$('.xten-alert .close').click(function (e) {
+			$('.xten-alert .close').on('xten.activate', function (e) {
 				var alertID = $(this)
 					.closest('.xten-alert')
 					.data('alert-id');
@@ -347,8 +399,8 @@
 			});
 		}
 
-		function preventExpandedCollapse() {
-		$('.preventExpandedCollapse, [data-expand-only="true"]').on('click', function(e) {
+	function preventExpandedCollapse() {
+		$('.preventExpandedCollapse, [data-expand-only="true"]').on('xten.activate', function(e) {
 			if ($(this).attr('aria-expanded') == 'true') {
 				e.stopImmediatePropagation();
 				e.preventDefault();
