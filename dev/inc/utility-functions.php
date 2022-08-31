@@ -150,14 +150,21 @@ class XTenUtilities {
 				$size         = array( null, null ),
 				$aspect_ratio = array( 16, 9 )
 			) {
-				if ( ! $image_id || $size === 'full' ) :
-					return;
+				if ( ! $image_id ) :
+					return false;
 				endif;
 				$size_array = array();
 				// Get Image dimensions.
 				$image_details       = wp_get_attachment_image_src( $image_id, 'full' );
 				$image_width         = $image_details[1];
 				$image_height        = $image_details[2];
+		
+				if ( $size === 'full' ) :
+					$size = array(
+						$image_width,
+						$image_height
+					);
+				endif;
 		
 				// Determine whether min_height is at least 56.25% of min_width
 				$min_width           = $size[0];
@@ -186,7 +193,7 @@ class XTenUtilities {
 				$optimal_provided_dimension  = $actual_provided_dimension;
 		
 				$aspect_ratio_multiplicand   = $aspect_ratio_dividend / $aspect_ratio_divisor;
-
+		
 				// Whichever value was not provided (height or width) needs to be calculated.
 				$calc_missing_dimension      = $provided_min_dimension *
 					$aspect_ratio_multiplicand;
@@ -199,7 +206,7 @@ class XTenUtilities {
 					$actual_missing_dimension *
 					$calc_missing_dimension;
 		
-				if ( $calc_min_provided_dimension <= $provided_min_dimension ) :
+				if ( $calc_min_provided_dimension < $provided_min_dimension ) :
 					$optimal_missing_dimension = $calc_missing_dimension /
 						$calc_min_provided_dimension *
 						$provided_min_dimension;

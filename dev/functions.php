@@ -163,9 +163,10 @@ function xten_styles() {
 	}
 
 	// Fontawesome.
+	$font_awesome_version = '6.1.2';
 	$handle = 'xten-vendor-fontawesome-css';
 	if ( ! wp_style_is( $handle, 'registered' ) ) {
-		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), '6.1.1', 'all' );
+		wp_register_style( $handle, get_theme_file_uri( '/assets/vendor/fontawesome/css/all.min.css' ), array(), $font_awesome_version, 'all' );
 	}
 
 	// Slick Slider Vendor
