@@ -682,6 +682,22 @@ class XTenUtilities {
 			}
 		endif; // endif ( ! function_exists( 'xten_get_post_meta_description' ) ) :
 
+		if ( ! function_exists( 'xten_get_cf7' ) ) :
+			/**
+			 * Get Contact Form 7 Markup from Object.
+			 * @param obj - $contact_form Contact Form 7 WP_Object
+			 * @return string - Contact Form 7 markup rendered by shortcode.
+			 */
+			function xten_get_cf7( $contact_form ) {
+				if ( is_object( $contact_form ) ) :
+					$contact_form_id = $contact_form->ID;
+				elseif ( is_numeric( $contact_form ) ) :
+					$contact_form_id = $contact_form;
+				endif;
+				return do_shortcode( '[contact-form-7 id="' . $contact_form_id . '"]' );
+			}
+		endif; // endif ( ! function_exists( 'xten_get_cf7' ) ) :
+
 	}
 
 }
