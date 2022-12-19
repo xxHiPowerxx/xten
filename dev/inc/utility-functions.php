@@ -655,8 +655,16 @@ class XTenUtilities {
 					global $post;
 				endif;
 
-				$post_id = $post->ID;
-				$description = get_post_meta($post_id, '_yoast_wpseo_metadesc', true);
+				$post_id     = $post->ID;
+				$description;
+				$plugin_description_field = null;
+				// Check if Rank Math is being used before checking if YOAST SEO Meta Description exists.
+				if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) :
+					$plugin_description_field = '_yoast_wpseo_metadesc';
+				elseif ( is_plugin_active( 'seo-by-rank-math/rank-math.php' ) ) :
+					$plugin_description_field = 'rank_math_description';
+				endif;
+				$description = get_post_meta( $post_id, $plugin_description_field, true );
 
 				if ( empty( $description ) ) :
 					setup_postdata( $post );

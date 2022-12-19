@@ -15,9 +15,13 @@
 <meta name="apple-mobile-web-app-title" content="<?php bloginfo( 'name' ); ?> - <?php bloginfo( 'description' ); ?>" />
 
 <?php
-// Only use Meta tags if Yoast SEO Plugin is not Activated.
+// Only use Meta tags if Yoast SEO Plugin AND Rank Math Plugin are not Activated.
 $yoast_seo_plugin_file = 'wordpress-seo/wp-seo.php';
-if ( ! is_plugin_active($yoast_seo_plugin_file) ) :
+$rank_math_plugin_file = 'seo-by-rank-math/rank-math.php';
+if (
+	! is_plugin_active( $yoast_seo_plugin_file ) &&
+	! is_plugin_active( $rank_math_plugin_file )
+) :
 	setup_postdata( $post );
 	$metadescription_field = 'metadescription_17587';
 	if ( is_front_page() ) :
@@ -116,4 +120,4 @@ if ( ! is_plugin_active($yoast_seo_plugin_file) ) :
 	?>
 	<!-- /SEO -->
 	<?php
-endif; // endif ( ! is_plugin_active($yoast_seo_plugin_file) ) :
+endif; // endif ( ! is_plugin_active($yoast_seo_plugin_file) && ! is_plugin_active( $rank_math_plugin_file ) ) :
