@@ -40,7 +40,7 @@ $font_selection = array(
 			'value' => 'Verdana',
 			'serif' => 'sans-serif',
 		)
-	)                                    => __( 'Verdana (Web Font)', 'xten' ),
+	)          => __( 'Verdana (Web Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'web',
@@ -96,63 +96,70 @@ $font_selection = array(
 			'value' => 'abrilfatface',
 			'serif' => 'sans-serif',
 		)
-	)                            => __( 'Abril Fatface (Google Font)', 'xten' ),
+	) => __( 'Abril Fatface (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'cabin',
 			'serif' => 'sans-serif',
 		)
-	)                                   => __( 'Cabin (Google Font)', 'xten' ),
+	) => __( 'Cabin (Google Font)', 'xten' ),
+	json_encode(
+		array(
+			'type'  => 'google',
+			'value' => 'bebasneue',
+			'serif' => 'sans-serif',
+		)
+	) => __( 'Bebas Neue (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'catamaran',
 			'serif' => 'sans-serif',
 		)
-	)                               => __( 'Catamaran (Google Font)', 'xten' ),
+	) => __( 'Catamaran (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'lora',
 			'serif' => 'sans-serif',
 		)
-	)                                    => __( 'Lora (Google Font)', 'xten' ),
+	) => __( 'Lora (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'lato',
 			'serif' => 'sans-serif',
 		)
-	)                                    => __( 'Lato (Google Font)', 'xten' ),
+	) => __( 'Lato (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'merriweather',
 			'serif' => 'sans-serif',
 		)
-	)                            => __( 'Merriweather (Google Font)', 'xten' ),
+	) => __( 'Merriweather (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'montserrat',
 			'serif' => 'sans-serif',
 		)
-	)                              => __( 'Montserrat (Google Font)', 'xten' ),
+	) => __( 'Montserrat (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'notosans',
 			'serif' => 'sans-serif',
 		)
-	)                               => __( 'Noto Sans (Google Font)', 'xten' ),
+	) => __( 'Noto Sans (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'opensans',
 			'serif' => 'sans-serif',
 		)
-	)                               => __( 'Open Sans (Google Font)', 'xten' ),
+	) => __( 'Open Sans (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
@@ -166,84 +173,84 @@ $font_selection = array(
 			'value' => 'oswald',
 			'serif' => 'sans-serif',
 		)
-	)                                  => __( 'Oswald (Google Font)', 'xten' ),
+	) => __( 'Oswald (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'playfairdisplay',
 			'serif' => 'sans-serif',
 		)
-	)                        => __( 'Playfair Display (Google Font)', 'xten' ),
+	) => __( 'Playfair Display (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'poppins',
 			'serif' => 'sans-serif',
 		)
-	)                                 => __( 'Poppins (Google Font)', 'xten' ),
+	) => __( 'Poppins (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'ptsans',
 			'serif' => 'sans-serif',
 		)
-	)                                 => __( 'PT Sans (Google Font)', 'xten' ),
+	) => __( 'PT Sans (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'ptserif',
 			'serif' => 'sans-serif',
 		)
-	)                                => __( 'PT Serif (Google Font)', 'xten' ),
+	) => __( 'PT Serif (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'raleway',
 			'serif' => 'sans-serif',
 		)
-	)                                 => __( 'Raleway (Google Font)', 'xten' ),
+	) => __( 'Raleway (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'roboto',
 			'serif' => 'sans-serif',
 		)
-	)                                  => __( 'Roboto (Google Font)', 'xten' ),
+	) => __( 'Roboto (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'robotocondensed',
 			'serif' => 'sans-serif',
 		)
-	)                        => __( 'Roboto Condensed (Google Font)', 'xten' ),
+	) => __( 'Roboto Condensed (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'robotomono',
 			'serif' => 'sans-serif',
 		)
-	)                             => __( 'Roboto Mono (Google Font)', 'xten' ),
+	) => __( 'Roboto Mono (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'robotoslab',
 			'serif' => 'sans-serif',
 		)
-	)                             => __( 'Roboto Slab (Google Font)', 'xten' ),
+	) => __( 'Roboto Slab (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'slabo',
 			'serif' => 'sans-serif',
 		)
-	)                                   => __( 'Slabo (Google Font)', 'xten' ),
+	) => __( 'Slabo (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
 			'value' => 'sourcesanspro',
 			'serif' => 'sans-serif',
 		)
-	)                         => __( 'Source Sans Pro (Google Font)', 'xten' ),
+	) => __( 'Source Sans Pro (Google Font)', 'xten' ),
 	json_encode(
 		array(
 			'type'  => 'google',
@@ -253,4 +260,16 @@ $font_selection = array(
 	) => __( 'Ubuntu (Google Font)', 'xten' ),
 );
 
+/* TODO: Use below code to loop through directories and find fonts instead of defining them in this file.
+$fonts_directory = get_template_directory() . '/assets/fonts';
+$dir = new DirectoryIterator($fonts_directory);
+$files = array();
+foreach ($dir as $fileinfo) {
+    if ($fileinfo->isDir() && !$fileinfo->isDot()) {
+        $files[]= $fileinfo->getFilename();
+    }
+}
+?><pre><?php var_dump($files, glob($fonts_directory . '/*' , GLOB_ONLYDIR)); ?></pre><?php
+die;
+*/
 return $font_selection;

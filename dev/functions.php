@@ -606,7 +606,7 @@ function xten_define_global_theme_variables() {
 
 	// Fonts
 	$primary_font_family   = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"opensans", "serif":"sans-serif"}' ) );
-	$secondary_font_family = json_decode( get_theme_mod( 'primary_font_family', '{"type":"google", "value":"roboto", "serif":"sans-serif"}' ) );
+	$secondary_font_family = json_decode( get_theme_mod( 'secondary_font_family', '{"type":"google", "value":"roboto", "serif":"sans-serif"}' ) );
 
 	// Primary Font.
 	$primary_font_fallback   = $primary_font_family->serif === 'sans-serif' ?
@@ -654,8 +654,6 @@ function xten_define_theme_css() {
 	foreach( $GLOBALS['xten_theme_fonts']['font_families'] as $name => $value ) :
 		$name_f         = xten_snake_to_dash( $name );
 		$css           .= '.' . $name_f . '{font-family:' . $value . ';}';
-		// var_dump('.' . $name_f . '{font-family:' . $value} . ')';
-		// die;
 		$css_variables .= '--' . $name_f . ':' . $value . ';';
 	endforeach;
 	// /Fonts

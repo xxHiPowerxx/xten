@@ -347,6 +347,28 @@
 			});
 		}
 
+		// Use this to ensure display: inline-block does not cause
+		// parent to extend to full width when children wrap.
+		function collapseToInner() {
+			return;
+			$('.collapseToInner').each(function(){
+				var $collapseToInner = $(this),
+					$clone = $(this).clone();
+				$clone.css({
+					'visibility':'hidden',
+					'opacity':'0',
+					'position':'absolute',
+				}).each(function(){
+					var innerWidth = $(this).outerWidth() - $(this).innerWidth(),
+						$children = $(this).children();
+					$children.each(function(){
+						innerWidth += $(this).outerWidth(true);
+					});
+					$collapseToInner.width(innerWidth);
+				});
+			});
+		}
+
 		function readyFuncs() {
 			detectBrowser();
 			sizeContent();
@@ -356,6 +378,7 @@
 			makeCollapseAccessible();
 			movePreloadedLinkToPreloadLocation();
 			setClientReferrerTagVal();
+			collapseToInner();
 		}
 
 		/**
@@ -370,6 +393,7 @@
 		function resizeFuncs() {
 			sizeContent();
 			redundantResize(sizeContent(), 1000);
+			collapseToInner();
 		}
 
 		function loadFuncs() {

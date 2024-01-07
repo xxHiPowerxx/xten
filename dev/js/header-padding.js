@@ -108,7 +108,7 @@ function compensateForAdminBar() {
 		// eslint-disable-next-line vars-on-top
 		var adminBarRect = adminBar.getBoundingClientRect(),
 			siteHeadOffSetTop = adminBarRect.top,
-			adminBarHeight = adminBarRect.height + siteHeadOffSetTop,
+			adminBarHeight = adminBarRect.height,
 			html = document.documentElement,
 			headerWrapper = document.getElementsByClassName(
 				"header-wrapper"
@@ -133,7 +133,10 @@ function compensateForAdminBar() {
 		// eslint-disable-next-line vars-on-top
 		var optimalStyleTop = 0 < adminBarHeight ? adminBarHeight : 0;
 		headerWrapper.style.top = optimalStyleTop + "px";
-		pageWrapper.style.marginTop = optimalStyleTop + "px";
+		// DEBUG ONLY:
+		// console.log('headerWrapper.style.top', headerWrapper.style.top);
+		// console.log('optimalStyleTop + "px"', optimalStyleTop + "px");
+		pageWrapper.style.paddingTop = optimalStyleTop + "px";
 		siteHeader.style.top = "";
 
 		// Ensure that mobile menu compensates for Admin Bar

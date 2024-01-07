@@ -188,11 +188,17 @@ function process_inline_css() {
 		$font_weight = '-bold.ttf';
 	endif;
 
+	if ( 'bebasneue' == $secondary_font_path ) :
+		$font_weight = '-medium.ttf';
+	endif;
+
 	$styles .= '@font-face{' .
 		'font-family:' . $secondary_font_family->value . ';' .
 		'font-weight:700;' .
 		'src:url(' . $root_dir . '/assets/fonts/' . $secondary_font_path . '/' . $secondary_font_path . $font_weight . ');' .
 	'}';
+	/*?><pre><?php var_dump($styles, $secondary_font_family, $GLOBALS['xten_theme_fonts']); ?></pre><?php*/
+// die;
 
 	$body_styles .= '@font-face{' .
 		'font-family:' . $primary_font_family->value . ';' .
